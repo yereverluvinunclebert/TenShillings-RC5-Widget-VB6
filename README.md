@@ -2,6 +2,8 @@
 
 An example of a moveable/resizable single-image, VB6 / TwinBasic program using the RC6 widget framework, complete with right click menu, help, about and licence forms and help CHM.
 
+The reason for this duplicate of the TenShillings-RC6-Widget-VB6 is that this RichClient RC5 version, runs on XP. 
+
 The program does very little but place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine.
 
 You can add more logic as you require or replace the main image with your own. 
