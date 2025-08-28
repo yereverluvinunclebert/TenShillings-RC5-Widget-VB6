@@ -162,10 +162,10 @@ The above is only for development, for ordinary users, during runtime there is n
 	VisualBasic Runtime Objects and Procedures  
 	VisualBasic Objects and Procedures  
 	OLE Automation  
-	vbRichClient6  
+	vbRichClient5
  
- <img width="445" height="359" alt="projectReferences" src="https://github.com/user-attachments/assets/51a33785-2e3c-4b32-9fd0-6c4b0ebb8531" />
- 
+<img width="445" height="359" alt="rc5refs" src="https://github.com/user-attachments/assets/19b420ac-393c-4fc2-8f7c-b41d7e6040bb" />
+
  LICENCE AGREEMENTS:
  
  Copyright © 2023 Dean Beedell
