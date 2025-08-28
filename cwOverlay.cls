@@ -1,0 +1,446 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+  Persistable = 0  'NotPersistable
+  DataBindingBehavior = 0  'vbNone
+  DataSourceBehavior  = 0  'vbNone
+  MTSTransactionMode  = 0  'NotAnMTSObject
+END
+Attribute VB_Name = "cwTenShillings"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = False
+'@IgnoreModule IntegerDataType, ModuleWithoutFolder
+'---------------------------------------------------------------------------------------
+' Module    : cwTenShillings
+' Author    : beededea
+' Date      : 31/07/2023
+' Purpose   : create a fully click-through Widget, which allows for all kind of
+'             things to render on top of the PSD-generated Widgets created in cTenShillingsWidget
+'---------------------------------------------------------------------------------------
+
+Option Explicit
+
+Private TenShillingsxo As Integer
+Private TenShillingsyo  As Integer
+
+Private WithEvents W As cWidgetBase
+Attribute W.VB_VarHelpID = -1
+Private mZoom As Double
+Private mZoomDirection As String
+
+Private mLocked As Boolean ' property Locked
+Private mHidden As Boolean ' property Hidden
+Private mOpacity As Double
+
+
+
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : initialisePrivateVars
+' Author    : beededea
+' Date      : 12/02/2025
+' Purpose   : initialise vars
+'---------------------------------------------------------------------------------------
+'
+Private Sub initialisePrivateVars()
+
+   On Error GoTo initialisePrivateVars_Error
+   
+    TenShillingsxo = 0: TenShillingsyo = 0
+
+   On Error GoTo 0
+   Exit Sub
+
+initialisePrivateVars_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure initialisePrivateVars of Class Module cwTenShillings"
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : Class_Initialize for cwTenShillings
+' Author    : olaf schmidt
+' Date      : 31/07/2023
+' Purpose   : Constructor (Initialise) set the inital values of private vars, set up the timers
+'---------------------------------------------------------------------------------------
+'
+Private Sub Class_Initialize()
+    Dim intervalValue As Integer: intervalValue = 0
+    
+    On Error GoTo Class_Initialize_Error
+    
+    Call initialisePrivateVars
+    
+    mZoom = 0
+
+    TenShillingsxo = 15: TenShillingsyo = 27
+
+    Set W = Cairo.WidgetBase
+        W.BackColor = -1  'we don't use any BackColor here, transparent
+        W.ImplementsWheelMessages = True ' enables gblPlivate Sub W_MouseWheel
+        
+        mZoom = 1 ' the TenShillings size initially very small
+        ZoomDirection = mZoomDirection
+    
+   On Error GoTo 0
+   Exit Sub
+
+Class_Initialize_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class Module cwTenShillings"
+End Sub
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : Widget
+' Author    : olaf schmidt
+' Date      : 21/09/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get Widget() As cWidgetBase
+   On Error GoTo Widget_Error
+
+    Set Widget = W
+
+   On Error GoTo 0
+   Exit Property
+
+Widget_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Widget of Class Module cwTenShillings"
+End Property
+'---------------------------------------------------------------------------------------
+' Procedure : Widgets
+' Author    : olaf schmidt
+' Date      : 21/09/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get Widgets() As cWidgets
+   On Error GoTo Widgets_Error
+
+    Set Widgets = W.Widgets
+
+   On Error GoTo 0
+   Exit Property
+
+Widgets_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Widgets of Class Module cwTenShillings"
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : Zoom
+' Author    : beededea
+' Date      : 17/05/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get Zoom() As Double
+   On Error GoTo ZoomGet_Error
+
+    Zoom = mZoom
+
+   On Error GoTo 0
+   Exit Property
+
+ZoomGet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Zoom of Class Module cwTenShillings"
+End Property
+'---------------------------------------------------------------------------------------
+' Procedure : Zoom
+' Author    : beededea
+' Date      : 17/05/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let Zoom(ByVal newValue As Double)
+   On Error GoTo ZoomLet_Error
+
+  If mZoom <> newValue Then mZoom = newValue Else Exit Property
+  If mZoom > 2 Then mZoom = 2 Else If mZoom < 0.05 Then mZoom = 0.05 'keep FZ within a sane ZoomInterval
+  W.Refresh
+
+   On Error GoTo 0
+   Exit Property
+
+ZoomLet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Zoom of Class Module cwTenShillings"
+End Property
+'---------------------------------------------------------------------------------------
+' Procedure : ZoomDirection
+' Author    : beededea
+' Date      : 17/05/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get ZoomDirection() As String
+   On Error GoTo ZoomDirectionGet_Error
+
+  ZoomDirection = mZoomDirection
+
+   On Error GoTo 0
+   Exit Property
+
+ZoomDirectionGet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ZoomDirection of Class Module cwTenShillings"
+End Property
+'---------------------------------------------------------------------------------------
+' Procedure : ZoomDirection
+' Author    : beededea
+' Date      : 17/05/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let ZoomDirection(ByVal newValue As String)
+   On Error GoTo ZoomDirectionLet_Error
+
+  If mZoomDirection <> newValue Then mZoomDirection = newValue Else Exit Property
+  W.Refresh
+
+   On Error GoTo 0
+   Exit Property
+
+ZoomDirectionLet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ZoomDirection of Class Module cwTenShillings"
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : opacity
+' Author    : beededea
+' Date      : 17/05/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let opacity(ByVal newValue As Double)
+   On Error GoTo opacityLet_Error
+
+    If mOpacity <> newValue Then mOpacity = newValue Else Exit Property
+
+   On Error GoTo 0
+   Exit Property
+
+opacityLet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure opacity of Class Module cwTenShillings"
+End Property
+'---------------------------------------------------------------------------------------
+' Procedure : opacity
+' Author    : beededea
+' Date      : 17/05/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get opacity() As Double
+   On Error GoTo opacityGet_Error
+
+    opacity = mOpacity
+
+   On Error GoTo 0
+   Exit Property
+
+opacityGet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure opacity of Class Module cwTenShillings"
+End Property
+
+
+
+'---------------------------------------------------------------------------------------
+' Property  : Locked
+' Author    : beededea
+' Date      : 17/05/2023
+' Purpose   : property used to store/set the lock state to lock the widget in place, the actual locking is done elsewhere
+'---------------------------------------------------------------------------------------
+'
+Public Property Get Locked() As Boolean
+   On Error GoTo LockedGet_Error
+
+   Locked = mLocked
+
+   On Error GoTo 0
+   Exit Property
+
+LockedGet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Locked of Class Module cwTenShillings"
+End Property
+'---------------------------------------------------------------------------------------
+' Property  : Locked
+' Author    : beededea
+' Date      : 17/05/2023
+' Purpose   : property used to store/set the lock state to lock the widget in place, the actual locking is done elsewhere
+'---------------------------------------------------------------------------------------
+'
+Public Property Let Locked(ByVal newValue As Boolean)
+   On Error GoTo LockedLet_Error
+
+   If mLocked <> newValue Then mLocked = newValue Else Exit Property
+
+   On Error GoTo 0
+   Exit Property
+
+LockedLet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Locked of Class Module cwTenShillings"
+End Property
+
+
+
+
+
+'---------------------------------------------------------------------------------------
+' Property  : Hidden
+' Author    : beededea
+' Date      : 17/05/2023
+' Purpose   : property to determine (by value)  the set the hidden value of the whole widget
+'---------------------------------------------------------------------------------------
+'
+Public Property Get Hidden() As Boolean
+   On Error GoTo HiddenGet_Error
+
+   Hidden = mHidden
+
+   On Error GoTo 0
+   Exit Property
+
+HiddenGet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Hidden of Class Module cwTenShillings"
+End Property
+
+    
+
+
+'---------------------------------------------------------------------------------------
+' Property  : Hidden
+' Author    : beededea
+' Date      : 10/05/2023
+' Purpose   : property to determine (by value)  the set the hidden value of the whole widget
+'---------------------------------------------------------------------------------------
+'
+Public Property Let Hidden(ByVal newValue As Boolean)
+   On Error GoTo HiddenLet_Error
+
+    If mHidden <> newValue Then mHidden = newValue Else Exit Property
+    If mHidden = True Then
+        W.Visible = False
+        
+        W.Refresh
+    Else
+        W.Visible = True
+        
+        W.Refresh
+    End If
+
+   On Error GoTo 0
+   Exit Property
+
+HiddenLet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Hidden of Class Module cwTenShillings"
+End Property
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : W_MouseWheel
+' Author    : beededea
+' Date      : 09/05/2023
+' Purpose   : uses ScaleDrawings mZoom, mZoom
+'---------------------------------------------------------------------------------------
+'
+Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal LineOffset As Long, ByVal xAbs As Single, ByVal yAbs As Single)
+   On Error GoTo W_MouseWheel_Error
+
+    If gblIgnoreMouse = "1" Then Exit Sub
+
+    Select Case MouseKeys
+    Case 8 'change the Zoom only, when the Ctrl-Key is down
+        
+        If ZoomDirection = "up" Then
+            Zoom = Zoom - 0.02 * LineOffset
+        Else
+            Zoom = Zoom + 0.02 * LineOffset
+        End If
+        gblWidgetSize = LTrim$(Str$(TenShillingsWidget.Zoom * 100)) ' store the value dynamically
+        sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
+        
+        If widgetPrefs.IsVisible = True Then widgetPrefs.sliWidgetSize = Val(gblWidgetSize)
+        W.Refresh
+        
+    End Select
+
+   On Error GoTo 0
+   Exit Sub
+
+W_MouseWheel_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure W_MouseWheel of Class Module cwTenShillings"
+    
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : W_MouseDown
+' Author    :
+' Date      : 09/05/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub W_MouseDown(Button As Integer, Shift As Integer, ByVal x As Single, ByVal y As Single)
+   On Error GoTo W_MouseDown_Error
+
+    If Button = vbRightButton Then
+        Call menuForm.PopupMenu(menuForm.mnuMainMenu)
+    Else
+        If gblIgnoreMouse = "1" Then Exit Sub
+        ' do whatever you want with a mouseDown here, not doing anything at the moment but we will...
+    End If
+
+
+   On Error GoTo 0
+   Exit Sub
+
+W_MouseDown_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure W_MouseDown of Class Module cwTenShillings"
+End Sub
+
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : W_Paint
+' Author    : olaf schmidt
+' Date      : 01/08/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByVal yAbs As Single, ByVal dx_Aligned As Single, ByVal dy_Aligned As Single, UserObj As Object)
+        
+    'RC5 whole widget .Refresh - RC5 Widgets are refreshed "from the ground up" but not so in RC5
+'    CC.Operator = CAIRO_OPERATOR_CLEAR
+'    CC.Paint ' clear the whole background of this Widgets underlying Surface via Clear-Operator
+'    CC.Operator = CAIRO_OPERATOR_OVER 'switch back to the default-Operator
+    
+    CC.TranslateDrawings 0, 0
+    CC.ScaleDrawings mZoom, mZoom
+    CC.Save
+   
+    CC.RenderSurfaceContent "tenshillings", TenShillingsxo, TenShillingsyo, , , , mOpacity
+    CC.Restore
+    
+    On Error GoTo 0
+   Exit Sub
+
+W_Paint_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure W_Paint of Class Module cwTenShillings"
+End Sub
+ 
+
