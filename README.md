@@ -1,4 +1,4 @@
-# TenShillings-RC6-Widget-VB6
+# TenShillings-RC5-Widget-VB6
 
 An example of a moveable/resizable single-image, VB6 / TwinBasic program using the RC6 widget framework, complete with right click menu, help, about and licence forms and help CHM.
 
@@ -6,7 +6,7 @@ The program does very little but place some eye-candy on the desktop in the mann
 
 You can add more logic as you require or replace the main image with your own. 
 
-This is merely a template for other single-image VB6 / TwinBasic RC6 programs that I knocked up late at night whilst drinking gin and tonic.
+This is merely a template for other single-image VB6 / TwinBasic RC5 programs that I knocked up late at night whilst drinking gin and tonic.
 
 <img width="829" height="520" alt="TenShillings" src="https://github.com/user-attachments/assets/07f63cb6-c0fe-4f70-ad02-b57a9ab18b58" />
 
@@ -84,16 +84,16 @@ BUILD: The program runs without any Microsoft plugins.
  ship with VB6.  
  
  
- * Uses the latest version of the RC6 Cairo framework from Olaf Schmidt.
+ * Uses the latest version of the RC5 Cairo framework from Olaf Schmidt.
  
- During development the RC6 components need to be registered. These scripts are 
+ During development the RC5 components need to be registered. These scripts are 
  used to register. Run each by double-clicking on them.
  
-	RegisterRC6inPlace.vbs
-	RegisterRC6WidgetsInPlace.vbs
+	RegisterRC5inPlace.vbs
+	RegisterRC5WidgetsInPlace.vbs
  
- During runtime on the users system, the RC6 components are dynamically 
- referenced using modRC6regfree.bas which is compiled into the binary.	
+ During runtime on the users system, the RC5 components are dynamically 
+ referenced using modRC5regfree.bas which is compiled into the binary.	
  
 ![prefsGeneral](https://github.com/user-attachments/assets/8a228ec6-89a9-459a-98bd-d1d17ce9728d)
 
