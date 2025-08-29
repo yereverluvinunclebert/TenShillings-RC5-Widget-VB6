@@ -317,7 +317,7 @@ Begin VB.Form widgetPrefs
          Width           =   1470
       End
       Begin VB.Label lblAbout 
-         Caption         =   "Windows Vista, 7, 8, 10  && 11"
+         Caption         =   "Windows XP, ReactOS, Vista, 7, 8, 10  && 11"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
