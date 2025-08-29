@@ -2084,7 +2084,9 @@ Public Sub saveMainRCFormPosition()
     
     sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
     sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
-    gblWidgetSize = CStr(fMain.TenShillingsForm.WidgetRoot.Zoom * 100)
+   
+    gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
+    
     sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
 
    On Error GoTo 0
@@ -2109,7 +2111,8 @@ Public Sub saveMainRCFormSize()
 
     sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
     sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
-    gblWidgetSize = CStr(fMain.TenShillingsForm.WidgetRoot.Zoom * 100)
+    gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
+
     sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
 
    On Error GoTo 0
