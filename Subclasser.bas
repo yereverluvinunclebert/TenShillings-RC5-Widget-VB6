@@ -165,7 +165,7 @@ Private Function ComboBox_Proc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal wPa
     Const ODS_COMBOBOXEDIT      As Long = &H1000& ' (edit control being drawn).
     Const WM_SETCURSOR          As Long = &H20&
     '
-    If uMsg = WM_SETCURSOR Then     ' Mouse-Move.
+    If uMsg = WM_SETCURSOR Then     ' Mouse-Over.
         Set cbo = ComObjectFromPtr(dwRefData)
         On Error Resume Next        ' Protect in case programmer forgot to put in procedure.
             cbo.Parent.MouseMoveOnComboText cbo.Name
@@ -198,6 +198,10 @@ Private Function Form_Proc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal wParam 
     Const WM_DESTROY            As Long = &H2&  ' All other needed constants are declared within the procedures.
     'Const WM_MOVE               As Long = &H3  ' called all during any form move
     Const WM_EXITSIZEMOVE       As Long = &H232 ' called only when all movement is completed
+    Const WM_SETCURSOR          As Long = &H20&
+    
+    Dim sTitle As String: sTitle = vbNullString
+    Dim sText As String: sText = vbNullString
     
     Dim frm As Object
     
@@ -209,10 +213,27 @@ Private Function Form_Proc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal wParam 
         Exit Function
     End If
     '
-    If uMsg = WM_EXITSIZEMOVE Then     ' Mouse-Move.
+    If uMsg = WM_EXITSIZEMOVE Then     ' Mouse-MoveEND.
         Set frm = ComObjectFromPtr(dwRefData)
         On Error Resume Next        ' Protect in case programmer forgot to put in procedure.
             frm.Form_Moved frm.Name
+        On Error GoTo 0
+        Set frm = Nothing
+    End If
+    
+    If uMsg = WM_SETCURSOR Then     ' Mouse-Over.
+        Set frm = ComObjectFromPtr(dwRefData)
+        On Error Resume Next        ' Protect in case programmer forgot to put in procedure.
+        
+        ' due to the RC form being created in code then there is no default form that we can insert a form-specific mouseMove/mouseOver event into.
+        ' Instead I have subclassed the form and place the code to generate a balloon tooltip here.
+        If frm.Name = "TenShillingsForm" Then
+            If gblWidgetTooltips = "0" Then
+                sTitle = "TenShillings Desktop Widget"
+                sText = "Right Click to open the menu and the preferences. CTRL+ Mouse scrollwheel UP/DOWN to resize. You can turn off the balloon tooltips in the preferences."
+                CreateToolTip fMain.TenShillingsForm.hWnd, sText, , sTitle, , , , True
+            End If
+        End If
         On Error GoTo 0
         Set frm = Nothing
     End If

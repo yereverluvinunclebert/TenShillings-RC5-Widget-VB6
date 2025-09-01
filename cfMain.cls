@@ -115,6 +115,11 @@ initAndCreateTenShillingsForm_Error:
     
 End Sub
 
+
+
+
+
+
 '---------------------------------------------------------------------------------------
 ' Procedure : initAndCreateAboutForm
 ' Author    :
@@ -533,22 +538,23 @@ Private Sub TenShillingsForm_MouseMove(Button As Integer, Shift As Integer, x As
    Static x0 As Single, y0 As Single: If Button = 0 Then x0 = x: y0 = y 'just store the offsets when no button is down
    
     On Error GoTo TenShillingsForm_MouseMove_Error
-
-    If TenShillingsWidget.Locked = True Then Exit Sub
-    If gblIgnoreMouse = "1" Then Exit Sub
-    If gblMenuOccurred = True Then
-        gblMenuOccurred = False
-        Exit Sub
-    End If
     
     If Button = vbLeftButton And Not TenShillingsForm.ActiveWidget Is Nothing Then 'Form-Dragging (under certain conditions)
 
-      FX = (x - x0) * TenShillingsForm.WidgetRoot.Zoom + TenShillingsForm.Left
-      FY = (y - y0) * TenShillingsForm.WidgetRoot.Zoom + TenShillingsForm.Top
-      TenShillingsForm.Move FX, FY
+        If TenShillingsWidget.Locked = True Then Exit Sub
+        If gblIgnoreMouse = "1" Then Exit Sub
+        
+        If gblMenuOccurred = True Then
+            gblMenuOccurred = False
+            Exit Sub
+        End If
 
-      Debug.Print "FX " & FX
-      Debug.Print "FY " & FY
+        FX = (x - x0) * TenShillingsForm.WidgetRoot.Zoom + TenShillingsForm.Left
+        FY = (y - y0) * TenShillingsForm.WidgetRoot.Zoom + TenShillingsForm.Top
+        TenShillingsForm.Move FX, FY
+        
+'        Debug.Print "FX " & FX
+'        Debug.Print "FY " & FY
 
     End If
 
@@ -613,3 +619,5 @@ TenShillingsForm_MouseUp_Error:
           End If
     End With
 End Sub
+
+

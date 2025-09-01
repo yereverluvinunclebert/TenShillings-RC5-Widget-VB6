@@ -384,15 +384,23 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal dx As Single, ByVal dy As Sing
     W.SelectFontSettingsInto CC
     
     If gblDpiAwareness = "0" Then
-        CC.DrawText 350, 0, dx, dy - 275, "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
-    Else
+        CC.DrawText 350, -20, dx, dy - 275, "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
+         
+        #If TWINBASIC Then
+            CC.DrawText 360, -20, dx, dy, "TwinBasic", , , 2, True, , mMyOpacity
+        #Else
+            CC.DrawText 315, -20, dx, dy - 275, "VB6", , , 2, True, , mMyOpacity
+        #End If
+        
+   Else
+        
+        CC.DrawText 350, 0, dx, dy - 1050, "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
         
         #If TWINBASIC Then
-            CC.DrawText 125, -202, dx, dy, "TwinBasic", , , 2, True, , mMyOpacity
+            CC.DrawText 360, 0, dx, dy, "TwinBasic", , , 2, True, , mMyOpacity
         #Else
-            CC.DrawText 168, -202, dx, dy, "VB6", , , 2, True, , mMyOpacity
+            CC.DrawText 315, 0, dx, dy - 1050, "VB6", , , 2, True, , mMyOpacity
         #End If
-        CC.DrawText 350, 0, dx, dy - 1020, "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
         
     End If
     W.Refresh

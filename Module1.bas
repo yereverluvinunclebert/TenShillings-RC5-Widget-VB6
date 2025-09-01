@@ -1646,17 +1646,11 @@ Public Sub setRichClientTooltips()
    On Error GoTo setRichClientTooltips_Error
 
     If gblWidgetTooltips = "1" Then
-
         TenShillingsWidget.Widget.ToolTip = "Use CTRL+mouse scrollwheel up/down to resize."
         aboutWidget.Widget.ToolTip = "Click on me to make me go away."
-        
-        
     Else
         TenShillingsWidget.Widget.ToolTip = vbNullString
         aboutWidget.Widget.ToolTip = vbNullString
-        
-
-   
    End If
     
    Call ChangeToolTipWidgetDefaultSettings(Cairo.ToolTipWidget.Widget)
@@ -2707,6 +2701,7 @@ hideBusyTimer_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure hideBusyTimer of Form widgetPrefs"
     
 End Sub
+
 
 
 

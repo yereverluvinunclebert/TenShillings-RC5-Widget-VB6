@@ -174,6 +174,9 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     
     ' make the busy sand timer invisible
     Call hideBusyTimer
+        
+    'subclassed the widget form to generate a balloon tooltip
+    Call SubclassForm(fMain.TenShillingsForm.hWnd, ObjPtr(fMain.TenShillingsForm))
     
     ' end the startup by un-setting the start global flag
     gblStartupFlg = False
