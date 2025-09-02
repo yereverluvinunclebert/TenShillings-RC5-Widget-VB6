@@ -36,7 +36,7 @@ Public FZ As Single
 
 Public licenceFormX As Long
 Public licenceFormY As Long
-
+' Public licenceFormZ As Single
 
 Private WithEvents btnAccept As cwButton
 Attribute btnAccept.VB_VarHelpID = -1
@@ -114,11 +114,6 @@ initAndCreateTenShillingsForm_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure initAndCreateTenShillingsForm of Class Module cfMain"
     
 End Sub
-
-
-
-
-
 
 '---------------------------------------------------------------------------------------
 ' Procedure : initAndCreateAboutForm
@@ -320,22 +315,22 @@ Public Sub initAndCreateLicenceForm(ByVal x As Long, ByVal y As Long, Optional B
         licenceWidget.Zoom = licenceWidgetZoomValue
     End If
 
-    ' When running in the IDE the RC5 DLLs are required to be registered. If for some reason they become unregistered then
+    ' When running in the IDE the RC6 DLLs are required to be registered. If for some reason they become unregistered then
     ' the following 'set' commands will generate an error, to handle this we have a temporary error trap for the IDE only.
     
-    If InIDE Then On Error GoTo RC5NotRegistered_Error
+    If InIDE Then On Error GoTo RC6NotRegistered_Error
 
     ' add two RC predefined button controls to the licence form
     If gblDpiAwareness = "1" Then
         Set btnDecline = licenceForm.Widgets.Add(New_W("cwButton"), "btnDecline", 352, 397, 70, 29)
-        Set btnAccept = licenceForm.Widgets.Add(New cwButton, "btnAccept", 428, 397, 70, 29)
-        Set textBox = licenceForm.Widgets.Add(New cwTextBox, "textBox", 50, 60, 440, 280)
-        Set lblDeclineOrNot = licenceForm.Widgets.Add(New cwLabel, "lblDeclineOrNot", 50, 345, 440, 35)
+        Set btnAccept = licenceForm.Widgets.Add(New_W("cwButton"), "btnAccept", 428, 397, 70, 29)
+        Set textBox = licenceForm.Widgets.Add(New_W("cwTextBox"), "textBox", 50, 60, 440, 280)
+        Set lblDeclineOrNot = licenceForm.Widgets.Add(New_W("cwLabel"), "lblDeclineOrNot", 50, 345, 440, 35)
     Else
-        Set btnDecline = licenceForm.Widgets.Add(New cwButton, "btnDecline", 189, 210, 40, 18)
-        Set btnAccept = licenceForm.Widgets.Add(New cwButton, "btnAccept", 228, 210, 40, 18)
-        Set textBox = licenceForm.Widgets.Add(New cwTextBox, "textBox", 25, 30, 240, 155)
-        Set lblDeclineOrNot = licenceForm.Widgets.Add(New cwLabel, "lblDeclineOrNot", 25, 188, 240, 20)
+        Set btnDecline = licenceForm.Widgets.Add(New_W("cwButton"), "btnDecline", 189, 210, 40, 18)
+        Set btnAccept = licenceForm.Widgets.Add(New_W("cwButton"), "btnAccept", 228, 210, 40, 18)
+        Set textBox = licenceForm.Widgets.Add(New_W("cwTextBox"), "textBox", 25, 30, 240, 155)
+        Set lblDeclineOrNot = licenceForm.Widgets.Add(New_W("cwLabel"), "lblDeclineOrNot", 25, 188, 240, 20)
     End If
     
     On Error GoTo initAndCreateLicenceForm_Error
@@ -356,12 +351,12 @@ Public Sub initAndCreateLicenceForm(ByVal x As Long, ByVal y As Long, Optional B
     licenceForm.Widgets("btnDecline").Widget.ForeColor = vbWhite
     licenceForm.Widgets("btnDecline").Widget.Alpha = 0.05
     licenceForm.Widgets("btnDecline").Widget.ToolTip = "Press this button to decline the terms of the GPL licence."
-
+        
     licenceForm.Widgets("btnAccept").Caption = "Accept"
     licenceForm.Widgets("btnAccept").Widget.ForeColor = vbWhite
     licenceForm.Widgets("btnAccept").Widget.Alpha = 0.05
     licenceForm.Widgets("btnAccept").Widget.ToolTip = "Press this button to accept the terms of the GPL licence."
-
+    
     licenceForm.Widgets("TextBox").MultiLine = True
     licenceForm.Widgets("TextBox").ScrollBars = vbVertical
     licenceForm.Widgets("TextBox").Widget.BackColor = &H4000&
@@ -382,7 +377,7 @@ Public Sub initAndCreateLicenceForm(ByVal x As Long, ByVal y As Long, Optional B
     licenceForm.Widgets("lblDeclineOrNot").Alignment = vbCenter
     licenceForm.Widgets("lblDeclineOrNot").Widget.BackColor = -1
     licenceForm.Widgets("lblDeclineOrNot").Widget.ForeColor = vbWhite
-
+    
     licenceForm.Widgets("lblDeclineOrNot").Caption = "If you do not agree with the terms set forth above, please click the " & _
         "Decline button below and destroy this widget and its documentation"
         
@@ -396,9 +391,9 @@ initAndCreateLicenceForm_Error:
     
     Exit Sub
    
-RC5NotRegistered_Error:
+RC6NotRegistered_Error:
     
-    MsgBox "Error in procedure initAndCreateLicenceForm_Error of Class Module cfMain. RC5.DLL is NOT registered, use the registration script to register RC5.DLL."
+    MsgBox "Error in procedure initAndCreateLicenceForm_Error of Class Module cfMain. vbRichClient5.dll is NOT registered, use the registration script to register vbRichClient5.dll."
 
 End Sub
 '---------------------------------------------------------------------------------------
@@ -540,7 +535,7 @@ Private Sub TenShillingsForm_MouseMove(Button As Integer, Shift As Integer, x As
     On Error GoTo TenShillingsForm_MouseMove_Error
     
     If Button = vbLeftButton And Not TenShillingsForm.ActiveWidget Is Nothing Then 'Form-Dragging (under certain conditions)
-
+    
         If TenShillingsWidget.Locked = True Then Exit Sub
         If gblIgnoreMouse = "1" Then Exit Sub
         
@@ -619,5 +614,3 @@ TenShillingsForm_MouseUp_Error:
           End If
     End With
 End Sub
-
-

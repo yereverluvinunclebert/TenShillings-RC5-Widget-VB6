@@ -1,6 +1,6 @@
 Attribute VB_Name = "modRegFree"
 '@IgnoreModule ModuleWithoutFolder
-Option Explicit 'simple "drop-in" regfree-module for RC5 (in the IDE it will use the registered version, but as Exe will require a \Bin\-Subfolder with all RC5-Dlls)
+Option Explicit 'simple "drop-in" regfree-module for RC6 (in the IDE it will use the registered version, but as Exe will require a \Bin\-Subfolder with all RC6-Dlls)
 
 Private Declare Function LoadLibraryW Lib "kernel32" (ByVal lpLibFileName As Long) As Long
 Private Declare Function GetInstanceEx Lib "DirectCOM" (spFName As Long, spClassName As Long, Optional ByVal UseAlteredSearchPath As Boolean = True) As Object

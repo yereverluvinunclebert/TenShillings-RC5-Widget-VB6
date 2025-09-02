@@ -296,8 +296,6 @@ End Property
 
 
 
-
-
 '---------------------------------------------------------------------------------------
 ' Property  : Hidden
 ' Author    : beededea
@@ -415,7 +413,6 @@ W_MouseDown_Error:
 End Sub
 
 
-
 '---------------------------------------------------------------------------------------
 ' Procedure : W_Paint
 ' Author    : olaf schmidt
@@ -425,10 +422,14 @@ End Sub
 '
 Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByVal yAbs As Single, ByVal dx_Aligned As Single, ByVal dy_Aligned As Single, UserObj As Object)
         
-    'RC5 whole widget .Refresh - RC5 Widgets are refreshed "from the ground up" but not so in RC5
-'    CC.Operator = CAIRO_OPERATOR_CLEAR
-'    CC.Paint ' clear the whole background of this Widgets underlying Surface via Clear-Operator
-'    CC.Operator = CAIRO_OPERATOR_OVER 'switch back to the default-Operator
+    If gblRichClientEnvironment = "RC6" Then
+        ' Widgets are refreshed "from the ground up" in RC5 and not so in RC6
+        ' extra code NOT needed when using RC5 but now required in RC6 - starts
+        CC.Operator = CAIRO_OPERATOR_CLEAR
+        CC.Paint 'clear the whole background of this Widgets underlying Surface via Clear-Operator
+        CC.Operator = CAIRO_OPERATOR_OVER 'switch back to the default-Operator
+        ' extra code not needed when using RC5 but now required in RC6 - ends
+    End If
     
     CC.TranslateDrawings 0, 0
     CC.ScaleDrawings mZoom, mZoom

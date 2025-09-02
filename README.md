@@ -1,14 +1,11 @@
-# TenShillings-RC5-Widget-VB6
+# TenShillings-RC6-Widget-VB6
 
 An example of a moveable/resizable single-image, VB6 / TwinBasic program using the RC6 widget framework, complete with right click menu, help, about and licence forms and help CHM.
 
-The reason for this duplicate of the TenShillings-RC6-Widget-VB6 is that this RichClient RC5 version, runs on XP. 
+The RC6 version here operates on Vista+ to Windows 11+. There is another version on github in my repo. that operates with RC5, the earlier version of RichClient. That change allows the widget to run under Windows XP.
 
-The program does very little but place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine.
-
-You can add more logic as you require or replace the main image with your own. 
-
-This is merely a template for other single-image VB6 / TwinBasic RC5 programs that I knocked up late at night whilst drinking gin and tonic.
+The program does very little but place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine. You can add more logic as you require or replace the main image with your own. 
+This is merely a template for other single-image VB6 / TwinBasic RC6 programs that I knocked up late at night whilst drinking gin and tonic.
 
 <img width="829" height="520" alt="TenShillings" src="https://github.com/user-attachments/assets/07f63cb6-c0fe-4f70-ad02-b57a9ab18b58" />
 
@@ -86,16 +83,16 @@ BUILD: The program runs without any Microsoft plugins.
  ship with VB6.  
  
  
- * Uses the latest version of the RC5 Cairo framework from Olaf Schmidt.
+ * Uses the latest version of the RC6 Cairo framework from Olaf Schmidt.
  
- During development the RC5 components need to be registered. These scripts are 
+ During development the RC6 components need to be registered. These scripts are 
  used to register. Run each by double-clicking on them.
  
-	RegisterRC5inPlace.vbs
-	RegisterRC5WidgetsInPlace.vbs
+	RegisterRC6inPlace.vbs
+	RegisterRC6WidgetsInPlace.vbs
  
- During runtime on the users system, the RC5 components are dynamically 
- referenced using modRC5regfree.bas which is compiled into the binary.	
+ During runtime on the users system, the RC6 components are dynamically 
+ referenced using modRC6regfree.bas which is compiled into the binary.	
  
 ![prefsGeneral](https://github.com/user-attachments/assets/8a228ec6-89a9-459a-98bd-d1d17ce9728d)
 
@@ -162,10 +159,10 @@ The above is only for development, for ordinary users, during runtime there is n
 	VisualBasic Runtime Objects and Procedures  
 	VisualBasic Objects and Procedures  
 	OLE Automation  
-	vbRichClient5
+	vbRichClient6  
  
-<img width="445" height="359" alt="rc5refs" src="https://github.com/user-attachments/assets/19b420ac-393c-4fc2-8f7c-b41d7e6040bb" />
-
+ <img width="445" height="359" alt="projectReferences" src="https://github.com/user-attachments/assets/51a33785-2e3c-4b32-9fd0-6c4b0ebb8531" />
+ 
  LICENCE AGREEMENTS:
  
  Copyright © 2023 Dean Beedell

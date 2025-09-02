@@ -372,6 +372,15 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal dx As Single, ByVal dy As Sing
   
     CC.ScaleDrawings mZoom, mZoom
     
+    If gblRichClientEnvironment = "RC6" Then
+        ' Widgets are refreshed "from the ground up" in RC5 and not so in RC6
+        ' extra code NOT needed when using RC5 but now required in RC6 - starts
+        CC.Operator = CAIRO_OPERATOR_CLEAR
+        CC.Paint 'clear the whole background of this Widgets underlying Surface via Clear-Operator
+        CC.Operator = CAIRO_OPERATOR_OVER 'switch back to the default-Operator
+        ' extra code not needed when using RC5 but now required in RC6 - ends
+    End If
+    
     CC.RenderSurfaceContent "about", aboutxo, aboutyo, , , , mMyOpacity
         
     'set some Font- and ForeColor-Properties and draw some Text on the Widget
@@ -384,7 +393,7 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal dx As Single, ByVal dy As Sing
     W.SelectFontSettingsInto CC
     
     If gblDpiAwareness = "0" Then
-        CC.DrawText 350, -20, dx, dy - 275, "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
+        CC.DrawText 350, -20, dx, dy - 275, gblRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
          
         #If TWINBASIC Then
             CC.DrawText 360, -20, dx, dy, "TwinBasic", , , 2, True, , mMyOpacity
@@ -394,14 +403,14 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal dx As Single, ByVal dy As Sing
         
    Else
         
-        CC.DrawText 350, 0, dx, dy - 1050, "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
+        CC.DrawText 350, 0, dx, dy - 1050, gblRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
         
         #If TWINBASIC Then
             CC.DrawText 360, 0, dx, dy, "TwinBasic", , , 2, True, , mMyOpacity
         #Else
             CC.DrawText 315, 0, dx, dy - 1050, "VB6", , , 2, True, , mMyOpacity
         #End If
-        
+
     End If
     W.Refresh
 

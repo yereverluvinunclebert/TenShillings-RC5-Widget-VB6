@@ -1,24 +1,29 @@
 TENSHILLINGS WIDGET
 
-An example of a moveable/resizable single-image, VB6 / TwinBasic program using the older RC5 widget framework, complete with right click menu, help, about and licence forms and help CHM. The use of the older RC5 framework means that this program will operate under Windows XP and ReactOS.
+An example of a moveable/resizable single-image, VB6 / TwinBasic program using the RC5/RC6 widget framework, complete with right click menu, help, about and licence forms and help CHM.
 
-The program does very little but place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine. You can add more logic as you require or replace the main image with your own.
+The program does very little but place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine.
+You can add more logic as you require or replace the main image with your own.
 
-This widget's UI functionality is 'simple' as it is merely a template for other single-image VB6 / TwinBasic RC5 programs, a template that I knocked up late at night whilst drinking gin and tonic.
+This VB6/TwinBasic version of the TenShillings widget replaces the Yahoo widget version that is now obsolete.
+
+This widget's UI functionality is 'simple' as it is merely a template for other single-image VB6 / TwinBasic RC5/RC6 programs, a template that I knocked up late at night whilst drinking gin and tonic.
+
+Note that the RC5 version of the widget should run on XP and ReactOS (32bit).
 
 You can change a variety of characteristics with the preferences. It can be increased in size, opacity/transparency may be set as to the users discretion. The widget can also be made to hide for a pre-determined period.
 
-Right-click on the widget to display the function menu, mouse hover over the widget and press CTRL+mousewheel up/down to resize. It works well on Windows XP to Windows 11 as well as Linux and Mac os x with Wine.
+Right-click on the widget to display the function menu, mouse hover over the widget and press CTRL+mousewheel up/down to resize. It works well on Windows Vista+ to Windows 11 as well as Linux and Mac os x with Wine.
 
-This version was initially developed on Windows 7/10 using 32 bit VisualBasic 6 as a FOSS project creating a WoW64 widget for the desktop.
+This version was initially developed on Windows 7/10 using 32 bit VisualBasic 6 as a FOSS project creating a WoW64 widget for the desktop. Now using TwinBasic.
 
-It is open source to allow easy configuration, bug-fixing, enhancement and community contribution towards free-and-useful VB6 utilities that can be created by anyone. The first step was the creation of a template program to form the basis for the conversion of several desktop utilities or 'widgets'. This program is one of them. A future step is new VB6 widgets with more functionality and then hopefully, conversion of each to RADBasic/TwinBasic for future-proofing and 64bit-ness.
+It is open source to allow easy configuration, bug-fixing, enhancement and community contribution towards free-and-useful VB6/TwinBasic utilities that can be created by anyone. The first step was the creation of a template program to form the basis for the conversion of several desktop utilities or 'widgets'. This program is one of them. A future step is new VB6 widgets with more functionality and then hopefully, conversion of each to RADBasic/TwinBasic for future-proofing and 64bit-ness.
 
 This utility is one of a set of steampunk and dieselpunk widgets that you can find here on Deviantart: https://www.deviantart.com/yereverluvinuncleber/gallery
 
 I do hope you enjoy using this utility and others. Your own software enhancements and contributions will be gratefully received if you choose to contribute.
 
-Built using: VB6, MZ-TOOLS 3.0, VBAdvance, CodeHelp Core IDE Extender Framework 2.2 & Rubberduck 2.4.1, RichClient 5
+Built using: VB6, TwinBasic, MZ-TOOLS 3.0, VBAdvance, CodeHelp Core IDE Extender Framework 2.2 & Rubberduck 2.4.1, RichClient 5/6
 
 CREDITS:
 
@@ -26,7 +31,7 @@ I have really tried to maintain the credits as the project has progressed. If I 
 
 MicroSoft in the 90s - MS built good, lean and useful tools in the late 90s/early 2000s. Thanks for VB6.
 
-Olaf Schmidt    - This tool was built using the RichClient RC6 Cairo wrapper for VB6. Specifically the components using transparency. Thanks for the massive effort Olaf in creating Cairo counterparts for all VB6 native controls and giving us access to advanced features on controls such as transparency.
+Olaf Schmidt    - This tool was built using the RichClient RC5/RC6 Cairo wrapper for VB6. Specifically the components using transparency. Thanks for the massive effort Olaf in creating Cairo counterparts for all VB6 native controls and giving us access to advanced features on controls such as transparency.
 
 Shuja Ali @ codeguru for his settings.ini code.
 

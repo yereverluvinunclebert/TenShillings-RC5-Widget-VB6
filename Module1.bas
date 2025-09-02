@@ -463,6 +463,7 @@ Public gblPrefsFormResizedInCode As Boolean
 Public gblTenShillingsWidgetAvailable As Boolean
 
 Public gblCodingEnvironment As String
+Public gblRichClientEnvironment As String
 
 Public widgetPrefsOldHeight As Long
 Public widgetPrefsOldWidth As Long
@@ -1602,7 +1603,7 @@ Public Sub mnuSupport_ClickEvent()
     answer = msgBoxA(answerMsg, vbExclamation + vbYesNo, "Request to Contact Support", True, "mnuSupportClickEvent")
 
     If answer = vbYes Then
-        Call ShellExecute(menuForm.hWnd, "Open", "https://github.com/yereverluvinunclebert/TenShillings-RC5-Widget-" & gblCodingEnvironment & "/issues", vbNullString, App.Path, 1)
+        Call ShellExecute(menuForm.hWnd, "Open", "https://github.com/yereverluvinunclebert/TenShillings-" & gblRichClientEnvironment & "-Widget-" & gblCodingEnvironment & "/issues", vbNullString, App.Path, 1)
     End If
 
    On Error GoTo 0
@@ -1944,7 +1945,7 @@ End Sub
 ' Procedure : unloadAllForms
 ' Author    : beededea
 ' Date      : 28/06/2023
-' Purpose   : unload all VB6 and RC5 forms
+' Purpose   : unload all VB6 and RC6 forms
 '---------------------------------------------------------------------------------------
 '
 Public Sub unloadAllForms(ByVal endItAll As Boolean)
@@ -1967,7 +1968,7 @@ Public Sub unloadAllForms(ByVal endItAll As Boolean)
     widgetPrefs.tmrPrefsScreenResolution.Enabled = False
     widgetPrefs.tmrWritePosition.Enabled = False
 
-    'unload the RC5 widgets on the RC5 forms first
+    'unload the RC6 widgets on the RC6 forms first
     
     aboutWidget.Widgets.RemoveAll
     helpWidget.Widgets.RemoveAll
@@ -1980,7 +1981,7 @@ Public Sub unloadAllForms(ByVal endItAll As Boolean)
     Unload frmTimer
     Unload menuForm
 
-    ' RC5's own method for killing forms
+    ' RC6's own method for killing forms
     
     fMain.aboutForm.Unload
     fMain.helpForm.Unload
@@ -2035,8 +2036,8 @@ Public Sub reloadProgram()
     
     Call unloadAllForms(False) ' unload forms but do not END
     
-    ' this will call the routines as called by sub main() and initialise the program and RELOAD the RC5 forms.
-    Call mainRoutine(True) ' sets the restart flag to avoid repriming the RC5 message pump.
+    ' this will call the routines as called by sub main() and initialise the program and RELOAD the RC6 forms.
+    Call mainRoutine(True) ' sets the restart flag to avoid repriming the RC6 message pump.
 
     On Error GoTo 0
     Exit Sub
@@ -2078,9 +2079,7 @@ Public Sub saveMainRCFormPosition()
     
     sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
     sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
-   
     gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
-    
     sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
 
    On Error GoTo 0
@@ -2106,7 +2105,6 @@ Public Sub saveMainRCFormSize()
     sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
     sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
     gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
-
     sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
 
    On Error GoTo 0
@@ -2436,12 +2434,12 @@ Public Sub hardRestart()
     
     On Error GoTo hardRestart_Error
 
-    thisCommand = App.Path & "\TenShillings-RC5-Widget-VB6-Restart.exe"
+    thisCommand = App.Path & "\TenShillings-" & gblRichClientEnvironment & "-Widget-Restart.exe"
     
     If fFExists(thisCommand) Then
         
         ' run the helper program that kills the current process and restarts it
-        Call ShellExecute(widgetPrefs.hWnd, "open", thisCommand, "TenShillings-RC5-Widget-VB6.exe prefs", "", 1)
+        Call ShellExecute(widgetPrefs.hWnd, "open", thisCommand, "TenShillings-" & gblRichClientEnvironment & "-Widget-" & gblCodingEnvironment & ".exe prefs", "", 1)
     Else
         'answer = MsgBox(thisCommand & " is missing", vbOKOnly + vbExclamation)
         answerMsg = thisCommand & " is missing"
@@ -2701,7 +2699,6 @@ hideBusyTimer_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure hideBusyTimer of Form widgetPrefs"
     
 End Sub
-
 
 
 
