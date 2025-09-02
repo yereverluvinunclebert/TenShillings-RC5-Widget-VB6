@@ -48,8 +48,6 @@ Public TenShillingsWidget As cwTenShillings
 ' any other private vars
 Public gblWidgetName As String
 
-
-
 '---------------------------------------------------------------------------------------
 ' Procedure : Main
 ' Author    : beededea
@@ -97,13 +95,20 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     extractCommand = Command$ ' capture any parameter passed, remove if a soft reload
     If restart = True Then extractCommand = vbNullString
     
+    'Test for the coding environment and set a global variable to alter conditions throughout, mostly in text
     #If TWINBASIC Then
         gblCodingEnvironment = "TwinBasic"
     #Else
         gblCodingEnvironment = "VB6"
     #End If
-    gblRichClientEnvironment = "RC5"
-        
+    
+    ' Test for the version of RichClient and set a global variable to alter conditions throughout, mostly in text, there is no new_c.version in RC5
+    If fFExists(App.Path & "\BIN\vbRichClient5.dll") Then
+        gblRichClientEnvironment = "RC5"
+    ElseIf fFExists(App.Path & "\BIN\RC6.dll") Then
+        gblRichClientEnvironment = "RC6"
+    End If
+      
     menuForm.mnuAbout.Caption = "About TenShillings " & gblRichClientEnvironment & " Cairo " & gblCodingEnvironment & " widget"
        
     ' Load the sounds into numbered buffers ready for playing
