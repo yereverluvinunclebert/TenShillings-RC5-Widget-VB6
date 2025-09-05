@@ -2356,7 +2356,7 @@ Private Sub Form_Load()
     
     Me.Visible = False
     btnSave.Enabled = False ' disable the save button
-    Me.mnuAbout.Caption = "About TenShillings Widget Cairo " & gblCodingEnvironment & " widget"
+    Me.mnuAbout.Caption = "About TenShillings Widget Cairo" & gblRichClientEnvironment & " Cairo " & gblCodingEnvironment & " widget"
 
     pvtPrefsStartupFlg = True ' this is used to prevent some control initialisations from running code at startup
     'pvtPrefsDynamicSizingFlg = False
@@ -3327,7 +3327,7 @@ Private Sub cmbDebug_Click()
 
     btnSave.Enabled = True ' enable the save button
     If cmbDebug.ListIndex = 0 Then
-        txtDefaultEditor.Text = "eg. E:\vb6\TenShillings-" & gblRichClientEnvironment & "-Widget-VB6MkII\TenShillings-" & gblRichClientEnvironment & "-Widget-VB6.vbp"
+        txtDefaultEditor.Text = "eg. E:\vb6\TenShillings-" & gblRichClientEnvironment & "-Widget-VB6MkII\TenShillings-" & gblRichClientEnvironment & "-Widget-" & gblCodingEnvironment & ".vbp"
         txtDefaultEditor.Enabled = False
         lblDebug(7).Enabled = False
         btnDefaultEditor.Enabled = False

@@ -73,8 +73,8 @@ Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optio
         If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then tenShillingsFormWidth = gblVirtualScreenWidthPixels
         If tenShillingsFormHeight > gblVirtualScreenHeightPixels Then tenShillingsFormHeight = gblVirtualScreenHeightPixels
     Else
-        tenShillingsFormWidth = 1800
-        tenShillingsFormHeight = 1600
+        tenShillingsFormWidth = dx ' roughly twice the width of the main image plus a bit
+        tenShillingsFormHeight = dy '
         If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then
             tenShillingsFormWidth = gblVirtualScreenWidthPixels
             tenShillingsWidgetZoomValue = 1

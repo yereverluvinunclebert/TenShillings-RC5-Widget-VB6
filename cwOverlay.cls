@@ -29,6 +29,7 @@ Private WithEvents W As cWidgetBase
 Attribute W.VB_VarHelpID = -1
 Private mZoom As Double
 Private mZoomDirection As String
+Private mSkewDegrees As Double
 
 Private mLocked As Boolean ' property Locked
 Private mHidden As Boolean ' property Hidden
@@ -158,10 +159,10 @@ End Property
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Public Property Let Zoom(ByVal newValue As Double)
+Public Property Let Zoom(ByVal NewValue As Double)
    On Error GoTo ZoomLet_Error
 
-  If mZoom <> newValue Then mZoom = newValue Else Exit Property
+  If mZoom <> NewValue Then mZoom = NewValue Else Exit Property
   If mZoom > 2 Then mZoom = 2 Else If mZoom < 0.05 Then mZoom = 0.05 'keep FZ within a sane ZoomInterval
   W.Refresh
 
@@ -198,10 +199,10 @@ End Property
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Public Property Let ZoomDirection(ByVal newValue As String)
+Public Property Let ZoomDirection(ByVal NewValue As String)
    On Error GoTo ZoomDirectionLet_Error
 
-  If mZoomDirection <> newValue Then mZoomDirection = newValue Else Exit Property
+  If mZoomDirection <> NewValue Then mZoomDirection = NewValue Else Exit Property
   W.Refresh
 
    On Error GoTo 0
@@ -213,16 +214,56 @@ ZoomDirectionLet_Error:
 End Property
 
 '---------------------------------------------------------------------------------------
+' Procedure : SkewDegrees
+' Author    : beededea
+' Date      : 05/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get SkewDegrees() As Double
+    On Error GoTo SkewDegrees_Error
+
+    SkewDegrees = mSkewDegrees
+
+    On Error GoTo 0
+    Exit Property
+
+SkewDegrees_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure SkewDegrees of Class Module cwTenShillings"
+End Property
+'---------------------------------------------------------------------------------------
+' Procedure : SkewDegrees
+' Author    : beededea
+' Date      : 05/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let SkewDegrees(ByVal NewValue As Double)
+    On Error GoTo SkewDegrees_Error
+
+    If mSkewDegrees <> NewValue Then mSkewDegrees = NewValue Else Exit Property
+    W.Refresh
+
+    On Error GoTo 0
+    Exit Property
+
+SkewDegrees_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure SkewDegrees of Class Module cwTenShillings"
+End Property
+
+'---------------------------------------------------------------------------------------
 ' Procedure : opacity
 ' Author    : beededea
 ' Date      : 17/05/2023
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Public Property Let opacity(ByVal newValue As Double)
+Public Property Let opacity(ByVal NewValue As Double)
    On Error GoTo opacityLet_Error
 
-    If mOpacity <> newValue Then mOpacity = newValue Else Exit Property
+    If mOpacity <> NewValue Then mOpacity = NewValue Else Exit Property
 
    On Error GoTo 0
    Exit Property
@@ -279,10 +320,10 @@ End Property
 ' Purpose   : property used to store/set the lock state to lock the widget in place, the actual locking is done elsewhere
 '---------------------------------------------------------------------------------------
 '
-Public Property Let Locked(ByVal newValue As Boolean)
+Public Property Let Locked(ByVal NewValue As Boolean)
    On Error GoTo LockedLet_Error
 
-   If mLocked <> newValue Then mLocked = newValue Else Exit Property
+   If mLocked <> NewValue Then mLocked = NewValue Else Exit Property
 
    On Error GoTo 0
    Exit Property
@@ -326,10 +367,10 @@ End Property
 ' Purpose   : property to determine (by value)  the set the hidden value of the whole widget
 '---------------------------------------------------------------------------------------
 '
-Public Property Let Hidden(ByVal newValue As Boolean)
+Public Property Let Hidden(ByVal NewValue As Boolean)
    On Error GoTo HiddenLet_Error
 
-    If mHidden <> newValue Then mHidden = newValue Else Exit Property
+    If mHidden <> NewValue Then mHidden = NewValue Else Exit Property
     If mHidden = True Then
         W.Visible = False
         
@@ -375,6 +416,8 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
         If widgetPrefs.IsVisible = True Then widgetPrefs.sliWidgetSize = Val(gblWidgetSize)
         W.Refresh
         
+    Case Else
+        SkewDegrees = SkewDegrees + LineOffset
     End Select
 
    On Error GoTo 0
@@ -421,7 +464,7 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByVal yAbs As Single, ByVal dx_Aligned As Single, ByVal dy_Aligned As Single, UserObj As Object)
-        
+
     If gblRichClientEnvironment = "RC6" Then
         ' Widgets are refreshed "from the ground up" in RC5 and not so in RC6
         ' extra code NOT needed when using RC5 but now required in RC6 - starts
@@ -431,12 +474,32 @@ Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByV
         ' extra code not needed when using RC5 but now required in RC6 - ends
     End If
     
-    CC.TranslateDrawings 0, 0
+    ' note: default origin point is always top left, needs to be adjusted
+
+    ' set the origin point closeish to the midpoint
+    CC.TranslateDrawings 400, 400
+    
+    ' set the origin point prior to rotation
+    CC.TranslateDrawings 500, 500
+    
+    ' set the scaling ratio for all images
     CC.ScaleDrawings mZoom, mZoom
+    
+    ' save the current state created so far
     CC.Save
-   
-    CC.RenderSurfaceContent "tenshillings", TenShillingsxo, TenShillingsyo, , , , mOpacity
+    
+    ' set the rotation in degrees only for the coming render of the tenshillings image
+    CC.RotateDrawingsDeg SkewDegrees
+    
+    ' reverse the origin point prior to rotation
+    CC.TranslateDrawings -500, -500
+    
+    'render the tenshillings in relation to the reversed translated origin above
+    CC.RenderSurfaceContent "tenshillings", 0, 0, , , , mOpacity
+    
+    ' restores to the state saved by a preceding call to CC.Save
     CC.Restore
+    
     
     On Error GoTo 0
    Exit Sub

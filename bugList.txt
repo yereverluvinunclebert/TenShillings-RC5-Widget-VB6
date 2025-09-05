@@ -1,19 +1,9 @@
 DONE
 
-lamps
-pointer
 help
 help CHM
 
 TODO
-
-' When not on battery it states "MAINS AC is ON and charging" - no battery! 
-
-' smooth pointer - flick/smooth
-
-' new msgbox - no battery
-
-' startup - reboot - not present
 
 ' add second monitor - wip find cable!
 

@@ -1055,7 +1055,7 @@ Private Sub createRCFormsOnCurrentDisplay()
     On Error GoTo createRCFormsOnCurrentDisplay_Error
 
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateTenShillingsForm(.WorkLeft, .WorkTop, 3000, 3000, gblWidgetName)
+      Call fMain.initAndCreateTenShillingsForm(.WorkLeft, .WorkTop, 2200, 2200, gblWidgetName)
     End With
 
     With New_c.Displays(1) 'get the current Display

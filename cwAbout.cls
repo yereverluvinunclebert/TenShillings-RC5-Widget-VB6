@@ -156,10 +156,10 @@ End Property
 ' Purpose   : property to determine (by value) the zoom value, it being selected by a mousewheel scroll or the slider in the prefs
 '---------------------------------------------------------------------------------------
 '
-Public Property Let Zoom(ByVal newValue As Double)
+Public Property Let Zoom(ByVal NewValue As Double)
    On Error GoTo ZoomLet_Error
 
-  If mZoom <> newValue Then mZoom = newValue Else Exit Property
+  If mZoom <> NewValue Then mZoom = NewValue Else Exit Property
   If mZoom > 3 Then mZoom = 3 Else If mZoom < 0.05 Then mZoom = 0.05
   W.Refresh
 
@@ -209,10 +209,10 @@ End Sub
 ' Purpose   : property to determine (by value) the opacity value used by RenderSurfaceContent
 '---------------------------------------------------------------------------------------
 '
-Public Property Let MyOpacity(ByVal newValue As Double)
+Public Property Let MyOpacity(ByVal NewValue As Double)
    On Error GoTo MyOpacityLet_Error
 
-   If mMyOpacity <> newValue Then mMyOpacity = newValue Else Exit Property
+   If mMyOpacity <> NewValue Then mMyOpacity = NewValue Else Exit Property
 
    On Error GoTo 0
    Exit Property
@@ -248,10 +248,10 @@ End Property
 ' Purpose   : property to determine (by value) that triggers a fade in timer
 '---------------------------------------------------------------------------------------
 '
-Public Property Let ShowMe(ByVal newValue As Boolean)
+Public Property Let ShowMe(ByVal NewValue As Boolean)
     On Error GoTo ShowMeLet_Error
 
-    mShowMe = newValue
+    mShowMe = NewValue
     
     If mShowMe = True Then tmrAboutFadeIn.Enabled = True
     
@@ -388,29 +388,14 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal dx As Single, ByVal dy As Sing
     W.FontName = gblWidgetFont
     W.ForeColor = vbBlack
     W.FontBold = True
-    W.FontSize = 11
+    W.FontSize = 9
 
     W.SelectFontSettingsInto CC
     
     If gblDpiAwareness = "0" Then
-        CC.DrawText 350, -20, dx, dy - 275, gblRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
-         
-        #If TWINBASIC Then
-            CC.DrawText 360, -20, dx, dy, "TwinBasic", , , 2, True, , mMyOpacity
-        #Else
-            CC.DrawText 315, -20, dx, dy - 275, "VB6", , , 2, True, , mMyOpacity
-        #End If
-        
+        CC.DrawText 340, -20, dx, dy - 275, gblRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
    Else
-        
-        CC.DrawText 350, 0, dx, dy - 1050, gblRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
-        
-        #If TWINBASIC Then
-            CC.DrawText 360, 0, dx, dy, "TwinBasic", , , 2, True, , mMyOpacity
-        #Else
-            CC.DrawText 315, 0, dx, dy - 1050, "VB6", , , 2, True, , mMyOpacity
-        #End If
-
+        CC.DrawText 340, 0, dx, dy - 1050, gblRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
     End If
     W.Refresh
 
