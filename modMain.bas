@@ -141,8 +141,8 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     ' initialise and create the three main RC forms (widget, about and licence) on the current display
     Call createRCFormsOnCurrentDisplay
     
-    ' Set the opacity of the widget, passing just this one global variable to a public property within the class
-    'TenShillingsWidget.opacity = gblOpacity
+'    ' Set the opacity of the widget, passing just this one global variable to a public property within the class
+    TenShillingsWidget.opacity = Val(gblOpacity) / 100
     
     ' place the form at the saved location and configure all the form elements
     Call makeVisibleFormElements
@@ -632,7 +632,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
         TenShillingsWidget.Locked = True ' this is just here for continuity's sake, it is also set at the time the control is selected
     End If
     
-    TenShillingsWidget.opacity = Val(gblOpacity)
+    TenShillingsWidget.opacity = Val(gblOpacity) / 100
 
     ' set the z-ordering of the window
     Call setAlphaFormZordering

@@ -159,10 +159,10 @@ End Property
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Public Property Let Zoom(ByVal NewValue As Double)
+Public Property Let Zoom(ByVal newValue As Double)
    On Error GoTo ZoomLet_Error
 
-  If mZoom <> NewValue Then mZoom = NewValue Else Exit Property
+  If mZoom <> newValue Then mZoom = newValue Else Exit Property
   If mZoom > 2 Then mZoom = 2 Else If mZoom < 0.05 Then mZoom = 0.05 'keep FZ within a sane ZoomInterval
   W.Refresh
 
@@ -199,10 +199,10 @@ End Property
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Public Property Let ZoomDirection(ByVal NewValue As String)
+Public Property Let ZoomDirection(ByVal newValue As String)
    On Error GoTo ZoomDirectionLet_Error
 
-  If mZoomDirection <> NewValue Then mZoomDirection = NewValue Else Exit Property
+  If mZoomDirection <> newValue Then mZoomDirection = newValue Else Exit Property
   W.Refresh
 
    On Error GoTo 0
@@ -239,10 +239,10 @@ End Property
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Public Property Let SkewDegrees(ByVal NewValue As Double)
+Public Property Let SkewDegrees(ByVal newValue As Double)
     On Error GoTo SkewDegrees_Error
 
-    If mSkewDegrees <> NewValue Then mSkewDegrees = NewValue Else Exit Property
+    If mSkewDegrees <> newValue Then mSkewDegrees = newValue Else Exit Property
     W.Refresh
 
     On Error GoTo 0
@@ -260,10 +260,10 @@ End Property
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Public Property Let opacity(ByVal NewValue As Double)
+Public Property Let opacity(ByVal newValue As Double)
    On Error GoTo opacityLet_Error
 
-    If mOpacity <> NewValue Then mOpacity = NewValue Else Exit Property
+    If mOpacity <> newValue Then mOpacity = newValue Else Exit Property
 
    On Error GoTo 0
    Exit Property
@@ -320,10 +320,10 @@ End Property
 ' Purpose   : property used to store/set the lock state to lock the widget in place, the actual locking is done elsewhere
 '---------------------------------------------------------------------------------------
 '
-Public Property Let Locked(ByVal NewValue As Boolean)
+Public Property Let Locked(ByVal newValue As Boolean)
    On Error GoTo LockedLet_Error
 
-   If mLocked <> NewValue Then mLocked = NewValue Else Exit Property
+   If mLocked <> newValue Then mLocked = newValue Else Exit Property
 
    On Error GoTo 0
    Exit Property
@@ -367,10 +367,10 @@ End Property
 ' Purpose   : property to determine (by value)  the set the hidden value of the whole widget
 '---------------------------------------------------------------------------------------
 '
-Public Property Let Hidden(ByVal NewValue As Boolean)
+Public Property Let Hidden(ByVal newValue As Boolean)
    On Error GoTo HiddenLet_Error
 
-    If mHidden <> NewValue Then mHidden = NewValue Else Exit Property
+    If mHidden <> newValue Then mHidden = newValue Else Exit Property
     If mHidden = True Then
         W.Visible = False
         
