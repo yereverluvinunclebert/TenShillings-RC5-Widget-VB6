@@ -472,7 +472,6 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub addImagesToImageList()
-    'Dim useloop As Integer: useloop = 0
     
     On Error GoTo addImagesToImageList_Error
 

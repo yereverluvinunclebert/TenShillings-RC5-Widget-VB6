@@ -2434,7 +2434,7 @@ Public Sub hardRestart()
     
     On Error GoTo hardRestart_Error
 
-    thisCommand = App.Path & "\TenShillings-" & gblRichClientEnvironment & "-Widget-Restart.exe"
+    thisCommand = App.Path & "\TenShillings-Widget-Restart.exe"
     
     If fFExists(thisCommand) Then
         

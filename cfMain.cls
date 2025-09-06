@@ -56,7 +56,9 @@ Private lblDeclineOrNot As cwLabel
 '---------------------------------------------------------------------------------------
 '
 Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optional ByVal dx As Long, Optional ByVal dy As Long, Optional ByVal Caption As String)
-    
+    Dim thisSrf As cCairoSurface
+    Dim imageHeight As Long: imageHeight = 0
+    Dim imageWidth As Long: imageWidth = 0
     Dim tenShillingsFormWidth As Long: tenShillingsFormWidth = 0
     Dim tenShillingsFormHeight As Long: tenShillingsFormHeight = 0
     Dim tenShillingsWidgetWidth As Long: tenShillingsWidgetWidth = 0
@@ -67,14 +69,19 @@ Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optio
     
     On Error GoTo initAndCreateTenShillingsForm_Error
     
+    If Cairo.ImageList.Exists("tenshillings") Then Set thisSrf = Cairo.ImageList("tenshillings")
+    
+    imageWidth = thisSrf.Width
+    imageHeight = thisSrf.Height
+    
     If gblDpiAwareness = "0" Then
         tenShillingsFormWidth = 900
         tenShillingsFormHeight = 850
         If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then tenShillingsFormWidth = gblVirtualScreenWidthPixels
         If tenShillingsFormHeight > gblVirtualScreenHeightPixels Then tenShillingsFormHeight = gblVirtualScreenHeightPixels
     Else
-        tenShillingsFormWidth = dx ' roughly twice the width of the main image plus a bit
-        tenShillingsFormHeight = dy '
+        tenShillingsFormWidth = imageWidth * 2.2 ' roughly twice the width of the main image plus a bit
+        tenShillingsFormHeight = imageHeight * 2.2 '
         If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then
             tenShillingsFormWidth = gblVirtualScreenWidthPixels
             tenShillingsWidgetZoomValue = 1
