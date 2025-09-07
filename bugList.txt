@@ -6,9 +6,11 @@ Rotation
 
 TODO
 
-' add second monitor - wip find cable!
+HTML text and images
 
-' test usage of RC6 for monitor awareness - wip
+Add the spawn menu option and code when it is ready to use
+
+' test usage of RC for monitor awareness - wip
 '      adjust Form Position on startup placing form onto Correct Monitor when placed off screen due to
 '               monitor/resolution changes.
 

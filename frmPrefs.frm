@@ -317,6 +317,62 @@ Begin VB.Form widgetPrefs
          End
       End
    End
+   Begin VB.Frame fraGeneral 
+      Caption         =   "General"
+      ForeColor       =   &H80000008&
+      Height          =   1755
+      Left            =   240
+      TabIndex        =   157
+      Top             =   1230
+      Visible         =   0   'False
+      Width           =   7995
+      Begin VB.Frame fraGeneralInner 
+         BorderStyle     =   0  'None
+         Height          =   1245
+         Left            =   480
+         TabIndex        =   158
+         Top             =   315
+         Width           =   6750
+         Begin VB.CheckBox chkWidgetFunctions 
+            Caption         =   "Functionality Toggle"
+            Height          =   465
+            Left            =   1995
+            TabIndex        =   161
+            ToolTipText     =   "Check this box to enable the automatic start of the program when Windows is started."
+            Top             =   555
+            Width           =   4020
+         End
+         Begin VB.CheckBox chkGenStartup 
+            Caption         =   "Run the Ten Shillings Widget at Windows Startup "
+            Height          =   465
+            Left            =   1995
+            TabIndex        =   159
+            ToolTipText     =   "Check this box to enable the automatic start of the program when Windows is started."
+            Top             =   150
+            Width           =   4020
+         End
+         Begin VB.Label lblGeneral 
+            Caption         =   "Widget Functions :"
+            Height          =   375
+            Index           =   1
+            Left            =   435
+            TabIndex        =   162
+            Tag             =   "lblRefreshInterval"
+            Top             =   660
+            Width           =   1740
+         End
+         Begin VB.Label lblGeneral 
+            Caption         =   "Auto Start :"
+            Height          =   375
+            Index           =   11
+            Left            =   960
+            TabIndex        =   160
+            Tag             =   "lblRefreshInterval"
+            Top             =   255
+            Width           =   1740
+         End
+      End
+   End
    Begin VB.Frame fraAbout 
       Caption         =   "About"
       Height          =   8580
@@ -656,62 +712,6 @@ Begin VB.Form widgetPrefs
          TabIndex        =   93
          Top             =   510
          Width           =   2655
-      End
-   End
-   Begin VB.Frame fraGeneral 
-      Caption         =   "General"
-      ForeColor       =   &H80000008&
-      Height          =   1725
-      Left            =   240
-      TabIndex        =   157
-      Top             =   1230
-      Visible         =   0   'False
-      Width           =   7995
-      Begin VB.Frame fraGeneralInner 
-         BorderStyle     =   0  'None
-         Height          =   1245
-         Left            =   480
-         TabIndex        =   158
-         Top             =   315
-         Width           =   6750
-         Begin VB.CheckBox chkWidgetFunctions 
-            Caption         =   "Functionality Toggle"
-            Height          =   465
-            Left            =   1995
-            TabIndex        =   161
-            ToolTipText     =   "Check this box to enable the automatic start of the program when Windows is started."
-            Top             =   555
-            Width           =   4020
-         End
-         Begin VB.CheckBox chkGenStartup 
-            Caption         =   "Run the Ten Shillings Widget at Windows Startup "
-            Height          =   465
-            Left            =   1995
-            TabIndex        =   159
-            ToolTipText     =   "Check this box to enable the automatic start of the program when Windows is started."
-            Top             =   150
-            Width           =   4020
-         End
-         Begin VB.Label lblGeneral 
-            Caption         =   "Widget Functions :"
-            Height          =   375
-            Index           =   1
-            Left            =   435
-            TabIndex        =   162
-            Tag             =   "lblRefreshInterval"
-            Top             =   660
-            Width           =   1740
-         End
-         Begin VB.Label lblGeneral 
-            Caption         =   "Auto Start :"
-            Height          =   375
-            Index           =   11
-            Left            =   960
-            TabIndex        =   160
-            Tag             =   "lblRefreshInterval"
-            Top             =   255
-            Width           =   1740
-         End
       End
    End
    Begin VB.Timer tmrPrefsMonitorSaveHeight 
@@ -5017,10 +5017,13 @@ Private Sub sliSkewDegrees_Change()
 
     btnSave.Enabled = True ' enable the save button
     
-    ' pvtAllowSkewChangeFlg prevents the slider being modified unless it is the active user control to avoid reciprocal back and forth between the two forms
+    ' note the slider is also modified in W_MouseWheel in cwTenShillings
+    ' pvtAllowSkewChangeFlg prevents the slider altering the skew on the tenshillings widget unless the slider is the active user control.
+    ' It does this in order to avoid reciprocal back and forth between the main widget form and the prefs form
+    ' the pvtAllowSkewChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
+    
     If pvtAllowSkewChangeFlg = True Then
         TenShillingsWidget.SkewDegrees = sliSkewDegrees.Value
-        TenShillingsWidget.Widget.Refresh
     End If
     
     Call saveMainRCFormSize
@@ -5959,7 +5962,10 @@ Public Sub sliWidgetSize_Change()
 
     btnSave.Enabled = True ' enable the save button
     
-    ' pvtAllowSizeChangeFlg prevents the slider being modified unless it is the active user control to avoid reciprocal back and forth between the two forms
+    ' note the slider is also modified in W_MouseWheel in cwTenShillings
+    ' pvtAllowSizeChangeFlg prevents the slider altering the skew on the tenshillings widget unless the slider is the active user control.
+    ' It does this in order to avoid reciprocal back and forth between the main widget form and the prefs form
+    ' the pvtAllowSizeChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
     If pvtAllowSizeChangeFlg = True Then
         Me.WidgetSize = sliWidgetSize.Value / 100
     End If
@@ -7049,7 +7055,7 @@ Private Sub setframeHeights()
         'End If
     Else
         fraGeneral.Height = 1749
-        fraConfig.Height = 8259
+        fraConfig.Height = 8686
         fraSounds.Height = 3985
         fraPosition.Height = 7544
         fraFonts.Height = 5643

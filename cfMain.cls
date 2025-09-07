@@ -75,8 +75,8 @@ Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optio
     imageHeight = thisSrf.Height
     
     If gblDpiAwareness = "0" Then
-        tenShillingsFormWidth = 900
-        tenShillingsFormHeight = 850
+        tenShillingsFormWidth = imageWidth * 2.2 ' roughly twice the width of the main image plus a bit
+        tenShillingsFormHeight = imageHeight * 2.2 '
         If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then tenShillingsFormWidth = gblVirtualScreenWidthPixels
         If tenShillingsFormHeight > gblVirtualScreenHeightPixels Then tenShillingsFormHeight = gblVirtualScreenHeightPixels
     Else
