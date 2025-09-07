@@ -342,6 +342,7 @@ Private Sub initialiseGlobalVars()
     gblDpiAwareness = vbNullString
     
     gblWidgetSize = vbNullString
+    gblSkewDegrees = vbNullString
     gblScrollWheelDirection = vbNullString
 '    gblNumericDisplayRotation = vbNullString
     
@@ -560,6 +561,8 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
         End If
     End If
     
+    TenShillingsWidget.SkewDegrees = CDbl(gblSkewDegrees)
+    
     ' set the initial size
     If gblMonitorCount > 1 And (LTrim$(gblMultiMonitorResize) = "1" Or LTrim$(gblMultiMonitorResize) = "2") Then
         If widgetMonitorStruct.IsPrimary = True Then
@@ -710,6 +713,8 @@ Public Sub readSettingsFile(ByVal Location As String, ByVal gblSettingsFile As S
         gblShowHelp = fGetINISetting(Location, "showHelp", gblSettingsFile)
         gblDpiAwareness = fGetINISetting(Location, "dpiAwareness", gblSettingsFile)
         gblWidgetSize = fGetINISetting(Location, "widgetSize", gblSettingsFile)
+        gblSkewDegrees = fGetINISetting(Location, "skewDegrees", gblSettingsFile)
+        
         gblScrollWheelDirection = fGetINISetting(Location, "scrollWheelDirection", gblSettingsFile)
         
         ' position
@@ -824,6 +829,8 @@ Public Sub validateInputs()
 '
         If gblDpiAwareness = vbNullString Then gblDpiAwareness = "0"
         If gblWidgetSize = vbNullString Then gblWidgetSize = "100"
+        If gblSkewDegrees = vbNullString Then gblSkewDegrees = "0"
+        
         If gblScrollWheelDirection = vbNullString Then gblScrollWheelDirection = "1"
 '        If gblNumericDisplayRotation = vbNullString Then gblNumericDisplayRotation = "1"
                

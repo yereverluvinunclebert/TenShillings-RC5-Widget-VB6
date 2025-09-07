@@ -312,7 +312,9 @@ Public gblShowTaskbar As String
 Public gblShowHelp As String
 
 Public gblDpiAwareness As String
-Public gblWidgetSize As String
+Private m_sgblWidgetSize As String
+Public gblSkewDegrees As String
+
 Public gblScrollWheelDirection As String
 
 
@@ -2080,7 +2082,10 @@ Public Sub saveMainRCFormPosition()
     sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
     sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
     gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
+    gblSkewDegrees = CStr(TenShillingsWidget.SkewDegrees)
+    
     sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "skewDegrees", gblSkewDegrees, gblSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -2105,7 +2110,9 @@ Public Sub saveMainRCFormSize()
     sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
     sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
     gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
+    gblSkewDegrees = CStr(TenShillingsWidget.SkewDegrees)
     sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "skewDegrees", gblSkewDegrees, gblSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -2703,3 +2710,47 @@ End Sub
 
 
 
+
+'---------------------------------------------------------------------------------------
+' Procedure : gblWidgetSize
+' Author    : beededea
+' Date      : 06/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gblWidgetSize() As String
+
+    On Error GoTo gblWidgetSize_Error
+
+    gblWidgetSize = m_sgblWidgetSize
+
+    On Error GoTo 0
+    Exit Property
+
+gblWidgetSize_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gblWidgetSize of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gblWidgetSize
+' Author    : beededea
+' Date      : 06/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gblWidgetSize(ByVal sgblWidgetSize As String)
+
+    On Error GoTo gblWidgetSize_Error
+
+    m_sgblWidgetSize = sgblWidgetSize
+
+    On Error GoTo 0
+    Exit Property
+
+gblWidgetSize_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gblWidgetSize of Module Module1"
+
+End Property

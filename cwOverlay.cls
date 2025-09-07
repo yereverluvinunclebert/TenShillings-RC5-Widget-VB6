@@ -202,8 +202,8 @@ End Property
 Public Property Let ZoomDirection(ByVal newValue As String)
    On Error GoTo ZoomDirectionLet_Error
 
-  If mZoomDirection <> newValue Then mZoomDirection = newValue Else Exit Property
-  W.Refresh
+   If mZoomDirection <> newValue Then mZoomDirection = newValue Else Exit Property
+   W.Refresh
 
    On Error GoTo 0
    Exit Property
@@ -406,18 +406,27 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
     Case 8 'change the Zoom only, when the Ctrl-Key is down
         
         If ZoomDirection = "up" Then
-            Zoom = Zoom - 0.02 * LineOffset
+            Me.Zoom = Me.Zoom - 0.02 * LineOffset
         Else
-            Zoom = Zoom + 0.02 * LineOffset
+            Me.Zoom = Me.Zoom + 0.02 * LineOffset
         End If
-        gblWidgetSize = LTrim$(Str$(TenShillingsWidget.Zoom * 100)) ' store the value dynamically
+        gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100) ' store the value dynamically
         sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
         
-        If widgetPrefs.IsVisible = True Then widgetPrefs.sliWidgetSize = Val(gblWidgetSize)
+        If widgetPrefs.IsVisible = True Then
+            widgetPrefs.sliWidgetSize.Value = Val(gblWidgetSize)
+        End If
         W.Refresh
         
     Case Else
         SkewDegrees = SkewDegrees + LineOffset
+         
+        gblSkewDegrees = CStr(TenShillingsWidget.SkewDegrees) ' store the value dynamically
+        sPutINISetting "Software\TenShillings", "skewDegrees", gblSkewDegrees, gblSettingsFile
+        
+        If widgetPrefs.IsVisible = True Then
+            widgetPrefs.sliSkewDegrees.Value = Val(gblSkewDegrees)
+        End If
     End Select
 
    On Error GoTo 0
