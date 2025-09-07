@@ -164,8 +164,6 @@ The above is only for development, for ordinary users, during runtime there is n
 	vbRichClient5
 
  <img width="445" height="359" alt="RC5VB6References" src="https://github.com/user-attachments/assets/d4130a3e-c08d-4f1b-91cc-6a04c0756c5e" />
-
- <img width="445" height="359" alt="projectReferences" src="https://github.com/user-attachments/assets/51a33785-2e3c-4b32-9fd0-6c4b0ebb8531" />
  
  LICENCE AGREEMENTS:
  
