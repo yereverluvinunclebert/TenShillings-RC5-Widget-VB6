@@ -1649,7 +1649,7 @@ Public Sub setRichClientTooltips()
    On Error GoTo setRichClientTooltips_Error
 
     If gblWidgetTooltips = "1" Then
-        TenShillingsWidget.Widget.ToolTip = "Use CTRL+mouse scrollwheel up/down to resize."
+        TenShillingsWidget.Widget.ToolTip = "Use Mouse scrollwheel UP/DOWN to rotate, press CTRL at same time to resize. "
         aboutWidget.Widget.ToolTip = "Click on me to make me go away."
     Else
         TenShillingsWidget.Widget.ToolTip = vbNullString

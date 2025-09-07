@@ -25,7 +25,7 @@ Begin VB.Form widgetPrefs
          Left            =   450
          TabIndex        =   33
          Top             =   435
-         Width           =   6450
+         Width           =   6705
          Begin VB.Frame fraClockTooltips 
             BorderStyle     =   0  'None
             Height          =   1110
@@ -185,7 +185,7 @@ Begin VB.Form widgetPrefs
             TabIndex        =   173
             ToolTipText     =   "Adjust to a percentage of the original size. You can also use Ctrl+Mousewheel."
             Top             =   3210
-            Width           =   4065
+            Width           =   4515
          End
          Begin VB.Label lblGaugeSize 
             Caption         =   "180"
@@ -514,7 +514,7 @@ Begin VB.Form widgetPrefs
          Width           =   225
       End
       Begin VB.Label lblAbout 
-         Caption         =   "Dean Beedell © 2023"
+         Caption         =   "Dean Beedell © 2025"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -568,7 +568,7 @@ Begin VB.Form widgetPrefs
          Width           =   795
       End
       Begin VB.Label lblAbout 
-         Caption         =   "Dean Beedell © 2023"
+         Caption         =   "Dean Beedell © 2025"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -622,7 +622,7 @@ Begin VB.Form widgetPrefs
          Width           =   1470
       End
       Begin VB.Label lblAbout 
-         Caption         =   "Windows Vista, 7, 8, 10  && 11"
+         Caption         =   "Windows XP, ReactOS, Vista, 7, 8, 10  && 11+"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25

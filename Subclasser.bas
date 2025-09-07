@@ -230,7 +230,7 @@ Private Function Form_Proc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal wParam 
         If frm.Name = "TenShillingsForm" Then
             If gblWidgetTooltips = "0" Then
                 sTitle = "TenShillings Desktop Widget"
-                sText = "Right Click to open the menu and the preferences. CTRL+ Mouse scrollwheel UP/DOWN to resize. You can turn off the balloon tooltips in the preferences."
+                sText = "Right Click to open the menu and the preferences. Mouse scrollwheel UP/DOWN to rotate, press CTRL at same time to resize. You can turn off the balloon tooltips in the preferences."
                 CreateToolTip fMain.TenShillingsForm.hWnd, sText, , sTitle, , , , True
             End If
         End If
