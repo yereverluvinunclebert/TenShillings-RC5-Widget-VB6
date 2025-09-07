@@ -1,21 +1,20 @@
-# TenShillings-RC6-Widget-VB6
+# TenShillings-RC5-Widget-VB6
 
-An example of a moveable/resizable single-image, VB6 / TwinBasic program using the RC6 widget framework, complete with right click menu, help, about and licence forms and help CHM.
+An example of a moveable/resizable single-image, VB6 / TwinBasic program using the RC5 widget framework, complete with right click menu, help, about and licence forms and help CHM.
 
-The RC6 version here operates on Vista+ to Windows 11+. There is another version on github in my repo. that operates with RC5, the earlier version of RichClient. That change allows the widget to run under Windows XP.
+The RC5 version here operates on XP/ReactOS, Vista+ to Windows 11+. There is another version on github in my repo. that operates with RC6, the latest version of RichClient. Other than being able to run on XP type systems, there is no other difference.
 
-The program does very little but place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine. You can add more logic as you require or replace the main image with your own. 
-This is merely a template for other single-image VB6 / TwinBasic RC6 programs that I knocked up late at night whilst drinking gin and tonic.
+The program does very little but place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine. You can add more logic as you require or replace the main image with your own.  This is merely a template for other single-image VB6 / TwinBasic RC5/6 programs - one that I knocked up late at night whilst drinking gin and tonic.
 
 <img width="829" height="520" alt="TenShillings" src="https://github.com/user-attachments/assets/07f63cb6-c0fe-4f70-ad02-b57a9ab18b58" />
 
-If you want a template for a more complex program with multi-function clickable areas then try this program, 
+If you want a template for a more complex program with multi-function, clickable areas then try this program, 
 https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-VB6
 
 BUILD: The program runs without any Microsoft plugins.
  
  Built using: VB6, MZ-TOOLS 3.0, VBAdvance, CodeHelp Core IDE Extender
- Framework 2.2 & Rubberduck 2.4.1, RichClient 6
+ Framework 2.2 & Rubberduck 2.4.1, RichClient 5
 
   ![vb6-logo-200](https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-VB6/assets/2788342/bf00fa3d-f1d4-417b-bc50-9446f2c3e674)
  
@@ -37,6 +36,8 @@ BUILD: The program runs without any Microsoft plugins.
 
  Tested on :
  
+	Windows XP Professional 32bit on Intel 
+    ReactOS 32bit on Intel 
 	Windows 7 Professional 32bit on Intel    
 	Windows 7 Ultimate 64bit on Intel    
 	Windows 7 Professional 64bit on Intel    
@@ -83,16 +84,16 @@ BUILD: The program runs without any Microsoft plugins.
  ship with VB6.  
  
  
- * Uses the latest version of the RC6 Cairo framework from Olaf Schmidt.
+ * Uses the RC5 Cairo framework from Olaf Schmidt.
  
- During development the RC6 components need to be registered. These scripts are 
+ During development the RC5 components need to be registered. These scripts are 
  used to register. Run each by double-clicking on them.
  
-	RegisterRC6inPlace.vbs
-	RegisterRC6WidgetsInPlace.vbs
+	RegisterRC5inPlace.vbs
+	RegisterVBWidgetsInPlace.vbs
  
- During runtime on the users system, the RC6 components are dynamically 
- referenced using modRC6regfree.bas which is compiled into the binary.	
+ During runtime on the users system, the RC5 components are dynamically 
+ referenced using modregfree.bas which is compiled into the binary.	
  
 ![prefsGeneral](https://github.com/user-attachments/assets/8a228ec6-89a9-459a-98bd-d1d17ce9728d)
 
@@ -159,9 +160,10 @@ The above is only for development, for ordinary users, during runtime there is n
 	VisualBasic Runtime Objects and Procedures  
 	VisualBasic Objects and Procedures  
 	OLE Automation  
-	vbRichClient6  
- 
- <img width="445" height="359" alt="projectReferences" src="https://github.com/user-attachments/assets/51a33785-2e3c-4b32-9fd0-6c4b0ebb8531" />
+    vbWidgets
+	vbRichClient5
+
+ <img width="445" height="359" alt="RC5VB6References" src="https://github.com/user-attachments/assets/d4130a3e-c08d-4f1b-91cc-6a04c0756c5e" />
  
  LICENCE AGREEMENTS:
  
