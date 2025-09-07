@@ -86,14 +86,14 @@ BUILD: The program runs without any Microsoft plugins.
  
  * Uses the RC5 Cairo framework from Olaf Schmidt.
  
- During development the RC6 components need to be registered. These scripts are 
+ During development the RC5 components need to be registered. These scripts are 
  used to register. Run each by double-clicking on them.
  
-	RegisterRC6inPlace.vbs
-	RegisterRC6WidgetsInPlace.vbs
+	RegisterRC5inPlace.vbs
+	RegisterVBWidgetsInPlace.vbs
  
- During runtime on the users system, the RC6 components are dynamically 
- referenced using modRC6regfree.bas which is compiled into the binary.	
+ During runtime on the users system, the RC5 components are dynamically 
+ referenced using modregfree.bas which is compiled into the binary.	
  
 ![prefsGeneral](https://github.com/user-attachments/assets/8a228ec6-89a9-459a-98bd-d1d17ce9728d)
 
