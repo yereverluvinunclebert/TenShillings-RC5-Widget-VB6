@@ -420,6 +420,9 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
         
     Case Else
         SkewDegrees = SkewDegrees + LineOffset
+        
+        If SkewDegrees > 360 Then SkewDegrees = SkewDegrees - 360
+        If SkewDegrees < 0 Then SkewDegrees = SkewDegrees + 360
          
         gblSkewDegrees = CStr(TenShillingsWidget.SkewDegrees) ' store the value dynamically
         sPutINISetting "Software\TenShillings", "skewDegrees", gblSkewDegrees, gblSettingsFile

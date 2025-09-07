@@ -5017,11 +5017,14 @@ Private Sub sliSkewDegrees_Change()
 
     btnSave.Enabled = True ' enable the save button
     
-    ' note the slider is also modified in W_MouseWheel in cwTenShillings
     ' pvtAllowSkewChangeFlg prevents the slider altering the skew on the tenshillings widget unless the slider is the active user control.
-    ' It does this in order to avoid reciprocal back and forth between the main widget form and the prefs form
-    ' the pvtAllowSkewChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
+    ' It does this in order to avoid reciprocal back and forth between the main widget form and the prefs form,
     
+    ' ie. the slider slides but does not itself change the widget rotation, that is happening elsewhere
+    ' the widget rotation is modified in W_MouseWheel in cwTenShillings
+    
+    ' the pvtAllowSkewChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
+       
     If pvtAllowSkewChangeFlg = True Then
         TenShillingsWidget.SkewDegrees = sliSkewDegrees.Value
     End If
@@ -5962,9 +5965,12 @@ Public Sub sliWidgetSize_Change()
 
     btnSave.Enabled = True ' enable the save button
     
-    ' note the slider is also modified in W_MouseWheel in cwTenShillings
     ' pvtAllowSizeChangeFlg prevents the slider altering the skew on the tenshillings widget unless the slider is the active user control.
     ' It does this in order to avoid reciprocal back and forth between the main widget form and the prefs form
+    
+    ' ie. the slider slides but does not itself change the widget size, that is happening elsewhere
+    ' the widget size is modified in W_MouseWheel in cwTenShillings
+    
     ' the pvtAllowSizeChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
     If pvtAllowSizeChangeFlg = True Then
         Me.WidgetSize = sliWidgetSize.Value / 100
