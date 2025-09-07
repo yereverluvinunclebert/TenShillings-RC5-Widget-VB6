@@ -8,8 +8,7 @@ The program does very little but place some eye-candy on the desktop in the mann
 
 <img width="829" height="520" alt="TenShillings" src="https://github.com/user-attachments/assets/07f63cb6-c0fe-4f70-ad02-b57a9ab18b58" />
 
-If you want a template for a more complex program with multi-function <img width="445" height="359" alt="image" src="https://github.com/user-attachments/assets/5a3a75fd-1912-4617-8244-921147482a66" />
-clickable areas then try this program, 
+If you want a template for a more complex program with multi-function, clickable areas then try this program, 
 https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-VB6
 
 BUILD: The program runs without any Microsoft plugins.
