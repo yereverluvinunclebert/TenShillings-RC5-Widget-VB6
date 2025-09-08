@@ -33,6 +33,8 @@ Private mSkewDegrees As Double
 
 Private mLocked As Boolean ' property Locked
 Private mHidden As Boolean ' property Hidden
+Private mImageWidth As Long
+Private mImageHeight As Long
 Private mOpacity As Double
 
 
@@ -391,6 +393,46 @@ End Property
 
 
 '---------------------------------------------------------------------------------------
+' Property  : imageWidth
+' Author    : beededea
+' Date      : 10/05/2023
+' Purpose   : property to determine (by value)  the set the imageWidth value of the whole widget
+'---------------------------------------------------------------------------------------
+'
+Public Property Let imageWidth(ByVal newValue As Long)
+   On Error GoTo imageWidthLet_Error
+
+    If mImageWidth <> newValue Then mImageWidth = newValue Else Exit Property
+
+   On Error GoTo 0
+   Exit Property
+
+imageWidthLet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property imageWidth of Class Module cwTenShillings"
+End Property
+
+'---------------------------------------------------------------------------------------
+' Property  : imageHeight
+' Author    : beededea
+' Date      : 10/05/2023
+' Purpose   : property to determine (by value)  the set the imageHeight value of the whole widget
+'---------------------------------------------------------------------------------------
+'
+Public Property Let imageHeight(ByVal newValue As Long)
+   On Error GoTo imageHeightLet_Error
+
+    If mImageHeight <> newValue Then mImageHeight = newValue Else Exit Property
+
+   On Error GoTo 0
+   Exit Property
+
+imageHeightLet_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property imageHeight of Class Module cwTenShillings"
+End Property
+    
+'---------------------------------------------------------------------------------------
 ' Procedure : W_MouseWheel
 ' Author    : beededea
 ' Date      : 09/05/2023
@@ -476,7 +518,10 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByVal yAbs As Single, ByVal dx_Aligned As Single, ByVal dy_Aligned As Single, UserObj As Object)
-
+    Dim reverseOrigin As Long: reverseOrigin = 0
+    
+    reverseOrigin = (mImageHeight / 2) - (mImageHeight)
+    
     If gblRichClientEnvironment = "RC6" Then
         ' Widgets are refreshed "from the ground up" in RC5 and not so in RC6
         ' extra code NOT needed when using RC5 but now required in RC6 - starts
@@ -487,12 +532,9 @@ Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByV
     End If
     
     ' note: default origin point is always top left, needs to be adjusted
-
-    ' set the origin point closeish to the midpoint
-    CC.TranslateDrawings 400, 400
     
     ' set the origin point prior to rotation
-    CC.TranslateDrawings 500, 500
+    CC.TranslateDrawings mImageHeight, mImageHeight
     
     ' set the scaling ratio for all images
     CC.ScaleDrawings mZoom, mZoom
@@ -504,14 +546,13 @@ Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByV
     CC.RotateDrawingsDeg SkewDegrees
     
     ' reverse the origin point prior to rotation
-    CC.TranslateDrawings -500, -500
+    CC.TranslateDrawings reverseOrigin, reverseOrigin
     
     'render the tenshillings in relation to the reversed translated origin above
     CC.RenderSurfaceContent "tenshillings", 0, 0, , , , mOpacity
     
     ' restores to the state saved by a preceding call to CC.Save
     CC.Restore
-    
     
     On Error GoTo 0
    Exit Sub

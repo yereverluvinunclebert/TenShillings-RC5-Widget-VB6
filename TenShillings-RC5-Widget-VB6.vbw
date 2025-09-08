@@ -1,6 +1,6 @@
 modRegFree = 26, 26, 1437, 868, 
-cwTenShillings = 316, 106, 1488, 845, 
-modTooltips = 26, 26, 1397, 802, Z
+cwTenShillings = 316, 106, 1488, 845, Z
+modTooltips = 26, 26, 1397, 802, 
 cwAbout = 130, 130, 1302, 869, 
 cfMain = 156, 156, 1328, 895, 
 menuForm = 260, 260, 1432, 999, , 312, 312, 1484, 1051, C

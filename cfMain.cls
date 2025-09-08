@@ -75,13 +75,13 @@ Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optio
     imageHeight = thisSrf.Height
     
     If gblDpiAwareness = "0" Then
-        tenShillingsFormWidth = imageWidth * 2.2 ' roughly twice the width of the main image plus a bit
-        tenShillingsFormHeight = imageHeight * 2.2 '
+        tenShillingsFormWidth = imageWidth * 2 ' roughly twice the width of the main image plus a bit
+        tenShillingsFormHeight = imageHeight * 2 '
         If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then tenShillingsFormWidth = gblVirtualScreenWidthPixels
         If tenShillingsFormHeight > gblVirtualScreenHeightPixels Then tenShillingsFormHeight = gblVirtualScreenHeightPixels
     Else
-        tenShillingsFormWidth = imageWidth * 2.2 ' roughly twice the width of the main image plus a bit
-        tenShillingsFormHeight = imageHeight * 2.2 '
+        tenShillingsFormWidth = imageWidth * 2 ' roughly twice the width of the main image plus a bit
+        tenShillingsFormHeight = imageHeight * 2 '
         If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then
             tenShillingsFormWidth = gblVirtualScreenWidthPixels
             tenShillingsWidgetZoomValue = 1
@@ -112,6 +112,9 @@ Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optio
     Else
         TenShillingsWidget.Zoom = tenShillingsWidgetZoomValue
     End If
+    
+    TenShillingsWidget.imageWidth = imageWidth
+    TenShillingsWidget.imageHeight = imageHeight
     
    On Error GoTo 0
    Exit Sub
