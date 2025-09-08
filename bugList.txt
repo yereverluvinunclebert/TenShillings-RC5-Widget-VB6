@@ -3,10 +3,10 @@ DONE
 Rotation
 HTML text and images
 
-TODO
-
 ' help CHM
 ' setup2go create setup.exe
+
+TODO
 
 Add the spawn menu option and code when it is ready to use
 
@@ -21,8 +21,6 @@ Add the spawn menu option and code when it is ready to use
 ' adjustFormPositionToCorrectMonitor - licence form
 ' adjustFormPositionToCorrectMonitor - about form
 ' adjustFormPositionToCorrectMonitor - help form
-
-
 
 ' -oOo-
 
