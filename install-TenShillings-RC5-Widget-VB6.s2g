@@ -129,7 +129,6 @@ File=%AppDir%\help\Panzer-CPU-Gauge-onDesktop.jpg,.\help\Panzer-CPU-Gauge-onDesk
 File=%AppDir%\help\prefs-about.jpg,.\help\prefs-about.jpg,17,0,32
 File=%AppDir%\help\prefs-config.jpg,.\help\prefs-config.jpg,17,0,32
 File=%AppDir%\help\prefs-development.jpg,.\help\prefs-development.jpg,17,0,32
-File=%AppDir%\help\prefs-font.jpg,.\help\prefs-font.jpg,17,0,32
 File=%AppDir%\help\prefs-fonts.jpg,.\help\prefs-fonts.jpg,17,0,32
 File=%AppDir%\help\prefs-general.jpg,.\help\prefs-general.jpg,17,0,32
 File=%AppDir%\help\prefs-position.jpg,.\help\prefs-position.jpg,17,0,32
