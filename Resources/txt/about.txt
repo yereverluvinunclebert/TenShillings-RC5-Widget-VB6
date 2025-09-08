@@ -5,8 +5,6 @@ An example of a moveable/resizable single-image, VB6 / TwinBasic program using t
 The program does very little but place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine.
 You can add more logic as you require or replace the main image with your own.
 
-This VB6/TwinBasic version of the TenShillings widget replaces the Yahoo widget version that is now obsolete.
-
 This widget's UI functionality is 'simple' as it is merely a template for other single-image VB6 / TwinBasic RC5/RC6 programs, a template that I knocked up late at night whilst drinking gin and tonic.
 
 Note that the RC5 version of the widget should run on XP and ReactOS (32bit).
