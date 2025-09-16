@@ -12,6 +12,210 @@ Begin VB.Form widgetPrefs
    ScaleMode       =   0  'User
    ScaleWidth      =   8880
    Visible         =   0   'False
+   Begin VB.Frame fraWindow 
+      Caption         =   "Window"
+      Height          =   8460
+      Left            =   240
+      TabIndex        =   10
+      Top             =   1230
+      Width           =   8415
+      Begin VB.Frame fraWindowInner 
+         BorderStyle     =   0  'None
+         Height          =   7995
+         Left            =   165
+         TabIndex        =   14
+         Top             =   345
+         Width           =   7470
+         Begin VB.CheckBox Check1 
+            Caption         =   "Form Visible"
+            Height          =   225
+            Left            =   2250
+            TabIndex        =   175
+            Top             =   1230
+            Width           =   2535
+         End
+         Begin vb6projectCCRSlider.Slider sliOpacity 
+            Height          =   390
+            Left            =   2115
+            TabIndex        =   150
+            Top             =   5205
+            Width           =   3870
+            _ExtentX        =   6826
+            _ExtentY        =   688
+            Min             =   20
+            Max             =   100
+            Value           =   20
+            SmallChange     =   2
+            SelStart        =   20
+         End
+         Begin VB.ComboBox cmbMultiMonitorResize 
+            Height          =   315
+            Left            =   2220
+            Style           =   2  'Dropdown List
+            TabIndex        =   138
+            Top             =   6435
+            Width           =   3720
+         End
+         Begin VB.Frame fraHiding 
+            BorderStyle     =   0  'None
+            Height          =   2010
+            Left            =   1395
+            TabIndex        =   108
+            Top             =   2970
+            Width           =   5130
+            Begin VB.ComboBox cmbHidingTime 
+               Height          =   315
+               Left            =   825
+               Style           =   2  'Dropdown List
+               TabIndex        =   111
+               Top             =   1575
+               Width           =   3720
+            End
+            Begin VB.CheckBox chkWidgetHidden 
+               Caption         =   "Hiding Widget *"
+               Height          =   225
+               Left            =   855
+               TabIndex        =   109
+               Top             =   315
+               Width           =   2955
+            End
+            Begin VB.Label lblWindowLevel 
+               Caption         =   "Hiding :"
+               Height          =   345
+               Index           =   2
+               Left            =   90
+               TabIndex        =   112
+               Top             =   315
+               Width           =   720
+            End
+            Begin VB.Label lblWindowLevel 
+               Caption         =   $"frmPrefs.frx":0CCA
+               Height          =   975
+               Index           =   1
+               Left            =   855
+               TabIndex        =   110
+               Top             =   705
+               Width           =   3900
+            End
+         End
+         Begin VB.ComboBox cmbWindowLevel 
+            Height          =   315
+            Left            =   2220
+            Style           =   2  'Dropdown List
+            TabIndex        =   16
+            Top             =   0
+            Width           =   3720
+         End
+         Begin VB.CheckBox chkIgnoreMouse 
+            Caption         =   "Ignore Mouse *"
+            Height          =   225
+            Left            =   2250
+            TabIndex        =   15
+            ToolTipText     =   "Checking this box causes the program to ignore all mouse events."
+            Top             =   2070
+            Width           =   2535
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "Checking this box causes the underlying form to show"
+            Height          =   420
+            Index           =   12
+            Left            =   2250
+            TabIndex        =   176
+            Top             =   1620
+            Width           =   4260
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "Multi-Monitor Resizing :"
+            Height          =   255
+            Index           =   11
+            Left            =   375
+            TabIndex        =   137
+            Top             =   6465
+            Width           =   1830
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   $"frmPrefs.frx":0D6D
+            Height          =   1140
+            Index           =   10
+            Left            =   2235
+            TabIndex        =   136
+            Top             =   6885
+            Width           =   4050
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "This setting controls the relative layering of this widget. You may use it to place it on top of other windows or underneath. "
+            Height          =   660
+            Index           =   3
+            Left            =   2235
+            TabIndex        =   117
+            Top             =   570
+            Width           =   4380
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "Window Level :"
+            Height          =   345
+            Index           =   0
+            Left            =   915
+            TabIndex        =   23
+            Top             =   60
+            Width           =   1740
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "20%"
+            Height          =   315
+            Index           =   7
+            Left            =   2205
+            TabIndex        =   22
+            Top             =   5700
+            Width           =   345
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "100%"
+            Height          =   315
+            Index           =   9
+            Left            =   5565
+            TabIndex        =   21
+            Top             =   5700
+            Width           =   405
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "60%"
+            Height          =   315
+            Index           =   8
+            Left            =   3975
+            TabIndex        =   20
+            Top             =   5700
+            Width           =   840
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "Opacity:"
+            Height          =   315
+            Index           =   6
+            Left            =   1470
+            TabIndex        =   19
+            Top             =   5250
+            Width           =   780
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "Set the program transparency level."
+            Height          =   330
+            Index           =   5
+            Left            =   2250
+            TabIndex        =   18
+            Top             =   6015
+            Width           =   3810
+         End
+         Begin VB.Label lblWindowLevel 
+            Caption         =   "Checking this box causes the program to ignore all mouse events except right click menu interactions."
+            Height          =   660
+            Index           =   4
+            Left            =   2235
+            TabIndex        =   17
+            Top             =   2460
+            Width           =   3810
+         End
+      End
+   End
    Begin VB.Frame fraGeneral 
       Caption         =   "General"
       ForeColor       =   &H80000008&
@@ -141,7 +345,7 @@ Begin VB.Form widgetPrefs
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   101
-         Text            =   "frmPrefs.frx":0CCA
+         Text            =   "frmPrefs.frx":0E84
          Top             =   2205
          Width           =   7935
       End
@@ -448,7 +652,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgDevelopment 
          Height          =   600
          Left            =   150
-         Picture         =   "frmPrefs.frx":1C81
+         Picture         =   "frmPrefs.frx":1E3B
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -456,7 +660,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgDevelopmentClicked 
          Height          =   600
          Left            =   160
-         Picture         =   "frmPrefs.frx":2239
+         Picture         =   "frmPrefs.frx":23F3
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -496,7 +700,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgAbout 
          Height          =   600
          Left            =   160
-         Picture         =   "frmPrefs.frx":25BF
+         Picture         =   "frmPrefs.frx":2779
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -504,7 +708,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgAboutClicked 
          Height          =   600
          Left            =   160
-         Picture         =   "frmPrefs.frx":2B47
+         Picture         =   "frmPrefs.frx":2D01
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -529,7 +733,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgConfig 
          Height          =   600
          Left            =   165
-         Picture         =   "frmPrefs.frx":3032
+         Picture         =   "frmPrefs.frx":31EC
          Stretch         =   -1  'True
          Top             =   240
          Width           =   600
@@ -537,7 +741,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgConfigClicked 
          Height          =   600
          Left            =   165
-         Picture         =   "frmPrefs.frx":3611
+         Picture         =   "frmPrefs.frx":37CB
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -562,7 +766,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgPosition 
          Height          =   600
          Left            =   160
-         Picture         =   "frmPrefs.frx":3B16
+         Picture         =   "frmPrefs.frx":3CD0
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -570,7 +774,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgPositionClicked 
          Height          =   600
          Left            =   160
-         Picture         =   "frmPrefs.frx":40E7
+         Picture         =   "frmPrefs.frx":42A1
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -615,7 +819,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgSounds 
          Height          =   600
          Left            =   160
-         Picture         =   "frmPrefs.frx":4485
+         Picture         =   "frmPrefs.frx":463F
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -623,7 +827,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgSoundsClicked 
          Height          =   600
          Left            =   160
-         Picture         =   "frmPrefs.frx":4A44
+         Picture         =   "frmPrefs.frx":4BFE
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -663,7 +867,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgWindow 
          Height          =   600
          Left            =   160
-         Picture         =   "frmPrefs.frx":4F14
+         Picture         =   "frmPrefs.frx":50CE
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -671,7 +875,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgWindowClicked 
          Height          =   600
          Left            =   160
-         Picture         =   "frmPrefs.frx":53DE
+         Picture         =   "frmPrefs.frx":5598
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -695,7 +899,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgFonts 
          Height          =   600
          Left            =   180
-         Picture         =   "frmPrefs.frx":578A
+         Picture         =   "frmPrefs.frx":5944
          Stretch         =   -1  'True
          Top             =   195
          Width           =   600
@@ -703,7 +907,7 @@ Begin VB.Form widgetPrefs
       Begin VB.Image imgFontsClicked 
          Height          =   600
          Left            =   180
-         Picture         =   "frmPrefs.frx":5CE0
+         Picture         =   "frmPrefs.frx":5E9A
          Stretch         =   -1  'True
          Top             =   195
          Width           =   600
@@ -719,7 +923,7 @@ Begin VB.Form widgetPrefs
          Appearance      =   0  'Flat
          Height          =   600
          Left            =   165
-         Picture         =   "frmPrefs.frx":6179
+         Picture         =   "frmPrefs.frx":6333
          Stretch         =   -1  'True
          Top             =   225
          Width           =   600
@@ -876,7 +1080,7 @@ Begin VB.Form widgetPrefs
             Width           =   3285
          End
          Begin VB.Label lblFontsTab 
-            Caption         =   $"frmPrefs.frx":77C3
+            Caption         =   $"frmPrefs.frx":797D
             Height          =   1710
             Index           =   0
             Left            =   1680
@@ -980,193 +1184,6 @@ Begin VB.Form widgetPrefs
             TabIndex        =   29
             Top             =   480
             Width           =   4035
-         End
-      End
-   End
-   Begin VB.Frame fraWindow 
-      Caption         =   "Window"
-      Height          =   7935
-      Left            =   225
-      TabIndex        =   10
-      Top             =   1620
-      Width           =   8235
-      Begin VB.Frame fraWindowInner 
-         BorderStyle     =   0  'None
-         Height          =   7500
-         Left            =   165
-         TabIndex        =   14
-         Top             =   345
-         Width           =   7005
-         Begin vb6projectCCRSlider.Slider sliOpacity 
-            Height          =   390
-            Left            =   2115
-            TabIndex        =   150
-            Top             =   4575
-            Width           =   3870
-            _ExtentX        =   6826
-            _ExtentY        =   688
-            Min             =   20
-            Max             =   100
-            Value           =   20
-            SmallChange     =   2
-            SelStart        =   20
-         End
-         Begin VB.ComboBox cmbMultiMonitorResize 
-            Height          =   315
-            Left            =   2220
-            Style           =   2  'Dropdown List
-            TabIndex        =   138
-            Top             =   5805
-            Width           =   3720
-         End
-         Begin VB.Frame fraHiding 
-            BorderStyle     =   0  'None
-            Height          =   2010
-            Left            =   1395
-            TabIndex        =   108
-            Top             =   2325
-            Width           =   5130
-            Begin VB.ComboBox cmbHidingTime 
-               Height          =   315
-               Left            =   825
-               Style           =   2  'Dropdown List
-               TabIndex        =   111
-               Top             =   1605
-               Width           =   3720
-            End
-            Begin VB.CheckBox chkWidgetHidden 
-               Caption         =   "Hiding Widget *"
-               Height          =   225
-               Left            =   855
-               TabIndex        =   109
-               Top             =   210
-               Width           =   2955
-            End
-            Begin VB.Label lblWindowLevel 
-               Caption         =   "Hiding :"
-               Height          =   345
-               Index           =   2
-               Left            =   90
-               TabIndex        =   112
-               Top             =   210
-               Width           =   720
-            End
-            Begin VB.Label lblWindowLevel 
-               Caption         =   $"frmPrefs.frx":7901
-               Height          =   975
-               Index           =   1
-               Left            =   855
-               TabIndex        =   110
-               Top             =   600
-               Width           =   3900
-            End
-         End
-         Begin VB.ComboBox cmbWindowLevel 
-            Height          =   315
-            Left            =   2220
-            Style           =   2  'Dropdown List
-            TabIndex        =   16
-            Top             =   0
-            Width           =   3720
-         End
-         Begin VB.CheckBox chkIgnoreMouse 
-            Caption         =   "Ignore Mouse *"
-            Height          =   225
-            Left            =   2250
-            TabIndex        =   15
-            ToolTipText     =   "Checking this box causes the program to ignore all mouse events."
-            Top             =   1500
-            Width           =   2535
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   "Multi-Monitor Resizing :"
-            Height          =   255
-            Index           =   11
-            Left            =   375
-            TabIndex        =   137
-            Top             =   5835
-            Width           =   1830
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   $"frmPrefs.frx":79A4
-            Height          =   1140
-            Index           =   10
-            Left            =   2235
-            TabIndex        =   136
-            Top             =   6255
-            Width           =   4050
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   "This setting controls the relative layering of this widget. You may use it to place it on top of other windows or underneath. "
-            Height          =   660
-            Index           =   3
-            Left            =   2235
-            TabIndex        =   117
-            Top             =   570
-            Width           =   3810
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   "Window Level :"
-            Height          =   345
-            Index           =   0
-            Left            =   915
-            TabIndex        =   23
-            Top             =   60
-            Width           =   1740
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   "20%"
-            Height          =   315
-            Index           =   7
-            Left            =   2205
-            TabIndex        =   22
-            Top             =   5070
-            Width           =   345
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   "100%"
-            Height          =   315
-            Index           =   9
-            Left            =   5565
-            TabIndex        =   21
-            Top             =   5070
-            Width           =   405
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   "60%"
-            Height          =   315
-            Index           =   8
-            Left            =   3975
-            TabIndex        =   20
-            Top             =   5070
-            Width           =   840
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   "Opacity:"
-            Height          =   315
-            Index           =   6
-            Left            =   1470
-            TabIndex        =   19
-            Top             =   4620
-            Width           =   780
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   "Set the program transparency level."
-            Height          =   330
-            Index           =   5
-            Left            =   2250
-            TabIndex        =   18
-            Top             =   5385
-            Width           =   3810
-         End
-         Begin VB.Label lblWindowLevel 
-            Caption         =   "Checking this box causes the program to ignore all mouse events except right click menu interactions."
-            Height          =   660
-            Index           =   4
-            Left            =   2235
-            TabIndex        =   17
-            Top             =   1890
-            Width           =   3810
          End
       End
    End
@@ -7076,13 +7093,16 @@ Private Sub setframeHeights()
         fraPosition.Height = 7544
         fraFonts.Height = 5643
         
-        ' the lowest window controls are not displayed on a single monitor
+'        fraWindow.Height = 8700
+'        fraWindowInner.Height = 8085
+        
+'        ' the lowest window controls are not displayed on a single monitor
         If gblMonitorCount > 1 Then
-            fraWindow.Height = 8138
-            fraWindowInner.Height = 7500
+            fraWindow.Height = 8700
+            fraWindowInner.Height = 8085
         Else
-            fraWindow.Height = 6586
-            fraWindowInner.Height = 6000
+            fraWindow.Height = 7225
+            fraWindowInner.Height = 6345
         End If
 
         fraDevelopment.Height = 6297

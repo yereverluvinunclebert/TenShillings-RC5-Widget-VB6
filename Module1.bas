@@ -1720,7 +1720,7 @@ Public Sub makeVisibleFormElements()
     
     ' The RC forms are measured in pixels, whereas the native forms are in twips, do remember that...
 
-'    gblMonitorCount = fGetMonitorCount
+    gblMonitorCount = fGetMonitorCount
 '    If gblMonitorCount > 1 Then
 '        Call SetFormOnMonitor(fMain.TenShillingsForm.hWnd, formLeftPixels, formTopPixels)
 '    Else

@@ -46,17 +46,21 @@ Private WithEvents textBox As cwTextBox
 Attribute textBox.VB_VarHelpID = -1
 Private lblDeclineOrNot As cwLabel
  
- 
- 
+
 '---------------------------------------------------------------------------------------
-' Procedure : initAndCreateWidgetForm
+' Procedure : initAndCreateTenShillingsForm
 ' Author    :
 ' Date      : 27/04/2023
-' Purpose   : Initialise and create the tenShillings form only, then add the tenShillings widget based on the tenShillings class, to the form
+' Purpose   : The main form that contains the rotating and resizable image.
+'
+' Initialise and create the tenShillings form only, then add the tenShillings widget based on the tenShillings class to the form.
+'
+' NOTE: the underlying invisible form needs to be significantly larger than the supplied static image as the widget that contains the image can be rotated.
+' as the corners of the image will move to the extents of the form. The form must be large enough so that the image corners cannot be cropped when they exit the form extents
+'
 '---------------------------------------------------------------------------------------
 '
 Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optional ByVal dx As Long, Optional ByVal dy As Long, Optional ByVal Caption As String)
-    'Dim thisSrf As cCairoSurface
     Dim imageHeight As Long: imageHeight = 0
     Dim imageWidth As Long: imageWidth = 0
     Dim tenShillingsFormWidth As Long: tenShillingsFormWidth = 0
@@ -68,8 +72,6 @@ Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optio
     Const WFFStyleTool As Integer = 7 ' additional styles above the normal five  WFFStyleTool = 7 makes the taskbar button go away
     
     On Error GoTo initAndCreateTenShillingsForm_Error
-    
-    'If Cairo.ImageList.Exists("tenshillings") Then Set thisSrf = Cairo.ImageList("tenshillings")
     
     imageWidth = dx
     imageHeight = dy
