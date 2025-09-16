@@ -26,7 +26,7 @@ Begin VB.Form widgetPrefs
          TabIndex        =   14
          Top             =   345
          Width           =   7470
-         Begin VB.CheckBox Check1 
+         Begin VB.CheckBox chkFormVisible 
             Caption         =   "Form Visible"
             Height          =   225
             Left            =   2250
@@ -2145,12 +2145,32 @@ End Sub
 
 
 
+'---------------------------------------------------------------------------------------
+' Procedure : chkFormVisible_Click
+' Author    : beededea
+' Date      : 16/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub chkFormVisible_Click()
 
+    On Error GoTo chkFormVisible_Click_Error
 
+    If chkIgnoreMouse.Value = 0 Then
+        gblIgnoreMouse = "0"
+    Else
+        gblIgnoreMouse = "1"
+    End If
 
+    btnSave.Enabled = True ' enable the save button
 
+    On Error GoTo 0
+    Exit Sub
 
+chkFormVisible_Click_Error:
 
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkFormVisible_Click of Form widgetPrefs"
+End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : optWidgetTooltips_Click
@@ -3983,6 +4003,7 @@ Private Sub btnSave_Click()
     gblWidgetHidden = CStr(chkWidgetHidden.Value)
     gblHidingTime = CStr(cmbHidingTime.ListIndex)
     gblIgnoreMouse = CStr(chkIgnoreMouse.Value)
+    gblFormVisible = CStr(chkFormVisible.Value)
     
     gblMultiMonitorResize = CStr(cmbMultiMonitorResize.ListIndex)
      
@@ -4039,6 +4060,8 @@ Private Sub btnSave_Click()
         sPutINISetting "Software\TenShillings", "widgetHidden", gblWidgetHidden, gblSettingsFile
         sPutINISetting "Software\TenShillings", "hidingTime", gblHidingTime, gblSettingsFile
         sPutINISetting "Software\TenShillings", "ignoreMouse", gblIgnoreMouse, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "formVisible", gblFormVisible, gblSettingsFile
+        
         sPutINISetting "Software\TenShillings", "multiMonitorResize", gblMultiMonitorResize, gblSettingsFile
         
         
@@ -4408,6 +4431,8 @@ Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
     
     cmbWindowLevel.ListIndex = Val(gblWindowLevel)
     chkIgnoreMouse.Value = Val(gblIgnoreMouse)
+    chkFormVisible.Value = Val(gblFormVisible)
+    
     chkPreventDragging.Value = Val(gblPreventDragging)
     sliOpacity.Value = Val(gblOpacity)
     chkWidgetHidden.Value = Val(gblWidgetHidden)
@@ -5196,8 +5221,15 @@ End Sub
 
 Private Sub chkIgnoreMouse_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If gblPrefsTooltips = "0" Then CreateToolTip chkIgnoreMouse.hWnd, "Checking this box causes the program to ignore all mouse events. A strange option, a left-over from the Yahoo Widgets days that offered this additional option. Replicated here as a homage to the old widget platform.", _
-                  TTIconInfo, "Help on the Ignore Mouse optWidgetTooltips", , , , True
+                  TTIconInfo, "Help on the Ignore Mouse button", , , , True
 End Sub
+
+
+Private Sub chkFormVisible_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+    If gblPrefsTooltips = "0" Then CreateToolTip chkFormVisible.hWnd, "Checking this box makes the underlying form visible. This only helps when developing/debugging. Requires a restart.", _
+                  TTIconInfo, "Help on the Form Visible button", , , , True
+End Sub
+
 
 Private Sub chkPreventDragging_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If gblPrefsTooltips = "0" Then CreateToolTip chkPreventDragging.hWnd, "Checking this box causes the program to lock in place and ignore all attempts to move it with the mouse. " & vbCrLf & vbCrLf & _
@@ -6238,6 +6270,8 @@ Public Sub setPrefsTooltips()
         chkEnableResizing.ToolTipText = "Provides an alternative method of supporting high DPI screens."
         chkPreventDragging.ToolTipText = "Checking this box turns off the ability to drag the program with the mouse. The locking in position effect takes place instantly."
         chkIgnoreMouse.ToolTipText = "Checking this box causes the program to ignore all mouse events."
+        chkFormVisible.ToolTipText = "Checking this box causes the underlying form to show itself, useful only when debugging."
+        
         sliOpacity.ToolTipText = "Set the transparency of the program. Any change in opacity takes place instantly."
         cmbScrollWheelDirection.ToolTipText = "To change the direction of the mouse scroll wheel when resizing the widget."
         
@@ -6328,6 +6362,7 @@ Public Sub setPrefsTooltips()
         chkEnableResizing.ToolTipText = vbNullString
         chkPreventDragging.ToolTipText = vbNullString
         chkIgnoreMouse.ToolTipText = vbNullString
+        chkFormVisible.ToolTipText = vbNullString
         sliOpacity.ToolTipText = vbNullString
         cmbScrollWheelDirection.ToolTipText = vbNullString
         

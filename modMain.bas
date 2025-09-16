@@ -394,6 +394,8 @@ Private Sub initialiseGlobalVars()
     gblWidgetHidden = vbNullString
     gblHidingTime = vbNullString
     gblIgnoreMouse = vbNullString
+    gblFormVisible = vbNullString
+    
     gblMenuOccurred = False ' bool
     gblFirstTimeRun = vbNullString
     gblMultiMonitorResize = vbNullString
@@ -773,6 +775,8 @@ Public Sub readSettingsFile(ByVal Location As String, ByVal gblSettingsFile As S
         
         gblHidingTime = fGetINISetting(Location, "hidingTime", gblSettingsFile)
         gblIgnoreMouse = fGetINISetting(Location, "ignoreMouse", gblSettingsFile)
+        gblFormVisible = fGetINISetting(Location, "formVisible", gblSettingsFile)
+        
         gblMultiMonitorResize = fGetINISetting(Location, "multiMonitorResize", gblSettingsFile)
         gblFirstTimeRun = fGetINISetting(Location, "firstTimeRun", gblSettingsFile)
 
@@ -885,6 +889,8 @@ Public Sub validateInputs()
         If gblWidgetHidden = vbNullString Then gblWidgetHidden = "0"
         If gblHidingTime = vbNullString Then gblHidingTime = "0"
         If gblIgnoreMouse = vbNullString Then gblIgnoreMouse = "0"
+        If gblFormVisible = vbNullString Then gblFormVisible = "0"
+        
         If gblPreventDragging = vbNullString Then gblPreventDragging = "0"
         If gblMultiMonitorResize = vbNullString Then gblMultiMonitorResize = "0"
         

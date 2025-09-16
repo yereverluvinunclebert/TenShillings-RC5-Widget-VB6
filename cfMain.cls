@@ -104,7 +104,7 @@ Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optio
     Set TenShillingsForm = Cairo.WidgetForms.Create(WFFStyleTool, "TenShillings the " & Caption & " Widget", True, tenShillingsFormWidth, tenShillingsFormHeight)
     
     ' make the tenShillings form transparent
-    TenShillingsForm.WidgetRoot.BackColor = -1
+    If gblFormVisible = "0" Then TenShillingsForm.WidgetRoot.BackColor = -1
     
     ' create a new tenShillings widget with a name, position and size, first step of that is to run Class_Initialize
     Set TenShillingsWidget = TenShillingsForm.Widgets.Add(New cwTenShillings, "tenShillings", 1, 1, tenShillingsWidgetWidth, tenShillingsWidgetHeight)

@@ -370,6 +370,8 @@ Public gblOpacity  As String
 Public gblWidgetHidden  As String
 Public gblHidingTime  As String
 Public gblIgnoreMouse  As String
+Public gblFormVisible  As String
+
 Public gblMenuOccurred As Boolean ' bool
 Public gblFirstTimeRun  As String
 Public gblMultiMonitorResize  As String
