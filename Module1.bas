@@ -463,6 +463,7 @@ Public gblOldwidgetFormMonitorPrimary As Long
 Public gblPrefsFormResizedInCode As Boolean
 
 Public gblTenShillingsWidgetAvailable As Boolean
+Public gblReload As Boolean
 
 Public gblCodingEnvironment As String
 Public gblRichClientEnvironment As String
@@ -1719,13 +1720,13 @@ Public Sub makeVisibleFormElements()
     
     ' The RC forms are measured in pixels, whereas the native forms are in twips, do remember that...
 
-    gblMonitorCount = fGetMonitorCount
-    If gblMonitorCount > 1 Then
-        Call SetFormOnMonitor(fMain.TenShillingsForm.hWnd, formLeftPixels, formTopPixels)
-    Else
+'    gblMonitorCount = fGetMonitorCount
+'    If gblMonitorCount > 1 Then
+'        Call SetFormOnMonitor(fMain.TenShillingsForm.hWnd, formLeftPixels, formTopPixels)
+'    Else
         fMain.TenShillingsForm.Left = formLeftPixels
         fMain.TenShillingsForm.Top = formTopPixels
-    End If
+'    End If
     
     fMain.TenShillingsForm.Show
 
@@ -1838,17 +1839,19 @@ determineScreenDimensions_Error:
 End Sub
 
 
+
 '---------------------------------------------------------------------------------------
 ' Procedure : mainScreen
 ' Author    : beededea
 ' Date      : 04/05/2023
-' Purpose   : Function to move the main_window onto the main screen if it has been accidentally moved off - an accident that is possible by user positioning
+' Purpose   : Function to move the widget itself onto the main screen if it has been moved off so far it cannot be seen - an accident that is possible by user positioning
 '             calculate the current hlocation in % of the screen
 '             - called on startup and by timer
 '---------------------------------------------------------------------------------------
 '
 Public Sub mainScreen()
-   On Error GoTo mainScreen_Error
+
+    On Error GoTo mainScreen_Error
 
     ' check for aspect ratio and determine whether it is in portrait or landscape mode
     If gblPhysicalScreenWidthPixels > gblPhysicalScreenHeightPixels Then
@@ -1882,23 +1885,19 @@ Public Sub mainScreen()
             fMain.TenShillingsForm.Visible = False
         End If
     End If
+    
+    ' calculate the on screen widget's solid visible portion's X position in relation to the left screen edge
+    Call checkScreenEdgeLeft
+    
+    ' calculate the on screen widget's solid visible portion's Y position in relation to the top screen edge
+    Call checkScreenEdgeTop
+            
+    ' calculate the on screen widget's solid visible portion's X position in relation to the right screen edge
+    Call checkScreenEdgeRight
 
-    ' calculate the on screen widget position
-    If fMain.TenShillingsForm.Left < 0 Then
-        fMain.TenShillingsForm.Left = 10
-    End If
-    If fMain.TenShillingsForm.Top < 0 Then
-        fMain.TenShillingsForm.Top = 0
-    End If
-    
-    
-    If fMain.TenShillingsForm.Left > gblVirtualScreenWidthPixels - 50 Then
-        fMain.TenShillingsForm.Left = gblVirtualScreenWidthPixels - 150
-    End If
-    If fMain.TenShillingsForm.Top > gblVirtualScreenHeightPixels - 50 Then
-        fMain.TenShillingsForm.Top = gblVirtualScreenHeightPixels - 150
-    End If
-'
+    ' calculate the on screen widget's solid visible portion's X position in relation to the bottom screen edge
+    Call checkScreenEdgeBottom
+
     ' calculate the current hlocation in % of the screen
     ' store the current hlocation in % of the screen
     If gblWidgetPosition = "1" Then
@@ -1914,6 +1913,162 @@ mainScreen_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure mainScreen of Module Module1"
 
 End Sub
+
+'
+'---------------------------------------------------------------------------------------
+' Procedure : checkScreenEdgeBottom
+' Author    : beededea
+' Date      : 14/09/2025
+' Purpose   : calculate the on screen widget's solid visible portion's X position in relation to the bottom screen edge
+'---------------------------------------------------------------------------------------
+'
+Private Sub checkScreenEdgeBottom()
+
+    Dim widgetCurrentHeightPx As Long: widgetCurrentHeightPx = 0
+    Dim formMidPointY As Long: formMidPointY = 0
+    Dim widgetTopY As Long: widgetTopY = 0
+    Dim widgetLeftX As Long: widgetLeftX = 0
+    Dim screenEdge As Long: screenEdge = 0
+    
+    On Error GoTo checkScreenEdgeBottom_Error
+
+    If (fMain.TenShillingsForm.Top + fMain.TenShillingsForm.Height) > gblVirtualScreenHeightPixels Then  ' if any part of the form is off screen
+        ' the widget height is divided by two as it is doubled earlier
+        widgetCurrentHeightPx = (TenShillingsWidget.Widget.Height / 2 * TenShillingsWidget.Zoom) ' pixels
+        formMidPointY = (fMain.TenShillingsForm.Height / 2) + fMain.TenShillingsForm.Top
+        widgetTopY = formMidPointY '- (widgetCurrentHeightPx)
+        screenEdge = 100 ' pixels from the edge
+        
+        ' if the widget itself is close to the left of the screen then reposition it back on screen
+        If widgetTopY >= (gblVirtualScreenHeightPixels - screenEdge) Then
+            fMain.TenShillingsForm.Top = ((gblVirtualScreenHeightPixels - screenEdge) - (widgetCurrentHeightPx / 2) - 300)
+        End If
+    End If
+
+    On Error GoTo 0
+    Exit Sub
+
+checkScreenEdgeBottom_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure checkScreenEdgeBottom of Module Module1"
+    
+End Sub
+
+
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : checkScreenEdgeRight
+' Author    : beededea
+' Date      : 14/09/2025
+' Purpose   : calculate the on screen widget's solid visible portion's X position in relation to the right screen edge
+'---------------------------------------------------------------------------------------
+'
+Private Sub checkScreenEdgeRight()
+
+    Dim widgetCurrentWidthPx As Long: widgetCurrentWidthPx = 0
+    Dim formMidPointX As Long: formMidPointX = 0
+    Dim widgetBottomY As Long: widgetBottomY = 0
+    Dim widgetLeftX As Long: widgetLeftX = 0
+    Dim screenEdge As Long: screenEdge = 0
+    
+    On Error GoTo checkScreenEdgeRight_Error
+
+    If (fMain.TenShillingsForm.Left + fMain.TenShillingsForm.Width) > gblVirtualScreenWidthPixels Then ' if any part of the form is off screen
+        widgetCurrentWidthPx = (TenShillingsWidget.Widget.Width / 2 * TenShillingsWidget.Zoom) ' pixels
+        formMidPointX = (fMain.TenShillingsForm.Width / 2) + fMain.TenShillingsForm.Left
+        widgetLeftX = formMidPointX ' - widgetCurrentWidthPx / 2
+        screenEdge = 100 ' pixels from the edge
+
+        ' if the widget itself is close to the very left of the screen then reposition it back on screen
+        If widgetLeftX >= gblVirtualScreenWidthPixels - screenEdge Then
+            fMain.TenShillingsForm.Left = (gblVirtualScreenWidthPixels - screenEdge) - (fMain.TenShillingsForm.Width / 2) + (widgetCurrentWidthPx / 2) - 100
+        End If
+    End If
+
+    On Error GoTo 0
+    Exit Sub
+
+checkScreenEdgeRight_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure checkScreenEdgeRight of Module Module1"
+End Sub
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : checkScreenEdgeLeft
+' Author    : beededea
+' Date      : 13/09/2025
+' Purpose   : ' calculate the on screen widget's solid visible portion's X position in relation to the left screen edge
+'---------------------------------------------------------------------------------------
+'
+Private Sub checkScreenEdgeLeft()
+
+    Dim widgetCurrentWidthPx As Long: widgetCurrentWidthPx = 0
+    Dim formMidPointX As Long: formMidPointX = 0
+    Dim widgetBottomY As Long: widgetBottomY = 0
+    Dim widgetRightX As Long: widgetRightX = 0
+    Dim screenEdge As Long: screenEdge = 0
+    
+    On Error GoTo checkScreenEdgeLeft_Error
+
+    If fMain.TenShillingsForm.Left < 0 Then ' if any part of the form is off screen
+        widgetCurrentWidthPx = (TenShillingsWidget.Widget.Width / 2 * TenShillingsWidget.Zoom) ' pixels
+        formMidPointX = (fMain.TenShillingsForm.Width / 2) + fMain.TenShillingsForm.Left
+        widgetRightX = formMidPointX '+ widgetCurrentWidthPx / 2
+        screenEdge = 100 ' pixels from the edge
+        
+        ' if the widget itself is close to the very left of the screen then reposition it back on screen
+        If widgetRightX <= screenEdge Then
+            fMain.TenShillingsForm.Left = screenEdge - (((fMain.TenShillingsForm.Width / 2) + widgetCurrentWidthPx / 2)) + 100
+        End If
+    End If
+
+    On Error GoTo 0
+    Exit Sub
+
+checkScreenEdgeLeft_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure checkScreenEdgeLeft of Module Module1"
+End Sub
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : checkScreenEdgeTop
+' Author    : beededea
+' Date      : 13/09/2025
+' Purpose   : calculate the on screen widget's solid visible portion's Y position in relation to the top screen edge
+'---------------------------------------------------------------------------------------
+'
+Private Sub checkScreenEdgeTop()
+    Dim widgetCurrentHeightPx As Long: widgetCurrentHeightPx = 0
+    Dim formMidPointY As Long: formMidPointY = 0
+    Dim widgetBottomY As Long: widgetBottomY = 0
+    Dim widgetTopY As Long: widgetTopY = 0
+    Dim screenEdge As Long: screenEdge = 0
+    
+    On Error GoTo checkScreenEdgeTop_Error
+
+    If fMain.TenShillingsForm.Top < 0 Then ' if any part of the form is off screen
+        widgetCurrentHeightPx = (TenShillingsWidget.Widget.Height / 2 * TenShillingsWidget.Zoom) ' pixels
+        formMidPointY = (fMain.TenShillingsForm.Height / 2) + fMain.TenShillingsForm.Top
+        widgetBottomY = formMidPointY + widgetCurrentHeightPx / 2
+        screenEdge = 100 ' pixels from the edge
+        
+        ' if the widget itself is close to the left of the screen then reposition it back on screen
+        If formMidPointY <= screenEdge Then
+            fMain.TenShillingsForm.Top = (screenEdge - ((fMain.TenShillingsForm.Height / 2) + (widgetCurrentHeightPx / 2))) + 300
+        End If
+    End If
+
+    On Error GoTo 0
+    Exit Sub
+
+checkScreenEdgeTop_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure checkScreenEdgeTop of Module Module1"
+End Sub
+
 
 
 '---------------------------------------------------------------------------------------
@@ -2031,8 +2186,7 @@ Public Sub reloadProgram()
     'TenShillingsWidget.ShowHelp = False ' needs to be set to false for the reload to reshow it, if enabled
     
     gblTenShillingsWidgetAvailable = False ' tell the ' screenWrite util that the widgetForm is no longer available to write console events to
-    
-    'Erase gblTerminalRows ' remove the old text stored in the display screen array
+    gblReload = True
     
     Call saveMainRCFormPosition
     

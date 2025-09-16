@@ -533,6 +533,9 @@ Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByV
     
     ' note: default origin point is always top left, needs to be adjusted
     
+    ' move the image into the form a little to prevent cropping when rotating
+    CC.TranslateDrawings 150, 150
+
     ' set the origin point prior to rotation
     CC.TranslateDrawings mImageHeight, mImageHeight
     

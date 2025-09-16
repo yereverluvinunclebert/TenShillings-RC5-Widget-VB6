@@ -8,6 +8,10 @@ HTML text and images
 
 TODO
 
+' width of the underlying form cannot be square due to non-squre note overlapping the adges and cropping
+
+
+
 Add the spawn menu option and code when it is ready to use
 
 ' test usage of RC for monitor awareness - wip

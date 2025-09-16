@@ -185,7 +185,8 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     
     ' end the startup by un-setting the start global flag
     gblStartupFlg = False
-
+    gblReload = False
+    
     ' RC message pump will auto-exit when Cairo Forms > 0 so we run it only when 0, this prevents message interruption
     ' when running twice on reload. Do not move this line.
     #If TWINBASIC Then
@@ -1058,10 +1059,19 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub createRCFormsOnCurrentDisplay()
+    Dim thisSrf As cCairoSurface
+    Dim imageHeight As Long: imageHeight = 0
+    Dim imageWidth As Long: imageWidth = 0
+    
     On Error GoTo createRCFormsOnCurrentDisplay_Error
+    
+    If Cairo.ImageList.Exists("tenshillings") Then Set thisSrf = Cairo.ImageList("tenshillings")
+    
+    imageWidth = thisSrf.Width
+    imageHeight = thisSrf.Height
 
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateTenShillingsForm(.WorkLeft, .WorkTop, 2200, 2200, gblWidgetName)
+      Call fMain.initAndCreateTenShillingsForm(.WorkLeft, .WorkTop, imageWidth, imageHeight, gblWidgetName)
     End With
 
     With New_c.Displays(1) 'get the current Display
@@ -1076,7 +1086,7 @@ Private Sub createRCFormsOnCurrentDisplay()
       Call fMain.initAndCreateLicenceForm(.WorkLeft, .WorkTop, 1000, 1000, gblWidgetName)
     End With
     
-        On Error GoTo 0
+    On Error GoTo 0
     Exit Sub
 
 createRCFormsOnCurrentDisplay_Error:

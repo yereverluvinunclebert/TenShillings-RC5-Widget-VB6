@@ -43,7 +43,7 @@ Begin VB.Form widgetPrefs
             Left            =   1950
             TabIndex        =   161
             ToolTipText     =   "Check this box to enable the automatic start of the program when Windows is started."
-            Top             =   180
+            Top             =   165
             Width           =   4020
          End
          Begin VB.Label lblGeneral 
@@ -2716,7 +2716,7 @@ Private Sub subClassControls()
     
    On Error GoTo subClassControls_Error
 
-    If InIDE Then
+    If InIDE And gblReload = False Then
         MsgBox "NOTE: Running in IDE so Sub classing is disabled" & vbCrLf & "Mousewheel will not scroll icon maps and balloon tooltips will not display on comboboxes" & vbCrLf & vbCrLf & _
             "In addition, the display screen will not show messages as it currently crashes when run within the IDE."
     Else

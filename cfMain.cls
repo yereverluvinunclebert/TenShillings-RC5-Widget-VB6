@@ -52,11 +52,11 @@ Private lblDeclineOrNot As cwLabel
 ' Procedure : initAndCreateWidgetForm
 ' Author    :
 ' Date      : 27/04/2023
-' Purpose   : Initialise and create the tenShillings form only, add the tenShillings widget based on the tenShillings class, to the form
+' Purpose   : Initialise and create the tenShillings form only, then add the tenShillings widget based on the tenShillings class, to the form
 '---------------------------------------------------------------------------------------
 '
 Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optional ByVal dx As Long, Optional ByVal dy As Long, Optional ByVal Caption As String)
-    Dim thisSrf As cCairoSurface
+    'Dim thisSrf As cCairoSurface
     Dim imageHeight As Long: imageHeight = 0
     Dim imageWidth As Long: imageWidth = 0
     Dim tenShillingsFormWidth As Long: tenShillingsFormWidth = 0
@@ -69,19 +69,19 @@ Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optio
     
     On Error GoTo initAndCreateTenShillingsForm_Error
     
-    If Cairo.ImageList.Exists("tenshillings") Then Set thisSrf = Cairo.ImageList("tenshillings")
+    'If Cairo.ImageList.Exists("tenshillings") Then Set thisSrf = Cairo.ImageList("tenshillings")
     
-    imageWidth = thisSrf.Width
-    imageHeight = thisSrf.Height
+    imageWidth = dx
+    imageHeight = dy
     
     If gblDpiAwareness = "0" Then
-        tenShillingsFormWidth = imageWidth * 2 ' roughly twice the width of the main image plus a bit
-        tenShillingsFormHeight = imageHeight * 2 '
+        tenShillingsFormWidth = imageWidth * 2.4 ' roughly twice the width of the main image plus a bit, the image is non-square and needs room to rotate
+        tenShillingsFormHeight = imageHeight * 2.4 '
         If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then tenShillingsFormWidth = gblVirtualScreenWidthPixels
         If tenShillingsFormHeight > gblVirtualScreenHeightPixels Then tenShillingsFormHeight = gblVirtualScreenHeightPixels
     Else
-        tenShillingsFormWidth = imageWidth * 2 ' roughly twice the width of the main image plus a bit
-        tenShillingsFormHeight = imageHeight * 2 '
+        tenShillingsFormWidth = imageWidth * 2.4
+        tenShillingsFormHeight = imageHeight * 2.4 '
         If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then
             tenShillingsFormWidth = gblVirtualScreenWidthPixels
             tenShillingsWidgetZoomValue = 1
@@ -95,8 +95,8 @@ Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optio
             tenShillingsWidgetZoomValue = 1
         End If
     End If
-    tenShillingsWidgetWidth = tenShillingsFormWidth - 100
-    tenShillingsWidgetHeight = tenShillingsFormHeight - 100
+    tenShillingsWidgetWidth = tenShillingsFormWidth
+    tenShillingsWidgetHeight = tenShillingsFormHeight
     
     ' create an invisible form using a Cairo Widget Form with the predefined caption and sizing
     Set TenShillingsForm = Cairo.WidgetForms.Create(WFFStyleTool, "TenShillings the " & Caption & " Widget", True, tenShillingsFormWidth, tenShillingsFormHeight)
