@@ -26,14 +26,14 @@ Public Const OnTopFlags  As Long = SWP_NOMOVE Or SWP_NOSIZE
 
 '------------------------------------------------------ STARTS
 ' to set the full window Opacity
-Private Declare Function SetLayeredWindowAttributes Lib "user32" (ByVal hWnd As Long, ByVal crKey As Long, ByVal bAlpha As Byte, ByVal dwFlags As Long) As Long
-Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long) As Long
-Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
-
-Private Const WS_EX_LAYERED  As Long = &H80000
-Private Const GWL_EXSTYLE  As Long = (-20)
-Private Const LWA_COLORKEY  As Long = &H1       'to transparent
-Private Const LWA_ALPHA  As Long = &H2          'to semi transparent
+'Private Declare Function SetLayeredWindowAttributes Lib "user32" (ByVal hWnd As Long, ByVal crKey As Long, ByVal bAlpha As Byte, ByVal dwFlags As Long) As Long
+'Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long) As Long
+'Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+'
+'Private Const WS_EX_LAYERED  As Long = &H80000
+'Private Const GWL_EXSTYLE  As Long = (-20)
+'Private Const LWA_COLORKEY  As Long = &H1       'to transparent
+'Private Const LWA_ALPHA  As Long = &H2          'to semi transparent
 '------------------------------------------------------ ENDS
 
 ' class objects instantiated
@@ -112,7 +112,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     menuForm.mnuAbout.Caption = "About TenShillings " & gblRichClientEnvironment & " Cairo " & gblCodingEnvironment & " widget"
        
     ' Load the sounds into numbered buffers ready for playing
-    Call loadAsynchSoundFiles
+    'Call loadAsynchSoundFiles
     
     ' resolve VB6 sizing width bug
     Call determineScreenDimensions
@@ -1180,177 +1180,177 @@ End Function
 
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : loadAsynchSoundFiles
-' Author    : beededea
-' Date      : 27/01/2025
-' Purpose   : Load the sounds into numbered buffers ready for playing
-'---------------------------------------------------------------------------------------
+''---------------------------------------------------------------------------------------
+'' Procedure : loadAsynchSoundFiles
+'' Author    : beededea
+'' Date      : 27/01/2025
+'' Purpose   : Load the sounds into numbered buffers ready for playing
+''---------------------------------------------------------------------------------------
+''
+'Private Sub loadAsynchSoundFiles()
 '
-Private Sub loadAsynchSoundFiles()
-
-   On Error GoTo loadAsynchSoundFiles_Error
+'   On Error GoTo loadAsynchSoundFiles_Error
+''
+''    LoadSoundFile 1, App.path & "\resources\sounds\belltoll-quiet.wav"
+''    LoadSoundFile 2, App.path & "\resources\sounds\belltoll.wav"
+''    LoadSoundFile 3, App.path & "\resources\sounds\belltollLong-quiet.wav"
+''    LoadSoundFile 4, App.path & "\resources\sounds\belltollLong.wav"
+''    LoadSoundFile 5, App.path & "\resources\sounds\fullchime-quiet.wav"
+''    LoadSoundFile 6, App.path & "\resources\sounds\fullchime.wav"
+''    LoadSoundFile 7, App.path & "\resources\sounds\halfchime-quiet.wav"
+''    LoadSoundFile 8, App.path & "\resources\sounds\halfchime.wav"
+''    LoadSoundFile 9, App.path & "\resources\sounds\quarterchime-quiet.wav"
+''    LoadSoundFile 10, App.path & "\resources\sounds\quarterchime.wav"
+''    LoadSoundFile 11, App.path & "\resources\sounds\threequarterchime-quiet.wav"
+''    LoadSoundFile 12, App.path & "\resources\sounds\threequarterchime.wav"
+''    LoadSoundFile 13, App.path & "\resources\sounds\ticktock-quiet.wav"
+''    LoadSoundFile 14, App.path & "\resources\sounds\ticktock.wav"
+''    LoadSoundFile 15, App.path & "\resources\sounds\zzzz-quiet.wav"
+''    LoadSoundFile 16, App.path & "\resources\sounds\zzzz.wav"
+''    LoadSoundFile 17, App.path & "\resources\sounds\till-quiet.wav"
+''    LoadSoundFile 18, App.path & "\resources\sounds\till.wav"
 '
-'    LoadSoundFile 1, App.path & "\resources\sounds\belltoll-quiet.wav"
-'    LoadSoundFile 2, App.path & "\resources\sounds\belltoll.wav"
-'    LoadSoundFile 3, App.path & "\resources\sounds\belltollLong-quiet.wav"
-'    LoadSoundFile 4, App.path & "\resources\sounds\belltollLong.wav"
-'    LoadSoundFile 5, App.path & "\resources\sounds\fullchime-quiet.wav"
-'    LoadSoundFile 6, App.path & "\resources\sounds\fullchime.wav"
-'    LoadSoundFile 7, App.path & "\resources\sounds\halfchime-quiet.wav"
-'    LoadSoundFile 8, App.path & "\resources\sounds\halfchime.wav"
-'    LoadSoundFile 9, App.path & "\resources\sounds\quarterchime-quiet.wav"
-'    LoadSoundFile 10, App.path & "\resources\sounds\quarterchime.wav"
-'    LoadSoundFile 11, App.path & "\resources\sounds\threequarterchime-quiet.wav"
-'    LoadSoundFile 12, App.path & "\resources\sounds\threequarterchime.wav"
-'    LoadSoundFile 13, App.path & "\resources\sounds\ticktock-quiet.wav"
-'    LoadSoundFile 14, App.path & "\resources\sounds\ticktock.wav"
-'    LoadSoundFile 15, App.path & "\resources\sounds\zzzz-quiet.wav"
-'    LoadSoundFile 16, App.path & "\resources\sounds\zzzz.wav"
-'    LoadSoundFile 17, App.path & "\resources\sounds\till-quiet.wav"
-'    LoadSoundFile 18, App.path & "\resources\sounds\till.wav"
-
-   On Error GoTo 0
-   Exit Sub
-
-loadAsynchSoundFiles_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure loadAsynchSoundFiles of Module modMain"
-
-End Sub
+'   On Error GoTo 0
+'   Exit Sub
+'
+'loadAsynchSoundFiles_Error:
+'
+'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure loadAsynchSoundFiles of Module modMain"
+'
+'End Sub
 
 
 '---------------------------------------------------------------------------------------
-' Procedure : playAsynchSound
-' Author    : beededea
+'Procedure:   playAsynchSound
+'Author:      beededea
 ' Date      : 27/01/2025
 ' Purpose   : requires minimal changes to replace playSound code in the rest of the program
 '---------------------------------------------------------------------------------------
 '
-Public Sub playAsynchSound(ByVal SoundFile As String)
-
-     Dim soundindex As Long: soundindex = 0
-
-     On Error GoTo playAsynchSound_Error
-
-'     If SoundFile = App.path & "\resources\sounds\belltoll-quiet.wav" Then soundindex = 1
-'     If SoundFile = App.path & "\resources\sounds\belltoll.wav" Then soundindex = 2
-'     If SoundFile = App.path & "\resources\sounds\belltollLong-quiet.wav" Then soundindex = 3
-'     If SoundFile = App.path & "\resources\sounds\belltollLong.wav" Then soundindex = 4
-'     If SoundFile = App.path & "\resources\sounds\fullchime-quiet.wav" Then soundindex = 5
-'     If SoundFile = App.path & "\resources\sounds\fullchime.wav" Then soundindex = 6
-'     If SoundFile = App.path & "\resources\sounds\halfchime-quiet.wav" Then soundindex = 7
-'     If SoundFile = App.path & "\resources\sounds\halfchime.wav" Then soundindex = 8
-'     If SoundFile = App.path & "\resources\sounds\quarterchime-quiet.wav" Then soundindex = 9
-'     If SoundFile = App.path & "\resources\sounds\quarterchime.wav" Then soundindex = 10
-'     If SoundFile = App.path & "\resources\sounds\threequarterchime-quiet.wav" Then soundindex = 11
-'     If SoundFile = App.path & "\resources\sounds\threequarterchime.wav" Then soundindex = 12
-'     If SoundFile = App.path & "\resources\sounds\ticktock-quiet.wav" Then soundindex = 13
-'     If SoundFile = App.path & "\resources\sounds\ticktock.wav" Then soundindex = 14
-'     If SoundFile = App.path & "\resources\sounds\zzzz-quiet.wav" Then soundindex = 15
-'     If SoundFile = App.path & "\resources\sounds\zzzz.wav" Then soundindex = 16
-'     If SoundFile = App.path & "\resources\sounds\till-quiet.wav" Then soundindex = 17
-'     If SoundFile = App.path & "\resources\sounds\till.wav" Then soundindex = 18
-
-     Call playSounds(soundindex) ' writes the wav files (previously stored in a memory buffer) and feeds that buffer to the waveOutWrite API
-
-   On Error GoTo 0
-   Exit Sub
-
-playAsynchSound_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure playAsynchSound of Module modMain"
-
-End Sub
-
-
-
-'---------------------------------------------------------------------------------------
-' Procedure : stopAsynchSound
-' Author    : beededea
-' Date      : 27/01/2025
-' Purpose   : requires minimal changes to previous playSound code
-'---------------------------------------------------------------------------------------
+'Public Sub playAsynchSound(ByVal SoundFile As String)
 '
-Public Sub stopAsynchSound(ByVal SoundFile As String)
-
-     Dim soundindex As Long: soundindex = 0
-
-     On Error GoTo stopAsynchSound_Error
-
-'     If SoundFile = App.path & "\resources\sounds\belltoll-quiet.wav" Then soundindex = 1
-'     If SoundFile = App.path & "\resources\sounds\belltoll.wav" Then soundindex = 2
-'     If SoundFile = App.path & "\resources\sounds\belltollLong-quiet.wav" Then soundindex = 3
-'     If SoundFile = App.path & "\resources\sounds\belltollLong.wav" Then soundindex = 4
-'     If SoundFile = App.path & "\resources\sounds\fullchime-quiet.wav" Then soundindex = 5
-'     If SoundFile = App.path & "\resources\sounds\fullchime.wav" Then soundindex = 6
-'     If SoundFile = App.path & "\resources\sounds\halfchime-quiet.wav" Then soundindex = 7
-'     If SoundFile = App.path & "\resources\sounds\halfchime.wav" Then soundindex = 8
-'     If SoundFile = App.path & "\resources\sounds\quarterchime-quiet.wav" Then soundindex = 9
-'     If SoundFile = App.path & "\resources\sounds\quarterchime.wav" Then soundindex = 10
-'     If SoundFile = App.path & "\resources\sounds\threequarterchime-quiet.wav" Then soundindex = 11
-'     If SoundFile = App.path & "\resources\sounds\threequarterchime.wav" Then soundindex = 12
-'     If SoundFile = App.path & "\resources\sounds\ticktock-quiet.wav" Then soundindex = 13
-'     If SoundFile = App.path & "\resources\sounds\ticktock.wav" Then soundindex = 14
-'     If SoundFile = App.path & "\resources\sounds\zzzz-quiet.wav" Then soundindex = 15
-'     If SoundFile = App.path & "\resources\sounds\zzzz.wav" Then soundindex = 16
-'     If SoundFile = App.path & "\resources\sounds\till-quiet.wav" Then soundindex = 17
-'     If SoundFile = App.path & "\resources\sounds\till.wav" Then soundindex = 18
-     
-     Call StopSound(soundindex)
-
-   On Error GoTo 0
-   Exit Sub
-
-stopAsynchSound_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure stopAsynchSound of Module modMain"
-
-End Sub
-
-
-'---------------------------------------------------------------------------------------
-' Procedure : stopAllAsynchSounds
-' Author    : beededea
-' Date      : 04/02/2025
-' Purpose   : ONLY stops any WAV files currently playing in asynchronous mode.
-'---------------------------------------------------------------------------------------
+'     Dim soundindex As Long: soundindex = 0
 '
-Public Sub stopAllAsynchSounds()
-            
-   On Error GoTo stopAllAsynchSounds_Error
-
-'    Call StopSound(1)
-'    Call StopSound(2)
-'    Call StopSound(3)
-'    Call StopSound(4)
-'    Call StopSound(5)
-'    Call StopSound(6)
-'    Call StopSound(7)
-'    Call StopSound(8)
-'    Call StopSound(9)
-'    Call StopSound(10)
-'    Call StopSound(12)
-'    Call StopSound(13)
-'    Call StopSound(14)
-'    Call StopSound(15)
-'    Call StopSound(16)
-'    Call StopSound(17)
-'    Call StopSound(18)
-
-   On Error GoTo 0
-   Exit Sub
-
-stopAllAsynchSounds_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure stopAllAsynchSounds of Module modMain"
-
-End Sub
-
-
-
-' test open hardware monitor is running
-Private Sub checkMonitorIsRunning()
+'     On Error GoTo playAsynchSound_Error
+'
+'     If SoundFile = App.Path & "\resources\sounds\belltoll-quiet.wav" Then soundindex = 1
+'     If SoundFile = App.Path & "\resources\sounds\belltoll.wav" Then soundindex = 2
+'     If SoundFile = App.Path & "\resources\sounds\belltollLong-quiet.wav" Then soundindex = 3
+'     If SoundFile = App.Path & "\resources\sounds\belltollLong.wav" Then soundindex = 4
+'     If SoundFile = App.Path & "\resources\sounds\fullchime-quiet.wav" Then soundindex = 5
+'     If SoundFile = App.Path & "\resources\sounds\fullchime.wav" Then soundindex = 6
+'     If SoundFile = App.Path & "\resources\sounds\halfchime-quiet.wav" Then soundindex = 7
+'     If SoundFile = App.Path & "\resources\sounds\halfchime.wav" Then soundindex = 8
+'     If SoundFile = App.Path & "\resources\sounds\quarterchime-quiet.wav" Then soundindex = 9
+'     If SoundFile = App.Path & "\resources\sounds\quarterchime.wav" Then soundindex = 10
+'     If SoundFile = App.Path & "\resources\sounds\threequarterchime-quiet.wav" Then soundindex = 11
+'     If SoundFile = App.Path & "\resources\sounds\threequarterchime.wav" Then soundindex = 12
+'     If SoundFile = App.Path & "\resources\sounds\ticktock-quiet.wav" Then soundindex = 13
+'     If SoundFile = App.Path & "\resources\sounds\ticktock.wav" Then soundindex = 14
+'     If SoundFile = App.Path & "\resources\sounds\zzzz-quiet.wav" Then soundindex = 15
+'     If SoundFile = App.Path & "\resources\sounds\zzzz.wav" Then soundindex = 16
+'     If SoundFile = App.Path & "\resources\sounds\till-quiet.wav" Then soundindex = 17
+'     If SoundFile = App.Path & "\resources\sounds\till.wav" Then soundindex = 18
+'
+'     Call playSounds(soundindex) ' writes the wav files (previously stored in a memory buffer) and feeds that buffer to the waveOutWrite API
+'
+'   On Error GoTo 0
+'   Exit Sub
+'
+'playAsynchSound_Error:
+'
+'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure playAsynchSound of Module modMain"
+'
+'End Sub
 
 
-End Sub
+
+''---------------------------------------------------------------------------------------
+'' Procedure : stopAsynchSound
+'' Author    : beededea
+'' Date      : 27/01/2025
+'' Purpose   : requires minimal changes to previous playSound code
+''---------------------------------------------------------------------------------------
+''
+'Public Sub stopAsynchSound(ByVal SoundFile As String)
+'
+'     Dim soundindex As Long: soundindex = 0
+'
+'     On Error GoTo stopAsynchSound_Error
+'
+''     If SoundFile = App.path & "\resources\sounds\belltoll-quiet.wav" Then soundindex = 1
+''     If SoundFile = App.path & "\resources\sounds\belltoll.wav" Then soundindex = 2
+''     If SoundFile = App.path & "\resources\sounds\belltollLong-quiet.wav" Then soundindex = 3
+''     If SoundFile = App.path & "\resources\sounds\belltollLong.wav" Then soundindex = 4
+''     If SoundFile = App.path & "\resources\sounds\fullchime-quiet.wav" Then soundindex = 5
+''     If SoundFile = App.path & "\resources\sounds\fullchime.wav" Then soundindex = 6
+''     If SoundFile = App.path & "\resources\sounds\halfchime-quiet.wav" Then soundindex = 7
+''     If SoundFile = App.path & "\resources\sounds\halfchime.wav" Then soundindex = 8
+''     If SoundFile = App.path & "\resources\sounds\quarterchime-quiet.wav" Then soundindex = 9
+''     If SoundFile = App.path & "\resources\sounds\quarterchime.wav" Then soundindex = 10
+''     If SoundFile = App.path & "\resources\sounds\threequarterchime-quiet.wav" Then soundindex = 11
+''     If SoundFile = App.path & "\resources\sounds\threequarterchime.wav" Then soundindex = 12
+''     If SoundFile = App.path & "\resources\sounds\ticktock-quiet.wav" Then soundindex = 13
+''     If SoundFile = App.path & "\resources\sounds\ticktock.wav" Then soundindex = 14
+''     If SoundFile = App.path & "\resources\sounds\zzzz-quiet.wav" Then soundindex = 15
+''     If SoundFile = App.path & "\resources\sounds\zzzz.wav" Then soundindex = 16
+''     If SoundFile = App.path & "\resources\sounds\till-quiet.wav" Then soundindex = 17
+''     If SoundFile = App.path & "\resources\sounds\till.wav" Then soundindex = 18
+'
+'     Call StopSound(soundindex)
+'
+'   On Error GoTo 0
+'   Exit Sub
+'
+'stopAsynchSound_Error:
+'
+'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure stopAsynchSound of Module modMain"
+'
+'End Sub
+
+
+''---------------------------------------------------------------------------------------
+'' Procedure : stopAllAsynchSounds
+'' Author    : beededea
+'' Date      : 04/02/2025
+'' Purpose   : ONLY stops any WAV files currently playing in asynchronous mode.
+''---------------------------------------------------------------------------------------
+''
+'Public Sub stopAllAsynchSounds()
+'
+'   On Error GoTo stopAllAsynchSounds_Error
+'
+''    Call StopSound(1)
+''    Call StopSound(2)
+''    Call StopSound(3)
+''    Call StopSound(4)
+''    Call StopSound(5)
+''    Call StopSound(6)
+''    Call StopSound(7)
+''    Call StopSound(8)
+''    Call StopSound(9)
+''    Call StopSound(10)
+''    Call StopSound(12)
+''    Call StopSound(13)
+''    Call StopSound(14)
+''    Call StopSound(15)
+''    Call StopSound(16)
+''    Call StopSound(17)
+''    Call StopSound(18)
+'
+'   On Error GoTo 0
+'   Exit Sub
+'
+'stopAllAsynchSounds_Error:
+'
+'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure stopAllAsynchSounds of Module modMain"
+'
+'End Sub
+'
+'
+'
+'' test open hardware monitor is running
+'Private Sub checkMonitorIsRunning()
+'
+'
+'End Sub

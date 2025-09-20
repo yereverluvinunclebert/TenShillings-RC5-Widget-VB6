@@ -9,11 +9,11 @@ Attribute VB_Name = "Subclasser"
 Option Explicit
 
 Private Declare Function SetWindowSubclass Lib "comctl32" Alias "#410" (ByVal hWnd As Long, ByVal pfnSubclass As Long, ByVal uIdSubclass As Long, Optional ByVal dwRefData As Long) As Long
-Private Declare Function GetWindowSubclass Lib "comctl32" Alias "#411" (ByVal hWnd As Long, ByVal pfnSubclass As Long, ByVal uIdSubclass As Long, pdwRefData As Long) As Long
+'Private Declare Function GetWindowSubclass Lib "comctl32" Alias "#411" (ByVal hWnd As Long, ByVal pfnSubclass As Long, ByVal uIdSubclass As Long, pdwRefData As Long) As Long
 Private Declare Function RemoveWindowSubclass Lib "comctl32" Alias "#412" (ByVal hWnd As Long, ByVal pfnSubclass As Long, ByVal uIdSubclass As Long) As Long
 Private Declare Function NextSubclassProcOnChain Lib "comctl32" Alias "#413" (ByVal hWnd As Long, ByVal uMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
 '
-Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByRef Dest As Any, ByRef Source As Any, ByVal Bytes As Long)
+'Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByRef Dest As Any, ByRef Source As Any, ByVal Bytes As Long)
 Private Declare Function vbaObjSetAddref Lib "msvbvm60" Alias "__vbaObjSetAddref" (ByRef dstObject As Any, ByRef srcObjPtr As Any) As Long
 Private Declare Function GetComboBoxInfo Lib "user32" (ByVal hwndCombo As Long, CBInfo As COMBOBOXINFOSTRUCTURE) As Long
 
@@ -139,30 +139,30 @@ Private Function ComboBox_Proc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal wPa
         Exit Function
     End If
     '
-    Dim uDrawItem       As DRAWITEMSTRUCT
-    Dim oBrush          As Long
-    Dim oThePen         As Long
-    Dim iRet            As Long
-    Dim sText           As String
+'    Dim uDrawItem       As DRAWITEMSTRUCT
+'    Dim oBrush          As Long
+'    Dim oThePen         As Long
+'    Dim iRet            As Long
+'    Dim sText           As String
     Static sPrevText    As String
     Dim cbo             As Object
     '
-    Const WM_DRAWITEM           As Long = &H2B&
-    Const ODT_COMBOBOX          As Long = 3&
-    Const DC_PEN                As Long = 19&
-    Const DC_BRUSH              As Long = 18&
-    Const TRANSPARENT           As Long = 1&
-    Const COLOR_WINDOW          As Long = 5&
-    Const COLOR_WINDOWTEXT      As Long = 8&
-    Const COLOR_HIGHLIGHT       As Long = 13&
-    Const COLOR_HIGHLIGHTTEXT   As Long = 14&
-    Const CB_GETLBTEXT          As Long = &H148&
-    Const CB_GETLBTEXTLEN       As Long = &H149&
-    Const DT_SINGLELINE         As Long = &H20&
-    Const DT_VCENTER            As Long = &H4&
-    Const DT_NOPREFIX           As Long = &H800&
-    Const ODS_SELECTED          As Long = &H1&
-    Const ODS_COMBOBOXEDIT      As Long = &H1000& ' (edit control being drawn).
+'    Const WM_DRAWITEM           As Long = &H2B&
+'    Const ODT_COMBOBOX          As Long = 3&
+'    Const DC_PEN                As Long = 19&
+'    Const DC_BRUSH              As Long = 18&
+'    Const TRANSPARENT           As Long = 1&
+'    Const COLOR_WINDOW          As Long = 5&
+'    Const COLOR_WINDOWTEXT      As Long = 8&
+'    Const COLOR_HIGHLIGHT       As Long = 13&
+'    Const COLOR_HIGHLIGHTTEXT   As Long = 14&
+'    Const CB_GETLBTEXT          As Long = &H148&
+'    Const CB_GETLBTEXTLEN       As Long = &H149&
+'    Const DT_SINGLELINE         As Long = &H20&
+'    Const DT_VCENTER            As Long = &H4&
+'    Const DT_NOPREFIX           As Long = &H800&
+'    Const ODS_SELECTED          As Long = &H1&
+'    Const ODS_COMBOBOXEDIT      As Long = &H1000& ' (edit control being drawn).
     Const WM_SETCURSOR          As Long = &H20&
     '
     If uMsg = WM_SETCURSOR Then     ' Mouse-Move.

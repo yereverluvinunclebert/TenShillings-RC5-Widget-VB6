@@ -2092,56 +2092,56 @@ End Sub
 
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : btnSelectMonitor_Click
-' Author    : beededea
-' Date      : 02/05/2023
-' Purpose   :
-'---------------------------------------------------------------------------------------
+''---------------------------------------------------------------------------------------
+'' Procedure : btnSelectMonitor_Click
+'' Author    : beededea
+'' Date      : 02/05/2023
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Private Sub btnSelectMonitor_Click()
+'    Dim retFileName As String: retFileName = vbNullString
+'    Dim answer As VbMsgBoxResult: answer = vbNo
+'    Dim answerMsg As String: answerMsg = vbNullString
 '
-Private Sub btnSelectMonitor_Click()
-    Dim retFileName As String: retFileName = vbNullString
-    Dim answer As VbMsgBoxResult: answer = vbNo
-    Dim answerMsg As String: answerMsg = vbNullString
-
-    On Error GoTo btnSelectMonitor_Click_Error
-
-    Call addTargetFile(txtDefaultEditor.Text, retFileName)
-    
-    If retFileName <> vbNullString Then
-        txtDefaultEditor.Text = retFileName ' strips the buffered bit, leaving just the filename
-    End If
-    
-    If retFileName = vbNullString Then
-        Exit Sub
-    End If
-    
-    If Not fFExists(retFileName) Then
-        answer = vbYes
-        answerMsg = "The file doesn't currently exist, do you want me to create the chosen file, " & "   -  are you sure?"
-        answer = msgBoxA(answerMsg, vbYesNo, "Default Editor Confirmation", False)
-        If answer = vbNo Then
-            Exit Sub
-        End If
-    
-        'create new
-        Open retFileName For Output As #1
-        Close #1
-    End If
-
-    On Error GoTo 0
-    Exit Sub
-
-btnSelectMonitor_Click_Error:
-
-    With Err
-         If .Number <> 0 Then
-            MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure btnSelectMonitor_Click of Form widgetPrefs"
-            Resume Next
-          End If
-    End With
-    
-End Sub
+'    On Error GoTo btnSelectMonitor_Click_Error
+'
+'    Call addTargetFile(txtDefaultEditor.Text, retFileName)
+'
+'    If retFileName <> vbNullString Then
+'        txtDefaultEditor.Text = retFileName ' strips the buffered bit, leaving just the filename
+'    End If
+'
+'    If retFileName = vbNullString Then
+'        Exit Sub
+'    End If
+'
+'    If Not fFExists(retFileName) Then
+'        answer = vbYes
+'        answerMsg = "The file doesn't currently exist, do you want me to create the chosen file, " & "   -  are you sure?"
+'        answer = msgBoxA(answerMsg, vbYesNo, "Default Editor Confirmation", False)
+'        If answer = vbNo Then
+'            Exit Sub
+'        End If
+'
+'        'create new
+'        Open retFileName For Output As #1
+'        Close #1
+'    End If
+'
+'    On Error GoTo 0
+'    Exit Sub
+'
+'btnSelectMonitor_Click_Error:
+'
+'    With Err
+'         If .Number <> 0 Then
+'            MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure btnSelectMonitor_Click of Form widgetPrefs"
+'            Resume Next
+'          End If
+'    End With
+'
+'End Sub
 
 
 
@@ -2290,46 +2290,46 @@ optPrefsTooltips_Click_Error:
     
 End Sub
 
-
-'---------------------------------------------------------------------------------------
-' Procedure : chkEnableChimes_Click
-' Author    : beededea
-' Date      : 18/02/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
 '
-Private Sub chkEnableChimes_Click()
-   On Error GoTo chkEnableChimes_Click_Error
-
-    btnSave.Enabled = True ' enable the save button
-
-   On Error GoTo 0
-   Exit Sub
-
-chkEnableChimes_Click_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkEnableChimes_Click of Form widgetPrefs"
-End Sub
-
-'---------------------------------------------------------------------------------------
-' Procedure : chkNumericDisplayRotation_Click
-' Author    : beededea
-' Date      : 18/02/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
+''---------------------------------------------------------------------------------------
+'' Procedure : chkEnableChimes_Click
+'' Author    : beededea
+'' Date      : 18/02/2025
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Private Sub chkEnableChimes_Click()
+'   On Error GoTo chkEnableChimes_Click_Error
 '
-Private Sub chkNumericDisplayRotation_Click()
-   On Error GoTo chkNumericDisplayRotation_Click_Error
+'    btnSave.Enabled = True ' enable the save button
+'
+'   On Error GoTo 0
+'   Exit Sub
+'
+'chkEnableChimes_Click_Error:
+'
+'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkEnableChimes_Click of Form widgetPrefs"
+'End Sub
 
-    btnSave.Enabled = True ' enable the save button
-
-   On Error GoTo 0
-   Exit Sub
-
-chkNumericDisplayRotation_Click_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkNumericDisplayRotation_Click of Form widgetPrefs"
-End Sub
+''---------------------------------------------------------------------------------------
+'' Procedure : chkNumericDisplayRotation_Click
+'' Author    : beededea
+'' Date      : 18/02/2025
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Private Sub chkNumericDisplayRotation_Click()
+'   On Error GoTo chkNumericDisplayRotation_Click_Error
+'
+'    btnSave.Enabled = True ' enable the save button
+'
+'   On Error GoTo 0
+'   Exit Sub
+'
+'chkNumericDisplayRotation_Click_Error:
+'
+'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkNumericDisplayRotation_Click of Form widgetPrefs"
+'End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : cmbMultiMonitorResize_Click
@@ -2371,25 +2371,25 @@ cmbMultiMonitorResize_Click_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure cmbMultiMonitorResize_Click of Form widgetPrefs"
 End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : chkVolumeBoost_Click
-' Author    : beededea
-' Date      : 18/02/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
+''---------------------------------------------------------------------------------------
+'' Procedure : chkVolumeBoost_Click
+'' Author    : beededea
+'' Date      : 18/02/2025
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Private Sub chkVolumeBoost_Click()
+'   On Error GoTo chkVolumeBoost_Click_Error
 '
-Private Sub chkVolumeBoost_Click()
-   On Error GoTo chkVolumeBoost_Click_Error
-
-    btnSave.Enabled = True ' enable the save button
-
-   On Error GoTo 0
-   Exit Sub
-
-chkVolumeBoost_Click_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkVolumeBoost_Click of Form widgetPrefs"
-End Sub
+'    btnSave.Enabled = True ' enable the save button
+'
+'   On Error GoTo 0
+'   Exit Sub
+'
+'chkVolumeBoost_Click_Error:
+'
+'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkVolumeBoost_Click of Form widgetPrefs"
+'End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : chkEnableTicks_Click
@@ -2741,7 +2741,7 @@ End Sub
             On Error GoTo setVisualStyles_Error
 
             For Each Ctrl In widgetPrefs.Controls
-                If (TypeOf Ctrl Is textBox) Or (TypeOf Ctrl Is FileListBox) Or (TypeOf Ctrl Is ComboBox) Or (TypeOf Ctrl Is CheckBox) Or (TypeOf Ctrl Is OptionButton) Or (TypeOf Ctrl Is Frame) Or (TypeOf Ctrl Is ListBox) Or (TypeOf Ctrl Is Slider) Or (TypeOf Ctrl Is CommandButton) Then
+                If (TypeOf Ctrl Is CommandButton) Or (TypeOf Ctrl Is ListBox) Or (TypeOf Ctrl Is textBox) Or (TypeOf Ctrl Is FileListBox) Or (TypeOf Ctrl Is ComboBox) Or (TypeOf Ctrl Is CheckBox) Or (TypeOf Ctrl Is OptionButton) Or (TypeOf Ctrl Is Frame) Or (TypeOf Ctrl Is PictureBox) Or (TypeOf Ctrl Is Slider) Then
                 
                     Ctrl.VisualStyles = False
                 End If
@@ -6722,18 +6722,18 @@ Private Sub mnuAuto_Click()
    On Error GoTo mnuAuto_Click_Error
 
     If themeTimer.Enabled = True Then
-            MsgBox "Automatic Theme Selection is now Disabled"
-            mnuAuto.Caption = "Auto Theme Disabled - Click to Enable"
-            mnuAuto.Checked = False
-            
-            themeTimer.Enabled = False
+        MsgBox "Automatic Theme Selection is now Disabled"
+        mnuAuto.Caption = "Auto Theme Disabled - Click to Enable"
+        mnuAuto.Checked = False
+        
+        themeTimer.Enabled = False
     Else
-            MsgBox "Auto Theme Selection Enabled. If the o/s theme changes the utility should automatically skin the utility to suit the theme."
-            mnuAuto.Caption = "Auto Theme Enabled - Click to Disable"
-            mnuAuto.Checked = True
-            
-            themeTimer.Enabled = True
-            Call setThemeColour
+        MsgBox "Auto Theme Selection Enabled. If the o/s theme changes the utility should automatically skin the utility to suit the theme."
+        mnuAuto.Caption = "Auto Theme Enabled - Click to Disable"
+        mnuAuto.Checked = True
+        
+        themeTimer.Enabled = True
+        Call setThemeColour
     End If
 
    On Error GoTo 0
@@ -7183,20 +7183,10 @@ Private Sub setPrefsIconImagesDark()
 '    #If TWINBASIC Then
 '
 '        Set imgGeneral.Picture = LoadPicture(App.path & "\Resources\images\general-icon-dark-1010.jpg")
-
-'
 '        Set imgConfig.Picture = LoadPicture(App.path & "\Resources\images\config-icon-dark-1010.jpg")
-
-'
 '        Set imgFonts.Picture = LoadPicture(App.path & "\Resources\images\font-icon-dark-1010.jpg")
-
-'
 '        Set imgSounds.Picture = LoadPicture(App.path & "\Resources\images\sounds-icon-dark-1010.jpg")
-
-'
 '        Set imgPosition.Picture = LoadPicture(App.path & "\Resources\images\position-icon-dark-1010.jpg")
-
-'
 '        Set imgDevelopment.Picture = LoadPicture(App.path & "\Resources\images\development-icon-dark-1010.jpg")
 
 '
@@ -7237,57 +7227,21 @@ Private Sub setPrefsIconImagesDark()
 '    #Else
         
         Set imgGeneral.Picture = Cairo.ImageList("general-icon-dark").Picture
-
-    
         Set imgConfig.Picture = Cairo.ImageList("config-icon-dark").Picture
-
-        
-'        Set imgConfig.Picture = LoadPicture(App.path & "\Resources\images\config-icon-dark-1010.jpg")
-
-        
         Set imgFonts.Picture = Cairo.ImageList("font-icon-dark").Picture
-
-        
         Set imgSounds.Picture = Cairo.ImageList("sounds-icon-dark").Picture
-
-        
         Set imgPosition.Picture = Cairo.ImageList("position-icon-dark").Picture
-
-        
         Set imgDevelopment.Picture = Cairo.ImageList("development-icon-dark").Picture
-
-        
         Set imgWindow.Picture = Cairo.ImageList("windows-icon-dark").Picture
-
-        
         Set imgAbout.Picture = Cairo.ImageList("about-icon-dark").Picture
-
-        
-    '
         Set imgGeneralClicked.Picture = Cairo.ImageList("general-icon-dark-clicked").Picture
-
-        
         Set imgConfigClicked.Picture = Cairo.ImageList("config-icon-dark-clicked").Picture
-
-        
         Set imgFontsClicked.Picture = Cairo.ImageList("font-icon-dark-clicked").Picture
-
-        
         Set imgSoundsClicked.Picture = Cairo.ImageList("sounds-icon-dark-clicked").Picture
-
-        
         Set imgPositionClicked.Picture = Cairo.ImageList("position-icon-dark-clicked").Picture
-
-        
         Set imgDevelopmentClicked.Picture = Cairo.ImageList("development-icon-dark-clicked").Picture
-
-        
         Set imgWindowClicked.Picture = Cairo.ImageList("windows-icon-dark-clicked").Picture
-
-        
         Set imgAboutClicked.Picture = Cairo.ImageList("about-icon-dark-clicked").Picture
-
-        
     
 '    #End If
 
