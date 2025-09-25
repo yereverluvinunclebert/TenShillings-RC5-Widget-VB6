@@ -11,14 +11,16 @@ removed manifest
 
 ' The tooltip bug where the tooltip shape and background are different, visual styles = false removed from labels and images, removed the manifest to obtain normal styles
 
-TODO
-====
-
-' rubberduck 10/-
-
 ' mz Tools code analysis
 
 ' update the setup 2go
+
+TODO
+====
+
+' test prefs form size on a first start, should be 0.5
+
+' rubberduck 10/-
 
 ' create TB version
 
@@ -34,9 +36,7 @@ TODO
 
  Just tack it onto the end BEFORE the last line “</assembly>”
 
-
-
-' Add the spawn menu option for a future template for other gauges and code when it is ready to use
+ globals to properties?
 
 ' test usage of RC for monitor awareness - wip
 '      adjust Form Position on startup placing form onto Correct Monitor when placed off screen due to

@@ -2013,8 +2013,8 @@ Private Declare Function SendMessage Lib "user32" _
    ByVal wParam As Long, _
    lParam As Any) As Long
 
-Private Const WM_NCLBUTTONDOWN = &HA1
-Private Const HTBOTTOMRIGHT = 17
+Private Const WM_NCLBUTTONDOWN As Long = &HA1
+Private Const HTBOTTOMRIGHT As Long = 17
 '------------------------------------------------------ ENDS
 
 
@@ -4145,7 +4145,7 @@ Private Sub btnPrefsFont_Click()
     gblPrefsFontColour = CStr(fntColour)
     
     ' changes the displayed font to an adjusted base font size after a resize
-    Call PrefsForm_Resize_Event
+    Call PrefsFormResizeEvent
 
     If fFExists(gblSettingsFile) Then ' does the tool's own settings.ini exist?
         sPutINISetting "Software\TenShillings", "prefsFont", gblPrefsFont, gblSettingsFile
@@ -4249,11 +4249,11 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
-    Dim I As Integer: I = 0
+    ' Dim I As Integer: I = 0
     Dim fntWeight As Integer: fntWeight = 0
     Dim fntStyle As Boolean: fntStyle = False
     Dim sliWidgetSizeOldValue As Long: sliWidgetSizeOldValue = 0
-    Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
+    'Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
     
     On Error GoTo adjustPrefsControls_Error
     
@@ -4408,7 +4408,7 @@ End Sub
 
 Private Sub populatePrefsComboBoxes()
 
-    Dim I As Integer: I = 0
+    'Dim I As Integer: I = 0
     
     On Error GoTo populatePrefsComboBoxes_Error
     
@@ -4587,13 +4587,15 @@ End Sub
 '
 Private Sub Form_Resize()
 
+    On Error GoTo Form_Resize_Error
+
     pvtPrefsFormResizedByDrag = True
          
     ' do not call the resizing function when the form is resized by dragging the border
     ' only call this if the resize is done in code
         
     If InIDE Or gblPrefsFormResizedInCode = True Then
-        Call PrefsForm_Resize_Event
+        Call PrefsFormResizeEvent
     End If
             
     On Error GoTo 0
@@ -4610,7 +4612,7 @@ Form_Resize_Error:
 End Sub
 
 '---------------------------------------------------------------------------------------
-' Procedure : PrefsForm_Resize_Event
+' Procedure : PrefsFormResizeEvent
 ' Author    : beededea
 ' Date      : 10/10/2024
 ' Purpose   : Called mostly by WM_EXITSIZEMOVE, the subclassed (intercepted) message that indicates that the window has just been moved.
@@ -4620,11 +4622,11 @@ End Sub
 '
 '---------------------------------------------------------------------------------------
 '
-Public Sub PrefsForm_Resize_Event()
+Public Sub PrefsFormResizeEvent()
 
     Dim currentFontSize As Long: currentFontSize = 0
     
-    On Error GoTo PrefsForm_Resize_Event_Error
+    On Error GoTo PrefsFormResizeEvent_Error
 
     ' When minimised and a resize is called then simply exit.
     If Me.WindowState = vbMinimized Then Exit Sub
@@ -4641,7 +4643,7 @@ Public Sub PrefsForm_Resize_Event()
 
         'make tab frames invisible so that the control resizing is not apparent to the user
         Call makeFramesInvisible
-        Call resizeControls(Me, prefsControlPositions(), gblPrefsStartWidth, gblPrefsStartHeight, currentFontSize)
+        Call resizeControls(widgetPrefs, prefsControlPositions(), gblPrefsStartWidth, gblPrefsStartHeight, currentFontSize)
 
         Call tweakPrefsControlPositions(Me, gblPrefsStartWidth, gblPrefsStartHeight)
         'Call loadHigherResPrefsImages ' if you want higher res icons then load them here, current max. is 1010 twips or 67 pixels
@@ -4664,9 +4666,9 @@ Public Sub PrefsForm_Resize_Event()
    On Error GoTo 0
    Exit Sub
 
-PrefsForm_Resize_Event_Error:
+PrefsFormResizeEvent_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure PrefsForm_Resize_Event of Form widgetPrefs"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure PrefsFormResizeEvent of Form widgetPrefs"
 
 End Sub
 
@@ -4784,15 +4786,15 @@ makeFramesVisible_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure makeFramesVisible of Form widgetPrefs"
 End Sub
 '---------------------------------------------------------------------------------------
-' Procedure : Form_Moved
+' Procedure : FormMoved
 ' Author    : beededea
 ' Date      : 16/07/2024
 ' Purpose   : Non VB6-standard event caught by subclassing and intercepting the WM_EXITSIZEMOVE (WM_MOVED) event
 '---------------------------------------------------------------------------------------
 '
-Public Sub Form_Moved(sForm As String)
+Public Sub FormMoved(sForm As String)
 
-    On Error GoTo Form_Moved_Error
+    On Error GoTo FormMoved_Error
         
     'passing a form name as it allows us to potentially subclass another form's movement
     Select Case sForm
@@ -4800,14 +4802,14 @@ Public Sub Form_Moved(sForm As String)
             ' call a resize of all controls only when the form resize (by dragging) has completed (mouseUP)
             If pvtPrefsFormResizedByDrag = True Then
             
-                ' test the current form height and width, if the same then it is a form_moved and not a form_resize.
+                ' test the current form height and width, if the same then it is a FormMoved and not a form_resize.
                 If widgetPrefs.Height = widgetPrefsOldHeight And widgetPrefs.Width = widgetPrefsOldWidth Then
                     Exit Sub
                 Else
                     widgetPrefsOldHeight = widgetPrefs.Height
                     widgetPrefsOldWidth = widgetPrefs.Width
                     
-                    Call PrefsForm_Resize_Event
+                    Call PrefsFormResizeEvent
                     pvtPrefsFormResizedByDrag = False
                     
                 End If
@@ -4822,9 +4824,9 @@ Public Sub Form_Moved(sForm As String)
    On Error GoTo 0
    Exit Sub
 
-Form_Moved_Error:
+FormMoved_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Form_Moved of Form widgetPrefs"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure FormMoved of Form widgetPrefs"
 End Sub
 
 '---------------------------------------------------------------------------------------
@@ -5672,7 +5674,7 @@ Private Sub tmrPrefsScreenResolution_Timer()
 '    Dim answer As VbMsgBoxResult: answer = vbNo
 '    Dim answerMsg As String: answerMsg = vbNullString
 '
-'    On Error GoTo tmrPrefsScreenResolution_Timer_Error
+    On Error GoTo tmrPrefsScreenResolution_Timer_Error
 '
 '    ' calls a routine that tests for a change in the monitor upon which the form sits, if so, resizes
 '    If widgetPrefs.IsVisible = False Then Exit Sub
@@ -5693,7 +5695,7 @@ Private Sub tmrPrefsScreenResolution_Timer()
 '        If oldWidgetPrefsLeft <= 0 Then oldWidgetPrefsLeft = widgetPrefs.Left
 '        If oldWidgetPrefsTop <= 0 Then oldWidgetPrefsTop = widgetPrefs.Top
 '
-'        ' test whether the form has been moved (VB6 has no FORM_MOVING nor FORM_MOVED EVENTS)
+'        ' test whether the form has been moved (VB6 has no FORM_MOVING nor FormMoved EVENTS)
 '        If widgetPrefs.Left <> oldWidgetPrefsLeft Or widgetPrefs.Top <> oldWidgetPrefsTop Then
 '
 '               ' note the monitor ID at PrefsForm form_load and store as the prefsFormMonitorID

@@ -176,17 +176,18 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub menuReload_Click()
-    Dim answer As VbMsgBoxResult: answer = vbNo
+'    Dim answer As VbMsgBoxResult: answer = vbNo
     Dim answerMsg As String: answerMsg = vbNullString
 
     On Error GoTo menuReload_Click_Error
     
-    answer = vbYes
+    'answer = vbYes
     answerMsg = "Performing a hard restart now, press OK."
         
     If gblSHIFT_1 = True Then
         gblSHIFT_1 = False
-        answer = msgBoxA(answerMsg, vbExclamation + vbOK, "Performing a hard restart", True, "menuReloadClick")
+        'answer =
+        msgBoxA answerMsg, vbExclamation + vbOK, "Performing a hard restart", True, "menuReloadClick"
         
         Call hardRestart
     Else

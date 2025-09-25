@@ -22,8 +22,8 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private TenShillingsxo As Integer
-Private TenShillingsyo  As Integer
+'Private TenShillingsxo As Integer
+'Private TenShillingsyo  As Integer
 
 Private WithEvents W As cWidgetBase
 Attribute W.VB_VarHelpID = -1
@@ -52,7 +52,7 @@ Private Sub initialisePrivateVars()
 
    On Error GoTo initialisePrivateVars_Error
    
-    TenShillingsxo = 0: TenShillingsyo = 0
+    'TenShillingsxo = 0: TenShillingsyo = 0
 
    On Error GoTo 0
    Exit Sub
@@ -70,7 +70,7 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub Class_Initialize()
-    Dim intervalValue As Integer: intervalValue = 0
+    'Dim intervalValue As Integer: intervalValue = 0
     
     On Error GoTo Class_Initialize_Error
     
@@ -78,7 +78,7 @@ Private Sub Class_Initialize()
     
     mZoom = 0
 
-    TenShillingsxo = 15: TenShillingsyo = 27
+    'TenShillingsxo = 15: TenShillingsyo = 27
 
     Set W = Cairo.WidgetBase
         W.BackColor = -1  'we don't use any BackColor here, transparent
@@ -520,6 +520,8 @@ End Sub
 Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByVal yAbs As Single, ByVal dx_Aligned As Single, ByVal dy_Aligned As Single, UserObj As Object)
     Dim reverseOrigin As Long: reverseOrigin = 0
     
+    On Error GoTo W_Paint_Error
+ 
     reverseOrigin = (mImageHeight / 2) - (mImageHeight)
     
     If gblRichClientEnvironment = "RC6" Then

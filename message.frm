@@ -174,7 +174,7 @@ Private Sub Form_Load()
     ' save the initial positions of ALL the controls on the msgbox form
     Call SaveSizes(Me, msgBoxAControlPositions(), msgBoxACurrentWidth, msgBoxACurrentHeight)
         
-    For Each Ctrl In Me.Controls
+    For Each Ctrl In frmMessage.Controls
          If (TypeOf Ctrl Is CommandButton) Or (TypeOf Ctrl Is textBox) Or (TypeOf Ctrl Is FileListBox) Or (TypeOf Ctrl Is Label) Or (TypeOf Ctrl Is ComboBox) Or (TypeOf Ctrl Is CheckBox) Or (TypeOf Ctrl Is OptionButton) Or (TypeOf Ctrl Is Frame) Or (TypeOf Ctrl Is ListBox) Then
             If gblPrefsFont <> "" Then Ctrl.Font.Name = gblPrefsFont
            

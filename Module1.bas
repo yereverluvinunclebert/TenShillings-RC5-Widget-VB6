@@ -299,7 +299,7 @@ Private Declare Function PathIsDirectory Lib "shlwapi" Alias "PathIsDirectoryA" 
  
 Public gblStartup As String
 Public gblWidgetFunctions As String
-Public gblSmoothSecondHand As String
+'Public gblSmoothSecondHand As String
 
 Public gblPointerAnimate As String
 Public gblSamplingInterval As String
@@ -447,7 +447,7 @@ Public gblSHIFT_1 As Boolean
 ' other globals
 Public gblMinutesToHide As Integer
 Public gblAspectRatio As String
-Public gblOldSettingsModificationTime  As Date
+'Public gblOldSettingsModificationTime  As Date
 Public gblWindowLevelWasChanged As Boolean
 
 ' Flag for debug mode '.06 DAEB 19/04/2021 common.bas moved to the common area so that it can be used by each of the utilities
@@ -473,10 +473,10 @@ Public gblRichClientEnvironment As String
 Public widgetPrefsOldHeight As Long
 Public widgetPrefsOldWidth As Long
 
-Public tzDelta As Long
-Public tzDelta1 As Long
+'Public tzDelta As Long
+'Public tzDelta1 As Long
 
-Public msgBoxADynamicSizingFlg As Boolean
+'Public msgBoxADynamicSizingFlg As Boolean
 
 
 '
@@ -583,7 +583,7 @@ End Function
 '---------------------------------------------------------------------------------------
 '
 Public Sub showLicence(ByVal licenceState As Integer)
-    Dim slicence As String: slicence = "0"
+    'Dim slicence As String: slicence = "0"
     On Error GoTo showLicence_Error
     ''If gblDebugFlg = 1  Then DebugPrint "%" & "showLicence"
     
@@ -1755,7 +1755,7 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Public Sub getKeyPress(ByVal KeyCode As Integer, ByVal Shift As Integer)
-    Dim answer As VbMsgBoxResult: answer = vbNo
+    'Dim answer As VbMsgBoxResult: answer = vbNo
     Dim answerMsg As String: answerMsg = vbNullString
    
     On Error GoTo getkeypress_Error
@@ -1779,9 +1779,10 @@ Public Sub getKeyPress(ByVal KeyCode As Integer, ByVal Shift As Integer)
 
         Case 116 ' Performing a hard restart message box shift+F5
             If Shift = 1 Then
-                answer = vbYes
+                'answer = vbYes
                 answerMsg = "Performing a hard restart now, press OK."
-                answer = msgBoxA(answerMsg, vbExclamation + vbOK, "Performing a hard restart", True, "getKeypressHardRestart1")
+                'answer =
+                msgBoxA answerMsg, vbExclamation + vbOK, "Performing a hard restart", True, "getKeypressHardRestart1"
                 Call hardRestart
             Else
                 Call reloadProgram 'f5 refresh button as per all browsers
@@ -1929,7 +1930,7 @@ Private Sub checkScreenEdgeBottom()
     Dim widgetCurrentHeightPx As Long: widgetCurrentHeightPx = 0
     Dim formMidPointY As Long: formMidPointY = 0
     Dim widgetTopY As Long: widgetTopY = 0
-    Dim widgetLeftX As Long: widgetLeftX = 0
+    'Dim widgetLeftX As Long: widgetLeftX = 0
     Dim screenEdge As Long: screenEdge = 0
     
     On Error GoTo checkScreenEdgeBottom_Error
@@ -1970,7 +1971,7 @@ Private Sub checkScreenEdgeRight()
 
     Dim widgetCurrentWidthPx As Long: widgetCurrentWidthPx = 0
     Dim formMidPointX As Long: formMidPointX = 0
-    Dim widgetBottomY As Long: widgetBottomY = 0
+    'Dim widgetBottomY As Long: widgetBottomY = 0
     Dim widgetLeftX As Long: widgetLeftX = 0
     Dim screenEdge As Long: screenEdge = 0
     
@@ -2008,7 +2009,7 @@ Private Sub checkScreenEdgeLeft()
 
     Dim widgetCurrentWidthPx As Long: widgetCurrentWidthPx = 0
     Dim formMidPointX As Long: formMidPointX = 0
-    Dim widgetBottomY As Long: widgetBottomY = 0
+    'Dim widgetBottomY As Long: widgetBottomY = 0
     Dim widgetRightX As Long: widgetRightX = 0
     Dim screenEdge As Long: screenEdge = 0
     
@@ -2046,7 +2047,7 @@ Private Sub checkScreenEdgeTop()
     Dim widgetCurrentHeightPx As Long: widgetCurrentHeightPx = 0
     Dim formMidPointY As Long: formMidPointY = 0
     Dim widgetBottomY As Long: widgetBottomY = 0
-    Dim widgetTopY As Long: widgetTopY = 0
+    'Dim widgetTopY As Long: widgetTopY = 0
     Dim screenEdge As Long: screenEdge = 0
     
     On Error GoTo checkScreenEdgeTop_Error
@@ -2328,7 +2329,7 @@ End Sub
 Public Sub readPrefsPosition()
 
     'Dim prefsMonitorStruct As UDTMonitor
-    Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
+    'Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
             
     On Error GoTo readPrefsPosition_Error
 
@@ -2398,7 +2399,7 @@ End Sub
 '
 Public Sub writePrefsPositionAndSize()
      
-    Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
+    'Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
     
     On Error GoTo writePrefsPositionAndSize_Error
 
@@ -2591,7 +2592,7 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Public Sub hardRestart()
-    Dim answer As VbMsgBoxResult: answer = vbNo
+    'Dim answer As VbMsgBoxResult: answer = vbNo
     Dim answerMsg As String: answerMsg = vbNullString
     Dim thisCommand As String: thisCommand = vbNullString
     
@@ -2606,7 +2607,8 @@ Public Sub hardRestart()
     Else
         'answer = MsgBox(thisCommand & " is missing", vbOKOnly + vbExclamation)
         answerMsg = thisCommand & " is missing"
-        answer = msgBoxA(answerMsg, vbOKOnly + vbExclamation, "Restart Error Notification", False)
+        ' answer =
+        msgBoxA answerMsg, vbOKOnly + vbExclamation, "Restart Error Notification", False
     End If
 
    On Error GoTo 0
@@ -2912,3 +2914,4 @@ gblWidgetSize_Error:
      MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gblWidgetSize of Module Module1"
 
 End Property
+

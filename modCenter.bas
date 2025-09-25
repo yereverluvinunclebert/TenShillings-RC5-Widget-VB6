@@ -30,10 +30,10 @@ Private Declare Function GetClassName Lib "user32" Alias "GetClassNameA" (ByVal 
 Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As Long)
 Private Declare Function SetWindowPos Lib "user32" (ByVal hWnd As Long, ByVal hWndInsertAfter As Long, ByVal x As Long, ByVal y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
 
-Private Const SWP_FRAMECHANGED = &H20
-Private Const SWP_NOSIZE = &H1
-Private Const WM_CREATE = &H1
-Private Const WH_CALLWNDPROC = 4
+Private Const SWP_FRAMECHANGED As Long = &H20
+Private Const SWP_NOSIZE As Long = &H1
+Private Const WM_CREATE As Long = &H1
+Private Const WH_CALLWNDPROC As Long = 4
 
 Private lHook As Long
 

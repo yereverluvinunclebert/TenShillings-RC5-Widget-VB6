@@ -141,7 +141,7 @@ End Sub
 '
 Private Sub tmrScreenResolution_Timer()
 
-    Dim resizeProportion As Single: resizeProportion = 0
+'    Dim resizeProportion As Single: resizeProportion = 0
     
     On Error GoTo tmrScreenResolution_Timer_Error
 

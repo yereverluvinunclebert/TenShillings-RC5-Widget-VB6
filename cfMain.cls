@@ -32,10 +32,10 @@ Attribute TenShillingsForm.VB_VarHelpID = -1
 
 Public FX As Long   ' available externally, to allow the gaugeForm to be moved, need to add set/let for these public vars
 Public FY As Long
-Public FZ As Single
+'Public FZ As Single
 
-Public licenceFormX As Long
-Public licenceFormY As Long
+'Public licenceFormX As Long
+'Public licenceFormY As Long
 ' Public licenceFormZ As Single
 
 Private WithEvents btnAccept As cwButton
@@ -44,7 +44,7 @@ Private WithEvents btnDecline As cwButton
 Attribute btnDecline.VB_VarHelpID = -1
 Private WithEvents textBox As cwTextBox
 Attribute textBox.VB_VarHelpID = -1
-Private lblDeclineOrNot As cwLabel
+'Private lblDeclineOrNot As cwLabel
  
 
 '---------------------------------------------------------------------------------------
@@ -273,7 +273,7 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Public Sub initAndCreateLicenceForm(Optional ByVal Caption As String)
-    
+    Dim lblDeclineOrNot As cwLabel
     Dim licenceFormWidth As Long: licenceFormWidth = 0
     Dim licenceFormHeight As Long: licenceFormHeight = 0
     Dim licenceWidgetWidth As Long: licenceWidgetWidth = 0
@@ -416,7 +416,7 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub btnAccept_Click()
-    Dim answer As VbMsgBoxResult: answer = vbNo
+    'Dim answer As VbMsgBoxResult: answer = vbNo
     Dim fileToPlay As String: fileToPlay = vbNullString
     Dim slicence As String: slicence = "0"
     
@@ -428,7 +428,7 @@ Private Sub btnAccept_Click()
         playSound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
     End If
 
-    answer = msgBoxA("User accepted licence, thankyou.", vbOKOnly + vbExclamation, "Licence Acceptance", True, "btnAcceptClick")
+    msgBoxA "User accepted licence, thankyou.", vbOKOnly + vbExclamation, "Licence Acceptance", True, "btnAcceptClick"
     
     slicence = "1"
     sPutINISetting "Software\TenShillings", "licence", slicence, gblSettingsFile
@@ -456,13 +456,13 @@ End Sub
 '
 Private Sub btnDecline_Click()
     
-    Dim answer As VbMsgBoxResult: answer = vbNo
+    'Dim answer As VbMsgBoxResult: answer = vbNo
     Dim slicence As String: slicence = "0"
         
     On Error GoTo btnDecline_Click_Error
 
     'answer = MsgBox("Licence declined, please destroy your copy of this widget and its documentation.", vbYes)
-    answer = msgBoxA("Licence declined, please destroy your copy of this widget and its documentation. This widget will now unload.", vbOKOnly + vbExclamation, "Licence Declined", False)
+    msgBoxA "Licence declined, please destroy your copy of this widget and its documentation. This widget will now unload.", vbOKOnly + vbExclamation, "Licence Declined", False
     slicence = "0"
     sPutINISetting "Software\TenShillings", "licence", slicence, gblSettingsFile
 

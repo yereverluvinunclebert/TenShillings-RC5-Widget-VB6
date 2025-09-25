@@ -79,7 +79,7 @@ Private rcVS         As RECT 'coordinates for Virtual Screen
 ' vars to obtain correct screen width (to correct VB6 bug) STARTS
 Public Const HORZRES As Integer = 8
 Public Const VERTRES As Integer = 10
-Public Const DESKTOPHORZRES As Integer = &H76
+'Public Const DESKTOPHORZRES As Integer = &H76
 
 Public gblScreenTwipsPerPixelX As Long ' .07 DAEB 26/04/2021 common.bas changed to use pixels alone, removed all unnecessary twip conversion
 Public gblScreenTwipsPerPixelY As Long ' .07 DAEB 26/04/2021 common.bas changed to use pixels alone, removed all unnecessary twip conversion
@@ -309,7 +309,7 @@ Public Function cWidgetFormScreenProperties(ByVal frm As cWidgetForm, ByRef moni
     Dim hMonitor As Long: hMonitor = 0
     Dim MONITORINFO As tagMONITORINFO
     Dim Frect As RECT
-    Dim ad As Double: ad = 0
+    'Dim ad As Double: ad = 0
     
     On Error GoTo cWidgetFormScreenProperties_Error
    
@@ -371,7 +371,7 @@ Public Function formScreenProperties(ByVal frm As Form, ByRef monitorID As Long)
     Dim hMonitor As Long: hMonitor = 0
     Dim MONITORINFO As tagMONITORINFO
     Dim Frect As RECT
-    Dim ad As Double: ad = 0
+    'Dim ad As Double: ad = 0
     
     On Error GoTo formScreenProperties_Error
    
@@ -447,8 +447,8 @@ Public Sub positionPrefsByMonitorSize()
     Dim monitorStructHeightTwips As Long: monitorStructHeightTwips = 0
     Dim resizeProportion As Double: resizeProportion = 0
     Dim newPrefsHeight As Single: newPrefsHeight = 0
-    Dim answer As VbMsgBoxResult: answer = vbNo
-    Dim answerMsg As String: answerMsg = vbNullString
+    'Dim answer As VbMsgBoxResult: answer = vbNo
+    'Dim answerMsg As String: answerMsg = vbNullString
     
     ' calls a routine that tests for a change in the monitor upon which the form sits, if so, resizes
     On Error GoTo positionPrefsByMonitorSize_Error
@@ -569,7 +569,7 @@ positionPrefsByMonitorSize_Error:
 Public Function fVirtualScreenWidth(ByRef inPixels As Boolean) As Long
     ' This works even on Tablet PC.  The problem is: when the tablet screen is rotated, the "Screen" object of VB doesn't pick it up.
     Dim Pixels As Long: Pixels = 0
-    Const SM_CXVIRTUALSCREEN = 78
+    Const SM_CXVIRTUALSCREEN As Long = 78
     '
    On Error GoTo fVirtualScreenWidth_Error
 

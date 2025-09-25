@@ -6,7 +6,7 @@ Attribute VB_Name = "modMain"
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 
-'@IgnoreModule IntegerDataType, ModuleWithoutFolder
+'@IgnoreModule BooleanAssignedInIfElse, IntegerDataType, ModuleWithoutFolder
 
 
 Option Explicit
@@ -80,7 +80,7 @@ End Sub
 Public Sub mainRoutine(ByVal restart As Boolean)
 
     Dim extractCommand As String: extractCommand = vbNullString
-    Dim thisPSDFullPath As String: thisPSDFullPath = vbNullString
+    'Dim thisPSDFullPath As String: thisPSDFullPath = vbNullString
     Dim licenceState As Integer: licenceState = 0
 
     On Error GoTo main_routine_Error
@@ -90,7 +90,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     
     gblStartupFlg = True
     gblWidgetName = "TenShillings Widget"
-    thisPSDFullPath = App.Path & "\Res\TenShillings Widget VB6.psd"
+    'thisPSDFullPath = App.Path & "\Res\TenShillings Widget VB6.psd"
     
     extractCommand = Command$ ' capture any parameter passed, remove if a soft reload
     If restart = True Then extractCommand = vbNullString
@@ -221,7 +221,7 @@ Private Sub loadPreferenceForm()
     If widgetPrefs.IsLoaded = False Then
         Load widgetPrefs
         gblPrefsFormResizedInCode = True
-        Call widgetPrefs.PrefsForm_Resize_Event
+        Call widgetPrefs.PrefsFormResizeEvent
     End If
 
    On Error GoTo 0
@@ -452,7 +452,7 @@ Private Sub initialiseGlobalVars()
     gblDebugFlg = 0
     gblMinutesToHide = 0
     gblAspectRatio = vbNullString
-    gblOldSettingsModificationTime = #1/1/2000 12:00:00 PM#
+'    gblOldSettingsModificationTime = #1/1/2000 12:00:00 PM#
     gblCodingEnvironment = vbNullString
     gblRichClientEnvironment = vbNullString
 
@@ -598,6 +598,8 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
         menuForm.mnuEditWidget.Visible = False
     End If
     
+    '  fMain.TenShillingsForm.ShowInTaskbar = Not (gblShowTaskbar = "0") ' no!
+    
     If gblShowTaskbar = "0" Then
         fMain.TenShillingsForm.ShowInTaskbar = False
     Else
@@ -607,7 +609,6 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     ' set the visibility and characteristics of the interactive areas
     ' the alpha is already set to zero for all layers found in the PSD, we now turn them back on as we require
         
-    
     If gblDebug = "1" Then
         #If TWINBASIC Then
             If gblDefaultTBEditor <> vbNullString Then thisEditor = gblDefaultTBEditor
@@ -620,13 +621,6 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     Else
         menuForm.mnuEditWidget.Visible = False
     End If
-    
-    If gblShowTaskbar = "0" Then
-        fMain.TenShillingsForm.ShowInTaskbar = False
-    Else
-        fMain.TenShillingsForm.ShowInTaskbar = True
-    End If
-    
         
    ' set the lock state of the widget
    If gblPreventDragging = "0" Then
@@ -1005,7 +999,7 @@ Private Sub configureTimers()
 
     On Error GoTo configureTimers_Error
     
-    gblOldSettingsModificationTime = FileDateTime(gblSettingsFile)
+'    gblOldSettingsModificationTime = FileDateTime(gblSettingsFile)
 
     frmTimer.tmrScreenResolution.Enabled = True
     frmTimer.unhideTimer.Enabled = True
@@ -1354,3 +1348,5 @@ End Function
 '
 '
 'End Sub
+
+
