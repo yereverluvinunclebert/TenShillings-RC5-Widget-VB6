@@ -24,24 +24,24 @@ Private Type RECT
     Bottom As Long ' This is +1 (bottom - top = height)
 End Type
 '
-Private Type DRAWITEMSTRUCT
-    CtlType As Long
-    CtlID As Long
-    ItemID As Long
-    ItemAction As Long
-    ItemState As Long       ' Bitflags: ODS_COMBOBOXEDIT    = &h1000& (edit control being drawn).
-                            '           ODS_SELECTED        = &h0001&
-                            '           ODS_DISABLED        = &h0004&
-                            '           ODS_FOCUS           = &h0010&
-                            '           ODS_NOACCEL         = &h0100&
-                            '           ODS_NOFOCUSRECT     = &h0200&
-                            '           Others, but they don't apply to combobox.
-                            '
-    hWndItem As Long        ' hWnd to the ComboBox.
-    hDC As Long
-    rcItem As RECT
-    ItemData As Long
-End Type
+'Private Type DRAWITEMSTRUCT
+'    CtlType As Long
+'    CtlID As Long
+'    ItemID As Long
+'    ItemAction As Long
+'    ItemState As Long       ' Bitflags: ODS_COMBOBOXEDIT    = &h1000& (edit control being drawn).
+'                            '           ODS_SELECTED        = &h0001&
+'                            '           ODS_DISABLED        = &h0004&
+'                            '           ODS_FOCUS           = &h0010&
+'                            '           ODS_NOACCEL         = &h0100&
+'                            '           ODS_NOFOCUSRECT     = &h0200&
+'                            '           Others, but they don't apply to combobox.
+'                            '
+'    hWndItem As Long        ' hWnd to the ComboBox.
+'    hDC As Long
+'    rcItem As RECT
+'    ItemData As Long
+'End Type
 '
 Private Type COMBOBOXINFOSTRUCTURE
     cbSize          As Long
@@ -144,7 +144,7 @@ Private Function ComboBox_Proc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal wPa
 '    Dim oThePen         As Long
 '    Dim iRet            As Long
 '    Dim sText           As String
-    Static sPrevText    As String
+'    Static sPrevText    As String
     Dim cbo             As Object
     '
 '    Const WM_DRAWITEM           As Long = &H2B&

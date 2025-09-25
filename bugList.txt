@@ -9,25 +9,34 @@ removed manifest
 ' help CHM
 ' setup2go create setup.exe
 
-visual styles = false removed from labels and images
+' The tooltip bug where the tooltip shape and background are different, visual styles = false removed from labels and images, removed the manifest to obtain normal styles
 
 TODO
+====
+
+' rubberduck 10/-
+
+' mz Tools code analysis
+
+' update the setup 2go
 
 ' create TB version
-' The tooltip bug where the tooltip shape and background are different
-      ' I can live with the difference, it is only colour and shape
-      ' the shape is not a fault of TB as on a small TB form it works as expected, round!
-      ' So, if I create a stripped down simple RC widget with nothing much in it, stripping out components we may find out what causes the square  shape in a RC form
-      ' note that it does not occur in a non-RC form such as firecall...
-      ' Multi-line tooltips adopt the square format, whilst the single line retain the rounded balloon.
-      ' this is a feature of manifest equipped program that automatically enables the default system styles
-      ' might be possible to apply older system styles via a manifest setting. Need to search for examples on VBforum and other sites, there are examples
-      '
-      ' This is not a real problem for the program unless a manifest is required. It will display in the older mode.
 
-update the setup 2go
+' Test XP visual styles with a manifest
 
-Add the spawn menu option for a future template for other gauges and code when it is ready to use
+ First, you’ll need to add this to your manifest file before embedding:  (lines are numbered to combat word wrap)
+
+    <dependency>
+    <dependentAssembly>
+    <assemblyIdentity language=”*” name=”Microsoft.Windows.Common-Controls” processorArchitecture=”X86" publicKeyToken=”6595b64144ccf1df” type=”win32" version=”6.0.0.0" />
+    </dependentAssembly>
+    </dependency>
+
+ Just tack it onto the end BEFORE the last line “</assembly>”
+
+
+
+' Add the spawn menu option for a future template for other gauges and code when it is ready to use
 
 ' test usage of RC for monitor awareness - wip
 '      adjust Form Position on startup placing form onto Correct Monitor when placed off screen due to
@@ -40,10 +49,6 @@ Add the spawn menu option for a future template for other gauges and code when i
 ' adjustFormPositionToCorrectMonitor - licence form
 ' adjustFormPositionToCorrectMonitor - about form
 ' adjustFormPositionToCorrectMonitor - help form
-
-' rubberduck
-' mz Tools code analysis
-
 
 ' -oOo-
 

@@ -60,7 +60,7 @@ Private lblDeclineOrNot As cwLabel
 '
 '---------------------------------------------------------------------------------------
 '
-Public Sub initAndCreateTenShillingsForm(ByVal x As Long, ByVal y As Long, Optional ByVal dx As Long, Optional ByVal dy As Long, Optional ByVal Caption As String)
+Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByVal dy As Long, Optional ByVal Caption As String)
     Dim imageHeight As Long: imageHeight = 0
     Dim imageWidth As Long: imageWidth = 0
     Dim tenShillingsFormWidth As Long: tenShillingsFormWidth = 0
@@ -134,7 +134,7 @@ End Sub
 ' Purpose   : Initialise and create the about form only, add the about widget based on the about class, to the form
 '---------------------------------------------------------------------------------------
 '
-Public Sub initAndCreateAboutForm(ByVal x As Long, ByVal y As Long, Optional ByVal dx As Long, Optional ByVal dy As Long, Optional ByVal Caption As String)
+Public Sub initAndCreateAboutForm(Optional ByVal Caption As String)
     
     Dim aboutFormWidth As Long: aboutFormWidth = 0
     Dim aboutFormHeight As Long: aboutFormHeight = 0
@@ -201,7 +201,7 @@ End Sub
 ' Purpose   : Initialise and create the Help form only, add the Help widget based on the Help class, to the form
 '---------------------------------------------------------------------------------------
 '
-Public Sub initAndCreateHelpForm(ByVal x As Long, ByVal y As Long, Optional ByVal dx As Long, Optional ByVal dy As Long, Optional ByVal Caption As String)
+Public Sub initAndCreateHelpForm(Optional ByVal Caption As String)
     
     Dim helpFormWidth As Long: helpFormWidth = 0
     Dim helpFormHeight As Long: helpFormHeight = 0
@@ -272,7 +272,7 @@ End Sub
 '             as well as two RC cwButton widgets for the accept and decline buttons
 '---------------------------------------------------------------------------------------
 '
-Public Sub initAndCreateLicenceForm(ByVal x As Long, ByVal y As Long, Optional ByVal dx As Long, Optional ByVal dy As Long, Optional ByVal Caption As String)
+Public Sub initAndCreateLicenceForm(Optional ByVal Caption As String)
     
     Dim licenceFormWidth As Long: licenceFormWidth = 0
     Dim licenceFormHeight As Long: licenceFormHeight = 0

@@ -1077,19 +1077,19 @@ Private Sub createRCFormsOnCurrentDisplay()
     imageHeight = thisSrf.Height
 
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateTenShillingsForm(.WorkLeft, .WorkTop, imageWidth, imageHeight, gblWidgetName)
+      Call fMain.initAndCreateTenShillingsForm(imageWidth, imageHeight, gblWidgetName)
     End With
 
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateAboutForm(.WorkLeft, .WorkTop, 1000, 1000, gblWidgetName)
+      Call fMain.initAndCreateAboutForm(gblWidgetName)
     End With
     
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateHelpForm(.WorkLeft, .WorkTop, 1000, 1000, gblWidgetName)
+      Call fMain.initAndCreateHelpForm(gblWidgetName)
     End With
 
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateLicenceForm(.WorkLeft, .WorkTop, 1000, 1000, gblWidgetName)
+      Call fMain.initAndCreateLicenceForm(gblWidgetName)
     End With
     
     On Error GoTo 0

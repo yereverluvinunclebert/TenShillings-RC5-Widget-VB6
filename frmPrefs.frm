@@ -2290,46 +2290,6 @@ optPrefsTooltips_Click_Error:
     
 End Sub
 
-'
-''---------------------------------------------------------------------------------------
-'' Procedure : chkEnableChimes_Click
-'' Author    : beededea
-'' Date      : 18/02/2025
-'' Purpose   :
-''---------------------------------------------------------------------------------------
-''
-'Private Sub chkEnableChimes_Click()
-'   On Error GoTo chkEnableChimes_Click_Error
-'
-'    btnSave.Enabled = True ' enable the save button
-'
-'   On Error GoTo 0
-'   Exit Sub
-'
-'chkEnableChimes_Click_Error:
-'
-'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkEnableChimes_Click of Form widgetPrefs"
-'End Sub
-
-''---------------------------------------------------------------------------------------
-'' Procedure : chkNumericDisplayRotation_Click
-'' Author    : beededea
-'' Date      : 18/02/2025
-'' Purpose   :
-''---------------------------------------------------------------------------------------
-''
-'Private Sub chkNumericDisplayRotation_Click()
-'   On Error GoTo chkNumericDisplayRotation_Click_Error
-'
-'    btnSave.Enabled = True ' enable the save button
-'
-'   On Error GoTo 0
-'   Exit Sub
-'
-'chkNumericDisplayRotation_Click_Error:
-'
-'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkNumericDisplayRotation_Click of Form widgetPrefs"
-'End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : cmbMultiMonitorResize_Click
@@ -2371,45 +2331,8 @@ cmbMultiMonitorResize_Click_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure cmbMultiMonitorResize_Click of Form widgetPrefs"
 End Sub
 
-''---------------------------------------------------------------------------------------
-'' Procedure : chkVolumeBoost_Click
-'' Author    : beededea
-'' Date      : 18/02/2025
-'' Purpose   :
-''---------------------------------------------------------------------------------------
-''
-'Private Sub chkVolumeBoost_Click()
-'   On Error GoTo chkVolumeBoost_Click_Error
-'
-'    btnSave.Enabled = True ' enable the save button
-'
-'   On Error GoTo 0
-'   Exit Sub
-'
-'chkVolumeBoost_Click_Error:
-'
-'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkVolumeBoost_Click of Form widgetPrefs"
-'End Sub
 
-'---------------------------------------------------------------------------------------
-' Procedure : chkEnableTicks_Click
-' Author    : beededea
-' Date      : 18/02/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Private Sub chkEnableTicks_Click()
-   On Error GoTo chkEnableTicks_Click_Error
 
-    btnSave.Enabled = True ' enable the save button
-
-   On Error GoTo 0
-   Exit Sub
-
-chkEnableTicks_Click_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure chkEnableTicks_Click of Form widgetPrefs"
-End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : chkShowHelp_Click
@@ -4565,43 +4488,43 @@ populatePrefsComboBoxes_Error:
                 
 End Sub
 
-    
-'---------------------------------------------------------------------------------------
-' Procedure : readFileWriteComboBox
-' Author    : beededea
-' Date      : 28/07/2023
-' Purpose   : Open and load the Array with the timezones text File
-'---------------------------------------------------------------------------------------
 '
-Private Sub readFileWriteComboBox(ByRef thisComboBox As Control, ByVal thisFileName As String)
-    Dim strArr() As String
-    Dim lngCount As Long: lngCount = 0
-    Dim lngIdx As Long: lngIdx = 0
-        
-    On Error GoTo readFileWriteComboBox_Error
+''---------------------------------------------------------------------------------------
+'' Procedure : readFileWriteComboBox
+'' Author    : beededea
+'' Date      : 28/07/2023
+'' Purpose   : Open and load the Array with the timezones text File
+''---------------------------------------------------------------------------------------
+''
+'Private Sub readFileWriteComboBox(ByRef thisComboBox As Control, ByVal thisFileName As String)
+'    Dim strArr() As String
+'    Dim lngCount As Long: lngCount = 0
+'    Dim lngIdx As Long: lngIdx = 0
+'
+'    On Error GoTo readFileWriteComboBox_Error
+'
+'    If fFExists(thisFileName) = True Then
+'       ' the files must be DOS CRLF delineated
+'       Open thisFileName For Input As #1
+'           strArr() = Split(Input(LOF(1), 1), vbCrLf)
+'       Close #1
+'
+'       lngCount = UBound(strArr)
+'
+'       thisComboBox.Clear
+'       For lngIdx = 0 To lngCount
+'           thisComboBox.AddItem strArr(lngIdx)
+'       Next lngIdx
+'    End If
+'
+'   On Error GoTo 0
+'   Exit Sub
+'
+'readFileWriteComboBox_Error:
+'
+'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure readFileWriteComboBox of Form widgetPrefs"
 
-    If fFExists(thisFileName) = True Then
-       ' the files must be DOS CRLF delineated
-       Open thisFileName For Input As #1
-           strArr() = Split(Input(LOF(1), 1), vbCrLf)
-       Close #1
-    
-       lngCount = UBound(strArr)
-    
-       thisComboBox.Clear
-       For lngIdx = 0 To lngCount
-           thisComboBox.AddItem strArr(lngIdx)
-       Next lngIdx
-    End If
-
-   On Error GoTo 0
-   Exit Sub
-
-readFileWriteComboBox_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure readFileWriteComboBox of Form widgetPrefs"
-
-End Sub
+'End Sub
 
 '
 '---------------------------------------------------------------------------------------
@@ -5161,10 +5084,10 @@ Private Sub btnClose_MouseMove(Button As Integer, Shift As Integer, x As Single,
                   TTIconInfo, "Help on the Close Buttton", , , , True
 End Sub
 
-Private Sub btnDefaultVB6Editor_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnDefaultEditor.hWnd, "Clicking on this button will cause a file explorer window to appear allowing you to select a Visual Basic Project (VBP) file for opening via the right click menu edit option. Once selected the adjacent text field will be automatically filled with the chosen path and file.", _
-                  TTIconInfo, "Help on the VBP File Explorer Button", , , , True
-End Sub
+'Private Sub btnDefaultVB6Editor_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+'    If gblPrefsTooltips = "0" Then CreateToolTip btnDefaultEditor.hWnd, "Clicking on this button will cause a file explorer window to appear allowing you to select a Visual Basic Project (VBP) file for opening via the right click menu edit option. Once selected the adjacent text field will be automatically filled with the chosen path and file.", _
+'                  TTIconInfo, "Help on the VBP File Explorer Button", , , , True
+'End Sub
 
 Private Sub btnDisplayScreenFont_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If gblPrefsTooltips = "0" Then CreateToolTip btnDisplayScreenFont.hWnd, "This is the font selector button, if you click it the font selection window will pop up for you to select your chosen font. When resizing the main widget the display screen font size will change in relation to widget size. The base font determines the initial size, the resulting resized font will dynamically change. ", _
@@ -5293,9 +5216,9 @@ Private Sub fraDevelopment_MouseMove(Button As Integer, Shift As Integer, x As S
     If gblPrefsTooltips = "0" Then CreateToolTip fraDevelopment.hWnd, "This tab contains elements that will assist in debugging and developing this program further. ", _
                   TTIconInfo, "Help on the Development Tab", , , , True
 End Sub
-Private Sub fraDefaultVB6Editor_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    lblGitHub.ForeColor = &H80000012
-End Sub
+'Private Sub fraDefaultVB6Editor_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+'    lblGitHub.ForeColor = &H80000012
+'End Sub
 Private Sub fraDevelopmentInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If gblPrefsTooltips = "0" Then CreateToolTip fraDevelopmentInner.hWnd, "This tab contains elements that will assist in debugging and developing this program further. ", _
                   TTIconInfo, "Help on the Development Tab", , , , True
