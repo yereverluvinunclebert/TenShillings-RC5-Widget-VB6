@@ -455,6 +455,9 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
         gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100) ' store the value dynamically
         sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
         
+        ' saves the current ratios for the RC form
+        Call saveRCFormCurrentSizeRatios
+        
         If widgetPrefs.IsVisible = True Then
             widgetPrefs.sliWidgetSize.Value = Val(gblWidgetSize)
         End If

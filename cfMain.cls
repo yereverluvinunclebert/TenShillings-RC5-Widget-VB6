@@ -612,7 +612,7 @@ Private Sub TenShillingsForm_MouseUp(Button As Integer, Shift As Integer, x As S
     ' save the form x,y position whenever the globe/form is dragged
     Call saveMainRCFormPosition
 
-    Call positionRCFormByMonitorSize
+    Call resizeLocateRCFormByMoveToNewMonitor
 
     On Error GoTo 0
     Exit Sub

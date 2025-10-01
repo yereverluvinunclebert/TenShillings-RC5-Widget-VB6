@@ -4,7 +4,7 @@ Rotation
 HTML text and images
 
 Gutter fixed
-removed manifest
+removed manifest for TB
 
 ' help CHM
 ' setup2go create setup.exe
@@ -15,44 +15,27 @@ removed manifest
 
 ' update the setup 2go
 
+' rubberduck 10/-
+
+' test prefs form size on a first start, should be 0.5 on a screen that is bigger than twice the form height
+
+' setup2go create setup.exe
+
+' create and test TB version
+
+' test high DPI on 1st startup
+
+' test DPI awareness on multiple monitors, with a manifest, allows interception of the WM_DPICHANGED message which then allows the code to be called 
+'   that can auto-scale the whole form. This requires auto-scaling being enabled per monitor with different scaling on each screen.
+
 TODO
 ====
 
-' test prefs form size on a first start, should be 0.5
+' enable save button after a prefs form resize
 
-' rubberduck 10/-
+' "surround" code in resize - remove
 
-' create TB version
-
-' Test XP visual styles with a manifest
-
- First, you’ll need to add this to your manifest file before embedding:  (lines are numbered to combat word wrap)
-
-    <dependency>
-    <dependentAssembly>
-    <assemblyIdentity language=”*” name=”Microsoft.Windows.Common-Controls” processorArchitecture=”X86" publicKeyToken=”6595b64144ccf1df” type=”win32" version=”6.0.0.0" />
-    </dependentAssembly>
-    </dependency>
-
- Just tack it onto the end BEFORE the last line “</assembly>”
-
- globals to properties?
-
-' test usage of RC for monitor awareness - wip
-'      adjust Form Position on startup placing form onto Correct Monitor when placed off screen due to
-'               monitor/resolution changes.
-
-' https://www.vbforums.com/showthread.php?900892-VB6-Simple-way-to-make-your-VB6-application-quot-Per-Monitor-DPI-Aware-quot
-
-' adjustFormPositionToCorrectMonitor, make it work and observe the result as per FCW - wip
-' adjustFormPositionToCorrectMonitor - prefs form
-' adjustFormPositionToCorrectMonitor - licence form
-' adjustFormPositionToCorrectMonitor - about form
-' adjustFormPositionToCorrectMonitor - help form
-
-' -oOo-
-
-' Later tasks after testing
+' globals to properties? think, test and try
 
 ' test the icon sizes on 32bit Win7, XP and ReactOS, find out if 48x48 causes a crash
 ' 32x32 (24 bit)
@@ -61,10 +44,40 @@ TODO
 ' 32x32 (32 bit)
 ' 16x16 (32 bit)
 
-' test on ReactOS
-
 ' patch a 256 bit icon into the VB6 binary
 ' https://www.vbforums.com/showthread.php?858347-RESOLVED-How-to-create-and-connect-quality-icon-group-to-your-VB6-app
+
+' windevlib - observe, test and determine whether to use, implications
+
+' test on 32bit win 7
+' test on XP
+' test on ReactOS
+
+' if the code fails on VB6 then we can start by adding some API checks and removing functionality
+' https://www.vbforums.com/showthread.php?896944-VB6-QUESTION-Check-if-API-exists
+
+Final Tasks
+===========
+
+' credits update
+' XML
+' setup2go
+' Github release
+
+Not going to do (or much, much later)
+====================================
+
+' add functionality to the prefs to allow autoscaling dependent upon different monitor scaling factors using WM_DPICHANGED? Think and decide.
+'    we can already size a form per monitor, all we would need is to do the same when a DPI change is detected.
+'    this would help as the form resizing would occur as soon as the form leaves one monitor for another.
+'    the downside is that it would only work when DPI is different on both monitors
+'
+'    if we implemented this would it be significantly better than the current size by monitor?
+'    only because it would occur as soon the form is slotted over to the second monitor
+
+' an alternative would be to use a wm message that indicates when a form is being moved, then we would compare the form current position to the
+'    current monitor height and width or check whether it is within the bounds of the 2nd monitor then trigger a form resize.
+'    for the moment this is quite a big bit work and not high enough priority...
 
 
 

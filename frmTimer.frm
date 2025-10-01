@@ -152,7 +152,7 @@ Private Sub tmrScreenResolution_Timer()
     gblVirtualScreenHeightPixels = fVirtualScreenHeight(True)
 
     ' calls a routine that tests for a change in the monitor upon which the form sits, if so, resizes
-    'Call positionRCFormByMonitorSize
+    'Call resizeLocateRCFormByMoveToNewMonitor
     
     ' will be used to check for orientation changes
     If (gblOldPhysicalScreenHeightPixels <> gblPhysicalScreenHeightPixels) Or (gblOldPhysicalScreenWidthPixels <> gblPhysicalScreenWidthPixels) Then
