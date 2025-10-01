@@ -4024,7 +4024,8 @@ Private Sub btnSave_Click()
     ' sets the characteristics of the widget and menus immediately after saving
     Call adjustMainControls(1)
     
-    Me.SetFocus
+    If widgetPrefs.IsVisible Then Me.SetFocus
+    
     btnSave.Enabled = False ' disable the save button showing it has successfully saved
     
     ' reload here if the gblWindowLevel Was Changed
@@ -4656,7 +4657,7 @@ Public Sub PrefsFormResizeEvent()
     pvtPrefsFormResizedByDrag = False
     
     ' when resizing the form enable the save button to allow the recently set width/height to be saved.
-    'If gblMonitorCount > 1 And Val(gblMultiMonitorResize) > 0 Then widgetPrefs.btnSave = True
+    If gblMonitorCount > 1 And Val(gblMultiMonitorResize) > 0 Then widgetPrefs.btnSave = True
 
    On Error GoTo 0
    Exit Sub
