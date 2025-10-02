@@ -28,12 +28,17 @@ removed manifest for TB
 ' test DPI awareness on multiple monitors, with a manifest, allows interception of the WM_DPICHANGED message which then allows the code to be called 
 '   that can auto-scale the whole form. This requires auto-scaling being enabled per monitor with different scaling on each screen.
 
+' enable save button after a prefs form resize
+' "surround" code in resize - remove
+
+
 TODO
 ====
 
-' enable save button after a prefs form resize
+' patch a 256 bit icon into the VB6 binary
+' https://www.vbforums.com/showthread.php?858347-RESOLVED-How-to-create-and-connect-quality-icon-group-to-your-VB6-app
 
-' "surround" code in resize - remove
+' gbl to gblS gblL &c
 
 ' globals to properties? think, test and try
 
@@ -43,9 +48,6 @@ TODO
 ' 48x48 (32 bit)
 ' 32x32 (32 bit)
 ' 16x16 (32 bit)
-
-' patch a 256 bit icon into the VB6 binary
-' https://www.vbforums.com/showthread.php?858347-RESOLVED-How-to-create-and-connect-quality-icon-group-to-your-VB6-app
 
 ' windevlib - observe, test and determine whether to use, implications
 

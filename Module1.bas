@@ -2305,7 +2305,8 @@ Public Sub makeProgramPreferencesAvailable()
     Else
         widgetPrefs.SetFocus
     End If
-
+    
+    widgetPrefs.btnSave.Enabled = False
 
    On Error GoTo 0
    Exit Sub
@@ -2331,8 +2332,8 @@ Public Sub readPrefsPosition()
     On Error GoTo readPrefsPosition_Error
 
     If gblDpiAwareness = "1" Then
-        gblPrefsHighDpiXPosTwips = fGetINISetting("Software\TenShillings", "formHighDpiXPosTwips", gblSettingsFile)
-        gblPrefsHighDpiYPosTwips = fGetINISetting("Software\TenShillings", "formHighDpiYPosTwips", gblSettingsFile)
+        gblPrefsHighDpiXPosTwips = fGetINISetting("Software\TenShillings", "prefsHighDpiXPosTwips", gblSettingsFile)
+        gblPrefsHighDpiYPosTwips = fGetINISetting("Software\TenShillings", "prefsHighDpiYPosTwips", gblSettingsFile)
         
         ' if a current location not stored then position to the middle of the screen
         If gblPrefsHighDpiXPosTwips <> "" Then
@@ -2352,8 +2353,8 @@ Public Sub readPrefsPosition()
         gblPrefsHighDpiYPosTwips = widgetPrefs.Top
         
     Else
-        gblPrefsLowDpiXPosTwips = fGetINISetting("Software\TenShillings", "formLowDpiXPosTwips", gblSettingsFile)
-        gblPrefsLowDpiYPosTwips = fGetINISetting("Software\TenShillings", "formLowDpiYPosTwips", gblSettingsFile)
+        gblPrefsLowDpiXPosTwips = fGetINISetting("Software\TenShillings", "prefsLowDpiXPosTwips", gblSettingsFile)
+        gblPrefsLowDpiYPosTwips = fGetINISetting("Software\TenShillings", "prefsLowDpiYPosTwips", gblSettingsFile)
               
         ' if a current location not stored then position to the middle of the screen
         If gblPrefsLowDpiXPosTwips <> "" Then
@@ -2397,7 +2398,7 @@ End Sub
 ' Author    : beededea
 ' Date      : 28/05/2023
 ' Purpose   : save the current X and y position of this form to allow repositioning when restarting
-'             also the height of the form on a per monitor basis
+'             also the height of the form on a per monitor basis, called when closing and via a timer
 '---------------------------------------------------------------------------------------
 '
 Public Sub writePrefsPositionAndSize()
@@ -2412,15 +2413,15 @@ Public Sub writePrefsPositionAndSize()
             gblPrefsHighDpiYPosTwips = CStr(widgetPrefs.Top)
             
             ' now write those params to the toolSettings.ini
-            sPutINISetting "Software\TenShillings", "formHighDpiXPosTwips", gblPrefsHighDpiXPosTwips, gblSettingsFile
-            sPutINISetting "Software\TenShillings", "formHighDpiYPosTwips", gblPrefsHighDpiYPosTwips, gblSettingsFile
+            sPutINISetting "Software\TenShillings", "prefsHighDpiXPosTwips", gblPrefsHighDpiXPosTwips, gblSettingsFile
+            sPutINISetting "Software\TenShillings", "prefsHighDpiYPosTwips", gblPrefsHighDpiYPosTwips, gblSettingsFile
         Else
             gblPrefsLowDpiXPosTwips = CStr(widgetPrefs.Left)
             gblPrefsLowDpiYPosTwips = CStr(widgetPrefs.Top)
             
             ' now write those params to the toolSettings.ini
-            sPutINISetting "Software\TenShillings", "formLowDpiXPosTwips", gblPrefsLowDpiXPosTwips, gblSettingsFile
-            sPutINISetting "Software\TenShillings", "formLowDpiYPosTwips", gblPrefsLowDpiYPosTwips, gblSettingsFile
+            sPutINISetting "Software\TenShillings", "prefsLowDpiXPosTwips", gblPrefsLowDpiXPosTwips, gblSettingsFile
+            sPutINISetting "Software\TenShillings", "prefsLowDpiYPosTwips", gblPrefsLowDpiYPosTwips, gblSettingsFile
             
         End If
 
@@ -2950,6 +2951,36 @@ saveRCFormCurrentSizeRatios_Error:
 End Sub
 
 '---------------------------------------------------------------------------------------
+' Procedure : savePrefsFormCurrentSize
+' Author    : beededea
+' Date      : 01/10/2025
+' Purpose   : saves the absolute sizes for the Prefs form
+'---------------------------------------------------------------------------------------
+'
+Public Sub savePrefsFormCurrentSize()
+    Dim resizeProportion As Double: resizeProportion = 0
+
+    On Error GoTo savePrefsFormCurrentSize_Error
+
+    If LTrim$(gblMultiMonitorResize) = "2" Then
+        ' now save the prefs form absolute sizes
+        If prefsMonitorStruct.IsPrimary = True Then
+            sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gblPrefsPrimaryHeightTwips, gblSettingsFile
+        Else
+            sPutINISetting "Software\TenShillings", "prefsSecondaryHeightTwips", gblPrefsSecondaryHeightTwips, gblSettingsFile
+        End If
+    End If
+
+    On Error GoTo 0
+    Exit Sub
+
+savePrefsFormCurrentSize_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure savePrefsFormCurrentSize of Form widgetPrefs"
+    
+End Sub
+
+'---------------------------------------------------------------------------------------
 ' Procedure : saveMainFormsCurrentSizeAndRatios
 ' Author    : beededea
 ' Date      : 01/10/2025
@@ -2965,12 +2996,9 @@ Public Sub saveMainFormsCurrentSizeAndRatios()
         '  saves the current ratios for the RC form alone
         Call saveRCFormCurrentSizeRatios
         
-        ' now save the prefs form absolute sizes
-        If prefsMonitorStruct.IsPrimary = True Then
-            sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gblPrefsPrimaryHeightTwips, gblSettingsFile
-        Else
-            sPutINISetting "Software\TenShillings", "prefsSecondaryHeightTwips", gblPrefsSecondaryHeightTwips, gblSettingsFile
-        End If
+        ' saves the absolute sizes for the Prefs form
+        Call savePrefsFormCurrentSize
+
     End If
 
     On Error GoTo 0

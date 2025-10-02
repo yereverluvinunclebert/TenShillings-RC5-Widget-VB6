@@ -199,6 +199,7 @@ Private Function Form_Proc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal wParam 
     'Const WM_MOVE               As Long = &H3  ' called all during any form move
     Const WM_EXITSIZEMOVE       As Long = &H232 ' called only when all movement is completed
     Const WM_SETCURSOR          As Long = &H20&
+    Const WM_WINDOWPOSCHANGED          As Long = &H47&
     
     Dim sTitle As String: sTitle = vbNullString
     Dim sText As String: sText = vbNullString
@@ -237,6 +238,10 @@ Private Function Form_Proc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal wParam 
         On Error GoTo 0
         Set frm = Nothing
     End If
+    
+'    If uMsg = WM_WINDOWPOSCHANGED Then
+'        MsgBox "crossing"
+'    End If
         
     '
     ' If we fell out, just proceed as normal.
