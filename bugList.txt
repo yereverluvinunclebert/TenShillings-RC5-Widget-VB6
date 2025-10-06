@@ -25,20 +25,31 @@ removed manifest for TB
 
 ' test high DPI on 1st startup
 
-' test DPI awareness on multiple monitors, with a manifest, allows interception of the WM_DPICHANGED message which then allows the code to be called 
+' test DPI awareness on multiple monitors, with a manifest, allows interception of the WM_DPICHANGED message which then allows the code to be called
 '   that can auto-scale the whole form. This requires auto-scaling being enabled per monitor with different scaling on each screen.
 
 ' enable save button after a prefs form resize
 ' "surround" code in resize - remove
 
+' fix on call to save prefs to prevent setfocus error when not visible
+
+' fixing the wrong form size at prefs startup
+' ensure the save button is disabled during startup
+' moved monitor test to occur after the prefs form positioning
+
+' determine how to identify the screen intersection point using WM_MOVING - tested, too slow to resize all forms, abandoned the idea.
 
 TODO
 ====
 
+ ' Ensure the heights of forms are save correctly after a resize, sometimes you need to leth the background timer make the save before it 'sticks'
+
+ ' disable the 'save button' after an auto-resize by positionPrefsMonitor
+
 ' patch a 256 bit icon into the VB6 binary
 ' https://www.vbforums.com/showthread.php?858347-RESOLVED-How-to-create-and-connect-quality-icon-group-to-your-VB6-app
 
-' gbl to gblS gblL &c
+' globals renamed, eg. gbl to gblS gblL &c
 
 ' globals to properties? think, test and try
 
@@ -61,7 +72,7 @@ TODO
 Final Tasks
 ===========
 
-' credits update
+' credits update including wallpapers
 ' XML
 ' setup2go
 ' Github release

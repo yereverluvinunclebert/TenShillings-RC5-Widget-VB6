@@ -4785,15 +4785,17 @@ makeFramesVisible_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure makeFramesVisible of Form widgetPrefs"
 End Sub
 '---------------------------------------------------------------------------------------
-' Procedure : FormMoved
+' Procedure : FormResizedOrMoved
 ' Author    : beededea
 ' Date      : 16/07/2024
 ' Purpose   : Non VB6-standard event caught by subclassing and intercepting the WM_EXITSIZEMOVE (WM_MOVED) event
+'             If the user drags the corner then this routine is called
+'             If the user drags the corner then this routine is called
 '---------------------------------------------------------------------------------------
 '
-Public Sub FormMoved(sForm As String)
+Public Sub FormResizedOrMoved(sForm As String)
 
-    On Error GoTo FormMoved_Error
+    On Error GoTo FormResizedOrMoved_Error
         
     'passing a form name as it allows us to potentially subclass another form's movement
     Select Case sForm
@@ -4801,10 +4803,11 @@ Public Sub FormMoved(sForm As String)
             ' call a resize of all controls only when the form resize (by dragging) has completed (mouseUP)
             If pvtPrefsFormResizedByDrag = True Then
             
-                ' test the current form height and width, if the same then it is a FormMoved and not a form_resize.
+                ' test the current form height and width, if the same then it is a Form Moved on the same monitor and not a form_resize.
                 If widgetPrefs.Height = widgetPrefsOldHeight And widgetPrefs.Width = widgetPrefsOldWidth Then
                     Exit Sub
                 Else
+                
                     widgetPrefsOldHeight = widgetPrefs.Height
                     widgetPrefsOldWidth = widgetPrefs.Width
                     
@@ -4812,10 +4815,13 @@ Public Sub FormMoved(sForm As String)
                     pvtPrefsFormResizedByDrag = False
                     
                 End If
+            Else
+                ' call the procedure to resize the form automatically if it now resides on a different sized monitor
+                Call positionPrefsByMonitorSize
+                widgetPrefs.btnSave.Enabled = False
             End If
             
-            ' call the procedure to resize the form automatically if it now resides on a different sized monitor
-            Call positionPrefsByMonitorSize
+
            
         Case Else
     End Select
@@ -4823,9 +4829,9 @@ Public Sub FormMoved(sForm As String)
    On Error GoTo 0
    Exit Sub
 
-FormMoved_Error:
+FormResizedOrMoved_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure FormMoved of Form widgetPrefs"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure FormResizedOrMoved of Form widgetPrefs"
 End Sub
 
 '---------------------------------------------------------------------------------------
@@ -5694,7 +5700,7 @@ Private Sub tmrPrefsScreenResolution_Timer()
 '        If oldWidgetPrefsLeft <= 0 Then oldWidgetPrefsLeft = widgetPrefs.Left
 '        If oldWidgetPrefsTop <= 0 Then oldWidgetPrefsTop = widgetPrefs.Top
 '
-'        ' test whether the form has been moved (VB6 has no FORM_MOVING nor FormMoved EVENTS)
+'        ' test whether the form has been moved (VB6 has no FORM_MOVING nor FormResizedOrMoved EVENTS)
 '        If widgetPrefs.Left <> oldWidgetPrefsLeft Or widgetPrefs.Top <> oldWidgetPrefsTop Then
 '
 '               ' note the monitor ID at PrefsForm form_load and store as the prefsFormMonitorID
