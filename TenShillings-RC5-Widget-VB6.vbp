@@ -73,10 +73,12 @@ ReplaceIcon=1
 SendCommandArgs=0
 SymbDbgPref=0
 RevisionVersion=0
-AppIconFile=.\Resources\images\stopWatch.ico
+AppIconFile=.\Resources\images\TenShillings256.ico
 
 [Rubberduck]
 ProjectId=79e9b044-786f-4d2a-abd2-5aecb28ec8a1
 
 [fastBuild]
 fullPath=%ap%\TenShillings-RC5-Widget-VB6 exe
+
+

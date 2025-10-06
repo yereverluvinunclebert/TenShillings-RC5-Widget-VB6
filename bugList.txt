@@ -37,17 +37,14 @@ removed manifest for TB
 ' ensure the save button is disabled during startup
 ' moved monitor test to occur after the prefs form positioning
 
-' determine how to identify the screen intersection point using WM_MOVING - tested, too slow to resize all forms, abandoned the idea.
+' determine how to identify the screen intersection point using WM_MOVING - tested, too slow to resize all controls on all forms, abandoned the idea.
+' disable the 'save button' after an auto-resize by positionPrefsMonitor
+' inserting a 256 bit icon into the VB6 binary using VBAdvance
 
 TODO
 ====
 
- ' Ensure the heights of forms are save correctly after a resize, sometimes you need to leth the background timer make the save before it 'sticks'
-
- ' disable the 'save button' after an auto-resize by positionPrefsMonitor
-
-' patch a 256 bit icon into the VB6 binary
-' https://www.vbforums.com/showthread.php?858347-RESOLVED-How-to-create-and-connect-quality-icon-group-to-your-VB6-app
+' Ensure the heights of forms are saved correctly after a resize, sometimes you need to let the background timer make the save before it 'sticks'
 
 ' globals renamed, eg. gbl to gblS gblL &c
 
