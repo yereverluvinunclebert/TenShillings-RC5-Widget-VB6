@@ -23,38 +23,6 @@ Begin VB.Form widgetPrefs
       Left            =   -90
       Top             =   6420
    End
-   Begin VB.Frame fraDevelopmentButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   5490
-      TabIndex        =   38
-      Top             =   0
-      Width           =   1065
-      Begin VB.Label lblDevelopment 
-         Caption         =   "Development"
-         Height          =   240
-         Left            =   45
-         TabIndex        =   39
-         Top             =   855
-         Width           =   960
-      End
-      Begin VB.Image imgDevelopment 
-         Height          =   600
-         Left            =   150
-         Picture         =   "frmPrefs.frx":0CCA
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Image imgDevelopmentClicked 
-         Height          =   600
-         Left            =   160
-         Picture         =   "frmPrefs.frx":1282
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
-   End
    Begin VB.Timer tmrWritePosition 
       Enabled         =   0   'False
       Interval        =   5000
@@ -65,109 +33,10 @@ Begin VB.Form widgetPrefs
       Caption         =   "Enable Corner Resize"
       Height          =   210
       Left            =   3240
-      TabIndex        =   119
+      TabIndex        =   103
       Top             =   10125
       Visible         =   0   'False
       Width           =   2250
-   End
-   Begin VB.Frame fraAboutButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   7695
-      TabIndex        =   86
-      Top             =   0
-      Width           =   975
-      Begin VB.Label lblAbout 
-         Caption         =   "About"
-         Height          =   240
-         Index           =   0
-         Left            =   255
-         TabIndex        =   87
-         Top             =   855
-         Width           =   615
-      End
-      Begin VB.Image imgAbout 
-         Height          =   600
-         Left            =   160
-         Picture         =   "frmPrefs.frx":1608
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Image imgAboutClicked 
-         Height          =   600
-         Left            =   160
-         Picture         =   "frmPrefs.frx":1B90
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
-   End
-   Begin VB.Frame fraConfigButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   1215
-      TabIndex        =   40
-      Top             =   -15
-      Width           =   930
-      Begin VB.Label lblConfig 
-         Caption         =   "Config."
-         Height          =   240
-         Index           =   0
-         Left            =   270
-         TabIndex        =   41
-         Top             =   855
-         Width           =   510
-      End
-      Begin VB.Image imgConfig 
-         Height          =   600
-         Left            =   165
-         Picture         =   "frmPrefs.frx":207B
-         Stretch         =   -1  'True
-         Top             =   240
-         Width           =   600
-      End
-      Begin VB.Image imgConfigClicked 
-         Height          =   600
-         Left            =   165
-         Picture         =   "frmPrefs.frx":265A
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
-   End
-   Begin VB.Frame fraPositionButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   4410
-      TabIndex        =   36
-      Top             =   0
-      Width           =   930
-      Begin VB.Label lblPosition 
-         Caption         =   "Position"
-         Height          =   240
-         Index           =   0
-         Left            =   180
-         TabIndex        =   37
-         Top             =   855
-         Width           =   615
-      End
-      Begin VB.Image imgPosition 
-         Height          =   600
-         Left            =   160
-         Picture         =   "frmPrefs.frx":2B5F
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Image imgPositionClicked 
-         Height          =   600
-         Left            =   160
-         Picture         =   "frmPrefs.frx":3130
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
    End
    Begin VB.CommandButton btnSave 
       Caption         =   "&Save"
@@ -175,7 +44,7 @@ Begin VB.Form widgetPrefs
       Height          =   360
       Left            =   6075
       Style           =   1  'Graphical
-      TabIndex        =   6
+      TabIndex        =   0
       ToolTipText     =   "Save the changes you have made to the preferences"
       Top             =   10035
       Width           =   1320
@@ -185,42 +54,10 @@ Begin VB.Form widgetPrefs
       Height          =   360
       Left            =   120
       Style           =   1  'Graphical
-      TabIndex        =   35
+      TabIndex        =   27
       ToolTipText     =   "Open the help utility"
       Top             =   10035
       Width           =   1320
-   End
-   Begin VB.Frame fraSoundsButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   3315
-      TabIndex        =   11
-      Top             =   -15
-      Width           =   930
-      Begin VB.Label lblSounds 
-         Caption         =   "Sounds"
-         Height          =   240
-         Left            =   210
-         TabIndex        =   12
-         Top             =   870
-         Width           =   615
-      End
-      Begin VB.Image imgSounds 
-         Height          =   600
-         Left            =   160
-         Picture         =   "frmPrefs.frx":34CE
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Image imgSoundsClicked 
-         Height          =   600
-         Left            =   160
-         Picture         =   "frmPrefs.frx":3A8D
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
    End
    Begin VB.Timer themeTimer 
       Enabled         =   0   'False
@@ -233,133 +70,37 @@ Begin VB.Form widgetPrefs
       Height          =   360
       Left            =   7440
       Style           =   1  'Graphical
-      TabIndex        =   7
+      TabIndex        =   1
       ToolTipText     =   "Close the utility"
       Top             =   10035
       Width           =   1320
-   End
-   Begin VB.Frame fraWindowButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   6615
-      TabIndex        =   4
-      Top             =   0
-      Width           =   975
-      Begin VB.Label lblWindow 
-         Caption         =   "Window"
-         Height          =   240
-         Left            =   180
-         TabIndex        =   5
-         Top             =   855
-         Width           =   615
-      End
-      Begin VB.Image imgWindow 
-         Height          =   600
-         Left            =   160
-         Picture         =   "frmPrefs.frx":3F5D
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Image imgWindowClicked 
-         Height          =   600
-         Left            =   160
-         Picture         =   "frmPrefs.frx":4427
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
-   End
-   Begin VB.Frame fraFontsButton 
-      BorderStyle     =   0  'None
-      Height          =   1140
-      Left            =   2280
-      TabIndex        =   2
-      Top             =   0
-      Width           =   930
-      Begin VB.Label lblFonts 
-         Caption         =   "Fonts"
-         Height          =   240
-         Left            =   270
-         TabIndex        =   3
-         Top             =   855
-         Width           =   510
-      End
-      Begin VB.Image imgFonts 
-         Height          =   600
-         Left            =   180
-         Picture         =   "frmPrefs.frx":47D3
-         Stretch         =   -1  'True
-         Top             =   195
-         Width           =   600
-      End
-      Begin VB.Image imgFontsClicked 
-         Height          =   600
-         Left            =   180
-         Picture         =   "frmPrefs.frx":4D29
-         Stretch         =   -1  'True
-         Top             =   195
-         Width           =   600
-      End
-   End
-   Begin VB.Frame fraGeneralButton 
-      Height          =   1140
-      Left            =   240
-      TabIndex        =   0
-      Top             =   -15
-      Width           =   930
-      Begin VB.Image imgGeneral 
-         Appearance      =   0  'Flat
-         Height          =   600
-         Left            =   165
-         Picture         =   "frmPrefs.frx":51C2
-         Stretch         =   -1  'True
-         Top             =   225
-         Width           =   600
-      End
-      Begin VB.Label lblGeneral 
-         Caption         =   "General"
-         Height          =   240
-         Index           =   0
-         Left            =   195
-         TabIndex        =   1
-         Top             =   855
-         Width           =   705
-      End
-      Begin VB.Image imgGeneralClicked 
-         Height          =   600
-         Left            =   165
-         Stretch         =   -1  'True
-         Top             =   240
-         Width           =   600
-      End
    End
    Begin VB.Frame fraWindow 
       Caption         =   "Window"
       Height          =   8460
       Left            =   210
-      TabIndex        =   10
+      TabIndex        =   4
       Top             =   1215
       Width           =   8415
       Begin VB.Frame fraWindowInner 
          BorderStyle     =   0  'None
          Height          =   7995
          Left            =   165
-         TabIndex        =   14
+         TabIndex        =   6
          Top             =   345
          Width           =   7470
          Begin VB.CheckBox chkFormVisible 
             Caption         =   "Form Visible"
             Height          =   225
             Left            =   2250
-            TabIndex        =   175
+            TabIndex        =   159
             Top             =   1230
             Width           =   2535
          End
          Begin vb6projectCCRSlider.Slider sliOpacity 
             Height          =   390
             Left            =   2115
-            TabIndex        =   150
+            TabIndex        =   134
             Top             =   5205
             Width           =   3870
             _ExtentX        =   6826
@@ -374,7 +115,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   2220
             Style           =   2  'Dropdown List
-            TabIndex        =   138
+            TabIndex        =   122
             Top             =   6435
             Width           =   3720
          End
@@ -382,14 +123,14 @@ Begin VB.Form widgetPrefs
             BorderStyle     =   0  'None
             Height          =   2010
             Left            =   1395
-            TabIndex        =   108
+            TabIndex        =   92
             Top             =   2970
             Width           =   5130
             Begin VB.ComboBox cmbHidingTime 
                Height          =   315
                Left            =   825
                Style           =   2  'Dropdown List
-               TabIndex        =   111
+               TabIndex        =   95
                Top             =   1575
                Width           =   3720
             End
@@ -397,7 +138,7 @@ Begin VB.Form widgetPrefs
                Caption         =   "Hiding Widget *"
                Height          =   225
                Left            =   855
-               TabIndex        =   109
+               TabIndex        =   93
                Top             =   315
                Width           =   2955
             End
@@ -406,16 +147,16 @@ Begin VB.Form widgetPrefs
                Height          =   345
                Index           =   2
                Left            =   90
-               TabIndex        =   112
+               TabIndex        =   96
                Top             =   315
                Width           =   720
             End
             Begin VB.Label lblWindowLevel 
-               Caption         =   $"frmPrefs.frx":680C
+               Caption         =   $"frmPrefs.frx":0CCA
                Height          =   975
                Index           =   1
                Left            =   855
-               TabIndex        =   110
+               TabIndex        =   94
                Top             =   705
                Width           =   3900
             End
@@ -424,7 +165,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   2220
             Style           =   2  'Dropdown List
-            TabIndex        =   16
+            TabIndex        =   8
             Top             =   0
             Width           =   3720
          End
@@ -432,7 +173,7 @@ Begin VB.Form widgetPrefs
             Caption         =   "Ignore Mouse *"
             Height          =   225
             Left            =   2250
-            TabIndex        =   15
+            TabIndex        =   7
             ToolTipText     =   "Checking this box causes the program to ignore all mouse events."
             Top             =   2070
             Width           =   2535
@@ -442,7 +183,7 @@ Begin VB.Form widgetPrefs
             Height          =   420
             Index           =   12
             Left            =   2250
-            TabIndex        =   176
+            TabIndex        =   160
             Top             =   1620
             Width           =   4260
          End
@@ -451,16 +192,16 @@ Begin VB.Form widgetPrefs
             Height          =   255
             Index           =   11
             Left            =   375
-            TabIndex        =   137
+            TabIndex        =   121
             Top             =   6465
             Width           =   1830
          End
          Begin VB.Label lblWindowLevel 
-            Caption         =   $"frmPrefs.frx":68AF
+            Caption         =   $"frmPrefs.frx":0D6D
             Height          =   1140
             Index           =   10
             Left            =   2235
-            TabIndex        =   136
+            TabIndex        =   120
             Top             =   6885
             Width           =   4050
          End
@@ -469,7 +210,7 @@ Begin VB.Form widgetPrefs
             Height          =   660
             Index           =   3
             Left            =   2235
-            TabIndex        =   117
+            TabIndex        =   101
             Top             =   570
             Width           =   4380
          End
@@ -478,7 +219,7 @@ Begin VB.Form widgetPrefs
             Height          =   345
             Index           =   0
             Left            =   915
-            TabIndex        =   23
+            TabIndex        =   15
             Top             =   60
             Width           =   1740
          End
@@ -487,7 +228,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   7
             Left            =   2205
-            TabIndex        =   22
+            TabIndex        =   14
             Top             =   5700
             Width           =   345
          End
@@ -496,7 +237,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   9
             Left            =   5565
-            TabIndex        =   21
+            TabIndex        =   13
             Top             =   5700
             Width           =   405
          End
@@ -505,7 +246,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   8
             Left            =   3975
-            TabIndex        =   20
+            TabIndex        =   12
             Top             =   5700
             Width           =   840
          End
@@ -514,7 +255,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   6
             Left            =   1470
-            TabIndex        =   19
+            TabIndex        =   11
             Top             =   5250
             Width           =   780
          End
@@ -523,7 +264,7 @@ Begin VB.Form widgetPrefs
             Height          =   330
             Index           =   5
             Left            =   2250
-            TabIndex        =   18
+            TabIndex        =   10
             Top             =   6015
             Width           =   3810
          End
@@ -532,7 +273,7 @@ Begin VB.Form widgetPrefs
             Height          =   660
             Index           =   4
             Left            =   2235
-            TabIndex        =   17
+            TabIndex        =   9
             Top             =   2460
             Width           =   3810
          End
@@ -543,7 +284,7 @@ Begin VB.Form widgetPrefs
       ForeColor       =   &H80000008&
       Height          =   2175
       Left            =   240
-      TabIndex        =   157
+      TabIndex        =   141
       Top             =   1200
       Visible         =   0   'False
       Width           =   7995
@@ -551,14 +292,14 @@ Begin VB.Form widgetPrefs
          BorderStyle     =   0  'None
          Height          =   1620
          Left            =   480
-         TabIndex        =   158
+         TabIndex        =   142
          Top             =   270
          Width           =   6750
          Begin VB.CheckBox chkGenStartup 
             Caption         =   "Run the Ten Shillings Widget at Windows Startup "
             Height          =   465
             Left            =   1950
-            TabIndex        =   159
+            TabIndex        =   143
             ToolTipText     =   "Check this box to enable the automatic start of the program when Windows is started."
             Top             =   1125
             Width           =   4020
@@ -567,7 +308,7 @@ Begin VB.Form widgetPrefs
             Caption         =   "Double Click Enabled *"
             Height          =   465
             Left            =   1950
-            TabIndex        =   161
+            TabIndex        =   145
             ToolTipText     =   "Check this box to enable the automatic start of the program when Windows is started."
             Top             =   165
             Width           =   4020
@@ -577,7 +318,7 @@ Begin VB.Form widgetPrefs
             Height          =   375
             Index           =   2
             Left            =   1965
-            TabIndex        =   174
+            TabIndex        =   158
             Tag             =   "lblRefreshInterval"
             Top             =   660
             Width           =   3570
@@ -587,7 +328,7 @@ Begin VB.Form widgetPrefs
             Height          =   375
             Index           =   11
             Left            =   960
-            TabIndex        =   160
+            TabIndex        =   144
             Tag             =   "lblRefreshInterval"
             Top             =   1245
             Width           =   1740
@@ -597,7 +338,7 @@ Begin VB.Form widgetPrefs
             Height          =   375
             Index           =   1
             Left            =   420
-            TabIndex        =   162
+            TabIndex        =   146
             Tag             =   "lblRefreshInterval"
             Top             =   285
             Width           =   1740
@@ -608,7 +349,7 @@ Begin VB.Form widgetPrefs
       Caption         =   "About"
       Height          =   8580
       Left            =   240
-      TabIndex        =   88
+      TabIndex        =   72
       Top             =   1155
       Visible         =   0   'False
       Width           =   8520
@@ -626,7 +367,7 @@ Begin VB.Form widgetPrefs
          Height          =   360
          Left            =   6765
          Style           =   1  'Graphical
-         TabIndex        =   148
+         TabIndex        =   132
          ToolTipText     =   "Here you can visit the update location where you can download new versions of the programs."
          Top             =   300
          Width           =   1470
@@ -645,7 +386,7 @@ Begin VB.Form widgetPrefs
          Height          =   360
          Left            =   6765
          Style           =   1  'Graphical
-         TabIndex        =   89
+         TabIndex        =   73
          ToolTipText     =   "Opens a browser window and sends you to our donate page on Amazon"
          Top             =   1800
          Width           =   1470
@@ -654,7 +395,7 @@ Begin VB.Form widgetPrefs
          BorderStyle     =   0  'None
          Height          =   6225
          Left            =   7980
-         TabIndex        =   102
+         TabIndex        =   86
          Top             =   2205
          Width           =   420
       End
@@ -666,8 +407,8 @@ Begin VB.Form widgetPrefs
          Left            =   300
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   101
-         Text            =   "frmPrefs.frx":69C6
+         TabIndex        =   85
+         Text            =   "frmPrefs.frx":0E84
          Top             =   2205
          Width           =   7935
       End
@@ -685,7 +426,7 @@ Begin VB.Form widgetPrefs
          Height          =   360
          Left            =   6765
          Style           =   1  'Graphical
-         TabIndex        =   92
+         TabIndex        =   76
          ToolTipText     =   "This gives access to the debugging tool"
          Top             =   1425
          Width           =   1470
@@ -704,7 +445,7 @@ Begin VB.Form widgetPrefs
          Height          =   360
          Left            =   6765
          Style           =   1  'Graphical
-         TabIndex        =   91
+         TabIndex        =   75
          ToolTipText     =   "This will link you to the Rocket/Steamy dock users Group"
          Top             =   1050
          Width           =   1470
@@ -723,7 +464,7 @@ Begin VB.Form widgetPrefs
          Height          =   360
          Left            =   6765
          Style           =   1  'Graphical
-         TabIndex        =   90
+         TabIndex        =   74
          ToolTipText     =   "Here you can visit the update location where you can download new versions of the programs."
          Top             =   675
          Width           =   1470
@@ -742,7 +483,7 @@ Begin VB.Form widgetPrefs
          EndProperty
          Height          =   240
          Left            =   2445
-         TabIndex        =   104
+         TabIndex        =   88
          Top             =   510
          Width           =   225
       End
@@ -760,7 +501,7 @@ Begin VB.Form widgetPrefs
          EndProperty
          Height          =   240
          Left            =   2790
-         TabIndex        =   103
+         TabIndex        =   87
          Top             =   510
          Width           =   225
       End
@@ -778,7 +519,7 @@ Begin VB.Form widgetPrefs
          Height          =   225
          Index           =   8
          Left            =   2430
-         TabIndex        =   100
+         TabIndex        =   84
          Top             =   855
          Width           =   2175
       End
@@ -796,7 +537,7 @@ Begin VB.Form widgetPrefs
          Height          =   225
          Index           =   7
          Left            =   885
-         TabIndex        =   99
+         TabIndex        =   83
          Top             =   855
          Width           =   795
       End
@@ -814,7 +555,7 @@ Begin VB.Form widgetPrefs
          Height          =   225
          Index           =   6
          Left            =   900
-         TabIndex        =   98
+         TabIndex        =   82
          Top             =   495
          Width           =   795
       End
@@ -832,7 +573,7 @@ Begin VB.Form widgetPrefs
          Height          =   225
          Index           =   5
          Left            =   2430
-         TabIndex        =   97
+         TabIndex        =   81
          Top             =   1215
          Width           =   2175
       End
@@ -850,7 +591,7 @@ Begin VB.Form widgetPrefs
          Height          =   225
          Index           =   4
          Left            =   885
-         TabIndex        =   96
+         TabIndex        =   80
          Top             =   1215
          Width           =   1470
       End
@@ -868,7 +609,7 @@ Begin VB.Form widgetPrefs
          Height          =   225
          Index           =   3
          Left            =   885
-         TabIndex        =   95
+         TabIndex        =   79
          Top             =   1560
          Width           =   1470
       End
@@ -886,7 +627,7 @@ Begin VB.Form widgetPrefs
          Height          =   225
          Index           =   2
          Left            =   2430
-         TabIndex        =   94
+         TabIndex        =   78
          Top             =   1560
          Width           =   3735
       End
@@ -904,7 +645,7 @@ Begin VB.Form widgetPrefs
          Height          =   225
          Index           =   1
          Left            =   3525
-         TabIndex        =   93
+         TabIndex        =   77
          Top             =   510
          Width           =   3000
       End
@@ -922,7 +663,7 @@ Begin VB.Form widgetPrefs
          EndProperty
          Height          =   225
          Left            =   2610
-         TabIndex        =   106
+         TabIndex        =   90
          Top             =   510
          Width           =   495
       End
@@ -940,7 +681,7 @@ Begin VB.Form widgetPrefs
          EndProperty
          Height          =   240
          Left            =   3090
-         TabIndex        =   105
+         TabIndex        =   89
          Top             =   510
          Width           =   525
       End
@@ -949,7 +690,7 @@ Begin VB.Form widgetPrefs
       Caption         =   "Sounds"
       Height          =   2280
       Left            =   855
-      TabIndex        =   13
+      TabIndex        =   5
       Top             =   1230
       Visible         =   0   'False
       Width           =   7965
@@ -957,14 +698,14 @@ Begin VB.Form widgetPrefs
          BorderStyle     =   0  'None
          Height          =   1875
          Left            =   765
-         TabIndex        =   24
+         TabIndex        =   16
          Top             =   285
          Width           =   6420
          Begin VB.CheckBox chkEnableSounds 
             Caption         =   "Enable ALL sounds for the whole widget."
             Height          =   225
             Left            =   1485
-            TabIndex        =   34
+            TabIndex        =   26
             ToolTipText     =   "Check this box to enable or disable all of the sounds used during any animation on the main screen."
             Top             =   285
             Width           =   4485
@@ -974,7 +715,7 @@ Begin VB.Form widgetPrefs
             Height          =   540
             Index           =   4
             Left            =   885
-            TabIndex        =   135
+            TabIndex        =   119
             Tag             =   "lblSharedInputFile"
             Top             =   750
             Width           =   4680
@@ -984,7 +725,7 @@ Begin VB.Form widgetPrefs
             Height          =   255
             Index           =   3
             Left            =   885
-            TabIndex        =   85
+            TabIndex        =   71
             Tag             =   "lblSharedInputFile"
             Top             =   285
             Width           =   765
@@ -995,21 +736,21 @@ Begin VB.Form widgetPrefs
       Caption         =   "Fonts"
       Height          =   5565
       Left            =   255
-      TabIndex        =   9
+      TabIndex        =   3
       Top             =   1230
       Width           =   8280
       Begin VB.Frame fraFontsInner 
          BorderStyle     =   0  'None
          Height          =   5010
          Left            =   690
-         TabIndex        =   25
+         TabIndex        =   17
          Top             =   360
          Width           =   6105
          Begin VB.TextBox txtDisplayScreenFont 
             Height          =   315
             Left            =   1695
             Locked          =   -1  'True
-            TabIndex        =   144
+            TabIndex        =   128
             Text            =   "Courier  New"
             Top             =   3075
             Width           =   3285
@@ -1019,7 +760,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Left            =   5010
             Style           =   1  'Graphical
-            TabIndex        =   143
+            TabIndex        =   127
             Top             =   3075
             Width           =   585
          End
@@ -1027,7 +768,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   1695
             Locked          =   -1  'True
-            TabIndex        =   142
+            TabIndex        =   126
             Text            =   "8"
             Top             =   3615
             Width           =   510
@@ -1037,7 +778,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Left            =   1680
             Style           =   1  'Graphical
-            TabIndex        =   132
+            TabIndex        =   116
             Top             =   4230
             Width           =   885
          End
@@ -1045,7 +786,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   4200
             Locked          =   -1  'True
-            TabIndex        =   120
+            TabIndex        =   104
             ToolTipText     =   "Disabled for manual input. Shows the current font size when form resizing is enabled."
             Top             =   1065
             Visible         =   0   'False
@@ -1055,7 +796,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   1710
             Locked          =   -1  'True
-            TabIndex        =   28
+            TabIndex        =   20
             Text            =   "8"
             ToolTipText     =   "Disabled for manual input. Choose a font size using the font selector to be used within this preferences window only"
             Top             =   1065
@@ -1066,7 +807,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Left            =   5025
             Style           =   1  'Graphical
-            TabIndex        =   27
+            TabIndex        =   19
             Top             =   90
             Width           =   585
          End
@@ -1074,17 +815,17 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   1710
             Locked          =   -1  'True
-            TabIndex        =   26
+            TabIndex        =   18
             Text            =   "Times New Roman"
             Top             =   90
             Width           =   3285
          End
          Begin VB.Label lblFontsTab 
-            Caption         =   $"frmPrefs.frx":797D
+            Caption         =   $"frmPrefs.frx":1E3B
             Height          =   1710
             Index           =   0
             Left            =   1680
-            TabIndex        =   156
+            TabIndex        =   140
             ToolTipText     =   "We suggest Centurion Light SF at 8pt - which you will find in the FCW program folder"
             Top             =   1545
             Width           =   4455
@@ -1094,7 +835,7 @@ Begin VB.Form widgetPrefs
             Height          =   480
             Index           =   9
             Left            =   2415
-            TabIndex        =   147
+            TabIndex        =   131
             Top             =   3600
             Width           =   4035
          End
@@ -1103,7 +844,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Index           =   8
             Left            =   585
-            TabIndex        =   146
+            TabIndex        =   130
             Tag             =   "lblPrefsFont"
             Top             =   3105
             Width           =   1230
@@ -1113,7 +854,7 @@ Begin VB.Form widgetPrefs
             Height          =   330
             Index           =   5
             Left            =   165
-            TabIndex        =   145
+            TabIndex        =   129
             Tag             =   "lblPrefsFontSize"
             Top             =   3645
             Width           =   1590
@@ -1123,7 +864,7 @@ Begin VB.Form widgetPrefs
             Height          =   480
             Index           =   4
             Left            =   2670
-            TabIndex        =   133
+            TabIndex        =   117
             Top             =   4170
             Width           =   3360
          End
@@ -1132,7 +873,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Index           =   1
             Left            =   405
-            TabIndex        =   131
+            TabIndex        =   115
             Tag             =   "lblPrefsFont"
             Top             =   4275
             Width           =   1470
@@ -1142,7 +883,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   10
             Left            =   4920
-            TabIndex        =   121
+            TabIndex        =   105
             Top             =   1110
             Visible         =   0   'False
             Width           =   2400
@@ -1152,7 +893,7 @@ Begin VB.Form widgetPrefs
             Height          =   480
             Index           =   7
             Left            =   2310
-            TabIndex        =   32
+            TabIndex        =   24
             Top             =   1095
             Width           =   2400
          End
@@ -1161,7 +902,7 @@ Begin VB.Form widgetPrefs
             Height          =   330
             Index           =   3
             Left            =   435
-            TabIndex        =   31
+            TabIndex        =   23
             Tag             =   "lblPrefsFontSize"
             Top             =   1095
             Width           =   1230
@@ -1171,7 +912,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Index           =   2
             Left            =   360
-            TabIndex        =   30
+            TabIndex        =   22
             Tag             =   "lblPrefsFont"
             Top             =   120
             Width           =   1665
@@ -1181,7 +922,7 @@ Begin VB.Form widgetPrefs
             Height          =   480
             Index           =   6
             Left            =   1695
-            TabIndex        =   29
+            TabIndex        =   21
             Top             =   480
             Width           =   4035
          End
@@ -1191,7 +932,7 @@ Begin VB.Form widgetPrefs
       Caption         =   "Development"
       Height          =   6210
       Left            =   240
-      TabIndex        =   44
+      TabIndex        =   30
       Top             =   1200
       Visible         =   0   'False
       Width           =   8520
@@ -1199,14 +940,14 @@ Begin VB.Form widgetPrefs
          BorderStyle     =   0  'None
          Height          =   5595
          Left            =   870
-         TabIndex        =   45
+         TabIndex        =   31
          Top             =   300
          Width           =   7455
          Begin VB.Frame fraDefaultEditor 
             BorderStyle     =   0  'None
             Height          =   2370
             Left            =   75
-            TabIndex        =   122
+            TabIndex        =   106
             Top             =   3165
             Width           =   7290
             Begin VB.CommandButton btnDefaultEditor 
@@ -1214,7 +955,7 @@ Begin VB.Form widgetPrefs
                Height          =   300
                Left            =   5115
                Style           =   1  'Graphical
-               TabIndex        =   124
+               TabIndex        =   108
                ToolTipText     =   "Click to select the .vbp file to edit the program - You need to have access to the source!"
                Top             =   210
                Width           =   315
@@ -1222,27 +963,27 @@ Begin VB.Form widgetPrefs
             Begin VB.TextBox txtDefaultEditor 
                Height          =   315
                Left            =   1440
-               TabIndex        =   123
+               TabIndex        =   107
                Text            =   " eg. E:\vb6\fire call\FireCallWin.vbp"
                Top             =   195
                Width           =   3660
             End
             Begin VB.Label lblGitHub 
-               Caption         =   $"frmPrefs.frx":7ABB
+               Caption         =   $"frmPrefs.frx":1F79
                ForeColor       =   &H8000000D&
                Height          =   915
                Left            =   1560
-               TabIndex        =   127
+               TabIndex        =   111
                ToolTipText     =   "Double Click to visit github"
                Top             =   1440
                Width           =   4935
             End
             Begin VB.Label lblDebug 
-               Caption         =   $"frmPrefs.frx":7B82
+               Caption         =   $"frmPrefs.frx":2040
                Height          =   930
                Index           =   9
                Left            =   1545
-               TabIndex        =   126
+               TabIndex        =   110
                Top             =   690
                Width           =   4785
             End
@@ -1251,7 +992,7 @@ Begin VB.Form widgetPrefs
                Height          =   255
                Index           =   7
                Left            =   285
-               TabIndex        =   125
+               TabIndex        =   109
                Tag             =   "lblSharedInputFile"
                Top             =   225
                Width           =   1350
@@ -1260,7 +1001,7 @@ Begin VB.Form widgetPrefs
          Begin VB.TextBox txtDblClickCommand 
             Height          =   315
             Left            =   1515
-            TabIndex        =   53
+            TabIndex        =   39
             ToolTipText     =   "Enter a Windows command for the gauge to operate when double-clicked."
             Top             =   1095
             Width           =   3660
@@ -1270,7 +1011,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Left            =   5175
             Style           =   1  'Graphical
-            TabIndex        =   50
+            TabIndex        =   36
             ToolTipText     =   "Click to select a particular file for the gauge to run or open when double-clicked."
             Top             =   2250
             Width           =   315
@@ -1278,18 +1019,18 @@ Begin VB.Form widgetPrefs
          Begin VB.TextBox txtOpenFile 
             Height          =   315
             Left            =   1515
-            TabIndex        =   49
+            TabIndex        =   35
             ToolTipText     =   "Enter a particular file for the gauge to run or open when double-clicked."
             Top             =   2235
             Width           =   3660
          End
          Begin VB.ComboBox cmbDebug 
             Height          =   315
-            ItemData        =   "frmPrefs.frx":7C26
+            ItemData        =   "frmPrefs.frx":20E4
             Left            =   1530
-            List            =   "frmPrefs.frx":7C28
+            List            =   "frmPrefs.frx":20E6
             Style           =   2  'Dropdown List
-            TabIndex        =   46
+            TabIndex        =   32
             ToolTipText     =   "Choose to set debug mode."
             Top             =   -15
             Width           =   2160
@@ -1299,7 +1040,7 @@ Begin VB.Form widgetPrefs
             Height          =   510
             Index           =   1
             Left            =   -15
-            TabIndex        =   55
+            TabIndex        =   41
             Tag             =   "lblPrefixString"
             Top             =   1155
             Width           =   1545
@@ -1309,7 +1050,7 @@ Begin VB.Form widgetPrefs
             Height          =   375
             Index           =   6
             Left            =   1560
-            TabIndex        =   54
+            TabIndex        =   40
             Top             =   2730
             Width           =   3705
          End
@@ -1318,7 +1059,7 @@ Begin VB.Form widgetPrefs
             Height          =   570
             Index           =   5
             Left            =   1590
-            TabIndex        =   52
+            TabIndex        =   38
             Tag             =   "lblSharedInputFileDesc"
             Top             =   1605
             Width           =   4410
@@ -1328,7 +1069,7 @@ Begin VB.Form widgetPrefs
             Height          =   255
             Index           =   4
             Left            =   645
-            TabIndex        =   51
+            TabIndex        =   37
             Tag             =   "lblSharedInputFile"
             Top             =   2280
             Width           =   1350
@@ -1338,7 +1079,7 @@ Begin VB.Form widgetPrefs
             Height          =   495
             Index           =   2
             Left            =   1545
-            TabIndex        =   48
+            TabIndex        =   34
             Tag             =   "lblAlarmSoundDesc"
             Top             =   450
             Width           =   4455
@@ -1348,7 +1089,7 @@ Begin VB.Form widgetPrefs
             Height          =   375
             Index           =   0
             Left            =   855
-            TabIndex        =   47
+            TabIndex        =   33
             Tag             =   "lblAlarmSound"
             Top             =   45
             Width           =   1740
@@ -1359,7 +1100,7 @@ Begin VB.Form widgetPrefs
       Caption         =   "Position"
       Height          =   7440
       Left            =   270
-      TabIndex        =   42
+      TabIndex        =   28
       Top             =   1230
       Visible         =   0   'False
       Width           =   8520
@@ -1367,13 +1108,13 @@ Begin VB.Form widgetPrefs
          BorderStyle     =   0  'None
          Height          =   6960
          Left            =   150
-         TabIndex        =   43
+         TabIndex        =   29
          Top             =   300
          Width           =   7680
          Begin VB.TextBox txtLandscapeHoffset 
             Height          =   315
             Left            =   2250
-            TabIndex        =   67
+            TabIndex        =   53
             Top             =   4425
             Width           =   2130
          End
@@ -1381,7 +1122,7 @@ Begin VB.Form widgetPrefs
             Caption         =   "Widget Position Locked. *"
             Height          =   225
             Left            =   2265
-            TabIndex        =   115
+            TabIndex        =   99
             ToolTipText     =   "Checking this box turns off the ability to drag the program with the mouse, locking it in position."
             Top             =   3465
             Width           =   2505
@@ -1389,7 +1130,7 @@ Begin VB.Form widgetPrefs
          Begin VB.TextBox txtPortraitYoffset 
             Height          =   315
             Left            =   2250
-            TabIndex        =   73
+            TabIndex        =   59
             ToolTipText     =   "Enter a prefix/nickname for outgoing messages."
             Top             =   6465
             Width           =   2130
@@ -1397,7 +1138,7 @@ Begin VB.Form widgetPrefs
          Begin VB.TextBox txtPortraitHoffset 
             Height          =   315
             Left            =   2250
-            TabIndex        =   71
+            TabIndex        =   57
             ToolTipText     =   "Enter a prefix/nickname for outgoing messages."
             Top             =   6000
             Width           =   2130
@@ -1405,7 +1146,7 @@ Begin VB.Form widgetPrefs
          Begin VB.TextBox txtLandscapeVoffset 
             Height          =   315
             Left            =   2250
-            TabIndex        =   69
+            TabIndex        =   55
             ToolTipText     =   "Enter a prefix/nickname for outgoing messages."
             Top             =   4875
             Width           =   2130
@@ -1414,7 +1155,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   2250
             Style           =   2  'Dropdown List
-            TabIndex        =   65
+            TabIndex        =   51
             Top             =   3930
             Width           =   2160
          End
@@ -1422,7 +1163,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   2250
             Style           =   2  'Dropdown List
-            TabIndex        =   62
+            TabIndex        =   48
             ToolTipText     =   "Choose the alarm sound."
             Top             =   5505
             Width           =   2160
@@ -1431,7 +1172,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   2265
             Style           =   2  'Dropdown List
-            TabIndex        =   59
+            TabIndex        =   45
             ToolTipText     =   "Choose the alarm sound."
             Top             =   2100
             Width           =   2160
@@ -1440,7 +1181,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   2265
             Style           =   2  'Dropdown List
-            TabIndex        =   56
+            TabIndex        =   42
             ToolTipText     =   "Choose the alarm sound."
             Top             =   0
             Width           =   2160
@@ -1450,7 +1191,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Index           =   7
             Left            =   4530
-            TabIndex        =   129
+            TabIndex        =   113
             Tag             =   "lblPrefixString"
             Top             =   6495
             Width           =   435
@@ -1460,7 +1201,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Index           =   5
             Left            =   4530
-            TabIndex        =   128
+            TabIndex        =   112
             Tag             =   "lblPrefixString"
             Top             =   6045
             Width           =   435
@@ -1470,7 +1211,7 @@ Begin VB.Form widgetPrefs
             Height          =   255
             Index           =   1
             Left            =   4545
-            TabIndex        =   118
+            TabIndex        =   102
             Tag             =   "lblAlarmSound"
             Top             =   45
             Width           =   345
@@ -1480,7 +1221,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Index           =   4
             Left            =   4530
-            TabIndex        =   114
+            TabIndex        =   98
             Tag             =   "lblPrefixString"
             Top             =   4905
             Width           =   435
@@ -1490,7 +1231,7 @@ Begin VB.Form widgetPrefs
             Height          =   300
             Index           =   2
             Left            =   4530
-            TabIndex        =   113
+            TabIndex        =   97
             Tag             =   "lblPrefixString"
             Top             =   4500
             Width           =   390
@@ -1500,7 +1241,7 @@ Begin VB.Form widgetPrefs
             Height          =   510
             Index           =   17
             Left            =   645
-            TabIndex        =   74
+            TabIndex        =   60
             Tag             =   "lblPrefixString"
             Top             =   6480
             Width           =   2175
@@ -1510,7 +1251,7 @@ Begin VB.Form widgetPrefs
             Height          =   510
             Index           =   16
             Left            =   660
-            TabIndex        =   72
+            TabIndex        =   58
             Tag             =   "lblPrefixString"
             Top             =   6015
             Width           =   2175
@@ -1520,7 +1261,7 @@ Begin VB.Form widgetPrefs
             Height          =   510
             Index           =   15
             Left            =   420
-            TabIndex        =   70
+            TabIndex        =   56
             Tag             =   "lblPrefixString"
             Top             =   4905
             Width           =   2175
@@ -1530,7 +1271,7 @@ Begin VB.Form widgetPrefs
             Height          =   510
             Index           =   14
             Left            =   420
-            TabIndex        =   68
+            TabIndex        =   54
             Tag             =   "lblPrefixString"
             Top             =   4455
             Width           =   2175
@@ -1540,17 +1281,17 @@ Begin VB.Form widgetPrefs
             Height          =   435
             Index           =   13
             Left            =   450
-            TabIndex        =   66
+            TabIndex        =   52
             Tag             =   "lblAlarmSound"
             Top             =   3975
             Width           =   2115
          End
          Begin VB.Label lblPosition 
-            Caption         =   $"frmPrefs.frx":7C2A
+            Caption         =   $"frmPrefs.frx":20E8
             Height          =   3435
             Index           =   12
             Left            =   5145
-            TabIndex        =   64
+            TabIndex        =   50
             Tag             =   "lblAlarmSoundDesc"
             Top             =   3480
             Width           =   2520
@@ -1560,17 +1301,17 @@ Begin VB.Form widgetPrefs
             Height          =   375
             Index           =   11
             Left            =   690
-            TabIndex        =   63
+            TabIndex        =   49
             Tag             =   "lblAlarmSound"
             Top             =   5550
             Width           =   2040
          End
          Begin VB.Label lblPosition 
-            Caption         =   $"frmPrefs.frx":7DFC
+            Caption         =   $"frmPrefs.frx":22BA
             Height          =   705
             Index           =   10
             Left            =   2250
-            TabIndex        =   61
+            TabIndex        =   47
             Tag             =   "lblAlarmSoundDesc"
             Top             =   2550
             Width           =   5325
@@ -1580,17 +1321,17 @@ Begin VB.Form widgetPrefs
             Height          =   375
             Index           =   8
             Left            =   195
-            TabIndex        =   60
+            TabIndex        =   46
             Tag             =   "lblAlarmSound"
             Top             =   2145
             Width           =   2355
          End
          Begin VB.Label lblPosition 
-            Caption         =   $"frmPrefs.frx":7E9B
+            Caption         =   $"frmPrefs.frx":2359
             Height          =   3045
             Index           =   6
             Left            =   2265
-            TabIndex        =   58
+            TabIndex        =   44
             Tag             =   "lblAlarmSoundDesc"
             Top             =   450
             Width           =   5370
@@ -1600,7 +1341,7 @@ Begin VB.Form widgetPrefs
             Height          =   375
             Index           =   3
             Left            =   120
-            TabIndex        =   57
+            TabIndex        =   43
             Tag             =   "lblAlarmSound"
             Top             =   45
             Width           =   2145
@@ -1611,21 +1352,21 @@ Begin VB.Form widgetPrefs
       Caption         =   "Configuration"
       Height          =   8565
       Left            =   225
-      TabIndex        =   8
+      TabIndex        =   2
       Top             =   1230
       Width           =   7605
       Begin VB.Frame fraConfigInner 
          BorderStyle     =   0  'None
          Height          =   7905
          Left            =   450
-         TabIndex        =   33
+         TabIndex        =   25
          Top             =   435
          Width           =   6705
          Begin VB.Frame fraClockTooltips 
             BorderStyle     =   0  'None
             Height          =   1110
             Left            =   1785
-            TabIndex        =   152
+            TabIndex        =   136
             Top             =   3615
             Width           =   3345
             Begin VB.OptionButton optWidgetTooltips 
@@ -1633,7 +1374,7 @@ Begin VB.Form widgetPrefs
                Height          =   300
                Index           =   2
                Left            =   225
-               TabIndex        =   155
+               TabIndex        =   139
                Top             =   795
                Width           =   2790
             End
@@ -1642,7 +1383,7 @@ Begin VB.Form widgetPrefs
                Height          =   300
                Index           =   1
                Left            =   225
-               TabIndex        =   154
+               TabIndex        =   138
                Top             =   465
                Width           =   2790
             End
@@ -1651,7 +1392,7 @@ Begin VB.Form widgetPrefs
                Height          =   315
                Index           =   0
                Left            =   225
-               TabIndex        =   153
+               TabIndex        =   137
                Top             =   135
                Width           =   3060
             End
@@ -1659,7 +1400,7 @@ Begin VB.Form widgetPrefs
          Begin vb6projectCCRSlider.Slider sliWidgetSize 
             Height          =   390
             Left            =   1920
-            TabIndex        =   149
+            TabIndex        =   133
             Top             =   -45
             Width           =   3870
             _ExtentX        =   6826
@@ -1675,7 +1416,7 @@ Begin VB.Form widgetPrefs
             Height          =   1125
             Index           =   0
             Left            =   1860
-            TabIndex        =   139
+            TabIndex        =   123
             Top             =   4770
             Width           =   3150
             Begin VB.OptionButton optPrefsTooltips 
@@ -1683,7 +1424,7 @@ Begin VB.Form widgetPrefs
                Height          =   195
                Index           =   2
                Left            =   135
-               TabIndex        =   151
+               TabIndex        =   135
                Top             =   780
                Width           =   2970
             End
@@ -1692,7 +1433,7 @@ Begin VB.Form widgetPrefs
                Height          =   195
                Index           =   0
                Left            =   135
-               TabIndex        =   141
+               TabIndex        =   125
                Top             =   120
                Width           =   2760
             End
@@ -1701,7 +1442,7 @@ Begin VB.Form widgetPrefs
                Height          =   195
                Index           =   1
                Left            =   135
-               TabIndex        =   140
+               TabIndex        =   124
                Top             =   450
                Width           =   2970
             End
@@ -1710,7 +1451,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Left            =   1995
             Style           =   2  'Dropdown List
-            TabIndex        =   80
+            TabIndex        =   66
             ToolTipText     =   "To change the direction of the mouse scroll wheel when resiziing the globe gauge."
             Top             =   1410
             Width           =   2490
@@ -1718,7 +1459,7 @@ Begin VB.Form widgetPrefs
          Begin vb6projectCCRSlider.Slider sliSkewDegrees 
             Height          =   450
             Left            =   1890
-            TabIndex        =   163
+            TabIndex        =   147
             Top             =   2415
             Width           =   3870
             _ExtentX        =   6826
@@ -1732,14 +1473,14 @@ Begin VB.Form widgetPrefs
             BorderStyle     =   0  'None
             Height          =   2115
             Left            =   285
-            TabIndex        =   168
+            TabIndex        =   152
             Top             =   5820
             Width           =   6180
             Begin VB.CheckBox chkShowTaskbar 
                Caption         =   "Show Widget in Taskbar"
                Height          =   225
                Left            =   1725
-               TabIndex        =   171
+               TabIndex        =   155
                ToolTipText     =   "Check the box to show the widget in the taskbar"
                Top             =   195
                Width           =   3405
@@ -1748,7 +1489,7 @@ Begin VB.Form widgetPrefs
                Caption         =   "DPI Awareness Enable *"
                Height          =   285
                Left            =   1725
-               TabIndex        =   170
+               TabIndex        =   154
                ToolTipText     =   "Check the box to make the program DPI aware. RESTART required."
                Top             =   855
                Width           =   3405
@@ -1757,17 +1498,17 @@ Begin VB.Form widgetPrefs
                Caption         =   "Show Help on Widget Start"
                Height          =   225
                Left            =   1725
-               TabIndex        =   169
+               TabIndex        =   153
                ToolTipText     =   "Check the box to show the widget in the taskbar"
                Top             =   540
                Width           =   3405
             End
             Begin VB.Label lblConfiguration 
-               Caption         =   $"frmPrefs.frx":8037
+               Caption         =   $"frmPrefs.frx":24F5
                Height          =   855
                Index           =   0
                Left            =   1680
-               TabIndex        =   172
+               TabIndex        =   156
                Top             =   1215
                Width           =   4335
             End
@@ -1777,7 +1518,7 @@ Begin VB.Form widgetPrefs
             Height          =   555
             Index           =   4
             Left            =   2025
-            TabIndex        =   173
+            TabIndex        =   157
             ToolTipText     =   "Adjust to a percentage of the original size. You can also use Ctrl+Mousewheel."
             Top             =   3210
             Width           =   4515
@@ -1787,7 +1528,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   8
             Left            =   3660
-            TabIndex        =   167
+            TabIndex        =   151
             Top             =   2895
             Width           =   345
          End
@@ -1796,7 +1537,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   7
             Left            =   5550
-            TabIndex        =   166
+            TabIndex        =   150
             Top             =   2895
             Width           =   345
          End
@@ -1805,7 +1546,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   6
             Left            =   1995
-            TabIndex        =   165
+            TabIndex        =   149
             Top             =   2910
             Width           =   345
          End
@@ -1814,7 +1555,7 @@ Begin VB.Form widgetPrefs
             Height          =   375
             Index           =   5
             Left            =   600
-            TabIndex        =   164
+            TabIndex        =   148
             Top             =   2490
             Width           =   1365
          End
@@ -1823,7 +1564,7 @@ Begin VB.Form widgetPrefs
             Height          =   675
             Index           =   6
             Left            =   2025
-            TabIndex        =   107
+            TabIndex        =   91
             Top             =   1830
             Width           =   3990
          End
@@ -1832,7 +1573,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   4
             Left            =   4740
-            TabIndex        =   84
+            TabIndex        =   70
             Top             =   435
             Width           =   345
          End
@@ -1841,7 +1582,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   3
             Left            =   3990
-            TabIndex        =   83
+            TabIndex        =   69
             Top             =   435
             Width           =   345
          End
@@ -1850,7 +1591,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   1
             Left            =   2790
-            TabIndex        =   82
+            TabIndex        =   68
             Top             =   435
             Width           =   345
          End
@@ -1859,7 +1600,7 @@ Begin VB.Form widgetPrefs
             Height          =   345
             Index           =   3
             Left            =   255
-            TabIndex        =   81
+            TabIndex        =   67
             ToolTipText     =   "To change the direction of the mouse scroll wheel when resiziing the globe gauge."
             Top             =   1455
             Width           =   2055
@@ -1869,7 +1610,7 @@ Begin VB.Form widgetPrefs
             Height          =   555
             Index           =   2
             Left            =   2070
-            TabIndex        =   79
+            TabIndex        =   65
             ToolTipText     =   "Adjust to a percentage of the original size. You can also use Ctrl+Mousewheel."
             Top             =   780
             Width           =   3810
@@ -1879,7 +1620,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   1
             Left            =   885
-            TabIndex        =   78
+            TabIndex        =   64
             Top             =   30
             Width           =   975
          End
@@ -1888,7 +1629,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   2
             Left            =   3360
-            TabIndex        =   77
+            TabIndex        =   63
             Top             =   435
             Width           =   360
          End
@@ -1897,7 +1638,7 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   5
             Left            =   5385
-            TabIndex        =   76
+            TabIndex        =   62
             Top             =   435
             Width           =   735
          End
@@ -1906,9 +1647,276 @@ Begin VB.Form widgetPrefs
             Height          =   315
             Index           =   0
             Left            =   2085
-            TabIndex        =   75
+            TabIndex        =   61
             Top             =   435
             Width           =   345
+         End
+      End
+   End
+   Begin VB.Frame fraIconGroup 
+      BorderStyle     =   0  'None
+      Height          =   1305
+      Left            =   -10
+      TabIndex        =   161
+      Top             =   0
+      Width           =   8895
+      Begin VB.Frame fraAboutButton 
+         BorderStyle     =   0  'None
+         Height          =   1140
+         Left            =   7695
+         TabIndex        =   176
+         Top             =   60
+         Width           =   975
+         Begin VB.Image imgAbout 
+            Height          =   600
+            Left            =   160
+            Picture         =   "frmPrefs.frx":25A9
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+         Begin VB.Label lblAbout 
+            Caption         =   "About"
+            Height          =   240
+            Index           =   0
+            Left            =   255
+            TabIndex        =   177
+            Top             =   855
+            Width           =   615
+         End
+         Begin VB.Image imgAboutClicked 
+            Height          =   600
+            Left            =   160
+            Picture         =   "frmPrefs.frx":2B31
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+      End
+      Begin VB.Frame fraWindowButton 
+         BorderStyle     =   0  'None
+         Height          =   1140
+         Left            =   6615
+         TabIndex        =   174
+         Top             =   60
+         Width           =   975
+         Begin VB.Image imgWindow 
+            Height          =   600
+            Left            =   160
+            Picture         =   "frmPrefs.frx":301C
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+         Begin VB.Label lblWindow 
+            Caption         =   "Window"
+            Height          =   240
+            Left            =   180
+            TabIndex        =   175
+            Top             =   855
+            Width           =   615
+         End
+         Begin VB.Image imgWindowClicked 
+            Height          =   600
+            Left            =   160
+            Picture         =   "frmPrefs.frx":34E6
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+      End
+      Begin VB.Frame fraDevelopmentButton 
+         BorderStyle     =   0  'None
+         Height          =   1140
+         Left            =   5490
+         TabIndex        =   172
+         Top             =   60
+         Width           =   1065
+         Begin VB.Image imgDevelopment 
+            Height          =   600
+            Left            =   150
+            Picture         =   "frmPrefs.frx":3892
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+         Begin VB.Label lblDevelopment 
+            Caption         =   "Development"
+            Height          =   240
+            Left            =   45
+            TabIndex        =   173
+            Top             =   855
+            Width           =   960
+         End
+         Begin VB.Image imgDevelopmentClicked 
+            Height          =   600
+            Left            =   160
+            Picture         =   "frmPrefs.frx":3E4A
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+      End
+      Begin VB.Frame fraPositionButton 
+         BorderStyle     =   0  'None
+         Height          =   1140
+         Left            =   4410
+         TabIndex        =   170
+         Top             =   60
+         Width           =   930
+         Begin VB.Image imgPosition 
+            Height          =   600
+            Left            =   160
+            Picture         =   "frmPrefs.frx":41D0
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+         Begin VB.Label lblPosition 
+            Caption         =   "Position"
+            Height          =   240
+            Index           =   0
+            Left            =   180
+            TabIndex        =   171
+            Top             =   855
+            Width           =   615
+         End
+         Begin VB.Image imgPositionClicked 
+            Height          =   600
+            Left            =   160
+            Picture         =   "frmPrefs.frx":47A1
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+      End
+      Begin VB.Frame fraSoundsButton 
+         BorderStyle     =   0  'None
+         Height          =   1140
+         Left            =   3315
+         TabIndex        =   168
+         Top             =   60
+         Width           =   930
+         Begin VB.Image imgSounds 
+            Height          =   600
+            Left            =   160
+            Picture         =   "frmPrefs.frx":4B3F
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+         Begin VB.Label lblSounds 
+            Caption         =   "Sounds"
+            Height          =   240
+            Left            =   210
+            TabIndex        =   169
+            Top             =   870
+            Width           =   615
+         End
+         Begin VB.Image imgSoundsClicked 
+            Height          =   600
+            Left            =   160
+            Picture         =   "frmPrefs.frx":50FE
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+      End
+      Begin VB.Frame fraFontsButton 
+         BorderStyle     =   0  'None
+         Height          =   1140
+         Left            =   2280
+         TabIndex        =   166
+         Top             =   90
+         Width           =   930
+         Begin VB.Image imgFonts 
+            Height          =   600
+            Left            =   180
+            Picture         =   "frmPrefs.frx":55CE
+            Stretch         =   -1  'True
+            Top             =   195
+            Width           =   600
+         End
+         Begin VB.Label lblFonts 
+            Caption         =   "Fonts"
+            Height          =   240
+            Left            =   270
+            TabIndex        =   167
+            Top             =   855
+            Width           =   510
+         End
+         Begin VB.Image imgFontsClicked 
+            Height          =   600
+            Left            =   180
+            Picture         =   "frmPrefs.frx":5B24
+            Stretch         =   -1  'True
+            Top             =   195
+            Width           =   600
+         End
+      End
+      Begin VB.Frame fraConfigButton 
+         BorderStyle     =   0  'None
+         Height          =   1140
+         Left            =   1215
+         TabIndex        =   164
+         Top             =   60
+         Width           =   930
+         Begin VB.Image imgConfig 
+            Height          =   600
+            Left            =   165
+            Picture         =   "frmPrefs.frx":5FBD
+            Stretch         =   -1  'True
+            Top             =   240
+            Width           =   600
+         End
+         Begin VB.Label lblConfig 
+            Caption         =   "Config."
+            Height          =   240
+            Index           =   0
+            Left            =   270
+            TabIndex        =   165
+            Top             =   855
+            Width           =   510
+         End
+         Begin VB.Image imgConfigClicked 
+            Height          =   600
+            Left            =   165
+            Picture         =   "frmPrefs.frx":659C
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+      End
+      Begin VB.Frame fraGeneralButton 
+         Height          =   1140
+         Left            =   240
+         TabIndex        =   162
+         Top             =   90
+         Width           =   930
+         Begin VB.Image imgGeneral 
+            Appearance      =   0  'Flat
+            Height          =   600
+            Left            =   165
+            Picture         =   "frmPrefs.frx":6AA1
+            Stretch         =   -1  'True
+            Top             =   225
+            Width           =   600
+         End
+         Begin VB.Image imgGeneralClicked 
+            Height          =   600
+            Left            =   165
+            Stretch         =   -1  'True
+            Top             =   240
+            Width           =   600
+         End
+         Begin VB.Label lblGeneral 
+            Caption         =   "General"
+            Height          =   240
+            Index           =   0
+            Left            =   195
+            TabIndex        =   163
+            Top             =   855
+            Width           =   705
          End
       End
    End
@@ -1925,7 +1933,7 @@ Begin VB.Form widgetPrefs
       EndProperty
       Height          =   165
       Left            =   8700
-      TabIndex        =   134
+      TabIndex        =   118
       ToolTipText     =   "drag me"
       Top             =   10350
       Visible         =   0   'False
@@ -1935,7 +1943,7 @@ Begin VB.Form widgetPrefs
       Caption         =   "Size in twips"
       Height          =   285
       Left            =   1875
-      TabIndex        =   130
+      TabIndex        =   114
       Top             =   9780
       Visible         =   0   'False
       Width           =   4170
@@ -1944,7 +1952,7 @@ Begin VB.Form widgetPrefs
       Caption         =   "All controls marked with a * take effect immediately."
       Height          =   300
       Left            =   1920
-      TabIndex        =   116
+      TabIndex        =   100
       Top             =   10155
       Width           =   3870
    End
@@ -3682,7 +3690,7 @@ Private Sub positionPrefsFramesButtons()
     
     ' align frames rightmost and leftmost to the buttons at the top
     buttonTop = -15
-    frameTop = 1150
+    frameTop = 1250
     leftHandGutterWidth = 240
     frameLeft = leftHandGutterWidth ' use the first frame leftmost as reference
     rightHandAlignment = fraAboutButton.Left + fraAboutButton.Width ' use final button rightmost as reference
@@ -4718,7 +4726,9 @@ Private Sub makeFramesInvisible()
         If gblLastSelectedTab = "about" Then
             fraAbout.Visible = False
             fraAboutButton.Visible = False
-            End If
+        End If
+        
+        fraIconGroup.Visible = False
 
    On Error GoTo 0
    Exit Sub
@@ -4776,6 +4786,8 @@ Private Sub makeFramesVisible()
         fraAbout.Visible = True
         fraAboutButton.Visible = True
     End If
+    
+    fraIconGroup.Visible = True
 
    On Error GoTo 0
    Exit Sub
@@ -4821,8 +4833,6 @@ Public Sub FormResizedOrMoved(sForm As String)
                 widgetPrefs.btnSave.Enabled = False
             End If
             
-
-           
         Case Else
     End Select
     

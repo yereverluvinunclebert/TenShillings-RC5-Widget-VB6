@@ -40,6 +40,7 @@ removed manifest for TB
 ' determine how to identify the screen intersection point using WM_MOVING - tested, too slow to resize all controls on all forms, abandoned the idea.
 ' disable the 'save button' after an auto-resize by positionPrefsMonitor
 ' inserting a 256 bit icon into the VB6 binary using VBAdvance
+' frame around the prefs icon group - invisible during drag then visible on completion.
 
 TODO
 ====
