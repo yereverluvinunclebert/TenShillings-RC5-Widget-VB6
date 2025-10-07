@@ -12,22 +12,60 @@ Begin VB.Form widgetPrefs
    ScaleMode       =   0  'User
    ScaleWidth      =   8880
    Visible         =   0   'False
-   Begin VB.Timer tmrPrefsMonitorSaveHeight 
-      Interval        =   5000
-      Left            =   -90
-      Top             =   5220
-   End
-   Begin VB.Timer tmrPrefsScreenResolution 
-      Enabled         =   0   'False
-      Interval        =   1500
-      Left            =   -90
-      Top             =   6420
-   End
-   Begin VB.Timer tmrWritePosition 
-      Enabled         =   0   'False
-      Interval        =   5000
-      Left            =   -180
-      Top             =   6975
+   Begin VB.Frame fraTimers 
+      Caption         =   "Timers"
+      Height          =   2175
+      Left            =   0
+      TabIndex        =   178
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   2385
+      Begin VB.Timer themeTimer 
+         Enabled         =   0   'False
+         Interval        =   10000
+         Left            =   60
+         Tag             =   "a timer to apply a theme automatically"
+         Top             =   240
+      End
+      Begin VB.Timer tmrWritePositionAndSize 
+         Enabled         =   0   'False
+         Interval        =   5000
+         Left            =   60
+         Top             =   1200
+      End
+      Begin VB.Timer tmrPrefsScreenResolution 
+         Enabled         =   0   'False
+         Interval        =   1500
+         Left            =   60
+         Top             =   720
+      End
+      Begin VB.Label tmrLabel 
+         Caption         =   "tmrWritePositionAndSize"
+         Height          =   225
+         Index           =   3
+         Left            =   570
+         TabIndex        =   181
+         Top             =   1290
+         Width           =   1785
+      End
+      Begin VB.Label tmrLabel 
+         Caption         =   "tmrPrefsScreenResolution"
+         Height          =   435
+         Index           =   2
+         Left            =   570
+         TabIndex        =   180
+         Top             =   840
+         Width           =   1245
+      End
+      Begin VB.Label tmrLabel 
+         Caption         =   "themeTimer"
+         Height          =   435
+         Index           =   1
+         Left            =   570
+         TabIndex        =   179
+         Top             =   330
+         Width           =   1245
+      End
    End
    Begin VB.CheckBox chkEnableResizing 
       Caption         =   "Enable Corner Resize"
@@ -58,12 +96,6 @@ Begin VB.Form widgetPrefs
       ToolTipText     =   "Open the help utility"
       Top             =   10035
       Width           =   1320
-   End
-   Begin VB.Timer themeTimer 
-      Enabled         =   0   'False
-      Interval        =   10000
-      Left            =   -90
-      Top             =   5835
    End
    Begin VB.CommandButton btnClose 
       Caption         =   "&Close"
@@ -2626,10 +2658,10 @@ End Sub
 '
 Private Sub startPrefsTimers()
 
-    ' start the timer that records the prefs position every 10 seconds
+    ' start the timer that records the prefs position every 5 seconds
    On Error GoTo startPrefsTimers_Error
 
-    tmrWritePosition.Enabled = True
+    tmrWritePositionAndSize.Enabled = True
     
     ' start the timer that detects a MOVE event on the preferences form
     tmrPrefsScreenResolution.Enabled = True
@@ -5050,6 +5082,10 @@ Private Sub sliSkewDegrees_MouseMove(Button As Integer, Shift As Integer, x As S
                   TTIconInfo, "Help on the Size Rotate Slider", , , , True
 End Sub
 
+
+
+
+
 Private Sub txtPrefsFont_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     If gblPrefsTooltips = "0" Then CreateToolTip txtPrefsFont.hWnd, "This is a read-only text box. It displays the current font as set when you click the font selector button. This is in operation for informational purposes only. When resizing the form (drag bottom right) the font size will change in relation to form height. The base font determines the initial size, the resulting resized font will dynamically change.  My preferred font for this utility is Centurion Light SF at 8pt size.", _
                   TTIconInfo, "Help on the Currently Selected Font", , , , True
@@ -5703,7 +5739,7 @@ Private Sub tmrPrefsScreenResolution_Timer()
 '
 '        ' turn off the timer that saves the prefs height and position
 '        tmrPrefsMonitorSaveHeight.Enabled = False
-'        tmrWritePosition.Enabled = False
+'        tmrWritePositionAndSize.Enabled = False
 '        tmrPrefsScreenResolution.Enabled = False ' turn off this very timer here
 '
 '        ' populate the OLD vars if empty, to allow valid comparison next run
@@ -5772,7 +5808,7 @@ Private Sub tmrPrefsScreenResolution_Timer()
 '
 '    tmrPrefsScreenResolution.Enabled = True
 '    tmrPrefsMonitorSaveHeight.Enabled = True
-'    tmrWritePosition.Enabled = True
+'    tmrWritePositionAndSize.Enabled = True
     
     On Error GoTo 0
     Exit Sub
@@ -6979,24 +7015,25 @@ End Sub
 
 
 '---------------------------------------------------------------------------------------
-' Procedure : tmrWritePosition_Timer
+' Procedure : tmrWritePositionAndSize_Timer
 ' Author    : beededea
 ' Date      : 27/05/2023
-' Purpose   : periodically read the prefs form position and store
+' Purpose   : periodically read the prefs form position/height and store
 '---------------------------------------------------------------------------------------
 '
-Private Sub tmrWritePosition_Timer()
-    ' save the current X and y position of this form to allow repositioning when restarting
-    On Error GoTo tmrWritePosition_Timer_Error
+Private Sub tmrWritePositionAndSize_Timer()
+    
+    On Error GoTo tmrWritePositionAndSize_Timer_Error
    
+    ' save the current X and y position of this form to allow repositioning when restarting
     If widgetPrefs.IsVisible = True Then Call writePrefsPositionAndSize
 
    On Error GoTo 0
    Exit Sub
 
-tmrWritePosition_Timer_Error:
+tmrWritePositionAndSize_Timer_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure tmrWritePosition_Timer of Form widgetPrefs"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure tmrWritePositionAndSize_Timer of Form widgetPrefs"
 
 End Sub
 
@@ -7333,32 +7370,32 @@ End Sub
 ' Purpose   : save the current height of this form to allow resizing when restarting or placing on another monitor
 '---------------------------------------------------------------------------------------
 '
-Private Sub tmrPrefsMonitorSaveHeight_Timer()
-
-    'Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
-    
-    On Error GoTo tmrPrefsMonitorSaveHeight_Timer_Error
-    
-    If widgetPrefs.IsVisible = False Then Exit Sub
-
-    If LTrim$(gblMultiMonitorResize) <> "2" Then Exit Sub
- 
-    If prefsMonitorStruct.IsPrimary = True Then
-        gblPrefsPrimaryHeightTwips = CStr(widgetPrefs.Height)
-        sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gblPrefsPrimaryHeightTwips, gblSettingsFile
-    Else
-        gblPrefsSecondaryHeightTwips = CStr(widgetPrefs.Height)
-        sPutINISetting "Software\TenShillings", "prefsSecondaryHeightTwips", gblPrefsSecondaryHeightTwips, gblSettingsFile
-    End If
-
-   On Error GoTo 0
-   Exit Sub
-
-tmrPrefsMonitorSaveHeight_Timer_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure tmrPrefsMonitorSaveHeight_Timer of Form widgetPrefs"
-
-End Sub
+'Private Sub tmrPrefsMonitorSaveHeight_Timer()
+'
+'    'Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
+'
+'    On Error GoTo tmrPrefsMonitorSaveHeight_Timer_Error
+'
+'    If widgetPrefs.IsVisible = False Then Exit Sub
+'
+'    If LTrim$(gblMultiMonitorResize) <> "2" Then Exit Sub
+'
+'    If prefsMonitorStruct.IsPrimary = True Then
+'        gblPrefsPrimaryHeightTwips = CStr(widgetPrefs.Height)
+'        sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gblPrefsPrimaryHeightTwips, gblSettingsFile
+'    Else
+'        gblPrefsSecondaryHeightTwips = CStr(widgetPrefs.Height)
+'        sPutINISetting "Software\TenShillings", "prefsSecondaryHeightTwips", gblPrefsSecondaryHeightTwips, gblSettingsFile
+'    End If
+'
+'   On Error GoTo 0
+'   Exit Sub
+'
+'tmrPrefsMonitorSaveHeight_Timer_Error:
+'
+'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure tmrPrefsMonitorSaveHeight_Timer of Form widgetPrefs"
+'
+'End Sub
 
 
 

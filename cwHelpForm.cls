@@ -69,8 +69,46 @@ Class_Initialize_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class Module cwhelp"
 End Sub
 
-Public Property Get Widget() As cWidgetBase: Set Widget = W: End Property
-Public Property Get Widgets() As cWidgets:  Set Widgets = W.Widgets: End Property ' does this really need to be exposed?
+
+'---------------------------------------------------------------------------------------
+' Procedure : Widget
+' Author    : olaf schmidt
+' Date      : 21/09/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get Widget() As cWidgetBase
+   On Error GoTo Widget_Error
+
+    Set Widget = W
+
+   On Error GoTo 0
+   Exit Property
+
+Widget_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Widget of Class Module cwTenShillings"
+End Property
+'---------------------------------------------------------------------------------------
+' Procedure : Widgets
+' Author    : olaf schmidt
+' Date      : 21/09/2023
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get Widgets() As cWidgets
+   On Error GoTo Widgets_Error
+
+    Set Widgets = W.Widgets
+
+   On Error GoTo 0
+   Exit Property
+
+Widgets_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Widgets of Class Module cwTenShillings"
+End Property
+
 '---------------------------------------------------------------------------------------
 ' Procedure : Zoom
 ' Author    : beededea

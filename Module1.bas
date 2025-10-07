@@ -2120,10 +2120,10 @@ Public Sub unloadAllForms(ByVal endItAll As Boolean)
     
     ' stop all VB6 timers in the prefs form
     
-    widgetPrefs.tmrPrefsMonitorSaveHeight.Enabled = False
+    'widgetPrefs.tmrPrefsMonitorSaveHeight.Enabled = False
     widgetPrefs.themeTimer.Enabled = False
     widgetPrefs.tmrPrefsScreenResolution.Enabled = False
-    widgetPrefs.tmrWritePosition.Enabled = False
+    widgetPrefs.tmrWritePositionAndSize.Enabled = False
 
     'unload the RC6 widgets on the RC6 forms first
     
@@ -2402,12 +2402,10 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Public Sub writePrefsPositionAndSize()
-     
-    'Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
-    
+         
     On Error GoTo writePrefsPositionAndSize_Error
 
-    If widgetPrefs.IsLoaded = True And widgetPrefs.WindowState = vbNormal Then ' when vbMinimised the value = -48000  !
+    If widgetPrefs.IsVisible = True And widgetPrefs.WindowState = vbNormal Then ' when vbMinimised the value = -48000  !
         If gblDpiAwareness = "1" Then
             gblPrefsHighDpiXPosTwips = CStr(widgetPrefs.Left)
             gblPrefsHighDpiYPosTwips = CStr(widgetPrefs.Top)
@@ -2424,6 +2422,8 @@ Public Sub writePrefsPositionAndSize()
             sPutINISetting "Software\TenShillings", "prefsLowDpiYPosTwips", gblPrefsLowDpiYPosTwips, gblSettingsFile
             
         End If
+        
+        If LTrim$(gblMultiMonitorResize) <> "2" Then Exit Sub
 
         If prefsMonitorStruct.IsPrimary = True Then
             gblPrefsPrimaryHeightTwips = Trim$(CStr(widgetPrefs.Height))

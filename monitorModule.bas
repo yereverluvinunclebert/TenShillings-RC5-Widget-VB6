@@ -434,9 +434,6 @@ Public Sub positionPrefsByMonitorSize()
 
     Static oldWidgetPrefsLeft As Long
     Static oldWidgetPrefsTop As Long
-    'Static beenMovingFlg As Boolean
-    
-    'Static oldPrefsFormMonitorID As Long
     Static oldPrefsMonitorStructWidthTwips As Long
     Static oldPrefsMonitorStructHeightTwips As Long
     Static oldPrefsWidgetLeftPixels As Long
@@ -447,19 +444,16 @@ Public Sub positionPrefsByMonitorSize()
     Dim monitorStructHeightTwips As Long: monitorStructHeightTwips = 0
     Dim resizeProportion As Double: resizeProportion = 0
     Dim newPrefsHeight As Single: newPrefsHeight = 0
-    'Dim answer As VbMsgBoxResult: answer = vbNo
-    'Dim answerMsg As String: answerMsg = vbNullString
     
     ' calls a routine that tests for a change in the monitor upon which the form sits, if so, resizes
     On Error GoTo positionPrefsByMonitorSize_Error
+        
+    ' turn off the timer that saves the prefs height and position
+    widgetPrefs.tmrWritePositionAndSize.Enabled = False
 
     ' if just one monitor or the global switch is off then exit
     If gblMonitorCount > 1 And (LTrim$(gblMultiMonitorResize) = "1" Or LTrim$(gblMultiMonitorResize) = "2") Then
-    
-        ' turn off the timer that saves the prefs height and position
-        widgetPrefs.tmrPrefsMonitorSaveHeight.Enabled = False
-        widgetPrefs.tmrWritePosition.Enabled = False
-   
+
         ' populate the OLD vars if empty, to allow valid comparison next run
         If oldWidgetPrefsLeft <= 0 Then oldWidgetPrefsLeft = widgetPrefs.Left
         If oldWidgetPrefsTop <= 0 Then oldWidgetPrefsTop = widgetPrefs.Top
@@ -518,9 +512,11 @@ Public Sub positionPrefsByMonitorSize()
     oldWidgetPrefsLeft = widgetPrefs.Left
     oldWidgetPrefsTop = widgetPrefs.Top
     
-    ' restart any timers that position the prefs and store position/size values
-    widgetPrefs.tmrPrefsMonitorSaveHeight.Enabled = True
-    widgetPrefs.tmrWritePosition.Enabled = True
+    ' store position/size values now
+    If widgetPrefs.IsVisible = True Then Call writePrefsPositionAndSize
+    
+    ' restart any timers that position the prefs and store position/size values in 5 seconds time
+    widgetPrefs.tmrWritePositionAndSize.Enabled = True
 
    On Error GoTo 0
    Exit Sub

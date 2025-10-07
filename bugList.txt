@@ -42,14 +42,27 @@ removed manifest for TB
 ' inserting a 256 bit icon into the VB6 binary using VBAdvance
 ' frame around the prefs icon group - invisible during drag then visible on completion.
 
+' widgetprefs - moved timers into a non-visible frame
+' widget & widget properties in cwhelp.cls spread out
+
 TODO
 ====
 
-' Ensure the heights of forms are saved correctly after a resize, sometimes you need to let the background timer make the save before it 'sticks'
+' Ensure the heights of forms are saved correctly after a resize, sometimes you need to let the background timer make the save before it 'sticks'.
 
 ' globals renamed, eg. gbl to gblS gblL &c
 
 ' globals to properties? think, test and try
+
+
+' update PZ CPU RC5 to same standard
+
+' convert latest to TB
+
+' TB - test 256 x 256 icon
+
+' update 10/- RC6 to same standard
+' update PZ CPU RC6 to same standard
 
 ' test the icon sizes on 32bit Win7, XP and ReactOS, find out if 48x48 causes a crash
 ' 32x32 (24 bit)
@@ -58,25 +71,27 @@ TODO
 ' 32x32 (32 bit)
 ' 16x16 (32 bit)
 
-' windevlib - observe, test and determine whether to use, implications
-
 ' test on 32bit win 7
 ' test on XP
 ' test on ReactOS
 
-' if the code fails on VB6 then we can start by adding some API checks and removing functionality
+' if any newer, Vista + API code fails on VB6 then we can start by adding some API checks and removing functionality
 ' https://www.vbforums.com/showthread.php?896944-VB6-QUESTION-Check-if-API-exists
+
+' windevlib - observe, test and determine whether to use within TB version, implications
 
 Final Tasks
 ===========
 
-' credits update including wallpapers
+' credits update
 ' XML
 ' setup2go
 ' Github release
 
 Not going to do (or much, much later)
 ====================================
+
+' 32bit to 64bit conversion but only when RC is 64bit.
 
 ' add functionality to the prefs to allow autoscaling dependent upon different monitor scaling factors using WM_DPICHANGED? Think and decide.
 '    we can already size a form per monitor, all we would need is to do the same when a DPI change is detected.

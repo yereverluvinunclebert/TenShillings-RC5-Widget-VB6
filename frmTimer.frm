@@ -13,9 +13,9 @@ Begin VB.Form frmTimer
    Visible         =   0   'False
    Begin VB.Timer sleepTimer 
       Interval        =   3000
-      Left            =   120
+      Left            =   90
       Tag             =   "stores and compares the last time to see if the PC has slept"
-      Top             =   1575
+      Top             =   1560
    End
    Begin VB.Timer unhideTimer 
       Enabled         =   0   'False
