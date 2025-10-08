@@ -82,7 +82,7 @@ Private Sub Class_Initialize()
 
     Set W = Cairo.WidgetBase
         W.BackColor = -1  'we don't use any BackColor here, transparent
-        W.ImplementsWheelMessages = True ' enables gblPlivate Sub W_MouseWheel
+        W.ImplementsWheelMessages = True ' enables gsPlivate Sub W_MouseWheel
         
         mZoom = 1 ' the TenShillings size initially very small
         ZoomDirection = mZoomDirection
@@ -442,7 +442,7 @@ End Property
 Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal LineOffset As Long, ByVal xAbs As Single, ByVal yAbs As Single)
    On Error GoTo W_MouseWheel_Error
 
-    If gblIgnoreMouse = "1" Then Exit Sub
+    If gsIgnoreMouse = "1" Then Exit Sub
 
     Select Case MouseKeys
     Case 8 'change the Zoom only, when the Ctrl-Key is down
@@ -453,7 +453,7 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
             Me.Zoom = Me.Zoom + 0.02 * LineOffset
         End If
         gsWidgetSize = CStr(TenShillingsWidget.Zoom * 100) ' store the value dynamically
-        sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gsSettingsFile
         
         ' saves the current ratios for the RC form
         Call saveRCFormCurrentSizeRatios
@@ -470,7 +470,7 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
         If SkewDegrees < 0 Then SkewDegrees = SkewDegrees + 360
          
         gsSkewDegrees = CStr(TenShillingsWidget.SkewDegrees) ' store the value dynamically
-        sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gsSettingsFile
         
         If widgetPrefs.IsVisible = True Then
             widgetPrefs.sliSkewDegrees.Value = Val(gsSkewDegrees)
@@ -499,7 +499,7 @@ Private Sub W_MouseDown(Button As Integer, Shift As Integer, ByVal x As Single, 
     If Button = vbRightButton Then
         Call menuForm.PopupMenu(menuForm.mnuMainMenu)
     Else
-        If gblIgnoreMouse = "1" Then Exit Sub
+        If gsIgnoreMouse = "1" Then Exit Sub
         ' do whatever you want with a mouseDown here, not doing anything at the moment but we will...
     End If
 
@@ -527,7 +527,7 @@ Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByV
  
     reverseOrigin = (mImageHeight / 2) - (mImageHeight)
     
-    If gblRichClientEnvironment = "RC6" Then
+    If gsRichClientEnvironment = "RC6" Then
         ' Widgets are refreshed "from the ground up" in RC5 and not so in RC6
         ' extra code NOT needed when using RC5 but now required in RC6 - starts
         CC.Operator = CAIRO_OPERATOR_CLEAR

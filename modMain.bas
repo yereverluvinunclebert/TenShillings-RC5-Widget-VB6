@@ -46,7 +46,7 @@ Public licenceWidget As cwLicence
 Public TenShillingsWidget As cwTenShillings
 
 ' any other private vars
-Public gblWidgetName As String
+Public gsWidgetName As String
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Main
@@ -88,8 +88,8 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     ' initialise global vars
     Call initialiseGlobalVars
     
-    gblStartupFlg = True
-    gblWidgetName = "TenShillings Widget"
+    gsStartupFlg = True
+    gsWidgetName = "TenShillings Widget"
     'thisPSDFullPath = App.Path & "\Res\TenShillings Widget VB6.psd"
     
     extractCommand = Command$ ' capture any parameter passed, remove if a soft reload
@@ -97,19 +97,19 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     
     'Test for the coding environment and set a global variable to alter conditions throughout, mostly in text
     #If TWINBASIC Then
-        gblCodingEnvironment = "TwinBasic"
+        gsCodingEnvironment = "TwinBasic"
     #Else
-        gblCodingEnvironment = "VB6"
+        gsCodingEnvironment = "VB6"
     #End If
     
     ' Test for the version of RichClient and set a global variable to alter conditions throughout, mostly in text, there is no new_c.version in RC5
     If fFExists(App.Path & "\BIN\vbRichClient5.dll") Then
-        gblRichClientEnvironment = "RC5"
+        gsRichClientEnvironment = "RC5"
     ElseIf fFExists(App.Path & "\BIN\RC6.dll") Then
-        gblRichClientEnvironment = "RC6"
+        gsRichClientEnvironment = "RC6"
     End If
       
-    menuForm.mnuAbout.Caption = "About TenShillings " & gblRichClientEnvironment & " Cairo " & gblCodingEnvironment & " widget"
+    menuForm.mnuAbout.Caption = "About TenShillings " & gsRichClientEnvironment & " Cairo " & gsCodingEnvironment & " widget"
        
     ' Load the sounds into numbered buffers ready for playing
     'Call loadAsynchSoundFiles
@@ -121,7 +121,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     Call addImagesToImageList
     
     ' check the Windows version
-    gblClassicThemeCapable = fTestClassicThemeCapable
+    gsClassicThemeCapable = fTestClassicThemeCapable
   
     ' get this tool's entry in the trinkets settings file and assign the app.path
     Call getTrinketsFile
@@ -130,7 +130,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     Call getToolSettingsFile
     
     ' read the widget settings from the new configuration file
-    Call readSettingsFile("Software\TenShillings", gblSettingsFile)
+    Call readSettingsFile("Software\TenShillings", gsSettingsFile)
     
     ' validate the inputs of any data from the input settings file
     Call validateInputs
@@ -142,7 +142,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     Call createRCFormsOnCurrentDisplay
     
 '    ' Set the opacity of the widget, passing just this one global variable to a public property within the class
-    TenShillingsWidget.opacity = Val(gblOpacity) / 100
+    TenShillingsWidget.opacity = Val(gsOpacity) / 100
     
     ' place the form at the saved location and configure all the form elements
     Call makeVisibleFormElements
@@ -174,7 +174,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     ' configure any global timers here
     Call configureTimers
     
-    ' note the monitor primary at the preferences form_load and store as gblOldwidgetFormMonitorPrimary
+    ' note the monitor primary at the preferences form_load and store as gsOldwidgetFormMonitorPrimary
     Call identifyPrimaryMonitor
     
     ' make the busy sand timer invisible
@@ -192,8 +192,8 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     #End If
     
     ' end the startup by un-setting the start global flag
-    gblStartupFlg = False
-    gblReload = False
+    gsStartupFlg = False
+    gsReload = False
         
     ' note: the final act in startup is the form_resize_event that is triggered by the subclassed WM_EXITSIZEMOVE when the form is finally revealed
      
@@ -220,7 +220,7 @@ Private Sub loadPreferenceForm()
 
     If widgetPrefs.IsLoaded = False Then
         Load widgetPrefs
-        gblPrefsFormResizedInCode = True
+        gsPrefsFormResizedInCode = True
         Call widgetPrefs.PrefsFormResizeEvent
     End If
 
@@ -262,7 +262,7 @@ End Sub
 ' Procedure : identifyPrimaryMonitor
 ' Author    : beededea
 ' Date      : 20/02/2025
-' Purpose   : note the monitor primary at the main form_load and store as gblOldwidgetFormMonitorPrimary - will be resampled regularly later and compared
+' Purpose   : note the monitor primary at the main form_load and store as gsOldwidgetFormMonitorPrimary - will be resampled regularly later and compared
 '---------------------------------------------------------------------------------------
 '
 Private Sub identifyPrimaryMonitor()
@@ -271,7 +271,7 @@ Private Sub identifyPrimaryMonitor()
     On Error GoTo identifyPrimaryMonitor_Error
 
     widgetMonitorStruct = cWidgetFormScreenProperties(fMain.TenShillingsForm, widgetFormMonitorID)
-    gblOldwidgetFormMonitorPrimary = widgetMonitorStruct.IsPrimary
+    gsOldwidgetFormMonitorPrimary = widgetMonitorStruct.IsPrimary
 
     On Error GoTo 0
     Exit Sub
@@ -296,10 +296,10 @@ Private Sub checkFirstTime()
 
    On Error GoTo checkFirstTime_Error
 
-    If gblFirstTimeRun = "true" Then
+    If gsFirstTimeRun = "true" Then
         Call makeProgramPreferencesAvailable
-        gblFirstTimeRun = "false"
-        sPutINISetting "Software\TenShillings", "firstTimeRun", gblFirstTimeRun, gblSettingsFile
+        gsFirstTimeRun = "false"
+        sPutINISetting "Software\TenShillings", "firstTimeRun", gsFirstTimeRun, gsSettingsFile
     End If
 
    On Error GoTo 0
@@ -322,7 +322,7 @@ Private Sub initialiseGlobalVars()
       
     On Error GoTo initialiseGlobalVars_Error
     
-    gblMonitorCount = 0
+    gsMonitorCount = 0
 
     ' general
     gsStartup = vbNullString
@@ -333,19 +333,19 @@ Private Sub initialiseGlobalVars()
     ' config
     gsWidgetTooltips = vbNullString
     gsPrefsTooltips = vbNullString
-    'gblEnablePrefsTooltips = vbNullString
+    'gsEnablePrefsTooltips = vbNullString
     
     gsShowTaskbar = vbNullString
     gsShowHelp = vbNullString
-'    gblTogglePendulum = vbNullString
-'    gbl24HourWidgetMode = vbNullString
+'    gsTogglePendulum = vbNullString
+'    gs24HourWidgetMode = vbNullString
     
     gsDpiAwareness = vbNullString
     
     gsWidgetSize = vbNullString
     gsSkewDegrees = vbNullString
     gsScrollWheelDirection = vbNullString
-'    gblNumericDisplayRotation = vbNullString
+'    gsNumericDisplayRotation = vbNullString
     
     ' position
     gsAspectHidden = vbNullString
@@ -357,106 +357,106 @@ Private Sub initialiseGlobalVars()
     gsPortraitHoffset = vbNullString
     gsPortraitYoffset = vbNullString
     gsVLocationPercPrefValue = vbNullString
-    gblhLocationPercPrefValue = vbNullString
+    gsHLocationPercPrefValue = vbNullString
     
     ' sounds
-    gblEnableSounds = vbNullString
-'    gblEnableTicks = vbNullString
-'    gblEnableChimes = vbNullString
-'    gblEnableAlarms = vbNullString
-'    gblVolumeBoost = vbNullString
+    gsEnableSounds = vbNullString
+'    gsEnableTicks = vbNullString
+'    gsEnableChimes = vbNullString
+'    gsEnableAlarms = vbNullString
+'    gsVolumeBoost = vbNullString
     
     ' development
-    gblDebug = vbNullString
-    gblDblClickCommand = vbNullString
-    gblOpenFile = vbNullString
-    gblDefaultVB6Editor = vbNullString
-    gblDefaultTBEditor = vbNullString
+    gsDebug = vbNullString
+    gsDblClickCommand = vbNullString
+    gsOpenFile = vbNullString
+    gsDefaultVB6Editor = vbNullString
+    gsDefaultTBEditor = vbNullString
          
     ' font
-    gblClockFont = vbNullString
-    gblWidgetFont = vbNullString
-    gblPrefsFont = vbNullString
-    gblPrefsFontSizeHighDPI = vbNullString
-    gblPrefsFontSizeLowDPI = vbNullString
-    gblPrefsFontItalics = vbNullString
-    gblPrefsFontColour = vbNullString
+    gsClockFont = vbNullString
+    gsWidgetFont = vbNullString
+    gsPrefsFont = vbNullString
+    gsPrefsFontSizeHighDPI = vbNullString
+    gsPrefsFontSizeLowDPI = vbNullString
+    gsPrefsFontItalics = vbNullString
+    gsPrefsFontColour = vbNullString
     
-    gblDisplayScreenFont = vbNullString
-    gblDisplayScreenFontSize = vbNullString
-    gblDisplayScreenFontItalics = vbNullString
-    gblDisplayScreenFontColour = vbNullString
+    gsDisplayScreenFont = vbNullString
+    gsDisplayScreenFontSize = vbNullString
+    gsDisplayScreenFontItalics = vbNullString
+    gsDisplayScreenFontColour = vbNullString
     
     ' window
-    gblWindowLevel = vbNullString
-    gblPreventDragging = vbNullString
-    gblOpacity = vbNullString
-    gblWidgetHidden = vbNullString
-    gblHidingTime = vbNullString
-    gblIgnoreMouse = vbNullString
-    gblFormVisible = vbNullString
+    gsWindowLevel = vbNullString
+    gsPreventDragging = vbNullString
+    gsOpacity = vbNullString
+    gsWidgetHidden = vbNullString
+    gsHidingTime = vbNullString
+    gsIgnoreMouse = vbNullString
+    gsFormVisible = vbNullString
     
-    gblMenuOccurred = False ' bool
-    gblFirstTimeRun = vbNullString
-    gblMultiMonitorResize = vbNullString
+    gsMenuOccurred = False ' bool
+    gsFirstTimeRun = vbNullString
+    gsMultiMonitorResize = vbNullString
     
     ' general storage variables declared
-    gblSettingsDir = vbNullString
-    gblSettingsFile = vbNullString
+    gsSettingsDir = vbNullString
+    gsSettingsFile = vbNullString
     
-    gblTrinketsDir = vbNullString
-    gblTrinketsFile = vbNullString
+    gsTrinketsDir = vbNullString
+    gsTrinketsFile = vbNullString
     
-    gblWidgetHighDpiXPos = vbNullString
-    gblWidgetHighDpiYPos = vbNullString
+    gsWidgetHighDpiXPos = vbNullString
+    gsWidgetHighDpiYPos = vbNullString
     
-    gblWidgetLowDpiXPos = vbNullString
-    gblWidgetLowDpiYPos = vbNullString
+    gsWidgetLowDpiXPos = vbNullString
+    gsWidgetLowDpiYPos = vbNullString
     
-    gblLastSelectedTab = vbNullString
-    gblSkinTheme = vbNullString
+    gsLastSelectedTab = vbNullString
+    gsSkinTheme = vbNullString
     
     ' general variables declared
     'toolSettingsFile = vbNullString
-    gblClassicThemeCapable = False
-    gblStoreThemeColour = 0
+    gsClassicThemeCapable = False
+    glStoreThemeColour = 0
     'windowsVer = vbNullString
     
     ' vars to obtain correct screen width (to correct VB6 bug) STARTS
-    gblScreenTwipsPerPixelX = 0
-    gblScreenTwipsPerPixelY = 0
-    gblPhysicalScreenWidthTwips = 0
-    gblPhysicalScreenHeightTwips = 0
-    gblPhysicalScreenHeightPixels = 0
-    gblPhysicalScreenWidthPixels = 0
+    gsScreenTwipsPerPixelX = 0
+    gsScreenTwipsPerPixelY = 0
+    glPhysicalScreenWidthTwips = 0
+    gsPhysicalScreenHeightTwips = 0
+    gsPhysicalScreenHeightPixels = 0
+    gsPhysicalScreenWidthPixels = 0
     
-    gblVirtualScreenHeightPixels = 0
-    gblVirtualScreenWidthPixels = 0
+    gsVirtualScreenHeightPixels = 0
+    gsVirtualScreenWidthPixels = 0
     
-    gblOldPhysicalScreenHeightPixels = 0
-    gblOldPhysicalScreenWidthPixels = 0
+    gsOldPhysicalScreenHeightPixels = 0
+    gsOldPhysicalScreenWidthPixels = 0
     
-    gblPrefsPrimaryHeightTwips = vbNullString
-    gblPrefsSecondaryHeightTwips = vbNullString
-    gblWidgetPrimaryHeightRatio = vbNullString
-    gblWidgetSecondaryHeightRatio = vbNullString
+    gsPrefsPrimaryHeightTwips = vbNullString
+    gsPrefsSecondaryHeightTwips = vbNullString
+    gsWidgetPrimaryHeightRatio = vbNullString
+    gsWidgetSecondaryHeightRatio = vbNullString
     
-    gblMessageAHeightTwips = vbNullString
-    gblMessageAWidthTwips = vbNullString
+    gsMessageAHeightTwips = vbNullString
+    gsMessageAWidthTwips = vbNullString
     
     ' key presses
-    gblCTRL_1 = False
-    gblSHIFT_1 = False
+    gsCTRL_1 = False
+    gsSHIFT_1 = False
     
     ' other globals
-    gblDebugFlg = 0
-    gblMinutesToHide = 0
-    gblAspectRatio = vbNullString
-'    gblOldSettingsModificationTime = #1/1/2000 12:00:00 PM#
-    gblCodingEnvironment = vbNullString
-    gblRichClientEnvironment = vbNullString
+    gsDebugFlg = 0
+    gsMinutesToHide = 0
+    gsAspectRatio = vbNullString
+'    gsOldSettingsModificationTime = #1/1/2000 12:00:00 PM#
+    gsCodingEnvironment = vbNullString
+    gsRichClientEnvironment = vbNullString
 
-    'gblTimeAreaClicked = vbNullString
+    'gsTimeAreaClicked = vbNullString
     
    On Error GoTo 0
    Exit Sub
@@ -559,19 +559,19 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     ' if the licenstate is 0 then the program is running for the first time, so pre-size the form to fit larger screens
     If licenceState = 0 Then
         ' the widget displays at 100% at a screen width of 3840 pixels
-        If gblPhysicalScreenWidthPixels >= bigScreen Then
-            gsWidgetSize = CStr((gblPhysicalScreenWidthPixels / bigScreen) * 100)
+        If gsPhysicalScreenWidthPixels >= bigScreen Then
+            gsWidgetSize = CStr((gsPhysicalScreenWidthPixels / bigScreen) * 100)
         End If
     End If
     
     TenShillingsWidget.SkewDegrees = CDbl(gsSkewDegrees)
     
     ' set the initial size
-    If gblMonitorCount > 1 And (LTrim$(gblMultiMonitorResize) = "1" Or LTrim$(gblMultiMonitorResize) = "2") Then
+    If gsMonitorCount > 1 And (LTrim$(gsMultiMonitorResize) = "1" Or LTrim$(gsMultiMonitorResize) = "2") Then
         If widgetMonitorStruct.IsPrimary = True Then
-            TenShillingsWidget.Zoom = (Val(gblWidgetPrimaryHeightRatio))
+            TenShillingsWidget.Zoom = (Val(gsWidgetPrimaryHeightRatio))
         Else
-            TenShillingsWidget.Zoom = (Val(gblWidgetSecondaryHeightRatio))
+            TenShillingsWidget.Zoom = (Val(gsWidgetSecondaryHeightRatio))
         End If
     Else
         TenShillingsWidget.Zoom = Val(gsWidgetSize) / 100
@@ -585,11 +585,11 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
         menuForm.mnuTurnFunctionsOn.Checked = False
     End If
     
-    If gblDebug = "1" Then
+    If gsDebug = "1" Then
         #If TWINBASIC Then
-            If gblDefaultTBEditor <> vbNullString Then thisEditor = gblDefaultTBEditor
+            If gsDefaultTBEditor <> vbNullString Then thisEditor = gsDefaultTBEditor
         #Else
-            If gblDefaultVB6Editor <> vbNullString Then thisEditor = gblDefaultVB6Editor
+            If gsDefaultVB6Editor <> vbNullString Then thisEditor = gsDefaultVB6Editor
         #End If
         
         menuForm.mnuEditWidget.Caption = "Edit Widget using " & thisEditor
@@ -609,11 +609,11 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     ' set the visibility and characteristics of the interactive areas
     ' the alpha is already set to zero for all layers found in the PSD, we now turn them back on as we require
         
-    If gblDebug = "1" Then
+    If gsDebug = "1" Then
         #If TWINBASIC Then
-            If gblDefaultTBEditor <> vbNullString Then thisEditor = gblDefaultTBEditor
+            If gsDefaultTBEditor <> vbNullString Then thisEditor = gsDefaultTBEditor
         #Else
-            If gblDefaultVB6Editor <> vbNullString Then thisEditor = gblDefaultVB6Editor
+            If gsDefaultVB6Editor <> vbNullString Then thisEditor = gsDefaultVB6Editor
         #End If
         
         menuForm.mnuEditWidget.Caption = "Edit Widget using " & thisEditor
@@ -623,7 +623,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     End If
         
    ' set the lock state of the widget
-   If gblPreventDragging = "0" Then
+   If gsPreventDragging = "0" Then
         menuForm.mnuLockWidget.Checked = False
         TenShillingsWidget.Locked = False
     Else
@@ -631,7 +631,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
         TenShillingsWidget.Locked = True ' this is just here for continuity's sake, it is also set at the time the control is selected
     End If
     
-    TenShillingsWidget.opacity = Val(gblOpacity) / 100
+    TenShillingsWidget.opacity = Val(gsOpacity) / 100
 
     ' set the z-ordering of the window
     Call setAlphaFormZordering
@@ -642,7 +642,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     ' set the hiding time for the hiding timer, can't read the minutes from comboxbox as the prefs isn't yet open
     Call setHidingTime
 
-    If gblMinutesToHide > 0 Then menuForm.mnuHideWidget.Caption = "Hide Widget for " & gblMinutesToHide & " min."
+    If gsMinutesToHide > 0 Then menuForm.mnuHideWidget.Caption = "Hide Widget for " & gsMinutesToHide & " min."
     
     ' refresh the form in order to show the above changes immediately
     TenShillingsWidget.Widget.Refresh
@@ -668,11 +668,11 @@ Public Sub setAlphaFormZordering()
 
    On Error GoTo setAlphaFormZordering_Error
 
-    If Val(gblWindowLevel) = 0 Then
+    If Val(gsWindowLevel) = 0 Then
         Call SetWindowPos(fMain.TenShillingsForm.hWnd, HWND_BOTTOM, 0&, 0&, 0&, 0&, OnTopFlags)
-    ElseIf Val(gblWindowLevel) = 1 Then
+    ElseIf Val(gsWindowLevel) = 1 Then
         Call SetWindowPos(fMain.TenShillingsForm.hWnd, HWND_TOP, 0&, 0&, 0&, 0&, OnTopFlags)
-    ElseIf Val(gblWindowLevel) = 2 Then
+    ElseIf Val(gsWindowLevel) = 2 Then
         Call SetWindowPos(fMain.TenShillingsForm.hWnd, HWND_TOPMOST, 0&, 0&, 0&, 0&, OnTopFlags)
     End If
 
@@ -691,95 +691,95 @@ End Sub
 ' Purpose   : read the application's setting file and assign values to public vars
 '---------------------------------------------------------------------------------------
 '
-Public Sub readSettingsFile(ByVal Location As String, ByVal gblSettingsFile As String)
+Public Sub readSettingsFile(ByVal Location As String, ByVal gsSettingsFile As String)
     On Error GoTo readSettingsFile_Error
 
-    If fFExists(gblSettingsFile) Then
+    If fFExists(gsSettingsFile) Then
         
         ' general
-        gsStartup = fGetINISetting(Location, "startup", gblSettingsFile)
-        gsWidgetFunctions = fGetINISetting(Location, "widgetFunctions", gblSettingsFile)
-        gsPointerAnimate = fGetINISetting(Location, "pointerAnimate", gblSettingsFile)
-        gsSamplingInterval = fGetINISetting(Location, "samplingInterval", gblSettingsFile)
+        gsStartup = fGetINISetting(Location, "startup", gsSettingsFile)
+        gsWidgetFunctions = fGetINISetting(Location, "widgetFunctions", gsSettingsFile)
+        gsPointerAnimate = fGetINISetting(Location, "pointerAnimate", gsSettingsFile)
+        gsSamplingInterval = fGetINISetting(Location, "samplingInterval", gsSettingsFile)
         
         ' configuration
-        gsWidgetTooltips = fGetINISetting(Location, "widgetTooltips", gblSettingsFile)
-        gsPrefsTooltips = fGetINISetting(Location, "prefsTooltips", gblSettingsFile)
+        gsWidgetTooltips = fGetINISetting(Location, "widgetTooltips", gsSettingsFile)
+        gsPrefsTooltips = fGetINISetting(Location, "prefsTooltips", gsSettingsFile)
         
-        gsShowTaskbar = fGetINISetting(Location, "showTaskbar", gblSettingsFile)
-        gsShowHelp = fGetINISetting(Location, "showHelp", gblSettingsFile)
-        gsDpiAwareness = fGetINISetting(Location, "dpiAwareness", gblSettingsFile)
-        gsWidgetSize = fGetINISetting(Location, "widgetSize", gblSettingsFile)
-        gsSkewDegrees = fGetINISetting(Location, "skewDegrees", gblSettingsFile)
+        gsShowTaskbar = fGetINISetting(Location, "showTaskbar", gsSettingsFile)
+        gsShowHelp = fGetINISetting(Location, "showHelp", gsSettingsFile)
+        gsDpiAwareness = fGetINISetting(Location, "dpiAwareness", gsSettingsFile)
+        gsWidgetSize = fGetINISetting(Location, "widgetSize", gsSettingsFile)
+        gsSkewDegrees = fGetINISetting(Location, "skewDegrees", gsSettingsFile)
         
-        gsScrollWheelDirection = fGetINISetting(Location, "scrollWheelDirection", gblSettingsFile)
+        gsScrollWheelDirection = fGetINISetting(Location, "scrollWheelDirection", gsSettingsFile)
         
         ' position
-        gsAspectHidden = fGetINISetting(Location, "aspectHidden", gblSettingsFile)
-        gsWidgetPosition = fGetINISetting(Location, "widgetPosition", gblSettingsFile)
-        gsWidgetLandscape = fGetINISetting(Location, "widgetLandscape", gblSettingsFile)
-        gsWidgetPortrait = fGetINISetting(Location, "widgetPortrait", gblSettingsFile)
-        gsLandscapeFormHoffset = fGetINISetting(Location, "landscapeHoffset", gblSettingsFile)
-        gsLandscapeFormVoffset = fGetINISetting(Location, "landscapeYoffset", gblSettingsFile)
-        gsPortraitHoffset = fGetINISetting(Location, "portraitHoffset", gblSettingsFile)
-        gsPortraitYoffset = fGetINISetting(Location, "portraitYoffset", gblSettingsFile)
-        gsVLocationPercPrefValue = fGetINISetting(Location, "vLocationPercPrefValue", gblSettingsFile)
-        gblhLocationPercPrefValue = fGetINISetting(Location, "hLocationPercPrefValue", gblSettingsFile)
+        gsAspectHidden = fGetINISetting(Location, "aspectHidden", gsSettingsFile)
+        gsWidgetPosition = fGetINISetting(Location, "widgetPosition", gsSettingsFile)
+        gsWidgetLandscape = fGetINISetting(Location, "widgetLandscape", gsSettingsFile)
+        gsWidgetPortrait = fGetINISetting(Location, "widgetPortrait", gsSettingsFile)
+        gsLandscapeFormHoffset = fGetINISetting(Location, "landscapeHoffset", gsSettingsFile)
+        gsLandscapeFormVoffset = fGetINISetting(Location, "landscapeYoffset", gsSettingsFile)
+        gsPortraitHoffset = fGetINISetting(Location, "portraitHoffset", gsSettingsFile)
+        gsPortraitYoffset = fGetINISetting(Location, "portraitYoffset", gsSettingsFile)
+        gsVLocationPercPrefValue = fGetINISetting(Location, "vLocationPercPrefValue", gsSettingsFile)
+        gsHLocationPercPrefValue = fGetINISetting(Location, "hLocationPercPrefValue", gsSettingsFile)
 
         ' font
-        gblClockFont = fGetINISetting(Location, "clockFont", gblSettingsFile)
-        gblWidgetFont = fGetINISetting(Location, "widgetFont", gblSettingsFile)
-        gblPrefsFont = fGetINISetting(Location, "prefsFont", gblSettingsFile)
-        gblPrefsFontSizeHighDPI = fGetINISetting(Location, "prefsFontSizeHighDPI", gblSettingsFile)
-        gblPrefsFontSizeLowDPI = fGetINISetting(Location, "prefsFontSizeLowDPI", gblSettingsFile)
-        gblPrefsFontItalics = fGetINISetting(Location, "prefsFontItalics", gblSettingsFile)
-        gblPrefsFontColour = fGetINISetting(Location, "prefsFontColour", gblSettingsFile)
+        gsClockFont = fGetINISetting(Location, "clockFont", gsSettingsFile)
+        gsWidgetFont = fGetINISetting(Location, "widgetFont", gsSettingsFile)
+        gsPrefsFont = fGetINISetting(Location, "prefsFont", gsSettingsFile)
+        gsPrefsFontSizeHighDPI = fGetINISetting(Location, "prefsFontSizeHighDPI", gsSettingsFile)
+        gsPrefsFontSizeLowDPI = fGetINISetting(Location, "prefsFontSizeLowDPI", gsSettingsFile)
+        gsPrefsFontItalics = fGetINISetting(Location, "prefsFontItalics", gsSettingsFile)
+        gsPrefsFontColour = fGetINISetting(Location, "prefsFontColour", gsSettingsFile)
     
-        gblDisplayScreenFont = fGetINISetting(Location, "displayScreenFont", gblSettingsFile)
-        gblDisplayScreenFontSize = fGetINISetting(Location, "displayScreenFontSize", gblSettingsFile)
-        gblDisplayScreenFontItalics = fGetINISetting(Location, "displayScreenFontItalics", gblSettingsFile)
-        gblDisplayScreenFontColour = fGetINISetting(Location, "displayScreenFontColour", gblSettingsFile)
+        gsDisplayScreenFont = fGetINISetting(Location, "displayScreenFont", gsSettingsFile)
+        gsDisplayScreenFontSize = fGetINISetting(Location, "displayScreenFontSize", gsSettingsFile)
+        gsDisplayScreenFontItalics = fGetINISetting(Location, "displayScreenFontItalics", gsSettingsFile)
+        gsDisplayScreenFontColour = fGetINISetting(Location, "displayScreenFontColour", gsSettingsFile)
        
         ' sound
-'        gblEnableSounds = fGetINISetting(Location, "enableSounds", gblSettingsFile)
+'        gsEnableSounds = fGetINISetting(Location, "enableSounds", gsSettingsFile)
 
         
         ' development
-        gblDebug = fGetINISetting(Location, "debug", gblSettingsFile)
-        gblDblClickCommand = fGetINISetting(Location, "dblClickCommand", gblSettingsFile)
-        gblOpenFile = fGetINISetting(Location, "openFile", gblSettingsFile)
-        gblDefaultVB6Editor = fGetINISetting(Location, "defaultVB6Editor", gblSettingsFile)
-        gblDefaultTBEditor = fGetINISetting(Location, "defaultTBEditor", gblSettingsFile)
+        gsDebug = fGetINISetting(Location, "debug", gsSettingsFile)
+        gsDblClickCommand = fGetINISetting(Location, "dblClickCommand", gsSettingsFile)
+        gsOpenFile = fGetINISetting(Location, "openFile", gsSettingsFile)
+        gsDefaultVB6Editor = fGetINISetting(Location, "defaultVB6Editor", gsSettingsFile)
+        gsDefaultTBEditor = fGetINISetting(Location, "defaultTBEditor", gsSettingsFile)
         
         ' other
-        gblWidgetHighDpiXPos = fGetINISetting("Software\TenShillings", "widgetHighDpiXPos", gblSettingsFile)
-        gblWidgetHighDpiYPos = fGetINISetting("Software\TenShillings", "widgetHighDpiYPos", gblSettingsFile)
-        gblWidgetLowDpiXPos = fGetINISetting("Software\TenShillings", "widgetLowDpiXPos", gblSettingsFile)
-        gblWidgetLowDpiYPos = fGetINISetting("Software\TenShillings", "widgetLowDpiYPos", gblSettingsFile)
-        gblLastSelectedTab = fGetINISetting(Location, "lastSelectedTab", gblSettingsFile)
-        gblSkinTheme = fGetINISetting(Location, "skinTheme", gblSettingsFile)
+        gsWidgetHighDpiXPos = fGetINISetting("Software\TenShillings", "widgetHighDpiXPos", gsSettingsFile)
+        gsWidgetHighDpiYPos = fGetINISetting("Software\TenShillings", "widgetHighDpiYPos", gsSettingsFile)
+        gsWidgetLowDpiXPos = fGetINISetting("Software\TenShillings", "widgetLowDpiXPos", gsSettingsFile)
+        gsWidgetLowDpiYPos = fGetINISetting("Software\TenShillings", "widgetLowDpiYPos", gsSettingsFile)
+        gsLastSelectedTab = fGetINISetting(Location, "lastSelectedTab", gsSettingsFile)
+        gsSkinTheme = fGetINISetting(Location, "skinTheme", gsSettingsFile)
         
         ' window
-        gblWindowLevel = fGetINISetting(Location, "windowLevel", gblSettingsFile)
-        gblPreventDragging = fGetINISetting(Location, "preventDragging", gblSettingsFile)
-        gblOpacity = fGetINISetting(Location, "opacity", gblSettingsFile)
+        gsWindowLevel = fGetINISetting(Location, "windowLevel", gsSettingsFile)
+        gsPreventDragging = fGetINISetting(Location, "preventDragging", gsSettingsFile)
+        gsOpacity = fGetINISetting(Location, "opacity", gsSettingsFile)
         
         ' we do not want the widget to hide at startup
-        gblWidgetHidden = "0"
+        gsWidgetHidden = "0"
         
-        gblHidingTime = fGetINISetting(Location, "hidingTime", gblSettingsFile)
-        gblIgnoreMouse = fGetINISetting(Location, "ignoreMouse", gblSettingsFile)
-        gblFormVisible = fGetINISetting(Location, "formVisible", gblSettingsFile)
+        gsHidingTime = fGetINISetting(Location, "hidingTime", gsSettingsFile)
+        gsIgnoreMouse = fGetINISetting(Location, "ignoreMouse", gsSettingsFile)
+        gsFormVisible = fGetINISetting(Location, "formVisible", gsSettingsFile)
         
-        gblMultiMonitorResize = fGetINISetting(Location, "multiMonitorResize", gblSettingsFile)
-        gblFirstTimeRun = fGetINISetting(Location, "firstTimeRun", gblSettingsFile)
+        gsMultiMonitorResize = fGetINISetting(Location, "multiMonitorResize", gsSettingsFile)
+        gsFirstTimeRun = fGetINISetting(Location, "firstTimeRun", gsSettingsFile)
 
                            
-        gblWidgetSecondaryHeightRatio = fGetINISetting(Location, "widgetSecondaryHeightRatio", gblSettingsFile)
-        gblWidgetPrimaryHeightRatio = fGetINISetting(Location, "widgetPrimaryHeightRatio", gblSettingsFile)
+        gsWidgetSecondaryHeightRatio = fGetINISetting(Location, "widgetSecondaryHeightRatio", gsSettingsFile)
+        gsWidgetPrimaryHeightRatio = fGetINISetting(Location, "widgetPrimaryHeightRatio", gsSettingsFile)
         
-        gblMessageAHeightTwips = fGetINISetting(Location, "messageAHeightTwips", gblSettingsFile)
-        gblMessageAWidthTwips = fGetINISetting(Location, "messageAWidthTwips ", gblSettingsFile)
+        gsMessageAHeightTwips = fGetINISetting(Location, "messageAHeightTwips", gsSettingsFile)
+        gsMessageAWidthTwips = fGetINISetting(Location, "messageAWidthTwips ", gsSettingsFile)
         
     End If
 
@@ -807,7 +807,7 @@ Public Sub validateInputs()
             
         ' general
         If gsWidgetFunctions = vbNullString Then gsWidgetFunctions = "1" ' always turn
-'        If gblAnimationInterval = vbNullString Then gblAnimationInterval = "130"
+'        If gsAnimationInterval = vbNullString Then gsAnimationInterval = "130"
         If gsStartup = vbNullString Then gsStartup = "1"
         
         If gsPointerAnimate = vbNullString Then gsPointerAnimate = "0"
@@ -817,45 +817,45 @@ Public Sub validateInputs()
         If gsWidgetTooltips = "False" Then gsWidgetTooltips = "0"
         If gsWidgetTooltips = vbNullString Then gsWidgetTooltips = "0"
         
-        'If gblEnablePrefsTooltips = vbNullString Then gblEnablePrefsTooltips = "false"
+        'If gsEnablePrefsTooltips = vbNullString Then gsEnablePrefsTooltips = "false"
         If gsPrefsTooltips = "False" Then gsPrefsTooltips = "0"
         If gsPrefsTooltips = vbNullString Then gsPrefsTooltips = "0"
         
         If gsShowTaskbar = vbNullString Then gsShowTaskbar = "0"
         If gsShowHelp = vbNullString Then gsShowHelp = "1"
-'        If gblTogglePendulum = vbNullString Then gblTogglePendulum = "0"
-'        If gbl24HourWidgetMode = vbNullString Then gbl24HourWidgetMode = "1"
+'        If gsTogglePendulum = vbNullString Then gsTogglePendulum = "0"
+'        If gs24HourWidgetMode = vbNullString Then gs24HourWidgetMode = "1"
 '
         If gsDpiAwareness = vbNullString Then gsDpiAwareness = "0"
         If gsWidgetSize = vbNullString Then gsWidgetSize = "100"
         If gsSkewDegrees = vbNullString Then gsSkewDegrees = "0"
         
         If gsScrollWheelDirection = vbNullString Then gsScrollWheelDirection = "1"
-'        If gblNumericDisplayRotation = vbNullString Then gblNumericDisplayRotation = "1"
+'        If gsNumericDisplayRotation = vbNullString Then gsNumericDisplayRotation = "1"
                
         ' fonts
-        If gblPrefsFont = vbNullString Then gblPrefsFont = "times new roman"
-        If gblClockFont = vbNullString Then gblClockFont = gblPrefsFont
-        If gblPrefsFontSizeHighDPI = vbNullString Then gblPrefsFontSizeHighDPI = "8"
-        If gblPrefsFontSizeLowDPI = vbNullString Then gblPrefsFontSizeLowDPI = "8"
-        If gblPrefsFontItalics = vbNullString Then gblPrefsFontItalics = "false"
-        If gblPrefsFontColour = vbNullString Then gblPrefsFontColour = "0"
+        If gsPrefsFont = vbNullString Then gsPrefsFont = "times new roman"
+        If gsClockFont = vbNullString Then gsClockFont = gsPrefsFont
+        If gsPrefsFontSizeHighDPI = vbNullString Then gsPrefsFontSizeHighDPI = "8"
+        If gsPrefsFontSizeLowDPI = vbNullString Then gsPrefsFontSizeLowDPI = "8"
+        If gsPrefsFontItalics = vbNullString Then gsPrefsFontItalics = "false"
+        If gsPrefsFontColour = vbNullString Then gsPrefsFontColour = "0"
 
-        If gblWidgetFont = vbNullString Then gblWidgetFont = gblPrefsFont
+        If gsWidgetFont = vbNullString Then gsWidgetFont = gsPrefsFont
 
-        If gblDisplayScreenFont = vbNullString Then gblDisplayScreenFont = "courier new"
-        If gblDisplayScreenFont = "Courier  New" Then gblDisplayScreenFont = "courier new"
-        If gblDisplayScreenFontSize = vbNullString Then gblDisplayScreenFontSize = "5"
-        If gblDisplayScreenFontItalics = vbNullString Then gblDisplayScreenFontItalics = "false"
-        If gblDisplayScreenFontColour = vbNullString Then gblDisplayScreenFontColour = "0"
+        If gsDisplayScreenFont = vbNullString Then gsDisplayScreenFont = "courier new"
+        If gsDisplayScreenFont = "Courier  New" Then gsDisplayScreenFont = "courier new"
+        If gsDisplayScreenFontSize = vbNullString Then gsDisplayScreenFontSize = "5"
+        If gsDisplayScreenFontItalics = vbNullString Then gsDisplayScreenFontItalics = "false"
+        If gsDisplayScreenFontColour = vbNullString Then gsDisplayScreenFontColour = "0"
 
         ' sounds
         
-        If gblEnableSounds = vbNullString Then gblEnableSounds = "1"
-'        If gblEnableTicks = vbNullString Then gblEnableTicks = "0"
-'        If gblEnableChimes = vbNullString Then gblEnableChimes = "0"
-'        If gblEnableAlarms = vbNullString Then gblEnableAlarms = "0"
-'        If gblVolumeBoost = vbNullString Then gblVolumeBoost = "0"
+        If gsEnableSounds = vbNullString Then gsEnableSounds = "1"
+'        If gsEnableTicks = vbNullString Then gsEnableTicks = "0"
+'        If gsEnableChimes = vbNullString Then gsEnableChimes = "0"
+'        If gsEnableAlarms = vbNullString Then gsEnableAlarms = "0"
+'        If gsVolumeBoost = vbNullString Then gsVolumeBoost = "0"
         
         
         ' position
@@ -868,35 +868,35 @@ Public Sub validateInputs()
         If gsPortraitHoffset = vbNullString Then gsPortraitHoffset = vbNullString
         If gsPortraitYoffset = vbNullString Then gsPortraitYoffset = vbNullString
         If gsVLocationPercPrefValue = vbNullString Then gsVLocationPercPrefValue = vbNullString
-        If gblhLocationPercPrefValue = vbNullString Then gblhLocationPercPrefValue = vbNullString
+        If gsHLocationPercPrefValue = vbNullString Then gsHLocationPercPrefValue = vbNullString
                 
         ' development
-        If gblDebug = vbNullString Then gblDebug = "0"
-        If gblDblClickCommand = vbNullString And gblFirstTimeRun = "True" Then gblDblClickCommand = "mmsys.cpl"
-        If gblOpenFile = vbNullString Then gblOpenFile = vbNullString
-        If gblDefaultVB6Editor = vbNullString Then gblDefaultVB6Editor = vbNullString
-        If gblDefaultTBEditor = vbNullString Then gblDefaultTBEditor = vbNullString
+        If gsDebug = vbNullString Then gsDebug = "0"
+        If gsDblClickCommand = vbNullString And gsFirstTimeRun = "True" Then gsDblClickCommand = "mmsys.cpl"
+        If gsOpenFile = vbNullString Then gsOpenFile = vbNullString
+        If gsDefaultVB6Editor = vbNullString Then gsDefaultVB6Editor = vbNullString
+        If gsDefaultTBEditor = vbNullString Then gsDefaultTBEditor = vbNullString
         
         ' window
-        If gblWindowLevel = vbNullString Then gblWindowLevel = "1" 'WindowLevel", gblSettingsFile)
-        If gblOpacity = vbNullString Then gblOpacity = "100"
-        If gblWidgetHidden = vbNullString Then gblWidgetHidden = "0"
-        If gblHidingTime = vbNullString Then gblHidingTime = "0"
-        If gblIgnoreMouse = vbNullString Then gblIgnoreMouse = "0"
-        If gblFormVisible = vbNullString Then gblFormVisible = "0"
+        If gsWindowLevel = vbNullString Then gsWindowLevel = "1" 'WindowLevel", gsSettingsFile)
+        If gsOpacity = vbNullString Then gsOpacity = "100"
+        If gsWidgetHidden = vbNullString Then gsWidgetHidden = "0"
+        If gsHidingTime = vbNullString Then gsHidingTime = "0"
+        If gsIgnoreMouse = vbNullString Then gsIgnoreMouse = "0"
+        If gsFormVisible = vbNullString Then gsFormVisible = "0"
         
-        If gblPreventDragging = vbNullString Then gblPreventDragging = "0"
-        If gblMultiMonitorResize = vbNullString Then gblMultiMonitorResize = "0"
+        If gsPreventDragging = vbNullString Then gsPreventDragging = "0"
+        If gsMultiMonitorResize = vbNullString Then gsMultiMonitorResize = "0"
         
         
         ' other
-        If gblFirstTimeRun = vbNullString Then gblFirstTimeRun = "true"
-        If gblLastSelectedTab = vbNullString Then gblLastSelectedTab = "general"
-        If gblSkinTheme = vbNullString Then gblSkinTheme = "dark"
+        If gsFirstTimeRun = vbNullString Then gsFirstTimeRun = "true"
+        If gsLastSelectedTab = vbNullString Then gsLastSelectedTab = "general"
+        If gsSkinTheme = vbNullString Then gsSkinTheme = "dark"
     
         
-        If gblWidgetPrimaryHeightRatio = "" Then gblWidgetPrimaryHeightRatio = "1"
-        If gblWidgetSecondaryHeightRatio = "" Then gblWidgetSecondaryHeightRatio = "1"
+        If gsWidgetPrimaryHeightRatio = "" Then gsWidgetPrimaryHeightRatio = "1"
+        If gsWidgetSecondaryHeightRatio = "" Then gsWidgetSecondaryHeightRatio = "1"
         
         
    On Error GoTo 0
@@ -919,20 +919,20 @@ Private Sub getTrinketsFile()
     
     Dim iFileNo As Integer: iFileNo = 0
     
-    gblTrinketsDir = fSpecialFolder(feUserAppData) & "\trinkets" ' just for this user alone
-    gblTrinketsFile = gblTrinketsDir & "\" & gblWidgetName & ".ini"
+    gsTrinketsDir = fSpecialFolder(feUserAppData) & "\trinkets" ' just for this user alone
+    gsTrinketsFile = gsTrinketsDir & "\" & gsWidgetName & ".ini"
         
     'if the folder does not exist then create the folder
-    If Not fDirExists(gblTrinketsDir) Then
-        MkDir gblTrinketsDir
+    If Not fDirExists(gsTrinketsDir) Then
+        MkDir gsTrinketsDir
     End If
 
     'if the settings.ini does not exist then create the file by copying
-    If Not fFExists(gblTrinketsFile) Then
+    If Not fFExists(gsTrinketsFile) Then
 
         iFileNo = FreeFile
         'open the file for writing
-        Open gblTrinketsFile For Output As #iFileNo
+        Open gsTrinketsFile For Output As #iFileNo
         Write #iFileNo, App.Path & "\" & App.EXEName & ".exe"
         Write #iFileNo,
         Close #iFileNo
@@ -955,24 +955,24 @@ End Sub
 '
 Private Sub getToolSettingsFile()
     On Error GoTo getToolSettingsFile_Error
-    ''If gblDebugFlg = 1  Then Debug.Print "%getToolSettingsFile"
+    ''If gsDebugFlg = 1  Then Debug.Print "%getToolSettingsFile"
     
     Dim iFileNo As Integer: iFileNo = 0
     
-    gblSettingsDir = fSpecialFolder(feUserAppData) & "\TenShillings-" & gblRichClientEnvironment & "-Widget-" & gblCodingEnvironment & "" ' just for this user alone
-    gblSettingsFile = gblSettingsDir & "\settings.ini"
+    gsSettingsDir = fSpecialFolder(feUserAppData) & "\TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment & "" ' just for this user alone
+    gsSettingsFile = gsSettingsDir & "\settings.ini"
         
     'if the folder does not exist then create the folder
-    If Not fDirExists(gblSettingsDir) Then
-        MkDir gblSettingsDir
+    If Not fDirExists(gsSettingsDir) Then
+        MkDir gsSettingsDir
     End If
 
     'if the settings.ini does not exist then create the file by copying
-    If Not fFExists(gblSettingsFile) Then
+    If Not fFExists(gsSettingsFile) Then
 
         iFileNo = FreeFile
         'open the file for writing
-        Open gblSettingsFile For Output As #iFileNo
+        Open gsSettingsFile For Output As #iFileNo
         Close #iFileNo
     End If
     
@@ -999,7 +999,7 @@ Private Sub configureTimers()
 
     On Error GoTo configureTimers_Error
     
-'    gblOldSettingsModificationTime = FileDateTime(gblSettingsFile)
+'    gsOldSettingsModificationTime = FileDateTime(gsSettingsFile)
 
     frmTimer.tmrScreenResolution.Enabled = True
     frmTimer.unhideTimer.Enabled = True
@@ -1030,12 +1030,12 @@ Private Sub setHidingTime()
     
     On Error GoTo setHidingTime_Error
 
-    If gblHidingTime = "0" Then gblMinutesToHide = 1
-    If gblHidingTime = "1" Then gblMinutesToHide = 5
-    If gblHidingTime = "2" Then gblMinutesToHide = 10
-    If gblHidingTime = "3" Then gblMinutesToHide = 20
-    If gblHidingTime = "4" Then gblMinutesToHide = 30
-    If gblHidingTime = "5" Then gblMinutesToHide = 60
+    If gsHidingTime = "0" Then gsMinutesToHide = 1
+    If gsHidingTime = "1" Then gsMinutesToHide = 5
+    If gsHidingTime = "2" Then gsMinutesToHide = 10
+    If gsHidingTime = "3" Then gsMinutesToHide = 20
+    If gsHidingTime = "4" Then gsMinutesToHide = 30
+    If gsHidingTime = "5" Then gsMinutesToHide = 60
 
     On Error GoTo 0
     Exit Sub
@@ -1071,19 +1071,19 @@ Private Sub createRCFormsOnCurrentDisplay()
     imageHeight = thisSrf.Height
 
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateTenShillingsForm(imageWidth, imageHeight, gblWidgetName)
+      Call fMain.initAndCreateTenShillingsForm(imageWidth, imageHeight, gsWidgetName)
     End With
 
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateAboutForm(gblWidgetName)
+      Call fMain.initAndCreateAboutForm(gsWidgetName)
     End With
     
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateHelpForm(gblWidgetName)
+      Call fMain.initAndCreateHelpForm(gsWidgetName)
     End With
 
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateLicenceForm(gblWidgetName)
+      Call fMain.initAndCreateLicenceForm(gsWidgetName)
     End With
     
     On Error GoTo 0
@@ -1113,8 +1113,8 @@ Private Sub handleUnhideMode(ByVal thisUnhideMode As String)
     On Error GoTo handleUnhideMode_Error
 
     If thisUnhideMode = "unhide" Then     'parse the command line
-        gblUnhide = "true"
-        sPutINISetting "Software\TenShillings", "unhide", gblUnhide, gblSettingsFile
+        gsUnhide = "true"
+        sPutINISetting "Software\TenShillings", "unhide", gsUnhide, gsSettingsFile
         Call thisForm_Unload
         End
     End If

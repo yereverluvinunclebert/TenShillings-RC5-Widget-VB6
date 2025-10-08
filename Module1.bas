@@ -330,64 +330,64 @@ Public gsLandscapeFormVoffset As String
 Public gsPortraitHoffset As String
 Public gsPortraitYoffset As String
 Public gsVLocationPercPrefValue As String
-Public gblhLocationPercPrefValue As String
+Public gsHLocationPercPrefValue As String
 
 ' sounds
 
-Public gblEnableSounds  As String
+Public gsEnableSounds  As String
 
 ' development
 
-Public gblDebug As String
-Public gblDblClickCommand As String
-Public gblOpenFile As String
-Public gblDefaultVB6Editor As String
-Public gblDefaultTBEditor As String
+Public gsDebug As String
+Public gsDblClickCommand As String
+Public gsOpenFile As String
+Public gsDefaultVB6Editor As String
+Public gsDefaultTBEditor As String
        
 ' font
 
-Public gblClockFont As String
-Public gblWidgetFont As String
-Public gblPrefsFont As String
-Public gblPrefsFontSizeHighDPI As String
-Public gblPrefsFontSizeLowDPI As String
-Public gblPrefsFontItalics  As String
-Public gblPrefsFontColour  As String
+Public gsClockFont As String
+Public gsWidgetFont As String
+Public gsPrefsFont As String
+Public gsPrefsFontSizeHighDPI As String
+Public gsPrefsFontSizeLowDPI As String
+Public gsPrefsFontItalics  As String
+Public gsPrefsFontColour  As String
 
-Public gblDisplayScreenFont As String
-Public gblDisplayScreenFontSize As String
-Public gblDisplayScreenFontItalics As String
-Public gblDisplayScreenFontColour As String
+Public gsDisplayScreenFont As String
+Public gsDisplayScreenFontSize As String
+Public gsDisplayScreenFontItalics As String
+Public gsDisplayScreenFontColour As String
 
 ' window
 
-Public gblWindowLevel As String
-Public gblPreventDragging As String
-Public gblOpacity  As String
-Public gblWidgetHidden  As String
-Public gblHidingTime  As String
-Public gblIgnoreMouse  As String
-Public gblFormVisible  As String
+Public gsWindowLevel As String
+Public gsPreventDragging As String
+Public gsOpacity  As String
+Public gsWidgetHidden  As String
+Public gsHidingTime  As String
+Public gsIgnoreMouse  As String
+Public gsFormVisible  As String
 
-Public gblMenuOccurred As Boolean ' bool
-Public gblFirstTimeRun  As String
-Public gblMultiMonitorResize  As String
+Public gsMenuOccurred As Boolean ' bool
+Public gsFirstTimeRun  As String
+Public gsMultiMonitorResize  As String
 
 ' General storage variables declared
 
-Public gblSettingsDir As String
-Public gblSettingsFile As String
+Public gsSettingsDir As String
+Public gsSettingsFile As String
 
-Public gblTrinketsDir      As String
-Public gblTrinketsFile      As String
+Public gsTrinketsDir      As String
+Public gsTrinketsFile      As String
 
-Public gblWidgetHighDpiXPos As String
-Public gblWidgetHighDpiYPos As String
-Public gblWidgetLowDpiXPos As String
-Public gblWidgetLowDpiYPos As String
-Public gblLastSelectedTab As String
-Public gblSkinTheme As String
-Public gblUnhide As String
+Public gsWidgetHighDpiXPos As String
+Public gsWidgetHighDpiYPos As String
+Public gsWidgetLowDpiXPos As String
+Public gsWidgetLowDpiYPos As String
+Public gsLastSelectedTab As String
+Public gsSkinTheme As String
+Public gsUnhide As String
 
 
 ' global properties for the state of each UI element, read at startup
@@ -395,19 +395,19 @@ Public gblUnhide As String
 
 ' vars stored for positioning the prefs form
 
-Public gblPrefsHighDpiXPosTwips As String
-Public gblPrefsHighDpiYPosTwips As String
+Public gsPrefsHighDpiXPosTwips As String
+Public gsPrefsHighDpiYPosTwips As String
 
-Public gblPrefsLowDpiXPosTwips As String
-Public gblPrefsLowDpiYPosTwips As String
+Public gsPrefsLowDpiXPosTwips As String
+Public gsPrefsLowDpiYPosTwips As String
 
-Public gblPrefsPrimaryHeightTwips As String
-Public gblPrefsSecondaryHeightTwips As String
-Public gblWidgetPrimaryHeightRatio As String
-Public gblWidgetSecondaryHeightRatio As String
+Public gsPrefsPrimaryHeightTwips As String
+Public gsPrefsSecondaryHeightTwips As String
+Public gsWidgetPrimaryHeightRatio As String
+Public gsWidgetSecondaryHeightRatio As String
 
-Public gblMessageAHeightTwips  As String
-Public gblMessageAWidthTwips   As String
+Public gsMessageAHeightTwips  As String
+Public gsMessageAWidthTwips   As String
 
 '------------------------------------------------------ ENDS
 
@@ -415,57 +415,57 @@ Public gblMessageAWidthTwips   As String
 '------------------------------------------------------ STARTS
 ' General variables declared
 
-Public gblClassicThemeCapable As Boolean
-Public gblStoreThemeColour As Long
+Public gsClassicThemeCapable As Boolean
+Public glStoreThemeColour As Long
 
 ' vars to obtain actual correct screen width (to correct VB6 bug) twips
-Public gblPhysicalScreenWidthTwips As Long
-Public gblPhysicalScreenHeightTwips As Long
+Public glPhysicalScreenWidthTwips As Long
+Public gsPhysicalScreenHeightTwips As Long
 
 ' pixels
-Public gblPhysicalScreenHeightPixels As Long
-Public gblPhysicalScreenWidthPixels As Long
+Public gsPhysicalScreenHeightPixels As Long
+Public gsPhysicalScreenWidthPixels As Long
 
 ' vars to obtain the virtual (multi-monitor) width twips
-Public gblVirtualScreenHeightTwips As Long
-Public gblVirtualScreenWidthTwips As Long
+Public gsVirtualScreenHeightTwips As Long
+Public gsVirtualScreenWidthTwips As Long
 
 ' pixels
-Public gblVirtualScreenHeightPixels As Long
-Public gblVirtualScreenWidthPixels As Long
+Public gsVirtualScreenHeightPixels As Long
+Public gsVirtualScreenWidthPixels As Long
 
-Public gblOldPhysicalScreenHeightPixels As Long
-Public gblOldPhysicalScreenWidthPixels As Long
+Public gsOldPhysicalScreenHeightPixels As Long
+Public gsOldPhysicalScreenWidthPixels As Long
 
 ' key presses
-Public gblCTRL_1 As Boolean
-Public gblSHIFT_1 As Boolean
+Public gsCTRL_1 As Boolean
+Public gsSHIFT_1 As Boolean
 
 ' other globals
-Public gblMinutesToHide As Integer
-Public gblAspectRatio As String
-'Public gblOldSettingsModificationTime  As Date
-Public gblWindowLevelWasChanged As Boolean
+Public gsMinutesToHide As Integer
+Public gsAspectRatio As String
+'Public gsOldSettingsModificationTime  As Date
+Public gsWindowLevelWasChanged As Boolean
 
 ' Flag for debug mode '.06 DAEB 19/04/2021 common.bas moved to the common area so that it can be used by each of the utilities
 Private pvtDebugMode As Boolean ' .30 DAEB 03/03/2021 frmMain.frm replaced the inIDE function that used a variant to one without
 
-Public gblDebugFlg As Integer
+Public gsDebugFlg As Integer
 
-Public gblStartupFlg As Boolean
-Public gblMsgBoxADynamicSizingFlg As Boolean
-Public gblMonitorCount As Long
+Public gsStartupFlg As Boolean
+Public gsMsgBoxADynamicSizingFlg As Boolean
+Public gsMonitorCount As Long
 
 
-Public gblOldPrefsFormMonitorPrimary As Long
-Public gblOldwidgetFormMonitorPrimary As Long
-Public gblPrefsFormResizedInCode As Boolean
+Public gsOldPrefsFormMonitorPrimary As Long
+Public gsOldwidgetFormMonitorPrimary As Long
+Public gsPrefsFormResizedInCode As Boolean
 
-Public gblTenShillingsWidgetAvailable As Boolean
-Public gblReload As Boolean
+Public gsTenShillingsWidgetAvailable As Boolean
+Public gsReload As Boolean
 
-Public gblCodingEnvironment As String
-Public gblRichClientEnvironment As String
+Public gsCodingEnvironment As String
+Public gsRichClientEnvironment As String
 
 Public widgetPrefsOldHeight As Long
 Public widgetPrefsOldWidth As Long
@@ -542,12 +542,12 @@ Public Function fLicenceState() As Integer
     Dim slicence As String: slicence = "0"
     
     On Error GoTo fLicenceState_Error
-    ''If gblDebugFlg = 1  Then DebugPrint "%" & "fLicenceState"
+    ''If gsDebugFlg = 1  Then DebugPrint "%" & "fLicenceState"
     
     fLicenceState = 0
     ' read the tool's own settings file
-    If fFExists(gblSettingsFile) Then ' does the tool's own settings.ini exist?
-        slicence = fGetINISetting("Software\TenShillings", "licence", gblSettingsFile)
+    If fFExists(gsSettingsFile) Then ' does the tool's own settings.ini exist?
+        slicence = fGetINISetting("Software\TenShillings", "licence", gsSettingsFile)
         ' if the licence state is not already accepted then display the licence form
         If slicence = "1" Then fLicenceState = 1
     End If
@@ -570,7 +570,7 @@ End Function
 Public Sub showLicence(ByVal licenceState As Integer)
     'Dim slicence As String: slicence = "0"
     On Error GoTo showLicence_Error
-    ''If gblDebugFlg = 1  Then DebugPrint "%" & "showLicence"
+    ''If gsDebugFlg = 1  Then DebugPrint "%" & "showLicence"
     
     ' if the licence state is not already accepted then display the licence form
     If licenceState = 0 Then
@@ -603,7 +603,7 @@ Public Sub setDPIaware()
     If gsDpiAwareness = "1" Then
         If Not InIDE Then
             Cairo.SetDPIAwareness ' this way avoids the VB6 IDE shrinking (sadly, VB6 has a high DPI unaware IDE)
-            gblMsgBoxADynamicSizingFlg = True
+            gsMsgBoxADynamicSizingFlg = True
         End If
     End If
 
@@ -628,7 +628,7 @@ Public Sub testDPIAndSetInitialAwareness()
 
     'If fPixelsPerInchX() > 96 Then ' always seems to provide 96, no matter what I do.
     
-     If gblPhysicalScreenWidthPixels > 1960 Then
+     If gsPhysicalScreenWidthPixels > 1960 Then
         gsDpiAwareness = "1"
         Call setDPIaware
     End If
@@ -659,7 +659,7 @@ Public Sub LoadFileToTB(ByVal TxtBox As Object, ByVal FilePath As String, Option
     
     On Error GoTo LoadFileToTB_Error
 
-   ''If gblDebugFlg = 1  Then msgbox "%" & LoadFileToTB
+   ''If gsDebugFlg = 1  Then msgbox "%" & LoadFileToTB
 
     If Dir$(FilePath) = vbNullString Then Exit Sub
     
@@ -804,7 +804,7 @@ Public Sub addTargetFile(ByVal fieldValue As String, ByRef retFileName As String
     Dim retfileTitle As String: retfileTitle = vbNullString
     Const x_MaxBuffer As Integer = 256
     
-    ''If gblDebugFlg = 1  Then Debug.Print "%" & "addTargetfile"
+    ''If gsDebugFlg = 1  Then Debug.Print "%" & "addTargetfile"
     
     On Error Resume Next
     
@@ -859,7 +859,7 @@ End Sub
 Public Function fGetDirectory(ByRef Path As String) As String
 
    On Error GoTo fGetDirectory_Error
-   ''If gblDebugFlg = 1  Then DebugPrint "%" & "fnGetDirectory"
+   ''If gsDebugFlg = 1  Then DebugPrint "%" & "fnGetDirectory"
 
     If InStrRev(Path, "\") = 0 Then
         fGetDirectory = vbNullString
@@ -884,7 +884,7 @@ End Function
 '
 Public Sub obtainOpenFileName(ByRef retFileName As String, ByRef retfileTitle As String)
    On Error GoTo obtainOpenFileName_Error
-   ''If gblDebugFlg = 1  Then Debug.Print "%obtainOpenFileName"
+   ''If gsDebugFlg = 1  Then Debug.Print "%obtainOpenFileName"
 
   If GetOpenFileName(x_OpenFilename) <> 0 Then
 '    If x_OpenFilename.lpstrFile = "*.*" Then
@@ -1123,7 +1123,7 @@ Public Sub changeFont(ByVal frm As Form, ByVal fntNow As Boolean, ByRef fntFont 
     'fntUnderline = False
     fntFontResult = False
     
-    'If gblDebugFlg = 1  Then Debug.Print "%mnuFont_Click"
+    'If gsDebugFlg = 1  Then Debug.Print "%mnuFont_Click"
 
     displayFontSelector fntFont, fntSize, fntWeight, fntStyle, fntColour, fntItalics, fntUnderline, fntFontResult
     If fntFontResult = False Then Exit Sub
@@ -1414,21 +1414,21 @@ Public Sub aboutClickEvent()
     Dim fileToPlay As String: fileToPlay = vbNullString
 
     On Error GoTo aboutClickEvent_Error
-'    If gblVolumeBoost = "1" Then
+'    If gsVolumeBoost = "1" Then
 '        fileToPlay = "till.wav"
 '    Else
 '        fileToPlay = "till-quiet.wav"
 '    End If
     
 
-    If gblEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
+    If gsEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
         playSound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
     End If
     
     ' The RC forms are measured in pixels so the positioning needs to pre-convert the twips into pixels
    
-    fMain.aboutForm.Top = (gblPhysicalScreenHeightPixels / 2) - (fMain.aboutForm.Height / 2)
-    fMain.aboutForm.Left = (gblPhysicalScreenWidthPixels / 2) - (fMain.aboutForm.Width / 2)
+    fMain.aboutForm.Top = (gsPhysicalScreenHeightPixels / 2) - (fMain.aboutForm.Height / 2)
+    fMain.aboutForm.Left = (gsPhysicalScreenWidthPixels / 2) - (fMain.aboutForm.Width / 2)
      
     fMain.aboutForm.Load
     fMain.aboutForm.Show
@@ -1466,12 +1466,12 @@ Public Sub helpSplash()
     On Error GoTo helpSplash_Error
 
     fileToPlay = "till.wav"
-    If gblEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
+    If gsEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
         playSound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
     End If
 
-    fMain.helpForm.Top = (gblPhysicalScreenHeightPixels / 2) - (fMain.helpForm.Height / 2)
-    fMain.helpForm.Left = (gblPhysicalScreenWidthPixels / 2) - (fMain.helpForm.Width / 2)
+    fMain.helpForm.Top = (gsPhysicalScreenHeightPixels / 2) - (fMain.helpForm.Height / 2)
+    fMain.helpForm.Left = (gsPhysicalScreenWidthPixels / 2) - (fMain.helpForm.Width / 2)
      
     'helpWidget.MyOpacity = 0
     helpWidget.ShowMe = True
@@ -1505,19 +1505,19 @@ Public Sub licenceSplash()
 
     On Error GoTo licenceSplash_Error
 
-'    If gblVolumeBoost = "1" Then
+'    If gsVolumeBoost = "1" Then
         fileToPlay = "till.wav"
 '    Else
 '        fileToPlay = "till-quiet.wav"
 '    End If
     
-    If gblEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
+    If gsEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
         playSound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
     End If
     
     
-    fMain.licenceForm.Top = (gblPhysicalScreenHeightPixels / 2) - (fMain.licenceForm.Height / 2)
-    fMain.licenceForm.Left = (gblPhysicalScreenWidthPixels / 2) - (fMain.licenceForm.Width / 2)
+    fMain.licenceForm.Top = (gsPhysicalScreenHeightPixels / 2) - (fMain.licenceForm.Height / 2)
+    fMain.licenceForm.Left = (gsPhysicalScreenWidthPixels / 2) - (fMain.licenceForm.Width / 2)
      
     'licenceWidget.opacity = 0
     'opacityflag = 0
@@ -1590,7 +1590,7 @@ Public Sub mnuSupport_ClickEvent()
     answer = msgBoxA(answerMsg, vbExclamation + vbYesNo, "Request to Contact Support", True, "mnuSupportClickEvent")
 
     If answer = vbYes Then
-        Call ShellExecute(menuForm.hWnd, "Open", "https://github.com/yereverluvinunclebert/TenShillings-" & gblRichClientEnvironment & "-Widget-" & gblCodingEnvironment & "/issues", vbNullString, App.Path, 1)
+        Call ShellExecute(menuForm.hWnd, "Open", "https://github.com/yereverluvinunclebert/TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment & "/issues", vbNullString, App.Path, 1)
     End If
 
    On Error GoTo 0
@@ -1663,8 +1663,8 @@ Public Sub ChangeToolTipWidgetDefaultSettings(ByRef My_Widget As cWidgetBase)
 
     With My_Widget
     
-        .FontName = gblWidgetFont
-        .FontSize = Val(gblPrefsFontSizeLowDPI)
+        .FontName = gsWidgetFont
+        .FontSize = Val(gsPrefsFontSizeLowDPI)
     
     End With
 
@@ -1695,17 +1695,17 @@ Public Sub makeVisibleFormElements()
     'NOTE that when you position a widget you are positioning the form it is drawn upon.
 
     If gsDpiAwareness = "1" Then
-        formLeftPixels = Val(gblWidgetHighDpiXPos)
-        formTopPixels = Val(gblWidgetHighDpiYPos)
+        formLeftPixels = Val(gsWidgetHighDpiXPos)
+        formTopPixels = Val(gsWidgetHighDpiYPos)
     Else
-        formLeftPixels = Val(gblWidgetLowDpiXPos)
-        formTopPixels = Val(gblWidgetLowDpiYPos)
+        formLeftPixels = Val(gsWidgetLowDpiXPos)
+        formTopPixels = Val(gsWidgetLowDpiYPos)
     End If
     
     ' The RC forms are measured in pixels, whereas the native forms are in twips, do remember that...
 
-    gblMonitorCount = fGetMonitorCount
-'    If gblMonitorCount > 1 Then
+    gsMonitorCount = fGetMonitorCount
+'    If gsMonitorCount > 1 Then
 '        Call SetFormOnMonitor(fMain.TenShillingsForm.hWnd, formLeftPixels, formTopPixels)
 '    Else
         fMain.TenShillingsForm.Left = formLeftPixels
@@ -1742,20 +1742,20 @@ Public Sub getKeyPress(ByVal KeyCode As Integer, ByVal Shift As Integer)
    
     On Error GoTo getkeypress_Error
 
-    If gblCTRL_1 Or gblSHIFT_1 Then
-        gblCTRL_1 = False
-        gblSHIFT_1 = False
+    If gsCTRL_1 Or gsSHIFT_1 Then
+        gsCTRL_1 = False
+        gsSHIFT_1 = False
     End If
     
     If Shift Then
-        gblSHIFT_1 = True
+        gsSHIFT_1 = True
     End If
 
     Select Case KeyCode
         Case vbKeyControl
-            gblCTRL_1 = True
+            gsCTRL_1 = True
         Case vbKeyShift
-            gblSHIFT_1 = True
+            gsSHIFT_1 = True
         Case 82 ' R
             If Shift = 1 Then Call hardRestart
 
@@ -1794,26 +1794,26 @@ Public Sub determineScreenDimensions()
 
    On Error GoTo determineScreenDimensions_Error
    
-    'If gblDebugFlg = 1 Then msgbox "% sub determineScreenDimensions"
+    'If gsDebugFlg = 1 Then msgbox "% sub determineScreenDimensions"
 
     ' only calling TwipsPerPixelX/Y functions once on startup
-    gblScreenTwipsPerPixelY = fTwipsPerPixelY
-    gblScreenTwipsPerPixelX = fTwipsPerPixelX
+    gsScreenTwipsPerPixelY = fTwipsPerPixelY
+    gsScreenTwipsPerPixelX = fTwipsPerPixelX
     
-    gblPhysicalScreenHeightPixels = GetDeviceCaps(menuForm.hDC, VERTRES) ' we use the name of any form that we don't mind being loaded at this point
-    gblPhysicalScreenWidthPixels = GetDeviceCaps(menuForm.hDC, HORZRES)
+    gsPhysicalScreenHeightPixels = GetDeviceCaps(menuForm.hDC, VERTRES) ' we use the name of any form that we don't mind being loaded at this point
+    gsPhysicalScreenWidthPixels = GetDeviceCaps(menuForm.hDC, HORZRES)
 
-    gblPhysicalScreenHeightTwips = gblPhysicalScreenHeightPixels * gblScreenTwipsPerPixelY
-    gblPhysicalScreenWidthTwips = gblPhysicalScreenWidthPixels * gblScreenTwipsPerPixelX
+    gsPhysicalScreenHeightTwips = gsPhysicalScreenHeightPixels * gsScreenTwipsPerPixelY
+    glPhysicalScreenWidthTwips = gsPhysicalScreenWidthPixels * gsScreenTwipsPerPixelX
     
-    gblVirtualScreenHeightPixels = fVirtualScreenHeight(True)
-    gblVirtualScreenWidthPixels = fVirtualScreenWidth(True)
+    gsVirtualScreenHeightPixels = fVirtualScreenHeight(True)
+    gsVirtualScreenWidthPixels = fVirtualScreenWidth(True)
 
-    gblVirtualScreenHeightTwips = fVirtualScreenHeight(False)
-    gblVirtualScreenWidthTwips = fVirtualScreenWidth(False)
+    gsVirtualScreenHeightTwips = fVirtualScreenHeight(False)
+    gsVirtualScreenWidthTwips = fVirtualScreenWidth(False)
     
-    gblOldPhysicalScreenHeightPixels = gblPhysicalScreenHeightPixels ' will be used to check for orientation changes
-    gblOldPhysicalScreenWidthPixels = gblPhysicalScreenWidthPixels
+    gsOldPhysicalScreenHeightPixels = gsPhysicalScreenHeightPixels ' will be used to check for orientation changes
+    gsOldPhysicalScreenWidthPixels = gsPhysicalScreenWidthPixels
     
    On Error GoTo 0
    Exit Sub
@@ -1839,14 +1839,14 @@ Public Sub mainScreen()
     On Error GoTo mainScreen_Error
 
     ' check for aspect ratio and determine whether it is in portrait or landscape mode
-    If gblPhysicalScreenWidthPixels > gblPhysicalScreenHeightPixels Then
-        gblAspectRatio = "landscape"
+    If gsPhysicalScreenWidthPixels > gsPhysicalScreenHeightPixels Then
+        gsAspectRatio = "landscape"
     Else
-        gblAspectRatio = "portrait"
+        gsAspectRatio = "portrait"
     End If
     
     ' check if the widget has a lock for the screen type.
-    If gblAspectRatio = "landscape" Then
+    If gsAspectRatio = "landscape" Then
         If gsWidgetLandscape = "1" Then
             If gsLandscapeFormHoffset <> vbNullString Then
                 fMain.TenShillingsForm.Left = Val(gsLandscapeFormHoffset)
@@ -1860,7 +1860,7 @@ Public Sub mainScreen()
     End If
     
     ' check if the widget has a lock for the screen type.
-    If gblAspectRatio = "portrait" Then
+    If gsAspectRatio = "portrait" Then
         If gsWidgetPortrait = "1" Then
             fMain.TenShillingsForm.Left = Val(gsPortraitHoffset)
             fMain.TenShillingsForm.Top = Val(gsPortraitYoffset)
@@ -1886,8 +1886,8 @@ Public Sub mainScreen()
     ' calculate the current hlocation in % of the screen
     ' store the current hlocation in % of the screen
     If gsWidgetPosition = "1" Then
-        gblhLocationPercPrefValue = CStr(fMain.TenShillingsForm.Left / gblVirtualScreenWidthPixels * 100)
-        gsVLocationPercPrefValue = CStr(fMain.TenShillingsForm.Top / gblVirtualScreenHeightPixels * 100)
+        gsHLocationPercPrefValue = CStr(fMain.TenShillingsForm.Left / gsVirtualScreenWidthPixels * 100)
+        gsVLocationPercPrefValue = CStr(fMain.TenShillingsForm.Top / gsVirtualScreenHeightPixels * 100)
     End If
 
    On Error GoTo 0
@@ -1917,7 +1917,7 @@ Private Sub checkScreenEdgeBottom()
     
     On Error GoTo checkScreenEdgeBottom_Error
 
-    If (fMain.TenShillingsForm.Top + fMain.TenShillingsForm.Height) > gblVirtualScreenHeightPixels Then  ' if any part of the form is off screen
+    If (fMain.TenShillingsForm.Top + fMain.TenShillingsForm.Height) > gsVirtualScreenHeightPixels Then  ' if any part of the form is off screen
         ' the widget height is divided by two as it is doubled earlier
         widgetCurrentHeightPx = (TenShillingsWidget.Widget.Height / 2 * TenShillingsWidget.Zoom) ' pixels
         formMidPointY = (fMain.TenShillingsForm.Height / 2) + fMain.TenShillingsForm.Top
@@ -1925,8 +1925,8 @@ Private Sub checkScreenEdgeBottom()
         screenEdge = 100 ' pixels from the edge
         
         ' if the widget itself is close to the left of the screen then reposition it back on screen
-        If widgetTopY >= (gblVirtualScreenHeightPixels - screenEdge) Then
-            fMain.TenShillingsForm.Top = ((gblVirtualScreenHeightPixels - screenEdge) - (widgetCurrentHeightPx / 2) - 300)
+        If widgetTopY >= (gsVirtualScreenHeightPixels - screenEdge) Then
+            fMain.TenShillingsForm.Top = ((gsVirtualScreenHeightPixels - screenEdge) - (widgetCurrentHeightPx / 2) - 300)
         End If
     End If
 
@@ -1959,15 +1959,15 @@ Private Sub checkScreenEdgeRight()
     
     On Error GoTo checkScreenEdgeRight_Error
 
-    If (fMain.TenShillingsForm.Left + fMain.TenShillingsForm.Width) > gblVirtualScreenWidthPixels Then ' if any part of the form is off screen
+    If (fMain.TenShillingsForm.Left + fMain.TenShillingsForm.Width) > gsVirtualScreenWidthPixels Then ' if any part of the form is off screen
         widgetCurrentWidthPx = (TenShillingsWidget.Widget.Width / 2 * TenShillingsWidget.Zoom) ' pixels
         formMidPointX = (fMain.TenShillingsForm.Width / 2) + fMain.TenShillingsForm.Left
         widgetLeftX = formMidPointX ' - widgetCurrentWidthPx / 2
         screenEdge = 100 ' pixels from the edge
 
         ' if the widget itself is close to the very left of the screen then reposition it back on screen
-        If widgetLeftX >= gblVirtualScreenWidthPixels - screenEdge Then
-            fMain.TenShillingsForm.Left = (gblVirtualScreenWidthPixels - screenEdge) - (fMain.TenShillingsForm.Width / 2) + (widgetCurrentWidthPx / 2) - 100
+        If widgetLeftX >= gsVirtualScreenWidthPixels - screenEdge Then
+            fMain.TenShillingsForm.Left = (gsVirtualScreenWidthPixels - screenEdge) - (fMain.TenShillingsForm.Width / 2) + (widgetCurrentWidthPx / 2) - 100
         End If
     End If
 
@@ -2170,8 +2170,8 @@ Public Sub reloadProgram()
     
     'TenShillingsWidget.ShowHelp = False ' needs to be set to false for the reload to reshow it, if enabled
     
-    gblTenShillingsWidgetAvailable = False ' tell the ' screenWrite util that the widgetForm is no longer available to write console events to
-    gblReload = True
+    gsTenShillingsWidgetAvailable = False ' tell the ' screenWrite util that the widgetForm is no longer available to write console events to
+    gsReload = True
     
     Call saveMainRCFormPosition
     
@@ -2206,25 +2206,25 @@ Public Sub saveMainRCFormPosition()
    On Error GoTo saveMainRCFormPosition_Error
 
     If gsDpiAwareness = "1" Then
-        gblWidgetHighDpiXPos = CStr(fMain.TenShillingsForm.Left) ' saving in pixels
-        gblWidgetHighDpiYPos = CStr(fMain.TenShillingsForm.Top)
-        sPutINISetting "Software\TenShillings", "widgetHighDpiXPos", gblWidgetHighDpiXPos, gblSettingsFile
-        sPutINISetting "Software\TenShillings", "widgetHighDpiYPos", gblWidgetHighDpiYPos, gblSettingsFile
+        gsWidgetHighDpiXPos = CStr(fMain.TenShillingsForm.Left) ' saving in pixels
+        gsWidgetHighDpiYPos = CStr(fMain.TenShillingsForm.Top)
+        sPutINISetting "Software\TenShillings", "widgetHighDpiXPos", gsWidgetHighDpiXPos, gsSettingsFile
+        sPutINISetting "Software\TenShillings", "widgetHighDpiYPos", gsWidgetHighDpiYPos, gsSettingsFile
 
     Else
-        gblWidgetLowDpiXPos = CStr(fMain.TenShillingsForm.Left) ' saving in pixels
-        gblWidgetLowDpiYPos = CStr(fMain.TenShillingsForm.Top)
-        sPutINISetting "Software\TenShillings", "widgetLowDpiXPos", gblWidgetLowDpiXPos, gblSettingsFile
-        sPutINISetting "Software\TenShillings", "widgetLowDpiYPos", gblWidgetLowDpiYPos, gblSettingsFile
+        gsWidgetLowDpiXPos = CStr(fMain.TenShillingsForm.Left) ' saving in pixels
+        gsWidgetLowDpiYPos = CStr(fMain.TenShillingsForm.Top)
+        sPutINISetting "Software\TenShillings", "widgetLowDpiXPos", gsWidgetLowDpiXPos, gsSettingsFile
+        sPutINISetting "Software\TenShillings", "widgetLowDpiYPos", gsWidgetLowDpiYPos, gsSettingsFile
     End If
     
-    sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
-    sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gsWidgetPrimaryHeightRatio, gsSettingsFile
+    sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gsWidgetSecondaryHeightRatio, gsSettingsFile
     gsWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
     gsSkewDegrees = CStr(TenShillingsWidget.SkewDegrees)
     
-    sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gblSettingsFile
-    sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gsSettingsFile
+    sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gsSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -2246,12 +2246,12 @@ Public Sub saveMainRCFormSize()
 
    On Error GoTo saveMainRCFormSize_Error
 
-    sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
-    sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gsWidgetPrimaryHeightRatio, gsSettingsFile
+    sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gsWidgetSecondaryHeightRatio, gsSettingsFile
     gsWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
     gsSkewDegrees = CStr(TenShillingsWidget.SkewDegrees)
-    sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gblSettingsFile
-    sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gsSettingsFile
+    sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gsSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -2317,57 +2317,57 @@ Public Sub readPrefsPosition()
     On Error GoTo readPrefsPosition_Error
 
     If gsDpiAwareness = "1" Then
-        gblPrefsHighDpiXPosTwips = fGetINISetting("Software\TenShillings", "prefsHighDpiXPosTwips", gblSettingsFile)
-        gblPrefsHighDpiYPosTwips = fGetINISetting("Software\TenShillings", "prefsHighDpiYPosTwips", gblSettingsFile)
+        gsPrefsHighDpiXPosTwips = fGetINISetting("Software\TenShillings", "prefsHighDpiXPosTwips", gsSettingsFile)
+        gsPrefsHighDpiYPosTwips = fGetINISetting("Software\TenShillings", "prefsHighDpiYPosTwips", gsSettingsFile)
         
         ' if a current location not stored then position to the middle of the screen
-        If gblPrefsHighDpiXPosTwips <> "" Then
-            widgetPrefs.Left = Val(gblPrefsHighDpiXPosTwips)
+        If gsPrefsHighDpiXPosTwips <> "" Then
+            widgetPrefs.Left = Val(gsPrefsHighDpiXPosTwips)
         Else
-            widgetPrefs.Left = gblPhysicalScreenWidthTwips / 2 - widgetPrefs.Width / 2
+            widgetPrefs.Left = glPhysicalScreenWidthTwips / 2 - widgetPrefs.Width / 2
         End If
         
-        gblPrefsHighDpiXPosTwips = widgetPrefs.Left
+        gsPrefsHighDpiXPosTwips = widgetPrefs.Left
 
-        If gblPrefsHighDpiYPosTwips <> "" Then
-            widgetPrefs.Top = Val(gblPrefsHighDpiYPosTwips)
+        If gsPrefsHighDpiYPosTwips <> "" Then
+            widgetPrefs.Top = Val(gsPrefsHighDpiYPosTwips)
         Else
             widgetPrefs.Top = Screen.Height / 2 - widgetPrefs.Height / 2
         End If
         
-        gblPrefsHighDpiYPosTwips = widgetPrefs.Top
+        gsPrefsHighDpiYPosTwips = widgetPrefs.Top
         
     Else
-        gblPrefsLowDpiXPosTwips = fGetINISetting("Software\TenShillings", "prefsLowDpiXPosTwips", gblSettingsFile)
-        gblPrefsLowDpiYPosTwips = fGetINISetting("Software\TenShillings", "prefsLowDpiYPosTwips", gblSettingsFile)
+        gsPrefsLowDpiXPosTwips = fGetINISetting("Software\TenShillings", "prefsLowDpiXPosTwips", gsSettingsFile)
+        gsPrefsLowDpiYPosTwips = fGetINISetting("Software\TenShillings", "prefsLowDpiYPosTwips", gsSettingsFile)
               
         ' if a current location not stored then position to the middle of the screen
-        If gblPrefsLowDpiXPosTwips <> "" Then
-            widgetPrefs.Left = Val(gblPrefsLowDpiXPosTwips)
+        If gsPrefsLowDpiXPosTwips <> "" Then
+            widgetPrefs.Left = Val(gsPrefsLowDpiXPosTwips)
         Else
-            widgetPrefs.Left = gblPhysicalScreenWidthTwips / 2 - widgetPrefs.Width / 2
+            widgetPrefs.Left = glPhysicalScreenWidthTwips / 2 - widgetPrefs.Width / 2
         End If
         
-        gblPrefsLowDpiXPosTwips = widgetPrefs.Left
+        gsPrefsLowDpiXPosTwips = widgetPrefs.Left
 
-        If gblPrefsLowDpiYPosTwips <> "" Then
-            widgetPrefs.Top = Val(gblPrefsLowDpiYPosTwips)
+        If gsPrefsLowDpiYPosTwips <> "" Then
+            widgetPrefs.Top = Val(gsPrefsLowDpiYPosTwips)
         Else
             widgetPrefs.Top = Screen.Height / 2 - widgetPrefs.Height / 2
         End If
         
-        gblPrefsLowDpiYPosTwips = widgetPrefs.Top
+        gsPrefsLowDpiYPosTwips = widgetPrefs.Top
     End If
         
-    gblPrefsPrimaryHeightTwips = fGetINISetting("Software\TenShillings", "prefsPrimaryHeightTwips", gblSettingsFile)
-    gblPrefsSecondaryHeightTwips = fGetINISetting("Software\TenShillings", "prefsSecondaryHeightTwips", gblSettingsFile)
+    gsPrefsPrimaryHeightTwips = fGetINISetting("Software\TenShillings", "prefsPrimaryHeightTwips", gsSettingsFile)
+    gsPrefsSecondaryHeightTwips = fGetINISetting("Software\TenShillings", "prefsSecondaryHeightTwips", gsSettingsFile)
         
    ' on very first install this will be zero, then size of the prefs as a proportion of the screen size
-    If gblPrefsPrimaryHeightTwips = "" Then
-        If Screen.Height > gblPrefsStartHeight * 2 Then
-            gblPrefsPrimaryHeightTwips = Screen.Height / 2
+    If gsPrefsPrimaryHeightTwips = "" Then
+        If Screen.Height > gsPrefsStartHeight * 2 Then
+            gsPrefsPrimaryHeightTwips = Screen.Height / 2
         Else
-            gblPrefsPrimaryHeightTwips = gblPrefsStartHeight
+            gsPrefsPrimaryHeightTwips = gsPrefsStartHeight
         End If
     End If
     
@@ -2392,30 +2392,30 @@ Public Sub writePrefsPositionAndSize()
 
     If widgetPrefs.IsVisible = True And widgetPrefs.WindowState = vbNormal Then ' when vbMinimised the value = -48000  !
         If gsDpiAwareness = "1" Then
-            gblPrefsHighDpiXPosTwips = CStr(widgetPrefs.Left)
-            gblPrefsHighDpiYPosTwips = CStr(widgetPrefs.Top)
+            gsPrefsHighDpiXPosTwips = CStr(widgetPrefs.Left)
+            gsPrefsHighDpiYPosTwips = CStr(widgetPrefs.Top)
             
             ' now write those params to the toolSettings.ini
-            sPutINISetting "Software\TenShillings", "prefsHighDpiXPosTwips", gblPrefsHighDpiXPosTwips, gblSettingsFile
-            sPutINISetting "Software\TenShillings", "prefsHighDpiYPosTwips", gblPrefsHighDpiYPosTwips, gblSettingsFile
+            sPutINISetting "Software\TenShillings", "prefsHighDpiXPosTwips", gsPrefsHighDpiXPosTwips, gsSettingsFile
+            sPutINISetting "Software\TenShillings", "prefsHighDpiYPosTwips", gsPrefsHighDpiYPosTwips, gsSettingsFile
         Else
-            gblPrefsLowDpiXPosTwips = CStr(widgetPrefs.Left)
-            gblPrefsLowDpiYPosTwips = CStr(widgetPrefs.Top)
+            gsPrefsLowDpiXPosTwips = CStr(widgetPrefs.Left)
+            gsPrefsLowDpiYPosTwips = CStr(widgetPrefs.Top)
             
             ' now write those params to the toolSettings.ini
-            sPutINISetting "Software\TenShillings", "prefsLowDpiXPosTwips", gblPrefsLowDpiXPosTwips, gblSettingsFile
-            sPutINISetting "Software\TenShillings", "prefsLowDpiYPosTwips", gblPrefsLowDpiYPosTwips, gblSettingsFile
+            sPutINISetting "Software\TenShillings", "prefsLowDpiXPosTwips", gsPrefsLowDpiXPosTwips, gsSettingsFile
+            sPutINISetting "Software\TenShillings", "prefsLowDpiYPosTwips", gsPrefsLowDpiYPosTwips, gsSettingsFile
             
         End If
         
-        If LTrim$(gblMultiMonitorResize) <> "2" Then Exit Sub
+        If LTrim$(gsMultiMonitorResize) <> "2" Then Exit Sub
 
         If prefsMonitorStruct.IsPrimary = True Then
-            gblPrefsPrimaryHeightTwips = Trim$(CStr(widgetPrefs.Height))
-            sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gblPrefsPrimaryHeightTwips, gblSettingsFile
+            gsPrefsPrimaryHeightTwips = Trim$(CStr(widgetPrefs.Height))
+            sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gsPrefsPrimaryHeightTwips, gsSettingsFile
         Else
-            gblPrefsSecondaryHeightTwips = Trim$(CStr(widgetPrefs.Height))
-            sPutINISetting "Software\TenShillings", "prefsSecondaryHeightTwips", gblPrefsSecondaryHeightTwips, gblSettingsFile
+            gsPrefsSecondaryHeightTwips = Trim$(CStr(widgetPrefs.Height))
+            sPutINISetting "Software\TenShillings", "prefsSecondaryHeightTwips", gsPrefsSecondaryHeightTwips, gsSettingsFile
         End If
     End If
     
@@ -2438,12 +2438,12 @@ End Sub
 '
 'Private Sub settingsTimer_Timer()
 '
-'    gblUnhide = fGetINISetting("Software\TenShillings", "unhide", gblSettingsFile)
+'    gsUnhide = fGetINISetting("Software\TenShillings", "unhide", gsSettingsFile)
 '
-'    If gblUnhide = "true" Then
+'    If gsUnhide = "true" Then
 '        'TenShillingsWidget.Hidden = False
 '        fMain.TenShillingsForm.Visible = True
-'        sPutINISetting "Software\TenShillings", "unhide", vbNullString, gblSettingsFile
+'        sPutINISetting "Software\TenShillings", "unhide", vbNullString, gsSettingsFile
 '    End If
 '
 '    On Error GoTo 0
@@ -2478,25 +2478,25 @@ Public Sub toggleWidgetLock()
 
     fileToPlay = "lock.wav"
     
-    If gblPreventDragging = "1" Then
+    If gsPreventDragging = "1" Then
         ' Call ' screenWrite("Widget lock released")
         menuForm.mnuLockWidget.Checked = False
         If widgetPrefs.IsLoaded = True Then widgetPrefs.chkPreventDragging.Value = 0
-        gblPreventDragging = "0"
+        gsPreventDragging = "0"
         TenShillingsWidget.Locked = False
     Else
         ' Call ' screenWrite("Widget locked in place")
         menuForm.mnuLockWidget.Checked = True
         If widgetPrefs.IsLoaded = True Then widgetPrefs.chkPreventDragging.Value = 1
         TenShillingsWidget.Locked = True
-        gblPreventDragging = "1"
+        gsPreventDragging = "1"
     End If
     
     fMain.TenShillingsForm.Refresh
     
-    sPutINISetting "Software\TenShillings", "preventDragging", gblPreventDragging, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "preventDragging", gsPreventDragging, gsSettingsFile
    
-    If gblEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
+    If gsEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
         playSound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
     End If
     
@@ -2527,7 +2527,7 @@ Public Sub SwitchOff()
     menuForm.mnuTurnFunctionsOn.Checked = False
     
     gsWidgetFunctions = "0"
-    sPutINISetting "Software\TenShillings", "widgetFunctions", gsWidgetFunctions, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "widgetFunctions", gsWidgetFunctions, gsSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -2554,7 +2554,7 @@ Public Sub TurnFunctionsOn()
 
     fileToPlay = "ting.wav"
 
-    If gblEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
+    If gsEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
         playSound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
     End If
 
@@ -2562,7 +2562,7 @@ Public Sub TurnFunctionsOn()
     menuForm.mnuTurnFunctionsOn.Checked = True
     
     gsWidgetFunctions = "1"
-    sPutINISetting "Software\TenShillings", "widgetFunctions", gsWidgetFunctions, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "widgetFunctions", gsWidgetFunctions, gsSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -2592,7 +2592,7 @@ Public Sub hardRestart()
     If fFExists(thisCommand) Then
         
         ' run the helper program that kills the current process and restarts it
-        Call ShellExecute(widgetPrefs.hWnd, "open", thisCommand, "TenShillings-" & gblRichClientEnvironment & "-Widget-" & gblCodingEnvironment & ".exe prefs", "", 1)
+        Call ShellExecute(widgetPrefs.hWnd, "open", thisCommand, "TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment & ".exe prefs", "", 1)
     Else
         'answer = MsgBox(thisCommand & " is missing", vbOKOnly + vbExclamation)
         answerMsg = thisCommand & " is missing"
@@ -2827,13 +2827,13 @@ Public Sub saveRCFormCurrentSizeRatios()
 
     On Error GoTo saveRCFormCurrentSizeRatios_Error
 
-    If LTrim$(gblMultiMonitorResize) = "2" Then
+    If LTrim$(gsMultiMonitorResize) = "2" Then
         If widgetMonitorStruct.IsPrimary Then
-            gblWidgetPrimaryHeightRatio = TenShillingsWidget.Zoom
-            sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
+            gsWidgetPrimaryHeightRatio = TenShillingsWidget.Zoom
+            sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gsWidgetPrimaryHeightRatio, gsSettingsFile
         Else
-            gblWidgetSecondaryHeightRatio = TenShillingsWidget.Zoom
-            sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
+            gsWidgetSecondaryHeightRatio = TenShillingsWidget.Zoom
+            sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gsWidgetSecondaryHeightRatio, gsSettingsFile
         End If
     End If
 
@@ -2858,12 +2858,12 @@ Public Sub savePrefsFormCurrentSize()
 
     On Error GoTo savePrefsFormCurrentSize_Error
 
-    If LTrim$(gblMultiMonitorResize) = "2" Then
+    If LTrim$(gsMultiMonitorResize) = "2" Then
         ' now save the prefs form absolute sizes
         If prefsMonitorStruct.IsPrimary = True Then
-            sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gblPrefsPrimaryHeightTwips, gblSettingsFile
+            sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gsPrefsPrimaryHeightTwips, gsSettingsFile
         Else
-            sPutINISetting "Software\TenShillings", "prefsSecondaryHeightTwips", gblPrefsSecondaryHeightTwips, gblSettingsFile
+            sPutINISetting "Software\TenShillings", "prefsSecondaryHeightTwips", gsPrefsSecondaryHeightTwips, gsSettingsFile
         End If
     End If
 
@@ -2887,7 +2887,7 @@ Public Sub saveMainFormsCurrentSizeAndRatios()
 
     On Error GoTo saveMainFormsCurrentSizeAndRatios_Error
 
-    If LTrim$(gblMultiMonitorResize) = "2" Then
+    If LTrim$(gsMultiMonitorResize) = "2" Then
     
         '  saves the current ratios for the RC form alone
         Call saveRCFormCurrentSizeRatios
@@ -2937,11 +2937,11 @@ End Property
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Public Property Let gsWidgetSize(ByVal sgblWidgetSize As String)
+Public Property Let gsWidgetSize(ByVal sgsWidgetSize As String)
 
     On Error GoTo gsWidgetSize_Error
 
-    m_sWidgetSize = sgblWidgetSize
+    m_sWidgetSize = sgsWidgetSize
 
     On Error GoTo 0
     Exit Property

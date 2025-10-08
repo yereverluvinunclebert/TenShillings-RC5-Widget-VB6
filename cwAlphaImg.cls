@@ -68,7 +68,7 @@ Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByV
 
   If Cairo.ImageList.Exists(W.ImageKey) Then Set Srf = Cairo.ImageList(W.ImageKey) Else Exit Sub
     
-    If gblRichClientEnvironment = "RC6" Then
+    If gsRichClientEnvironment = "RC6" Then
         ' Widgets are refreshed "from the ground up" in RC5 and not so in RC6
         ' extra code NOT needed when using RC5 but now required in RC6 - starts
         CC.Operator = CAIRO_OPERATOR_CLEAR

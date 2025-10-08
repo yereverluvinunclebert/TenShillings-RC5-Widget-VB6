@@ -79,19 +79,19 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
     If gsDpiAwareness = "0" Then
         tenShillingsFormWidth = imageWidth * 2.4 ' roughly twice the width of the main image plus a bit, the image is non-square and needs room to rotate
         tenShillingsFormHeight = imageHeight * 2.4 '
-        If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then tenShillingsFormWidth = gblVirtualScreenWidthPixels
-        If tenShillingsFormHeight > gblVirtualScreenHeightPixels Then tenShillingsFormHeight = gblVirtualScreenHeightPixels
+        If tenShillingsFormWidth > gsVirtualScreenWidthPixels Then tenShillingsFormWidth = gsVirtualScreenWidthPixels
+        If tenShillingsFormHeight > gsVirtualScreenHeightPixels Then tenShillingsFormHeight = gsVirtualScreenHeightPixels
     Else
         tenShillingsFormWidth = imageWidth * 2.4
         tenShillingsFormHeight = imageHeight * 2.4 '
-        If tenShillingsFormWidth > gblVirtualScreenWidthPixels Then
-            tenShillingsFormWidth = gblVirtualScreenWidthPixels
+        If tenShillingsFormWidth > gsVirtualScreenWidthPixels Then
+            tenShillingsFormWidth = gsVirtualScreenWidthPixels
             tenShillingsWidgetZoomValue = 1
         Else
             tenShillingsWidgetZoomValue = 1
         End If
-        If tenShillingsFormHeight > gblVirtualScreenHeightPixels Then
-            tenShillingsFormHeight = gblVirtualScreenHeightPixels
+        If tenShillingsFormHeight > gsVirtualScreenHeightPixels Then
+            tenShillingsFormHeight = gsVirtualScreenHeightPixels
             tenShillingsWidgetZoomValue = 1
         Else
             tenShillingsWidgetZoomValue = 1
@@ -104,7 +104,7 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
     Set TenShillingsForm = Cairo.WidgetForms.Create(WFFStyleTool, "TenShillings the " & Caption & " Widget", True, tenShillingsFormWidth, tenShillingsFormHeight)
     
     ' make the tenShillings form transparent
-    If gblFormVisible = "0" Then TenShillingsForm.WidgetRoot.BackColor = -1
+    If gsFormVisible = "0" Then TenShillingsForm.WidgetRoot.BackColor = -1
     
     ' create a new tenShillings widget with a name, position and size, first step of that is to run Class_Initialize
     Set TenShillingsWidget = TenShillingsForm.Widgets.Add(New cwTenShillings, "tenShillings", 1, 1, tenShillingsWidgetWidth, tenShillingsWidgetHeight)
@@ -149,19 +149,19 @@ Public Sub initAndCreateAboutForm(Optional ByVal Caption As String)
     If gsDpiAwareness = "0" Then
         aboutFormWidth = 900
         aboutFormHeight = 850
-        If aboutFormWidth > gblVirtualScreenWidthPixels Then aboutFormWidth = gblVirtualScreenWidthPixels
-        If aboutFormHeight > gblVirtualScreenHeightPixels Then aboutFormHeight = gblVirtualScreenHeightPixels
+        If aboutFormWidth > gsVirtualScreenWidthPixels Then aboutFormWidth = gsVirtualScreenWidthPixels
+        If aboutFormHeight > gsVirtualScreenHeightPixels Then aboutFormHeight = gsVirtualScreenHeightPixels
     Else
         aboutFormWidth = 1800
         aboutFormHeight = 1600
-        If aboutFormWidth > gblVirtualScreenWidthPixels Then
-            aboutFormWidth = gblVirtualScreenWidthPixels
+        If aboutFormWidth > gsVirtualScreenWidthPixels Then
+            aboutFormWidth = gsVirtualScreenWidthPixels
             aboutWidgetZoomValue = 1
         Else
             aboutWidgetZoomValue = 1.6
         End If
-        If aboutFormHeight > gblVirtualScreenHeightPixels Then
-            aboutFormHeight = gblVirtualScreenHeightPixels
+        If aboutFormHeight > gsVirtualScreenHeightPixels Then
+            aboutFormHeight = gsVirtualScreenHeightPixels
             aboutWidgetZoomValue = 1
         Else
             aboutWidgetZoomValue = 1.6
@@ -216,20 +216,20 @@ Public Sub initAndCreateHelpForm(Optional ByVal Caption As String)
     If gsDpiAwareness = "0" Then
         helpFormWidth = 1000
         helpFormHeight = 800
-        If helpFormWidth > gblVirtualScreenWidthPixels Then helpFormWidth = gblVirtualScreenWidthPixels
-        If helpFormHeight > gblVirtualScreenHeightPixels Then helpFormHeight = gblVirtualScreenHeightPixels
+        If helpFormWidth > gsVirtualScreenWidthPixels Then helpFormWidth = gsVirtualScreenWidthPixels
+        If helpFormHeight > gsVirtualScreenHeightPixels Then helpFormHeight = gsVirtualScreenHeightPixels
         helpWidgetZoomValue = 0.8
     Else
         helpFormWidth = 1600
         helpFormHeight = 1300
-        If helpFormWidth > gblVirtualScreenWidthPixels Then
-            helpFormWidth = gblVirtualScreenWidthPixels
+        If helpFormWidth > gsVirtualScreenWidthPixels Then
+            helpFormWidth = gsVirtualScreenWidthPixels
             helpWidgetZoomValue = 1
         Else
             helpWidgetZoomValue = 1.4
         End If
-        If helpFormHeight > gblVirtualScreenHeightPixels Then
-            helpFormHeight = gblVirtualScreenHeightPixels
+        If helpFormHeight > gsVirtualScreenHeightPixels Then
+            helpFormHeight = gsVirtualScreenHeightPixels
             helpWidgetZoomValue = 1
         Else
             helpWidgetZoomValue = 1.4
@@ -288,21 +288,21 @@ Public Sub initAndCreateLicenceForm(Optional ByVal Caption As String)
     If gsDpiAwareness = "0" Then
         licenceFormWidth = 650
         licenceFormHeight = 550
-        If licenceFormWidth > gblVirtualScreenWidthPixels Then licenceFormWidth = gblVirtualScreenWidthPixels
-        If licenceFormHeight > gblVirtualScreenHeightPixels Then licenceFormHeight = gblVirtualScreenHeightPixels
+        If licenceFormWidth > gsVirtualScreenWidthPixels Then licenceFormWidth = gsVirtualScreenWidthPixels
+        If licenceFormHeight > gsVirtualScreenHeightPixels Then licenceFormHeight = gsVirtualScreenHeightPixels
         licenceWidgetZoomValue = 0.8
     Else
         licenceFormWidth = 750
         licenceFormHeight = 650
-        If licenceFormWidth > gblVirtualScreenWidthPixels Then
-            licenceFormWidth = gblVirtualScreenWidthPixels
+        If licenceFormWidth > gsVirtualScreenWidthPixels Then
+            licenceFormWidth = gsVirtualScreenWidthPixels
             licenceWidgetZoomValue = 0.8
         Else
             licenceWidgetZoomValue = 1.5
         End If
         
-        If licenceFormHeight > gblVirtualScreenHeightPixels Then
-            licenceFormHeight = gblVirtualScreenHeightPixels
+        If licenceFormHeight > gsVirtualScreenHeightPixels Then
+            licenceFormHeight = gsVirtualScreenHeightPixels
             licenceWidgetZoomValue = 0.8
         Else
             licenceWidgetZoomValue = 1.5
@@ -376,7 +376,7 @@ Public Sub initAndCreateLicenceForm(Optional ByVal Caption As String)
     
     Call LoadFileToTB(textBox, App.Path & "\resources\txt\licence.txt", False)
 
-    licenceForm.Widgets("TextBox").Text = gblWidgetName & vbCrLf & vbCrLf & _
+    licenceForm.Widgets("TextBox").Text = gsWidgetName & vbCrLf & vbCrLf & _
     "Copyright © 1992-2023 Dean Beedell" & vbCrLf & vbCrLf & _
     "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public Licence as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version." & vbCrLf & vbCrLf & _
         "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details." & vbCrLf & vbCrLf & _
@@ -424,14 +424,14 @@ Private Sub btnAccept_Click()
     
     fileToPlay = "ting.wav"
     
-    If gblEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
+    If gsEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
         playSound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
     End If
 
     msgBoxA "User accepted licence, thankyou.", vbOKOnly + vbExclamation, "Licence Acceptance", True, "btnAcceptClick"
     
     slicence = "1"
-    sPutINISetting "Software\TenShillings", "licence", slicence, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "licence", slicence, gsSettingsFile
     
     licenceWidget.ShowMe = False
     licenceWidget.MyOpacity = 0
@@ -464,7 +464,7 @@ Private Sub btnDecline_Click()
     'answer = MsgBox("Licence declined, please destroy your copy of this widget and its documentation.", vbYes)
     msgBoxA "Licence declined, please destroy your copy of this widget and its documentation. This widget will now unload.", vbOKOnly + vbExclamation, "Licence Declined", False
     slicence = "0"
-    sPutINISetting "Software\TenShillings", "licence", slicence, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "licence", slicence, gsSettingsFile
 
     Call thisForm_Unload
 
@@ -495,11 +495,11 @@ Public Sub TenShillingsForm_DblClick()
     
     On Error GoTo TenShillingsForm_DblClick_Error
 
-    If gsWidgetFunctions = "0" Or gblIgnoreMouse = "1" Then Exit Sub
+    If gsWidgetFunctions = "0" Or gsIgnoreMouse = "1" Then Exit Sub
     
-    If LTrim$(gblDblClickCommand) = vbNullString Then Exit Sub
+    If LTrim$(gsDblClickCommand) = vbNullString Then Exit Sub
     
-    thisCommand = gblDblClickCommand
+    thisCommand = gsDblClickCommand
         
     If InStr(thisCommand, "%userprofile%") Then
         userprof = Environ$("USERPROFILE")
@@ -512,9 +512,9 @@ Public Sub TenShillingsForm_DblClick()
         thisCommand = Replace(thisCommand, "%systemroot%", userprof)
     End If
     
-    If gblSHIFT_1 = True Then
-        gblSHIFT_1 = False
-        Call ShellExecute(fMain.TenShillingsForm.hWnd, "Open", gblOpenFile, vbNullString, App.Path, 1)
+    If gsSHIFT_1 = True Then
+        gsSHIFT_1 = False
+        Call ShellExecute(fMain.TenShillingsForm.hWnd, "Open", gsOpenFile, vbNullString, App.Path, 1)
     Else
         Call ShellExecute(fMain.TenShillingsForm.hWnd, "runas", thisCommand, vbNullString, App.Path, 1)
     End If
@@ -549,10 +549,10 @@ Private Sub TenShillingsForm_MouseMove(Button As Integer, Shift As Integer, x As
     If Button = vbLeftButton And Not TenShillingsForm.ActiveWidget Is Nothing Then 'Form-Dragging (under certain conditions)
     
         If TenShillingsWidget.Locked = True Then Exit Sub
-        If gblIgnoreMouse = "1" Then Exit Sub
+        If gsIgnoreMouse = "1" Then Exit Sub
         
-        If gblMenuOccurred = True Then
-            gblMenuOccurred = False
+        If gsMenuOccurred = True Then
+            gsMenuOccurred = False
             Exit Sub
         End If
 

@@ -81,8 +81,8 @@ Public Const HORZRES As Integer = 8
 Public Const VERTRES As Integer = 10
 'Public Const DESKTOPHORZRES As Integer = &H76
 
-Public gblScreenTwipsPerPixelX As Long ' .07 DAEB 26/04/2021 common.bas changed to use pixels alone, removed all unnecessary twip conversion
-Public gblScreenTwipsPerPixelY As Long ' .07 DAEB 26/04/2021 common.bas changed to use pixels alone, removed all unnecessary twip conversion
+Public gsScreenTwipsPerPixelX As Long ' .07 DAEB 26/04/2021 common.bas changed to use pixels alone, removed all unnecessary twip conversion
+Public gsScreenTwipsPerPixelY As Long ' .07 DAEB 26/04/2021 common.bas changed to use pixels alone, removed all unnecessary twip conversion
 'Public physicalScreenWidthTwips As Long
 'Public physicalScreenHeightTwips As Long
 
@@ -313,7 +313,7 @@ Public Function cWidgetFormScreenProperties(ByVal frm As cWidgetForm, ByRef moni
     
     On Error GoTo cWidgetFormScreenProperties_Error
    
-    'If gblDebugFlg = 1 Then MsgBox "%" & " func cWidgetFormScreenProperties"
+    'If gsDebugFlg = 1 Then MsgBox "%" & " func cWidgetFormScreenProperties"
     
     ' reads the size and position of the user supplied form window
     GetWindowRect frm.hWnd, Frect
@@ -327,13 +327,13 @@ Public Function cWidgetFormScreenProperties(ByVal frm As cWidgetForm, ByRef moni
     With cWidgetFormScreenProperties
         .handle = hMonitor
         'convert all dimensions from pixels to twips
-        .Left = MONITORINFO.rcMonitor.Left * gblScreenTwipsPerPixelX
-        .Right = MONITORINFO.rcMonitor.Right * gblScreenTwipsPerPixelX
-        .Top = MONITORINFO.rcMonitor.Top * gblScreenTwipsPerPixelY
-        .Bottom = MONITORINFO.rcMonitor.Bottom * gblScreenTwipsPerPixelY
+        .Left = MONITORINFO.rcMonitor.Left * gsScreenTwipsPerPixelX
+        .Right = MONITORINFO.rcMonitor.Right * gsScreenTwipsPerPixelX
+        .Top = MONITORINFO.rcMonitor.Top * gsScreenTwipsPerPixelY
+        .Bottom = MONITORINFO.rcMonitor.Bottom * gsScreenTwipsPerPixelY
 
-        .Height = (MONITORINFO.rcMonitor.Bottom - MONITORINFO.rcMonitor.Top) * gblScreenTwipsPerPixelY
-        .Width = (MONITORINFO.rcMonitor.Right - MONITORINFO.rcMonitor.Left) * gblScreenTwipsPerPixelX
+        .Height = (MONITORINFO.rcMonitor.Bottom - MONITORINFO.rcMonitor.Top) * gsScreenTwipsPerPixelY
+        .Width = (MONITORINFO.rcMonitor.Right - MONITORINFO.rcMonitor.Left) * gsScreenTwipsPerPixelX
 
         .IsPrimary = MONITORINFO.dwFlags And MONITORINFOF_PRIMARY
     End With
@@ -375,7 +375,7 @@ Public Function formScreenProperties(ByVal frm As Form, ByRef monitorID As Long)
     
     On Error GoTo formScreenProperties_Error
    
-    If gblDebugFlg = 1 Then MsgBox "%" & " func formScreenProperties"
+    If gsDebugFlg = 1 Then MsgBox "%" & " func formScreenProperties"
     
     ' reads the size and position of the user supplied form window
     GetWindowRect frm.hWnd, Frect
@@ -389,13 +389,13 @@ Public Function formScreenProperties(ByVal frm As Form, ByRef monitorID As Long)
     With formScreenProperties
         .handle = hMonitor
         'convert all dimensions from pixels to twips
-        .Left = MONITORINFO.rcMonitor.Left * gblScreenTwipsPerPixelX
-        .Right = MONITORINFO.rcMonitor.Right * gblScreenTwipsPerPixelX
-        .Top = MONITORINFO.rcMonitor.Top * gblScreenTwipsPerPixelY
-        .Bottom = MONITORINFO.rcMonitor.Bottom * gblScreenTwipsPerPixelY
+        .Left = MONITORINFO.rcMonitor.Left * gsScreenTwipsPerPixelX
+        .Right = MONITORINFO.rcMonitor.Right * gsScreenTwipsPerPixelX
+        .Top = MONITORINFO.rcMonitor.Top * gsScreenTwipsPerPixelY
+        .Bottom = MONITORINFO.rcMonitor.Bottom * gsScreenTwipsPerPixelY
 
-        .Height = (MONITORINFO.rcMonitor.Bottom - MONITORINFO.rcMonitor.Top) * gblScreenTwipsPerPixelY
-        .Width = (MONITORINFO.rcMonitor.Right - MONITORINFO.rcMonitor.Left) * gblScreenTwipsPerPixelX
+        .Height = (MONITORINFO.rcMonitor.Bottom - MONITORINFO.rcMonitor.Top) * gsScreenTwipsPerPixelY
+        .Width = (MONITORINFO.rcMonitor.Right - MONITORINFO.rcMonitor.Left) * gsScreenTwipsPerPixelX
 
         .IsPrimary = MONITORINFO.dwFlags And MONITORINFOF_PRIMARY
     End With
@@ -452,7 +452,7 @@ Public Sub positionPrefsByMonitorSize()
     widgetPrefs.tmrWritePositionAndSize.Enabled = False
 
     ' if just one monitor or the global switch is off then exit
-    If gblMonitorCount > 1 And (LTrim$(gblMultiMonitorResize) = "1" Or LTrim$(gblMultiMonitorResize) = "2") Then
+    If gsMonitorCount > 1 And (LTrim$(gsMultiMonitorResize) = "1" Or LTrim$(gsMultiMonitorResize) = "2") Then
 
         ' populate the OLD vars if empty, to allow valid comparison next run
         If oldWidgetPrefsLeft <= 0 Then oldWidgetPrefsLeft = widgetPrefs.Left
@@ -474,34 +474,34 @@ Public Sub positionPrefsByMonitorSize()
         If oldPrefsWidgetLeftPixels = 0 Then oldPrefsWidgetLeftPixels = widgetPrefs.Left
     
         ' if the monitor ID has changed
-        If gblOldPrefsFormMonitorPrimary <> prefsFormMonitorPrimary Then
+        If gsOldPrefsFormMonitorPrimary <> prefsFormMonitorPrimary Then
     
-            ' screenWrite ("Prefs Stored monitor primary status = " & CBool(gblOldPrefsFormMonitorPrimary))
+            ' screenWrite ("Prefs Stored monitor primary status = " & CBool(gsOldPrefsFormMonitorPrimary))
             ' screenWrite ("Prefs Current monitor primary status = " & CBool(prefsFormMonitorPrimary))
            
-            If LTrim$(gblMultiMonitorResize) = "1" Then
+            If LTrim$(gsMultiMonitorResize) = "1" Then
                 'if the resolution is different then calculate new size proportion
                 If monitorStructWidthTwips <> oldPrefsMonitorStructWidthTwips Or monitorStructHeightTwips <> oldPrefsMonitorStructHeightTwips Then
                     'now calculate the size of the widget according to the screen HeightTwips.
                     resizeProportion = prefsMonitorStruct.Height / oldPrefsMonitorStructHeightTwips
                     newPrefsHeight = widgetPrefs.Height * resizeProportion
-                    gblPrefsFormResizedInCode = True
+                    gsPrefsFormResizedInCode = True
                     widgetPrefs.Height = newPrefsHeight
                 End If
-            ElseIf LTrim$(gblMultiMonitorResize) = "2" Then
+            ElseIf LTrim$(gsMultiMonitorResize) = "2" Then
                 ' set the widget size according to saved values
-                gblPrefsFormResizedInCode = True
+                gsPrefsFormResizedInCode = True
                 If prefsMonitorStruct.IsPrimary = True Then
-                    widgetPrefs.Height = CLng(gblPrefsPrimaryHeightTwips)
+                    widgetPrefs.Height = CLng(gsPrefsPrimaryHeightTwips)
                 Else
-                    widgetPrefs.Height = CLng(gblPrefsSecondaryHeightTwips)
+                    widgetPrefs.Height = CLng(gsPrefsSecondaryHeightTwips)
                 End If
             End If
             
         End If
         
         ' set the current values as 'old' for comparison on next run
-        gblOldPrefsFormMonitorPrimary = prefsFormMonitorPrimary
+        gsOldPrefsFormMonitorPrimary = prefsFormMonitorPrimary
         
         oldPrefsMonitorStructWidthTwips = monitorStructWidthTwips
         oldPrefsMonitorStructHeightTwips = monitorStructHeightTwips
@@ -573,7 +573,7 @@ Public Function fVirtualScreenWidth(ByRef inPixels As Boolean) As Long
     If inPixels = True Then
         fVirtualScreenWidth = Pixels
     Else
-        fVirtualScreenWidth = Pixels * gblScreenTwipsPerPixelX
+        fVirtualScreenWidth = Pixels * gsScreenTwipsPerPixelX
     End If
 
    On Error GoTo 0
@@ -613,7 +613,7 @@ Public Function fVirtualScreenHeight(ByRef inPixels As Boolean, Optional ByRef b
     If inPixels = True Then
         fVirtualScreenHeight = fVirtualScreenHeight
     Else
-        fVirtualScreenHeight = fVirtualScreenHeight * gblScreenTwipsPerPixelY
+        fVirtualScreenHeight = fVirtualScreenHeight * gsScreenTwipsPerPixelY
     End If
 
    On Error GoTo 0
@@ -649,7 +649,7 @@ Public Sub resizeLocateRCFormByMoveToNewMonitor()
 
     On Error GoTo resizeLocateRCFormByMoveToNewMonitor_Error
   
-    If gblMonitorCount > 1 And (LTrim$(gblMultiMonitorResize) = "1" Or LTrim$(gblMultiMonitorResize) = "2") Then
+    If gsMonitorCount > 1 And (LTrim$(gsMultiMonitorResize) = "1" Or LTrim$(gsMultiMonitorResize) = "2") Then
                     
         ' note the monitor ID at widgetForm form_load and store as the widgetFormMonitorID
         widgetMonitorStruct = cWidgetFormScreenProperties(fMain.TenShillingsForm, widgetFormMonitorID)
@@ -667,12 +667,12 @@ Public Sub resizeLocateRCFormByMoveToNewMonitor()
         If oldMonitorStructHeightTwips = 0 Then oldMonitorStructHeightTwips = monitorStructHeightTwips
         If oldWidgetLeftPixels = 0 Then oldWidgetLeftPixels = fMain.TenShillingsForm.Left
     
-        If gblOldwidgetFormMonitorPrimary <> widgetFormMonitorPrimary Then
+        If gsOldwidgetFormMonitorPrimary <> widgetFormMonitorPrimary Then
             
-            ' screenWrite ("Stored monitor primary status = " & CBool(gblOldwidgetFormMonitorPrimary))
+            ' screenWrite ("Stored monitor primary status = " & CBool(gsOldwidgetFormMonitorPrimary))
             ' screenWrite ("Current monitor primary status = " & CBool(widgetFormMonitorPrimary))
             
-            If LTrim$(gblMultiMonitorResize) = "1" Then
+            If LTrim$(gsMultiMonitorResize) = "1" Then
                 'if the resolution is different then calculate new size proportion
                 If monitorStructWidthTwips <> oldMonitorStructWidthTwips Or monitorStructHeightTwips <> oldMonitorStructHeightTwips Then
                     ' screenWrite ("Resizing by proportion per monitor ")
@@ -684,14 +684,14 @@ Public Sub resizeLocateRCFormByMoveToNewMonitor()
                     fMain.TenShillingsForm.Refresh
                     TenShillingsWidget.Zoom = (resizeProportion)
                 End If
-            ElseIf LTrim$(gblMultiMonitorResize) = "2" Then
+            ElseIf LTrim$(gsMultiMonitorResize) = "2" Then
                 ' screenWrite ("Resizing per monitor stored size ")
                 If widgetMonitorStruct.IsPrimary = True Then
-                    If gblWidgetPrimaryHeightRatio = "" Then gblWidgetPrimaryHeightRatio = "1"
-                    resizeProportion = Val(gblWidgetPrimaryHeightRatio)
+                    If gsWidgetPrimaryHeightRatio = "" Then gsWidgetPrimaryHeightRatio = "1"
+                    resizeProportion = Val(gsWidgetPrimaryHeightRatio)
                 Else
-                    If gblWidgetSecondaryHeightRatio = "" Then gblWidgetSecondaryHeightRatio = "1"
-                    resizeProportion = Val(gblWidgetSecondaryHeightRatio)
+                    If gsWidgetSecondaryHeightRatio = "" Then gsWidgetSecondaryHeightRatio = "1"
+                    resizeProportion = Val(gsWidgetSecondaryHeightRatio)
                 End If
                 
                 fMain.TenShillingsForm.Refresh
@@ -699,7 +699,7 @@ Public Sub resizeLocateRCFormByMoveToNewMonitor()
             End If
         End If
     
-        gblOldwidgetFormMonitorPrimary = widgetFormMonitorPrimary
+        gsOldwidgetFormMonitorPrimary = widgetFormMonitorPrimary
         
         oldMonitorStructWidthTwips = monitorStructWidthTwips
         oldMonitorStructHeightTwips = monitorStructHeightTwips

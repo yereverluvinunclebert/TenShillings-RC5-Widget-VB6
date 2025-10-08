@@ -140,11 +140,11 @@ Private Sub Form_Activate()
 
    On Error GoTo Form_Activate_Error
 
-    gblMessageAHeightTwips = fGetINISetting("Software\TenShillings", "messageAHeightTwips", gblSettingsFile)
-    gblMessageAWidthTwips = fGetINISetting("Software\TenShillings", "messageAWidthTwips ", gblSettingsFile)
+    gsMessageAHeightTwips = fGetINISetting("Software\TenShillings", "messageAHeightTwips", gsSettingsFile)
+    gsMessageAWidthTwips = fGetINISetting("Software\TenShillings", "messageAWidthTwips ", gsSettingsFile)
     
-    frmMessage.Height = Val(gblMessageAHeightTwips)
-    frmMessage.Width = Val(gblMessageAWidthTwips)
+    frmMessage.Height = Val(gsMessageAHeightTwips)
+    frmMessage.Width = Val(gsMessageAWidthTwips)
 
    On Error GoTo 0
    Exit Sub
@@ -166,22 +166,22 @@ Private Sub Form_Load()
 
     On Error GoTo Form_Load_Error
     
-    If gblMessageAHeightTwips = "" Then gblMessageAHeightTwips = gblPhysicalScreenHeightTwips / 5.5
+    If gsMessageAHeightTwips = "" Then gsMessageAHeightTwips = gsPhysicalScreenHeightTwips / 5.5
     
-    msgBoxACurrentWidth = Val(gblMessageAWidthTwips)
-    msgBoxACurrentHeight = Val(gblMessageAHeightTwips)
+    msgBoxACurrentWidth = Val(gsMessageAWidthTwips)
+    msgBoxACurrentHeight = Val(gsMessageAHeightTwips)
         
     ' save the initial positions of ALL the controls on the msgbox form
     Call SaveSizes(Me, msgBoxAControlPositions(), msgBoxACurrentWidth, msgBoxACurrentHeight)
         
     For Each Ctrl In frmMessage.Controls
          If (TypeOf Ctrl Is CommandButton) Or (TypeOf Ctrl Is textBox) Or (TypeOf Ctrl Is FileListBox) Or (TypeOf Ctrl Is Label) Or (TypeOf Ctrl Is ComboBox) Or (TypeOf Ctrl Is CheckBox) Or (TypeOf Ctrl Is OptionButton) Or (TypeOf Ctrl Is Frame) Or (TypeOf Ctrl Is ListBox) Then
-            If gblPrefsFont <> "" Then Ctrl.Font.Name = gblPrefsFont
+            If gsPrefsFont <> "" Then Ctrl.Font.Name = gsPrefsFont
            
             If gsDpiAwareness = "1" Then
-                If Val(Abs(gblPrefsFontSizeHighDPI)) > 0 Then Ctrl.Font.Size = Val(Abs(gblPrefsFontSizeHighDPI))
+                If Val(Abs(gsPrefsFontSizeHighDPI)) > 0 Then Ctrl.Font.Size = Val(Abs(gsPrefsFontSizeHighDPI))
             Else
-                If Val(Abs(gblPrefsFontSizeLowDPI)) > 0 Then Ctrl.Font.Size = Val(Abs(gblPrefsFontSizeLowDPI))
+                If Val(Abs(gsPrefsFontSizeLowDPI)) > 0 Then Ctrl.Font.Size = Val(Abs(gsPrefsFontSizeLowDPI))
             End If
         End If
     Next
@@ -214,12 +214,12 @@ Private Sub Form_Resize()
 
     ratio = cMsgBoxAFormHeight / cMsgBoxAFormWidth
     If gsDpiAwareness = "1" Then
-        currentFont = Val(gblPrefsFontSizeHighDPI)
+        currentFont = Val(gsPrefsFontSizeHighDPI)
     Else
-        currentFont = Val(gblPrefsFontSizeLowDPI)
+        currentFont = Val(gsPrefsFontSizeLowDPI)
     End If
     
-    If gblMsgBoxADynamicSizingFlg = True Then
+    If gsMsgBoxADynamicSizingFlg = True Then
         Call setMessageIconImagesLight(1920)
         Call resizeControls(Me, msgBoxAControlPositions(), msgBoxACurrentWidth, msgBoxACurrentHeight, currentFont)
         Me.Width = Me.Height / ratio ' maintain the aspect ratio
@@ -227,10 +227,10 @@ Private Sub Form_Resize()
         Call setMessageIconImagesLight(600)
     End If
     
-    gblMessageAHeightTwips = Trim$(CStr(frmMessage.Height))
-    gblMessageAWidthTwips = Trim$(CStr(frmMessage.Width))
-    sPutINISetting "Software\TenShillings", "messageAHeightTwips", gblMessageAHeightTwips, gblSettingsFile
-    sPutINISetting "Software\TenShillings", "messageAWidthTwips", gblMessageAWidthTwips, gblSettingsFile
+    gsMessageAHeightTwips = Trim$(CStr(frmMessage.Height))
+    gsMessageAWidthTwips = Trim$(CStr(frmMessage.Width))
+    sPutINISetting "Software\TenShillings", "messageAHeightTwips", gsMessageAHeightTwips, gsSettingsFile
+    sPutINISetting "Software\TenShillings", "messageAWidthTwips", gsMessageAWidthTwips, gsSettingsFile
     
    On Error GoTo 0
    Exit Sub
@@ -341,9 +341,9 @@ Public Property Let propMessage(ByVal newValue As String)
     
     ' Expand the form and move the other controls if the message is too long to show.
           
-    If gblMsgBoxADynamicSizingFlg = True Then
+    If gsMsgBoxADynamicSizingFlg = True Then
         ' this causes a resize event
-        ' Me.Height = (gblPhysicalScreenHeightTwips / 5.5) '+ intDiff
+        ' Me.Height = (gsPhysicalScreenHeightTwips / 5.5) '+ intDiff
     Else
         fraPicVB.Top = 285
     End If
@@ -390,7 +390,7 @@ Public Property Let propTitle(ByVal newValue As String)
     If mPropTitle <> newValue Then mPropTitle = newValue Else Exit Property
 
     If mPropTitle = "" Then
-        Me.Caption = "TenShillings-" & gblRichClientEnvironment & "-Widget-" & gblCodingEnvironment & " Message."
+        Me.Caption = "TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment & " Message."
     Else
         Me.Caption = mPropTitle
     End If
@@ -591,7 +591,7 @@ Public Property Let propButtonVal(ByVal newValue As Integer)
         ' .86 DAEB 06/06/2022 rDIConConfig.frm Add a sound to the msgbox for critical and exclamations? ting and belltoll.wav files
         
         
-'        If gblVolumeBoost = "1" Then
+'        If gsVolumeBoost = "1" Then
 '            fileToPlay = "belltoll01.wav"
 '        Else
 '            fileToPlay = "belltoll01-quiet.wav"

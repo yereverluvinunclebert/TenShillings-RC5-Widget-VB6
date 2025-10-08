@@ -105,13 +105,13 @@ Private Sub revealWidgetTimer_Timer()
     On Error GoTo revealWidgetTimer_Timer_Error
 
     revealWidgetTimerCount = revealWidgetTimerCount + 1
-    If revealWidgetTimerCount >= (gblMinutesToHide * 12) Then
+    If revealWidgetTimerCount >= (gsMinutesToHide * 12) Then
         revealWidgetTimerCount = 0
 
         fMain.TenShillingsForm.Visible = True
         revealWidgetTimer.Enabled = False
-        gblWidgetHidden = "0"
-        sPutINISetting "Software\TenShillings", "widgetHidden", gblWidgetHidden, gblSettingsFile
+        gsWidgetHidden = "0"
+        sPutINISetting "Software\TenShillings", "widgetHidden", gsWidgetHidden, gsSettingsFile
     End If
 
     On Error GoTo 0
@@ -145,24 +145,24 @@ Private Sub tmrScreenResolution_Timer()
     
     On Error GoTo tmrScreenResolution_Timer_Error
 
-    gblPhysicalScreenHeightPixels = GetDeviceCaps(Me.hDC, VERTRES)
-    gblPhysicalScreenWidthPixels = GetDeviceCaps(Me.hDC, HORZRES)
+    gsPhysicalScreenHeightPixels = GetDeviceCaps(Me.hDC, VERTRES)
+    gsPhysicalScreenWidthPixels = GetDeviceCaps(Me.hDC, HORZRES)
     
-    gblVirtualScreenWidthPixels = fVirtualScreenWidth(True)
-    gblVirtualScreenHeightPixels = fVirtualScreenHeight(True)
+    gsVirtualScreenWidthPixels = fVirtualScreenWidth(True)
+    gsVirtualScreenHeightPixels = fVirtualScreenHeight(True)
 
     ' calls a routine that tests for a change in the monitor upon which the form sits, if so, resizes
     'Call resizeLocateRCFormByMoveToNewMonitor
     
     ' will be used to check for orientation changes
-    If (gblOldPhysicalScreenHeightPixels <> gblPhysicalScreenHeightPixels) Or (gblOldPhysicalScreenWidthPixels <> gblPhysicalScreenWidthPixels) Then
+    If (gsOldPhysicalScreenHeightPixels <> gsPhysicalScreenHeightPixels) Or (gsOldPhysicalScreenWidthPixels <> gsPhysicalScreenWidthPixels) Then
         
         ' move/hide onto/from the main screen and position per orientation portrait/landscape
         Call mainScreen
 '
         'store the resolution change
-        gblOldPhysicalScreenHeightPixels = gblPhysicalScreenHeightPixels
-        gblOldPhysicalScreenWidthPixels = gblPhysicalScreenWidthPixels
+        gsOldPhysicalScreenHeightPixels = gsPhysicalScreenHeightPixels
+        gsOldPhysicalScreenWidthPixels = gsPhysicalScreenWidthPixels
     End If
 
     On Error GoTo 0
@@ -191,11 +191,11 @@ Private Sub unhideTimer_Timer()
     
     On Error GoTo unhideTimer_Timer_Error
 
-    gblUnhide = fGetINISetting("Software\TenShillings", "unhide", gblSettingsFile)
+    gsUnhide = fGetINISetting("Software\TenShillings", "unhide", gsSettingsFile)
 
-    If gblUnhide = "true" Then
+    If gsUnhide = "true" Then
         fMain.TenShillingsForm.Visible = True
-        sPutINISetting "Software\TenShillings", "unhide", vbNullString, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "unhide", vbNullString, gsSettingsFile
     End If
 
     On Error GoTo 0
@@ -240,15 +240,15 @@ Private Sub sleepTimer_Timer()
 
     If lngSecondsGap > 60 Then
       
-        gblTenShillingsWidgetAvailable = True
+        gsTenShillingsWidgetAvailable = True
         ' Call ' screenWrite("system has just woken up from a sleep at " & Now() & vbCrLf & "updating digital widgets... ")
         
         'TenShillingsWidget.BaseDate = Now()
-        'gblTriggerDigitalWidgetPopulation = True
+        'gsTriggerDigitalWidgetPopulation = True
         
         fMain.TenShillingsForm.Refresh
         
-'        If gblNumericDisplayRotation = "1" Then
+'        If gsNumericDisplayRotation = "1" Then
 '            TenShillingsWidget.TmrDigitRotatorTicking = True
 '        End If
 '

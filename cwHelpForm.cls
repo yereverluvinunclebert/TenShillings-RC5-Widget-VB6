@@ -296,7 +296,7 @@ Private Sub tmrHelpFadeOut_Timer()
         fMain.helpForm.Hide
     
         fileToPlay = "till.wav"
-        If gblEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
+        If gsEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
             playSound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
         End If
         
@@ -344,7 +344,7 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal mMyOpacity As Double)
     
     CC.ScaleDrawings mZoom, mZoom
 
-    If gblRichClientEnvironment = "RC6" Then
+    If gsRichClientEnvironment = "RC6" Then
         ' Widgets are refreshed "from the ground up" in RC5 and not so in RC6
         ' extra code NOT needed when using RC5 but now required in RC6 - starts
         CC.Operator = CAIRO_OPERATOR_CLEAR

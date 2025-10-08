@@ -184,8 +184,8 @@ Private Sub menuReload_Click()
     'answer = vbYes
     answerMsg = "Performing a hard restart now, press OK."
         
-    If gblSHIFT_1 = True Then
-        gblSHIFT_1 = False
+    If gsSHIFT_1 = True Then
+        gsSHIFT_1 = False
         'answer =
         msgBoxA answerMsg, vbExclamation + vbOK, "Performing a hard restart", True, "menuReloadClick"
         
@@ -283,13 +283,13 @@ Private Sub mnuEditWidget_Click()
    On Error GoTo mnuEditWidget_Click_Error
 
     #If TWINBASIC Then
-        editorPath = gblDefaultTBEditor
+        editorPath = gsDefaultTBEditor
     #Else
-        editorPath = gblDefaultVB6Editor
+        editorPath = gsDefaultVB6Editor
     #End If
     
     If fFExists(editorPath) Then ' if it is a folder already
-        '''If gblDebugFlg = 1  Then msgBox "ShellExecute " & sCommand
+        '''If gsDebugFlg = 1  Then msgBox "ShellExecute " & sCommand
         
         ' run the selected program
         execStatus = ShellExecute(Me.hWnd, "open", editorPath, vbNullString, vbNullString, 1)
@@ -330,7 +330,7 @@ Public Sub mnuGithubHome_Click()
     answer = msgBoxA(answerMsg, vbExclamation + vbYesNo, "Request to Upgrade", True, "mnuGithubHomeClick")
 
     If answer = vbYes Then
-        Call ShellExecute(Me.hWnd, "Open", "https://github.com/yereverluvinunclebert/TenShillings-" & gblRichClientEnvironment & "-Widget-" & gblCodingEnvironment, vbNullString, App.Path, 1)
+        Call ShellExecute(Me.hWnd, "Open", "https://github.com/yereverluvinunclebert/TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment, vbNullString, App.Path, 1)
     End If
 
    On Error GoTo 0
@@ -408,9 +408,9 @@ Private Sub mnuHideWidget_Click()
     'TenShillingsWidget.Hidden = True
     TenShillingsWidget.Hidden = True
     frmTimer.revealWidgetTimer.Enabled = True
-    gblWidgetHidden = "1"
+    gsWidgetHidden = "1"
     ' we have to save the value here
-    sPutINISetting "Software\TenShillings", "widgetHidden", gblWidgetHidden, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "widgetHidden", gsWidgetHidden, gsSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -559,7 +559,7 @@ Public Sub mnuLatest_Click()
     Dim answerMsg As String: answerMsg = vbNullString
 
     On Error GoTo mnuLatest_Click_Error
-    '''If gblDebugFlg = 1  Then msgBox "%" & "mnuLatest_Click"
+    '''If gsDebugFlg = 1  Then msgBox "%" & "mnuLatest_Click"
     
     answer = vbYes
 
@@ -567,7 +567,7 @@ Public Sub mnuLatest_Click()
     answer = msgBoxA(answerMsg, vbExclamation + vbYesNo, "Request to Upgrade", True, "mnuLatestClick")
 
     If answer = vbYes Then
-        Call ShellExecute(Me.hWnd, "Open", "https://github.com/yereverluvinunclebert/TenShillings-" & gblRichClientEnvironment & "-Widget-" & gblCodingEnvironment & "/releases", vbNullString, App.Path, 1)
+        Call ShellExecute(Me.hWnd, "Open", "https://github.com/yereverluvinunclebert/TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment & "/releases", vbNullString, App.Path, 1)
     End If
 
 

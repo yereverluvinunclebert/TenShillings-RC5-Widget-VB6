@@ -183,13 +183,13 @@ Private Sub W_MouseDown(Button As Integer, Shift As Integer, ByVal x As Single, 
    On Error GoTo W_MouseDown_Error
     
     ' works better here
-'    If gblVolumeBoost = "1" Then
+'    If gsVolumeBoost = "1" Then
 '        fileToPlay = "till.wav"
 '    Else
 '        fileToPlay = "till-quiet.wav"
 '    End If
 '
-    If gblEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
+    If gsEnableSounds = "1" And fFExists(App.Path & "\resources\sounds\" & fileToPlay) Then
         playSound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
     End If
     
@@ -372,7 +372,7 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal dx As Single, ByVal dy As Sing
   
     CC.ScaleDrawings mZoom, mZoom
     
-    If gblRichClientEnvironment = "RC6" Then
+    If gsRichClientEnvironment = "RC6" Then
         ' Widgets are refreshed "from the ground up" in RC5 and not so in RC6
         ' extra code NOT needed when using RC5 but now required in RC6 - starts
         CC.Operator = CAIRO_OPERATOR_CLEAR
@@ -385,7 +385,7 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal dx As Single, ByVal dy As Sing
         
     'set some Font- and ForeColor-Properties and draw some Text on the Widget
     W.FontItalic = False
-    W.FontName = gblWidgetFont
+    W.FontName = gsWidgetFont
     W.ForeColor = vbBlack
     W.FontBold = True
     W.FontSize = 9
@@ -393,9 +393,9 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal dx As Single, ByVal dy As Sing
     W.SelectFontSettingsInto CC
     
     If gsDpiAwareness = "0" Then
-        CC.DrawText 330, -20, dx, dy - 275, gblCodingEnvironment & " " & gblRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
+        CC.DrawText 330, -20, dx, dy - 275, gsCodingEnvironment & " " & gsRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
     Else
-        CC.DrawText 330, 0, dx, dy - 1050, gblCodingEnvironment & " " & gblRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
+        CC.DrawText 330, 0, dx, dy - 1050, gsCodingEnvironment & " " & gsRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
     End If
     W.Refresh
 
@@ -416,8 +416,8 @@ End Sub
 ' to have multiple instances running so it does not really matter. If you want to convert each of these to property GET/LETs
 ' then please feel free to work your way through this list.
 
-' gblVolumeBoost
-' gblEnableSounds
+' gsVolumeBoost
+' gsEnableSounds
 
 
 
