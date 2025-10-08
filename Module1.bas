@@ -80,6 +80,7 @@ End Type
 
 
 '------------------------------------------------------ STARTS
+
 'APIs used to choose a font via the system dialog window
 Private Declare Function ChooseFont Lib "comdlg32.dll" Alias "ChooseFontA" (pChoosefont As FONTSTRUC) As Long
 Private Declare Function GlobalLock Lib "kernel32" (ByVal hMem As Long) As Long
@@ -179,10 +180,6 @@ Private Declare Function RegCloseKey Lib "advapi32.dll" (ByVal hKey As Long) As 
 Private Declare Function RegCreateKey Lib "advapi32.dll" Alias "RegCreateKeyA" (ByVal hKey As Long, ByVal lpSubKey As String, ByRef phkResult As Long) As Long
 Private Declare Function RegSetValueEx Lib "advapi32.dll" Alias "RegSetValueExA" (ByVal hKey As Long, ByVal lpValueName As String, ByVal Reserved As Long, ByVal dwType As Long, ByRef lpData As Any, ByVal cbData As Long) As Long
 '------------------------------------------------------ ENDS
-
-
-
-
 
 '------------------------------------------------------ STARTS
 ' Enums defined for opening a common dialog box to select files without OCX dependencies
@@ -291,9 +288,49 @@ Private Declare Function PathIsDirectory Lib "shlwapi" Alias "PathIsDirectoryA" 
 '------------------------------------------------------ ENDS
              
 '------------------------------------------------------ STARTS
-' private vars used as local vars in properties replacing global vars
+' private variables used within properties replacing global variables
+'   avoids breaking encapsulation
+'   allows validation during let
+'   allows addition of logic to provide potential constraint of values during each LET
 
+' general
+
+Private m_sgsMultiCoreEnable As String
 Private m_sWidgetSize As String
+Private m_sgsStartup As String
+Private m_sgsWidgetFunctions As String
+Private m_sgsPointerAnimate As String
+Private m_sgsSamplingInterval As String
+
+' config
+
+Private m_sgsSkewDegrees As String ' unique to the rotating widgets
+Private m_sgsWidgetTooltips As String
+Private m_sgsPrefsTooltips As String
+Private m_sgsShowTaskbar As String
+Private m_sgsShowHelp As String
+Private m_sgsDpiAwareness As String
+'Public gsWidgetSize As String
+Private m_sgsScrollWheelDirection As String
+Private m_sgsWidgetHighDpiXPos As String
+Private m_sgsWidgetHighDpiYPos As String
+Private m_sgsWidgetLowDpiXPos As String
+Private m_sgsWidgetLowDpiYPos As String
+       
+' font
+
+Private m_sgsClockFont As String
+Private m_sgsWidgetFont As String
+Private m_sgsPrefsFont As String
+Private m_sgsPrefsFontSizeHighDPI As String
+Private m_sgsPrefsFontSizeLowDPI As String
+Private m_sgsPrefsFontItalics As String
+Private m_sgsPrefsFontColour As String
+Private m_sgsDisplayScreenFont As String
+Private m_sgsDisplayScreenFontSize As String
+Private m_sgsDisplayScreenFontItalics As String
+Private m_sgsDisplayScreenFontColour As String
+
 '------------------------------------------------------ ENDS
 
 
@@ -305,43 +342,8 @@ Private m_sWidgetSize As String
 ' There are so many global vars because the old YWE javascript version of this program used global vars, this was a conversion.
 ' Note: In VB6 public variables used in class modules are treated as properties, passed by value, not by reference
 
-' general
- 
-Public gsStartup As String
-Public gsWidgetFunctions As String
-Public gsPointerAnimate As String
-Public gsMultiCoreEnable As String
-Public gsSamplingInterval As String
 
-' config
 
-Public gsSkewDegrees As String ' unique to the rotating widgets
-
-Public gsWidgetTooltips As String
-Public gsPrefsTooltips As String
-Public gsShowTaskbar As String
-Public gsShowHelp As String
-Public gsDpiAwareness As String
-'Public gsWidgetSize As String
-Public gsScrollWheelDirection As String
-Public gsWidgetHighDpiXPos As String
-Public gsWidgetHighDpiYPos As String
-Public gsWidgetLowDpiXPos As String
-Public gsWidgetLowDpiYPos As String
-       
-' font
-
-Public gsClockFont As String
-Public gsWidgetFont As String
-Public gsPrefsFont As String
-Public gsPrefsFontSizeHighDPI As String
-Public gsPrefsFontSizeLowDPI As String
-Public gsPrefsFontItalics  As String
-Public gsPrefsFontColour  As String
-Public gsDisplayScreenFont As String
-Public gsDisplayScreenFontSize As String
-Public gsDisplayScreenFontItalics As String
-Public gsDisplayScreenFontColour As String
 
 ' sounds
 
@@ -2932,5 +2934,1193 @@ Public Property Let gsWidgetSize(ByVal sgsWidgetSize As String)
 gsWidgetSize_Error:
 
      MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetSize of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsStartup
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsStartup() As String
+
+    On Error GoTo gsStartup_Error
+
+    gsStartup = m_sgsStartup
+
+    On Error GoTo 0
+    Exit Property
+
+gsStartup_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsStartup of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsStartup
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsStartup(ByVal sgsStartup As String)
+
+    On Error GoTo gsStartup_Error
+
+    m_sgsStartup = sgsStartup
+
+    On Error GoTo 0
+    Exit Property
+
+gsStartup_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsStartup of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetFunctions
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsWidgetFunctions() As String
+
+    On Error GoTo gsWidgetFunctions_Error
+
+    gsWidgetFunctions = m_sgsWidgetFunctions
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetFunctions_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetFunctions of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetFunctions
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsWidgetFunctions(ByVal sgsWidgetFunctions As String)
+
+    On Error GoTo gsWidgetFunctions_Error
+
+    m_sgsWidgetFunctions = sgsWidgetFunctions
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetFunctions_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetFunctions of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPointerAnimate
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsPointerAnimate() As String
+
+    On Error GoTo gsPointerAnimate_Error
+
+    gsPointerAnimate = m_sgsPointerAnimate
+
+    On Error GoTo 0
+    Exit Property
+
+gsPointerAnimate_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPointerAnimate of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPointerAnimate
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsPointerAnimate(ByVal sgsPointerAnimate As String)
+
+    On Error GoTo gsPointerAnimate_Error
+
+    m_sgsPointerAnimate = sgsPointerAnimate
+
+    On Error GoTo 0
+    Exit Property
+
+gsPointerAnimate_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPointerAnimate of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsMultiCoreEnable
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsMultiCoreEnable() As String
+
+    On Error GoTo gsMultiCoreEnable_Error
+
+    gsMultiCoreEnable = m_sgsMultiCoreEnable
+
+    On Error GoTo 0
+    Exit Property
+
+gsMultiCoreEnable_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsMultiCoreEnable of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsMultiCoreEnable
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsMultiCoreEnable(ByVal sgsMultiCoreEnable As String)
+
+    On Error GoTo gsMultiCoreEnable_Error
+
+    m_sgsMultiCoreEnable = sgsMultiCoreEnable
+
+    On Error GoTo 0
+    Exit Property
+
+gsMultiCoreEnable_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsMultiCoreEnable of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsSamplingInterval
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsSamplingInterval() As String
+
+    On Error GoTo gsSamplingInterval_Error
+
+    gsSamplingInterval = m_sgsSamplingInterval
+
+    On Error GoTo 0
+    Exit Property
+
+gsSamplingInterval_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsSamplingInterval of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsSamplingInterval
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsSamplingInterval(ByVal sgsSamplingInterval As String)
+
+    On Error GoTo gsSamplingInterval_Error
+
+    m_sgsSamplingInterval = sgsSamplingInterval
+
+    On Error GoTo 0
+    Exit Property
+
+gsSamplingInterval_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsSamplingInterval of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsSkewDegrees
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsSkewDegrees() As String
+
+    On Error GoTo gsSkewDegrees_Error
+
+    gsSkewDegrees = m_sgsSkewDegrees
+
+    On Error GoTo 0
+    Exit Property
+
+gsSkewDegrees_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsSkewDegrees of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsSkewDegrees
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsSkewDegrees(ByVal sgsSkewDegrees As String)
+
+    On Error GoTo gsSkewDegrees_Error
+
+    m_sgsSkewDegrees = sgsSkewDegrees
+
+    On Error GoTo 0
+    Exit Property
+
+gsSkewDegrees_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsSkewDegrees of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetTooltips
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsWidgetTooltips() As String
+
+    On Error GoTo gsWidgetTooltips_Error
+
+    gsWidgetTooltips = m_sgsWidgetTooltips
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetTooltips_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetTooltips of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetTooltips
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsWidgetTooltips(ByVal sgsWidgetTooltips As String)
+
+    On Error GoTo gsWidgetTooltips_Error
+
+    m_sgsWidgetTooltips = sgsWidgetTooltips
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetTooltips_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetTooltips of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsTooltips
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsPrefsTooltips() As String
+
+    On Error GoTo gsPrefsTooltips_Error
+
+    gsPrefsTooltips = m_sgsPrefsTooltips
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsTooltips_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsTooltips of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsTooltips
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsPrefsTooltips(ByVal sgsPrefsTooltips As String)
+
+    On Error GoTo gsPrefsTooltips_Error
+
+    m_sgsPrefsTooltips = sgsPrefsTooltips
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsTooltips_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsTooltips of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsShowTaskbar
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsShowTaskbar() As String
+
+    On Error GoTo gsShowTaskbar_Error
+
+    gsShowTaskbar = m_sgsShowTaskbar
+
+    On Error GoTo 0
+    Exit Property
+
+gsShowTaskbar_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsShowTaskbar of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsShowTaskbar
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsShowTaskbar(ByVal sgsShowTaskbar As String)
+
+    On Error GoTo gsShowTaskbar_Error
+
+    m_sgsShowTaskbar = sgsShowTaskbar
+
+    On Error GoTo 0
+    Exit Property
+
+gsShowTaskbar_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsShowTaskbar of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsShowHelp
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsShowHelp() As String
+
+    On Error GoTo gsShowHelp_Error
+
+    gsShowHelp = m_sgsShowHelp
+
+    On Error GoTo 0
+    Exit Property
+
+gsShowHelp_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsShowHelp of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsShowHelp
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsShowHelp(ByVal sgsShowHelp As String)
+
+    On Error GoTo gsShowHelp_Error
+
+    m_sgsShowHelp = sgsShowHelp
+
+    On Error GoTo 0
+    Exit Property
+
+gsShowHelp_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsShowHelp of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsDpiAwareness
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsDpiAwareness() As String
+
+    On Error GoTo gsDpiAwareness_Error
+
+    gsDpiAwareness = m_sgsDpiAwareness
+
+    On Error GoTo 0
+    Exit Property
+
+gsDpiAwareness_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsDpiAwareness of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsDpiAwareness
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsDpiAwareness(ByVal sgsDpiAwareness As String)
+
+    On Error GoTo gsDpiAwareness_Error
+
+    m_sgsDpiAwareness = sgsDpiAwareness
+
+    On Error GoTo 0
+    Exit Property
+
+gsDpiAwareness_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsDpiAwareness of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsScrollWheelDirection
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsScrollWheelDirection() As String
+
+    On Error GoTo gsScrollWheelDirection_Error
+
+    gsScrollWheelDirection = m_sgsScrollWheelDirection
+
+    On Error GoTo 0
+    Exit Property
+
+gsScrollWheelDirection_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsScrollWheelDirection of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsScrollWheelDirection
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsScrollWheelDirection(ByVal sgsScrollWheelDirection As String)
+
+    On Error GoTo gsScrollWheelDirection_Error
+
+    m_sgsScrollWheelDirection = sgsScrollWheelDirection
+
+    On Error GoTo 0
+    Exit Property
+
+gsScrollWheelDirection_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsScrollWheelDirection of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetHighDpiXPos
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsWidgetHighDpiXPos() As String
+
+    On Error GoTo gsWidgetHighDpiXPos_Error
+
+    gsWidgetHighDpiXPos = m_sgsWidgetHighDpiXPos
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetHighDpiXPos_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetHighDpiXPos of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetHighDpiXPos
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsWidgetHighDpiXPos(ByVal sgsWidgetHighDpiXPos As String)
+
+    On Error GoTo gsWidgetHighDpiXPos_Error
+
+    m_sgsWidgetHighDpiXPos = sgsWidgetHighDpiXPos
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetHighDpiXPos_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetHighDpiXPos of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetHighDpiYPos
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsWidgetHighDpiYPos() As String
+
+    On Error GoTo gsWidgetHighDpiYPos_Error
+
+    gsWidgetHighDpiYPos = m_sgsWidgetHighDpiYPos
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetHighDpiYPos_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetHighDpiYPos of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetHighDpiYPos
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsWidgetHighDpiYPos(ByVal sgsWidgetHighDpiYPos As String)
+
+    On Error GoTo gsWidgetHighDpiYPos_Error
+
+    m_sgsWidgetHighDpiYPos = sgsWidgetHighDpiYPos
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetHighDpiYPos_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetHighDpiYPos of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetLowDpiXPos
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsWidgetLowDpiXPos() As String
+
+    On Error GoTo gsWidgetLowDpiXPos_Error
+
+    gsWidgetLowDpiXPos = m_sgsWidgetLowDpiXPos
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetLowDpiXPos_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetLowDpiXPos of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetLowDpiXPos
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsWidgetLowDpiXPos(ByVal sgsWidgetLowDpiXPos As String)
+
+    On Error GoTo gsWidgetLowDpiXPos_Error
+
+    m_sgsWidgetLowDpiXPos = sgsWidgetLowDpiXPos
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetLowDpiXPos_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetLowDpiXPos of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetLowDpiYPos
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsWidgetLowDpiYPos() As String
+
+    On Error GoTo gsWidgetLowDpiYPos_Error
+
+    gsWidgetLowDpiYPos = m_sgsWidgetLowDpiYPos
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetLowDpiYPos_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetLowDpiYPos of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetLowDpiYPos
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsWidgetLowDpiYPos(ByVal sgsWidgetLowDpiYPos As String)
+
+    On Error GoTo gsWidgetLowDpiYPos_Error
+
+    m_sgsWidgetLowDpiYPos = sgsWidgetLowDpiYPos
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetLowDpiYPos_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetLowDpiYPos of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsClockFont
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsClockFont() As String
+
+    On Error GoTo gsClockFont_Error
+
+    gsClockFont = m_sgsClockFont
+
+    On Error GoTo 0
+    Exit Property
+
+gsClockFont_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsClockFont of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsClockFont
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsClockFont(ByVal sgsClockFont As String)
+
+    On Error GoTo gsClockFont_Error
+
+    m_sgsClockFont = sgsClockFont
+
+    On Error GoTo 0
+    Exit Property
+
+gsClockFont_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsClockFont of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetFont
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsWidgetFont() As String
+
+    On Error GoTo gsWidgetFont_Error
+
+    gsWidgetFont = m_sgsWidgetFont
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetFont_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetFont of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetFont
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsWidgetFont(ByVal sgsWidgetFont As String)
+
+    On Error GoTo gsWidgetFont_Error
+
+    m_sgsWidgetFont = sgsWidgetFont
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetFont_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetFont of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsFont
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsPrefsFont() As String
+
+    On Error GoTo gsPrefsFont_Error
+
+    gsPrefsFont = m_sgsPrefsFont
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsFont_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsFont of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsFont
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsPrefsFont(ByVal sgsPrefsFont As String)
+
+    On Error GoTo gsPrefsFont_Error
+
+    m_sgsPrefsFont = sgsPrefsFont
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsFont_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsFont of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsFontSizeHighDPI
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsPrefsFontSizeHighDPI() As String
+
+    On Error GoTo gsPrefsFontSizeHighDPI_Error
+
+    gsPrefsFontSizeHighDPI = m_sgsPrefsFontSizeHighDPI
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsFontSizeHighDPI_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsFontSizeHighDPI of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsFontSizeHighDPI
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsPrefsFontSizeHighDPI(ByVal sgsPrefsFontSizeHighDPI As String)
+
+    On Error GoTo gsPrefsFontSizeHighDPI_Error
+
+    m_sgsPrefsFontSizeHighDPI = sgsPrefsFontSizeHighDPI
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsFontSizeHighDPI_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsFontSizeHighDPI of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsFontSizeLowDPI
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsPrefsFontSizeLowDPI() As String
+
+    On Error GoTo gsPrefsFontSizeLowDPI_Error
+
+    gsPrefsFontSizeLowDPI = m_sgsPrefsFontSizeLowDPI
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsFontSizeLowDPI_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsFontSizeLowDPI of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsFontSizeLowDPI
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsPrefsFontSizeLowDPI(ByVal sgsPrefsFontSizeLowDPI As String)
+
+    On Error GoTo gsPrefsFontSizeLowDPI_Error
+
+    m_sgsPrefsFontSizeLowDPI = sgsPrefsFontSizeLowDPI
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsFontSizeLowDPI_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsFontSizeLowDPI of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsFontItalics
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsPrefsFontItalics() As String
+
+    On Error GoTo gsPrefsFontItalics_Error
+
+    gsPrefsFontItalics = m_sgsPrefsFontItalics
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsFontItalics_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsFontItalics of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsFontItalics
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsPrefsFontItalics(ByVal sgsPrefsFontItalics As String)
+
+    On Error GoTo gsPrefsFontItalics_Error
+
+    m_sgsPrefsFontItalics = sgsPrefsFontItalics
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsFontItalics_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsFontItalics of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsFontColour
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsPrefsFontColour() As String
+
+    On Error GoTo gsPrefsFontColour_Error
+
+    gsPrefsFontColour = m_sgsPrefsFontColour
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsFontColour_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsFontColour of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsPrefsFontColour
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsPrefsFontColour(ByVal sgsPrefsFontColour As String)
+
+    On Error GoTo gsPrefsFontColour_Error
+
+    m_sgsPrefsFontColour = sgsPrefsFontColour
+
+    On Error GoTo 0
+    Exit Property
+
+gsPrefsFontColour_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsPrefsFontColour of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsDisplayScreenFont
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsDisplayScreenFont() As String
+
+    On Error GoTo gsDisplayScreenFont_Error
+
+    gsDisplayScreenFont = m_sgsDisplayScreenFont
+
+    On Error GoTo 0
+    Exit Property
+
+gsDisplayScreenFont_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsDisplayScreenFont of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsDisplayScreenFont
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsDisplayScreenFont(ByVal sgsDisplayScreenFont As String)
+
+    On Error GoTo gsDisplayScreenFont_Error
+
+    m_sgsDisplayScreenFont = sgsDisplayScreenFont
+
+    On Error GoTo 0
+    Exit Property
+
+gsDisplayScreenFont_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsDisplayScreenFont of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsDisplayScreenFontSize
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsDisplayScreenFontSize() As String
+
+    On Error GoTo gsDisplayScreenFontSize_Error
+
+    gsDisplayScreenFontSize = m_sgsDisplayScreenFontSize
+
+    On Error GoTo 0
+    Exit Property
+
+gsDisplayScreenFontSize_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsDisplayScreenFontSize of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsDisplayScreenFontSize
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsDisplayScreenFontSize(ByVal sgsDisplayScreenFontSize As String)
+
+    On Error GoTo gsDisplayScreenFontSize_Error
+
+    m_sgsDisplayScreenFontSize = sgsDisplayScreenFontSize
+
+    On Error GoTo 0
+    Exit Property
+
+gsDisplayScreenFontSize_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsDisplayScreenFontSize of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsDisplayScreenFontItalics
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsDisplayScreenFontItalics() As String
+
+    On Error GoTo gsDisplayScreenFontItalics_Error
+
+    gsDisplayScreenFontItalics = m_sgsDisplayScreenFontItalics
+
+    On Error GoTo 0
+    Exit Property
+
+gsDisplayScreenFontItalics_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsDisplayScreenFontItalics of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsDisplayScreenFontItalics
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsDisplayScreenFontItalics(ByVal sgsDisplayScreenFontItalics As String)
+
+    On Error GoTo gsDisplayScreenFontItalics_Error
+
+    m_sgsDisplayScreenFontItalics = sgsDisplayScreenFontItalics
+
+    On Error GoTo 0
+    Exit Property
+
+gsDisplayScreenFontItalics_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsDisplayScreenFontItalics of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsDisplayScreenFontColour
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsDisplayScreenFontColour() As String
+
+    On Error GoTo gsDisplayScreenFontColour_Error
+
+    gsDisplayScreenFontColour = m_sgsDisplayScreenFontColour
+
+    On Error GoTo 0
+    Exit Property
+
+gsDisplayScreenFontColour_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsDisplayScreenFontColour of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsDisplayScreenFontColour
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsDisplayScreenFontColour(ByVal sgsDisplayScreenFontColour As String)
+
+    On Error GoTo gsDisplayScreenFontColour_Error
+
+    m_sgsDisplayScreenFontColour = sgsDisplayScreenFontColour
+
+    On Error GoTo 0
+    Exit Property
+
+gsDisplayScreenFontColour_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsDisplayScreenFontColour of Module Module1"
 
 End Property

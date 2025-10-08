@@ -47,11 +47,15 @@ removed manifest for TB
 ' Ensure the heights of forms are saved correctly after a resize, sometimes you need to let the background timer make the save before it 'sticks'.
 
 ' module1.bas globals renamed, eg. gbl to gblS gblL &c and tested.
+' other modules globals renamed, eg. gbl to gblS gblL &c and tested.
 
 TODO
 ====
 
-' globals to properties? think, test and try
+' globals to properties?  test and try
+'   avoids breaking encapsulation
+'   allows validation during let
+'   allows addition of logic to provide potential constraint of values during each LET
 
 ' update PZ CPU RC5 to same standard
 ' convert latest to TB
