@@ -2077,8 +2077,8 @@ Private Const pcPrefsFormWidth  As Long = 9090
 
 Private pPrefsFormResizedByDrag As Boolean
 
-'    gsPrefsStartWidth = 9075
-'    gsPrefsStartHeight = 16450
+'    gdPrefsStartWidth = 9075
+'    gdPrefsStartHeight = 16450
 '------------------------------------------------------ ENDS
 
 Private pPrefsStartupFlg As Boolean
@@ -2438,8 +2438,8 @@ Private Sub Form_Load()
     'pPrefsDynamicSizingFlg = False
     IsLoaded = True
     gbWindowLevelWasChanged = False
-    gsPrefsStartWidth = pcPrefsFormWidth
-    gsPrefsStartHeight = pcPrefsFormHeight
+    gdPrefsStartWidth = pcPrefsFormWidth
+    gdPrefsStartHeight = pcPrefsFormHeight
     pPrefsFormResizedByDrag = False
             
     ' subclass ALL forms created by intercepting WM_Create messages, identifying dialog forms to centre them in the middle of the monitor - specifically the font form.
@@ -2608,10 +2608,10 @@ Private Sub identifyPrefsPrimaryMonitor()
     
     On Error GoTo identifyPrefsPrimaryMonitor_Error
     
-    'prefsFormHeight = gsPrefsStartHeight
+    'prefsFormHeight = gdPrefsStartHeight
 
-    prefsMonitorStruct = formScreenProperties(widgetPrefs, prefsFormMonitorID)
-    glOldPrefsFormMonitorPrimary = prefsMonitorStruct.IsPrimary ' -1 true
+    gPrefsMonitorStruct = formScreenProperties(widgetPrefs, prefsFormMonitorID)
+    glOldPrefsFormMonitorPrimary = gPrefsMonitorStruct.IsPrimary ' -1 true
 
    On Error GoTo 0
    Exit Sub
@@ -2840,8 +2840,8 @@ Public Sub positionPrefsMonitor()
     End If
     
     If formLeftTwips = 0 Then
-        If ((fMain.TenShillingsForm.Left + fMain.TenShillingsForm.Width) * gsScreenTwipsPerPixelX) + 200 + widgetPrefs.Width > glPhysicalScreenWidthTwips Then
-            widgetPrefs.Left = (fMain.TenShillingsForm.Left * gsScreenTwipsPerPixelX) - (widgetPrefs.Width + 200)
+        If ((fMain.TenShillingsForm.Left + fMain.TenShillingsForm.Width) * glScreenTwipsPerPixelX) + 200 + widgetPrefs.Width > glPhysicalScreenWidthTwips Then
+            widgetPrefs.Left = (fMain.TenShillingsForm.Left * glScreenTwipsPerPixelX) - (widgetPrefs.Width + 200)
         End If
     End If
 
@@ -2882,11 +2882,11 @@ Public Sub positionPrefsMonitor()
         ' note the monitor primary at the preferences form_load and store as glOldwidgetFormMonitorPrimary
         Call identifyPrefsPrimaryMonitor
 
-        If prefsMonitorStruct.IsPrimary = True Then
+        If gPrefsMonitorStruct.IsPrimary = True Then
             gbPrefsFormResizedInCode = True
             gsPrefsPrimaryHeightTwips = fGetINISetting("Software\TenShillings", "prefsPrimaryHeightTwips", gsSettingsFile)
             If Val(gsPrefsPrimaryHeightTwips) <= 0 Then
-                widgetPrefs.Height = gsPrefsStartHeight
+                widgetPrefs.Height = gdPrefsStartHeight
             Else
                 widgetPrefs.Height = CLng(gsPrefsPrimaryHeightTwips)
             End If
@@ -2894,7 +2894,7 @@ Public Sub positionPrefsMonitor()
             gsPrefsSecondaryHeightTwips = fGetINISetting("Software\TenShillings", "prefsSecondaryHeightTwips", gsSettingsFile)
             gbPrefsFormResizedInCode = True
             If Val(gsPrefsSecondaryHeightTwips) <= 0 Then
-                widgetPrefs.Height = gsPrefsStartHeight
+                widgetPrefs.Height = gdPrefsStartHeight
             Else
                 widgetPrefs.Height = CLng(gsPrefsSecondaryHeightTwips)
             End If
@@ -4291,7 +4291,7 @@ Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
     On Error GoTo adjustPrefsControls_Error
     
     ' note the monitor ID at PrefsForm form_load and store as the prefsFormMonitorID
-    'prefsMonitorStruct = formScreenProperties(widgetPrefs, prefsFormMonitorID)
+    'gPrefsMonitorStruct = formScreenProperties(widgetPrefs, prefsFormMonitorID)
     
     'widgetPrefs.Height = CLng(gsPrefsPrimaryHeightTwips)
             
@@ -4682,9 +4682,9 @@ Public Sub PrefsFormResizeEvent()
 
         'make tab frames invisible so that the control resizing is not apparent to the user
         Call makeFramesInvisible
-        Call resizeControls(widgetPrefs, prefsControlPositions(), gsPrefsStartWidth, gsPrefsStartHeight, currentFontSize)
+        Call resizeControls(widgetPrefs, gcPrefsControlPositions(), gdPrefsStartWidth, gdPrefsStartHeight, currentFontSize)
 
-        Call tweakPrefsControlPositions(Me, gsPrefsStartWidth, gsPrefsStartHeight)
+        Call tweakgcPrefsControlPositions(Me, gdPrefsStartWidth, gdPrefsStartHeight)
         'Call loadHigherResPrefsImages ' if you want higher res icons then load them here, current max. is 1010 twips or 67 pixels
         Call makeFramesVisible
         
@@ -4877,19 +4877,19 @@ FormResizedOrMoved_Error:
 End Sub
 
 '---------------------------------------------------------------------------------------
-' Procedure : tweakPrefsControlPositions
+' Procedure : tweakgcPrefsControlPositions
 ' Author    : beededea
 ' Date      : 22/09/2023
 ' Purpose   : final tweak the bottom frame top and left positions
 '---------------------------------------------------------------------------------------
 '
-Private Sub tweakPrefsControlPositions(ByVal thisForm As Form, ByVal m_FormWid As Single, ByVal m_FormHgt As Single)
+Private Sub tweakgcPrefsControlPositions(ByVal thisForm As Form, ByVal m_FormWid As Single, ByVal m_FormHgt As Single)
 
     ' not sure why but the resizeControls routine can lead to incorrect positioning of frames and buttons
     Dim x_scale As Single: x_scale = 0
     Dim y_scale As Single: y_scale = 0
     
-    On Error GoTo tweakPrefsControlPositions_Error
+    On Error GoTo tweakgcPrefsControlPositions_Error
 
     ' Get the form's current scale factors.
     x_scale = thisForm.ScaleWidth / m_FormWid
@@ -4930,9 +4930,9 @@ Private Sub tweakPrefsControlPositions(ByVal thisForm As Form, ByVal m_FormWid A
    On Error GoTo 0
    Exit Sub
 
-tweakPrefsControlPositions_Error:
+tweakgcPrefsControlPositions_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure tweakPrefsControlPositions of Form widgetPrefs"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure tweakgcPrefsControlPositions of Form widgetPrefs"
 
 End Sub
 
@@ -5712,8 +5712,8 @@ Private Sub tmrPrefsScreenResolution_Timer()
 '
 '    Static oldPrefsFormMonitorID As Long
 ''    Static oldPrefsFormMonitorPrimary As Long
-'    Static oldPrefsMonitorStructWidthTwips As Long
-'    Static oldPrefsMonitorStructHeightTwips As Long
+'    Static oldgPrefsMonitorStructWidthTwips As Long
+'    Static oldgPrefsMonitorStructHeightTwips As Long
 '    Static oldPrefsWidgetLeftPixels As Long
 '
 '    Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
@@ -5750,20 +5750,20 @@ Private Sub tmrPrefsScreenResolution_Timer()
 '        If widgetPrefs.Left <> oldWidgetPrefsLeft Or widgetPrefs.Top <> oldWidgetPrefsTop Then
 '
 '               ' note the monitor ID at PrefsForm form_load and store as the prefsFormMonitorID
-'                prefsMonitorStruct = formScreenProperties(widgetPrefs, prefsFormMonitorID)
+'                gPrefsMonitorStruct = formScreenProperties(widgetPrefs, prefsFormMonitorID)
 '
-'                'prefsFormMonitorPrimary = prefsMonitorStruct.IsPrimary ' -1 true
+'                'prefsFormMonitorPrimary = gPrefsMonitorStruct.IsPrimary ' -1 true
 '
 '                ' sample the physical monitor resolution
-'                monitorStructWidthTwips = prefsMonitorStruct.Width
-'                monitorStructHeightTwips = prefsMonitorStruct.Height
+'                monitorStructWidthTwips = gPrefsMonitorStruct.Width
+'                monitorStructHeightTwips = gPrefsMonitorStruct.Height
 '
 '                'if the old monitor ID has not been stored already (form load) then do so now
 '                If oldPrefsFormMonitorID = 0 Then oldPrefsFormMonitorID = prefsFormMonitorID
 '
 '                ' same with other 'old' vars
-'                If oldPrefsMonitorStructWidthTwips = 0 Then oldPrefsMonitorStructWidthTwips = monitorStructWidthTwips
-'                If oldPrefsMonitorStructHeightTwips = 0 Then oldPrefsMonitorStructHeightTwips = monitorStructHeightTwips
+'                If oldgPrefsMonitorStructWidthTwips = 0 Then oldgPrefsMonitorStructWidthTwips = monitorStructWidthTwips
+'                If oldgPrefsMonitorStructHeightTwips = 0 Then oldgPrefsMonitorStructHeightTwips = monitorStructHeightTwips
 '                If oldPrefsWidgetLeftPixels = 0 Then oldPrefsWidgetLeftPixels = widgetPrefs.Left
 '
 '                ' if the monitor ID has changed
@@ -5775,15 +5775,15 @@ Private Sub tmrPrefsScreenResolution_Timer()
 '
 '                    If LTrim$(gsMultiMonitorResize) = "1" Then
 '                        'if the resolution is different then calculate new size proportion
-'                        If monitorStructWidthTwips <> oldPrefsMonitorStructWidthTwips Or monitorStructHeightTwips <> oldPrefsMonitorStructHeightTwips Then
+'                        If monitorStructWidthTwips <> oldgPrefsMonitorStructWidthTwips Or monitorStructHeightTwips <> oldgPrefsMonitorStructHeightTwips Then
 '                            'now calculate the size of the widget according to the screen HeightTwips.
-'                            resizeProportion = prefsMonitorStruct.Height / oldPrefsMonitorStructHeightTwips
+'                            resizeProportion = gPrefsMonitorStruct.Height / oldgPrefsMonitorStructHeightTwips
 '                            newPrefsHeight = widgetPrefs.Height * resizeProportion
 '                            widgetPrefs.Height = newPrefsHeight
 '                        End If
 '                    ElseIf LTrim$(gsMultiMonitorResize) = "2" Then
 '                        ' set the size according to saved values
-'                        If prefsMonitorStruct.IsPrimary = True Then
+'                        If gPrefsMonitorStruct.IsPrimary = True Then
 '                            widgetPrefs.Height = Val(gsPrefsPrimaryHeightTwips)
 '                        Else
 '                            'gsPrefsSecondaryHeightTwips = "15000"
@@ -5796,8 +5796,8 @@ Private Sub tmrPrefsScreenResolution_Timer()
 '                ' set the current values as 'old' for comparison on next run
 '                'oldPrefsFormMonitorPrimary = prefsFormMonitorPrimary
 '                oldPrefsFormMonitorID = prefsFormMonitorID
-'                oldPrefsMonitorStructWidthTwips = monitorStructWidthTwips
-'                oldPrefsMonitorStructHeightTwips = monitorStructHeightTwips
+'                oldgPrefsMonitorStructWidthTwips = monitorStructWidthTwips
+'                oldgPrefsMonitorStructHeightTwips = monitorStructHeightTwips
 '                oldPrefsWidgetLeftPixels = widgetPrefs.Left
 '            End If
 '
@@ -6505,7 +6505,7 @@ Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName
     #End If
 
     ' Get the form's current scale factors.
-    y_scale = Me.ScaleHeight / gsPrefsStartHeight
+    y_scale = Me.ScaleHeight / gdPrefsStartHeight
     
     If gsDpiAwareness = "1" Then
         btnHelp.Top = fraGeneral.Top + fraGeneral.Height + (100 * y_scale)
@@ -7110,7 +7110,7 @@ Private Sub setframeHeights()
     
         'If gsDpiAwareness = "1" Then
             ' save the initial positions of ALL the controls on the prefs form
-            Call SaveSizes(widgetPrefs, prefsControlPositions(), gsPrefsStartWidth, gsPrefsStartHeight)
+            Call SaveSizes(widgetPrefs, gcPrefsControlPositions(), gdPrefsStartWidth, gdPrefsStartHeight)
         'End If
     Else
         fraGeneral.Height = 2205
@@ -7380,7 +7380,7 @@ End Sub
 '
 '    If LTrim$(gsMultiMonitorResize) <> "2" Then Exit Sub
 '
-'    If prefsMonitorStruct.IsPrimary = True Then
+'    If gPrefsMonitorStruct.IsPrimary = True Then
 '        gsPrefsPrimaryHeightTwips = CStr(widgetPrefs.Height)
 '        sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gsPrefsPrimaryHeightTwips, gsSettingsFile
 '    Else

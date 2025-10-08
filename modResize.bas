@@ -17,13 +17,13 @@ Public Type ControlPositionType
     FontSize As Single
 End Type
 
-Public prefsControlPositions() As ControlPositionType
-Public gsPrefsStartWidth As Double
-Public gsPrefsStartHeight As Double
+Public gcPrefsControlPositions() As ControlPositionType
+Public gdPrefsStartWidth As Double
+Public gdPrefsStartHeight As Double
 
-Public msgBoxAControlPositions() As ControlPositionType
-Public msgBoxACurrentWidth As Double
-Public msgBoxACurrentHeight As Double
+Public gMsgBoxAControlPositions() As ControlPositionType
+Public gMsgBoxACurrentWidth As Double
+Public gMsgBoxACurrentHeight As Double
 
 '---------------------------------------------------------------------------------------
 ' Procedure : ResizeControls

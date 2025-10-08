@@ -452,7 +452,7 @@ Public gbStartupFlg As Boolean
 Public gbThisWidgetAvailable As Boolean
 Public gbReload As Boolean
 
-'Public gdOldSettingsModificationTime  As Date
+'Public gtOldSettingsModificationTime  As Date
 
 '------------------------------------------------------ ENDS
 
@@ -1780,14 +1780,14 @@ Public Sub determineScreenDimensions()
     'If giDebugFlg = 1 Then msgbox "% sub determineScreenDimensions"
 
     ' only calling TwipsPerPixelX/Y functions once on startup
-    gsScreenTwipsPerPixelY = fTwipsPerPixelY
-    gsScreenTwipsPerPixelX = fTwipsPerPixelX
+    glScreenTwipsPerPixelY = fTwipsPerPixelY
+    glScreenTwipsPerPixelX = fTwipsPerPixelX
     
     glPhysicalScreenHeightPixels = GetDeviceCaps(menuForm.hDC, VERTRES) ' we use the name of any form that we don't mind being loaded at this point
     glPhysicalScreenWidthPixels = GetDeviceCaps(menuForm.hDC, HORZRES)
 
-    glPhysicalScreenHeightTwips = glPhysicalScreenHeightPixels * gsScreenTwipsPerPixelY
-    glPhysicalScreenWidthTwips = glPhysicalScreenWidthPixels * gsScreenTwipsPerPixelX
+    glPhysicalScreenHeightTwips = glPhysicalScreenHeightPixels * glScreenTwipsPerPixelY
+    glPhysicalScreenWidthTwips = glPhysicalScreenWidthPixels * glScreenTwipsPerPixelX
     
     glVirtualScreenHeightPixels = fVirtualScreenHeight(True)
     glVirtualScreenWidthPixels = fVirtualScreenWidth(True)
@@ -2294,7 +2294,7 @@ End Sub
 '
 Public Sub readPrefsPosition()
 
-    'Dim prefsMonitorStruct As UDTMonitor
+    'Dim gPrefsMonitorStruct As UDTMonitor
     'Dim prefsFormMonitorID As Long: prefsFormMonitorID = 0
             
     On Error GoTo readPrefsPosition_Error
@@ -2347,10 +2347,10 @@ Public Sub readPrefsPosition()
         
    ' on very first install this will be zero, then size of the prefs as a proportion of the screen size
     If gsPrefsPrimaryHeightTwips = "" Then
-        If Screen.Height > gsPrefsStartHeight * 2 Then
+        If Screen.Height > gdPrefsStartHeight * 2 Then
             gsPrefsPrimaryHeightTwips = Screen.Height / 2
         Else
-            gsPrefsPrimaryHeightTwips = gsPrefsStartHeight
+            gsPrefsPrimaryHeightTwips = gdPrefsStartHeight
         End If
     End If
     
@@ -2393,7 +2393,7 @@ Public Sub writePrefsPositionAndSize()
         
         If LTrim$(gsMultiMonitorResize) <> "2" Then Exit Sub
 
-        If prefsMonitorStruct.IsPrimary = True Then
+        If gPrefsMonitorStruct.IsPrimary = True Then
             gsPrefsPrimaryHeightTwips = Trim$(CStr(widgetPrefs.Height))
             sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gsPrefsPrimaryHeightTwips, gsSettingsFile
         Else
@@ -2811,7 +2811,7 @@ Public Sub saveRCFormCurrentSizeRatios()
     On Error GoTo saveRCFormCurrentSizeRatios_Error
 
     If LTrim$(gsMultiMonitorResize) = "2" Then
-        If widgetMonitorStruct.IsPrimary Then
+        If gWidgetMonitorStruct.IsPrimary Then
             gsWidgetPrimaryHeightRatio = TenShillingsWidget.Zoom
             sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gsWidgetPrimaryHeightRatio, gsSettingsFile
         Else
@@ -2843,7 +2843,7 @@ Public Sub savePrefsFormCurrentSize()
 
     If LTrim$(gsMultiMonitorResize) = "2" Then
         ' now save the prefs form absolute sizes
-        If prefsMonitorStruct.IsPrimary = True Then
+        If gPrefsMonitorStruct.IsPrimary = True Then
             sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gsPrefsPrimaryHeightTwips, gsSettingsFile
         Else
             sPutINISetting "Software\TenShillings", "prefsSecondaryHeightTwips", gsPrefsSecondaryHeightTwips, gsSettingsFile

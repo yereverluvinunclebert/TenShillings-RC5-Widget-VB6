@@ -41,8 +41,6 @@ Public fMain As New cfMain
 Public aboutWidget As cwAbout
 Public helpWidget As cwHelp
 Public licenceWidget As cwLicence
-
-
 Public TenShillingsWidget As cwTenShillings
 
 ' any other private vars
@@ -270,8 +268,8 @@ Private Sub identifyPrimaryMonitor()
     
     On Error GoTo identifyPrimaryMonitor_Error
 
-    widgetMonitorStruct = cWidgetFormScreenProperties(fMain.TenShillingsForm, widgetFormMonitorID)
-    glOldWidgetFormMonitorPrimary = widgetMonitorStruct.IsPrimary
+    gWidgetMonitorStruct = cWidgetFormScreenProperties(fMain.TenShillingsForm, widgetFormMonitorID)
+    glOldWidgetFormMonitorPrimary = gWidgetMonitorStruct.IsPrimary
 
     On Error GoTo 0
     Exit Sub
@@ -423,8 +421,8 @@ Private Sub initialiseGlobalVars()
     'windowsVer = vbNullString
     
     ' vars to obtain correct screen width (to correct VB6 bug) STARTS
-    gsScreenTwipsPerPixelX = 0
-    gsScreenTwipsPerPixelY = 0
+    glScreenTwipsPerPixelX = 0
+    glScreenTwipsPerPixelY = 0
     glPhysicalScreenWidthTwips = 0
     glPhysicalScreenHeightTwips = 0
     glPhysicalScreenHeightPixels = 0
@@ -452,7 +450,7 @@ Private Sub initialiseGlobalVars()
     giDebugFlg = 0
     giMinutesToHide = 0
     gsAspectRatio = vbNullString
-'    gdOldSettingsModificationTime = #1/1/2000 12:00:00 PM#
+'    gtOldSettingsModificationTime = #1/1/2000 12:00:00 PM#
     gsCodingEnvironment = vbNullString
     gsRichClientEnvironment = vbNullString
 
@@ -568,7 +566,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     
     ' set the initial size
     If glMonitorCount > 1 And (LTrim$(gsMultiMonitorResize) = "1" Or LTrim$(gsMultiMonitorResize) = "2") Then
-        If widgetMonitorStruct.IsPrimary = True Then
+        If gWidgetMonitorStruct.IsPrimary = True Then
             TenShillingsWidget.Zoom = (Val(gsWidgetPrimaryHeightRatio))
         Else
             TenShillingsWidget.Zoom = (Val(gsWidgetSecondaryHeightRatio))
@@ -999,7 +997,7 @@ Private Sub configureTimers()
 
     On Error GoTo configureTimers_Error
     
-'    gdOldSettingsModificationTime = FileDateTime(gsSettingsFile)
+'    gtOldSettingsModificationTime = FileDateTime(gsSettingsFile)
 
     frmTimer.tmrScreenResolution.Enabled = True
     frmTimer.unhideTimer.Enabled = True

@@ -46,11 +46,10 @@ removed manifest for TB
 ' widget & widget properties in cwhelp.cls spread out
 ' Ensure the heights of forms are saved correctly after a resize, sometimes you need to let the background timer make the save before it 'sticks'.
 
+' module1.bas globals renamed, eg. gbl to gblS gblL &c and tested.
+
 TODO
 ====
-
-' general globals renamed, eg. gbl to gblS gblL &c
-' config globals renamed, eg. gbl to gblS gblL &c
 
 ' globals to properties? think, test and try
 
