@@ -52,7 +52,7 @@ removed manifest for TB
 TODO
 ====
 
-' globals to properties?  test and try
+' module1.bas globals to properties?  WIP
 '   avoids breaking encapsulation
 '   allows validation during let
 '   allows addition of logic to provide potential constraint of values during each LET

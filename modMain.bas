@@ -43,8 +43,8 @@ Public helpWidget As cwHelp
 Public licenceWidget As cwLicence
 Public TenShillingsWidget As cwTenShillings
 
-' any other private vars
-Public gsWidgetName As String
+' any other private vars for public properties
+Private m_sgsWidgetName As String
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Main
@@ -1348,3 +1348,47 @@ End Function
 'End Sub
 
 
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetName
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsWidgetName() As String
+
+    On Error GoTo gsWidgetName_Error
+
+    gsWidgetName = m_sgsWidgetName
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetName_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetName of Module modMain"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetName
+' Author    : beededea
+' Date      : 08/10/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsWidgetName(ByVal sgsWidgetName As String)
+
+    On Error GoTo gsWidgetName_Error
+
+    m_sgsWidgetName = sgsWidgetName
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetName_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetName of Module modMain"
+
+End Property
