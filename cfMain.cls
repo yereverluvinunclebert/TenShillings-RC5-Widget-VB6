@@ -79,19 +79,19 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
     If gsDpiAwareness = "0" Then
         tenShillingsFormWidth = imageWidth * 2.4 ' roughly twice the width of the main image plus a bit, the image is non-square and needs room to rotate
         tenShillingsFormHeight = imageHeight * 2.4 '
-        If tenShillingsFormWidth > gsVirtualScreenWidthPixels Then tenShillingsFormWidth = gsVirtualScreenWidthPixels
-        If tenShillingsFormHeight > gsVirtualScreenHeightPixels Then tenShillingsFormHeight = gsVirtualScreenHeightPixels
+        If tenShillingsFormWidth > glVirtualScreenWidthPixels Then tenShillingsFormWidth = glVirtualScreenWidthPixels
+        If tenShillingsFormHeight > glVirtualScreenHeightPixels Then tenShillingsFormHeight = glVirtualScreenHeightPixels
     Else
         tenShillingsFormWidth = imageWidth * 2.4
         tenShillingsFormHeight = imageHeight * 2.4 '
-        If tenShillingsFormWidth > gsVirtualScreenWidthPixels Then
-            tenShillingsFormWidth = gsVirtualScreenWidthPixels
+        If tenShillingsFormWidth > glVirtualScreenWidthPixels Then
+            tenShillingsFormWidth = glVirtualScreenWidthPixels
             tenShillingsWidgetZoomValue = 1
         Else
             tenShillingsWidgetZoomValue = 1
         End If
-        If tenShillingsFormHeight > gsVirtualScreenHeightPixels Then
-            tenShillingsFormHeight = gsVirtualScreenHeightPixels
+        If tenShillingsFormHeight > glVirtualScreenHeightPixels Then
+            tenShillingsFormHeight = glVirtualScreenHeightPixels
             tenShillingsWidgetZoomValue = 1
         Else
             tenShillingsWidgetZoomValue = 1
@@ -149,19 +149,19 @@ Public Sub initAndCreateAboutForm(Optional ByVal Caption As String)
     If gsDpiAwareness = "0" Then
         aboutFormWidth = 900
         aboutFormHeight = 850
-        If aboutFormWidth > gsVirtualScreenWidthPixels Then aboutFormWidth = gsVirtualScreenWidthPixels
-        If aboutFormHeight > gsVirtualScreenHeightPixels Then aboutFormHeight = gsVirtualScreenHeightPixels
+        If aboutFormWidth > glVirtualScreenWidthPixels Then aboutFormWidth = glVirtualScreenWidthPixels
+        If aboutFormHeight > glVirtualScreenHeightPixels Then aboutFormHeight = glVirtualScreenHeightPixels
     Else
         aboutFormWidth = 1800
         aboutFormHeight = 1600
-        If aboutFormWidth > gsVirtualScreenWidthPixels Then
-            aboutFormWidth = gsVirtualScreenWidthPixels
+        If aboutFormWidth > glVirtualScreenWidthPixels Then
+            aboutFormWidth = glVirtualScreenWidthPixels
             aboutWidgetZoomValue = 1
         Else
             aboutWidgetZoomValue = 1.6
         End If
-        If aboutFormHeight > gsVirtualScreenHeightPixels Then
-            aboutFormHeight = gsVirtualScreenHeightPixels
+        If aboutFormHeight > glVirtualScreenHeightPixels Then
+            aboutFormHeight = glVirtualScreenHeightPixels
             aboutWidgetZoomValue = 1
         Else
             aboutWidgetZoomValue = 1.6
@@ -216,20 +216,20 @@ Public Sub initAndCreateHelpForm(Optional ByVal Caption As String)
     If gsDpiAwareness = "0" Then
         helpFormWidth = 1000
         helpFormHeight = 800
-        If helpFormWidth > gsVirtualScreenWidthPixels Then helpFormWidth = gsVirtualScreenWidthPixels
-        If helpFormHeight > gsVirtualScreenHeightPixels Then helpFormHeight = gsVirtualScreenHeightPixels
+        If helpFormWidth > glVirtualScreenWidthPixels Then helpFormWidth = glVirtualScreenWidthPixels
+        If helpFormHeight > glVirtualScreenHeightPixels Then helpFormHeight = glVirtualScreenHeightPixels
         helpWidgetZoomValue = 0.8
     Else
         helpFormWidth = 1600
         helpFormHeight = 1300
-        If helpFormWidth > gsVirtualScreenWidthPixels Then
-            helpFormWidth = gsVirtualScreenWidthPixels
+        If helpFormWidth > glVirtualScreenWidthPixels Then
+            helpFormWidth = glVirtualScreenWidthPixels
             helpWidgetZoomValue = 1
         Else
             helpWidgetZoomValue = 1.4
         End If
-        If helpFormHeight > gsVirtualScreenHeightPixels Then
-            helpFormHeight = gsVirtualScreenHeightPixels
+        If helpFormHeight > glVirtualScreenHeightPixels Then
+            helpFormHeight = glVirtualScreenHeightPixels
             helpWidgetZoomValue = 1
         Else
             helpWidgetZoomValue = 1.4
@@ -288,21 +288,21 @@ Public Sub initAndCreateLicenceForm(Optional ByVal Caption As String)
     If gsDpiAwareness = "0" Then
         licenceFormWidth = 650
         licenceFormHeight = 550
-        If licenceFormWidth > gsVirtualScreenWidthPixels Then licenceFormWidth = gsVirtualScreenWidthPixels
-        If licenceFormHeight > gsVirtualScreenHeightPixels Then licenceFormHeight = gsVirtualScreenHeightPixels
+        If licenceFormWidth > glVirtualScreenWidthPixels Then licenceFormWidth = glVirtualScreenWidthPixels
+        If licenceFormHeight > glVirtualScreenHeightPixels Then licenceFormHeight = glVirtualScreenHeightPixels
         licenceWidgetZoomValue = 0.8
     Else
         licenceFormWidth = 750
         licenceFormHeight = 650
-        If licenceFormWidth > gsVirtualScreenWidthPixels Then
-            licenceFormWidth = gsVirtualScreenWidthPixels
+        If licenceFormWidth > glVirtualScreenWidthPixels Then
+            licenceFormWidth = glVirtualScreenWidthPixels
             licenceWidgetZoomValue = 0.8
         Else
             licenceWidgetZoomValue = 1.5
         End If
         
-        If licenceFormHeight > gsVirtualScreenHeightPixels Then
-            licenceFormHeight = gsVirtualScreenHeightPixels
+        If licenceFormHeight > glVirtualScreenHeightPixels Then
+            licenceFormHeight = glVirtualScreenHeightPixels
             licenceWidgetZoomValue = 0.8
         Else
             licenceWidgetZoomValue = 1.5
@@ -512,8 +512,8 @@ Public Sub TenShillingsForm_DblClick()
         thisCommand = Replace(thisCommand, "%systemroot%", userprof)
     End If
     
-    If gsSHIFT_1 = True Then
-        gsSHIFT_1 = False
+    If gbSHIFT_1 = True Then
+        gbSHIFT_1 = False
         Call ShellExecute(fMain.TenShillingsForm.hWnd, "Open", gsOpenFile, vbNullString, App.Path, 1)
     Else
         Call ShellExecute(fMain.TenShillingsForm.hWnd, "runas", thisCommand, vbNullString, App.Path, 1)
@@ -551,8 +551,8 @@ Private Sub TenShillingsForm_MouseMove(Button As Integer, Shift As Integer, x As
         If TenShillingsWidget.Locked = True Then Exit Sub
         If gsIgnoreMouse = "1" Then Exit Sub
         
-        If gsMenuOccurred = True Then
-            gsMenuOccurred = False
+        If gbMenuOccurred = True Then
+            gbMenuOccurred = False
             Exit Sub
         End If
 

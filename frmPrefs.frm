@@ -2070,20 +2070,20 @@ Private Declare Function IsThemeActive Lib "uxtheme" () As Boolean
 
 '------------------------------------------------------ STARTS
 ' Private Types for determining prefs sizing
-Private pvtPrefsDynamicSizingFlg As Boolean
-Private pvtLastFormHeight As Long
-Private Const pvtcPrefsFormHeight As Long = 11055
-Private Const pvtcPrefsFormWidth  As Long = 9090
+Private pPrefsDynamicSizingFlg As Boolean
+Private pLastFormHeight As Long
+Private Const pcPrefsFormHeight As Long = 11055
+Private Const pcPrefsFormWidth  As Long = 9090
 
-Private pvtPrefsFormResizedByDrag As Boolean
+Private pPrefsFormResizedByDrag As Boolean
 
 '    gsPrefsStartWidth = 9075
 '    gsPrefsStartHeight = 16450
 '------------------------------------------------------ ENDS
 
-Private pvtPrefsStartupFlg As Boolean
-Private pvtAllowSizeChangeFlg As Boolean
-Private pvtAllowSkewChangeFlg As Boolean
+Private pPrefsStartupFlg As Boolean
+Private pAllowSizeChangeFlg As Boolean
+Private pAllowSkewChangeFlg As Boolean
 
 ' module level balloon tooltip variables for subclassed comboBoxes ONLY.
 Private pCmbMultiMonitorResizeBalloonTooltip As String
@@ -2206,7 +2206,7 @@ Private Sub chkFormVisible_Click()
 
     btnSave.Enabled = True ' enable the save button
     
-    If pvtPrefsStartupFlg = False Then ' don't run this on startup
+    If pPrefsStartupFlg = False Then ' don't run this on startup
     
         answer = vbYes
         answerMsg = "You must close this widget and soft reload it, in order to change the underlying form visibility, do you want me to close and restart this widget? I can do it now for you."
@@ -2241,9 +2241,9 @@ Private Sub optWidgetTooltips_Click(Index As Integer)
     Dim answerMsg As String: answerMsg = vbNullString
     On Error GoTo optWidgetTooltips_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
-    If pvtPrefsStartupFlg = False Then
+    If pPrefsStartupFlg = False Then
         gsWidgetTooltips = CStr(Index)
     
         optWidgetTooltips(0).Tag = CStr(Index)
@@ -2284,7 +2284,7 @@ End Sub
 Private Sub chkWidgetFunctions_Click()
     On Error GoTo chkWidgetFunctions_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
     On Error GoTo 0
     Exit Sub
@@ -2309,9 +2309,9 @@ Private Sub optPrefsTooltips_Click(Index As Integer)
 
    On Error GoTo optPrefsTooltips_Click_Error
 
-    If pvtPrefsStartupFlg = False Then
+    If pPrefsStartupFlg = False Then
     
-        If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+        If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
         gsPrefsTooltips = CStr(Index)
         optPrefsTooltips(0).Tag = CStr(Index)
         optPrefsTooltips(1).Tag = CStr(Index)
@@ -2343,9 +2343,9 @@ End Sub
 Private Sub cmbMultiMonitorResize_Click()
    On Error GoTo cmbMultiMonitorResize_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     
-    If pvtPrefsStartupFlg = True Then Exit Sub
+    If pPrefsStartupFlg = True Then Exit Sub
     
     gsMultiMonitorResize = CStr(cmbMultiMonitorResize.ListIndex)
     
@@ -2375,7 +2375,7 @@ End Sub
 Private Sub chkShowHelp_Click()
    On Error GoTo chkShowHelp_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     If chkShowHelp.Value = 1 Then
         gsShowHelp = "1"
     Else
@@ -2434,13 +2434,13 @@ Private Sub Form_Load()
     btnSave.Enabled = False ' disable the save button
     Me.mnuAbout.Caption = "About TenShillings Widget Cairo" & gsRichClientEnvironment & " Cairo " & gsCodingEnvironment & " widget"
 
-    pvtPrefsStartupFlg = True ' this is used to prevent some control initialisations from running code at startup
-    'pvtPrefsDynamicSizingFlg = False
+    pPrefsStartupFlg = True ' this is used to prevent some control initialisations from running code at startup
+    'pPrefsDynamicSizingFlg = False
     IsLoaded = True
-    gsWindowLevelWasChanged = False
-    gsPrefsStartWidth = pvtcPrefsFormWidth
-    gsPrefsStartHeight = pvtcPrefsFormHeight
-    pvtPrefsFormResizedByDrag = False
+    gbWindowLevelWasChanged = False
+    gsPrefsStartWidth = pcPrefsFormWidth
+    gsPrefsStartHeight = pcPrefsFormHeight
+    pPrefsFormResizedByDrag = False
             
     ' subclass ALL forms created by intercepting WM_Create messages, identifying dialog forms to centre them in the middle of the monitor - specifically the font form.
     If Not InIDE Then subclassDialogForms
@@ -2498,11 +2498,11 @@ Private Sub Form_Load()
     ' start the timers
     Call startPrefsTimers
     
-    widgetPrefsOldHeight = widgetPrefs.Height
-    widgetPrefsOldWidth = widgetPrefs.Width
+    glWidgetPrefsOldHeightTwips = widgetPrefs.Height
+    glWidgetPrefsOldWidthTwips = widgetPrefs.Width
     
     ' end the startup by un-setting the start global-ish flag
-    pvtPrefsStartupFlg = False
+    pPrefsStartupFlg = False
     btnSave.Enabled = False
 
    On Error GoTo 0
@@ -2527,11 +2527,11 @@ Private Sub initialisePrefsVars()
 
    On Error GoTo initialisePrefsVars_Error
 
-    pvtPrefsDynamicSizingFlg = False
-    pvtLastFormHeight = 0
-    pvtPrefsStartupFlg = False
-    pvtAllowSizeChangeFlg = False
-    pvtAllowSkewChangeFlg = False
+    pPrefsDynamicSizingFlg = False
+    pLastFormHeight = 0
+    pPrefsStartupFlg = False
+    pAllowSizeChangeFlg = False
+    pAllowSkewChangeFlg = False
     pCmbMultiMonitorResizeBalloonTooltip = vbNullString
     pCmbScrollWheelDirectionBalloonTooltip = vbNullString
     pCmbWindowLevelBalloonTooltip = vbNullString
@@ -2541,7 +2541,7 @@ Private Sub initialisePrefsVars()
     pCmbWidgetLandscapeBalloonTooltip = vbNullString
     pCmbWidgetPortraitBalloonTooltip = vbNullString
     pCmbDebugBalloonTooltip = vbNullString
-    pvtPrefsFormResizedByDrag = False
+    pPrefsFormResizedByDrag = False
     mIsLoaded = False ' property
 
    On Error GoTo 0
@@ -2578,13 +2578,13 @@ Private Sub setFormResizingVars()
     End With
     
     If gsDpiAwareness = "1" Then
-        pvtPrefsDynamicSizingFlg = True
+        pPrefsDynamicSizingFlg = True
         chkEnableResizing.Value = 1
         lblDragCorner.Visible = True
     End If
     
-    widgetPrefsOldHeight = widgetPrefs.Height
-    widgetPrefsOldWidth = widgetPrefs.Width
+    glWidgetPrefsOldHeightTwips = widgetPrefs.Height
+    glWidgetPrefsOldWidthTwips = widgetPrefs.Width
 
    On Error GoTo 0
    Exit Sub
@@ -2599,7 +2599,7 @@ End Sub
 ' Procedure : identifyPrefsPrimaryMonitor
 ' Author    : beededea
 ' Date      : 20/02/2025
-' Purpose   : note the monitor primary at the preferences form_load and store as gsOldPrefsFormMonitorPrimary - will be resampled regularly later and compared
+' Purpose   : note the monitor primary at the preferences form_load and store as glOldPrefsFormMonitorPrimary - will be resampled regularly later and compared
 '---------------------------------------------------------------------------------------
 '
 Private Sub identifyPrefsPrimaryMonitor()
@@ -2611,7 +2611,7 @@ Private Sub identifyPrefsPrimaryMonitor()
     'prefsFormHeight = gsPrefsStartHeight
 
     prefsMonitorStruct = formScreenProperties(widgetPrefs, prefsFormMonitorID)
-    gsOldPrefsFormMonitorPrimary = prefsMonitorStruct.IsPrimary ' -1 true
+    glOldPrefsFormMonitorPrimary = prefsMonitorStruct.IsPrimary ' -1 true
 
    On Error GoTo 0
    Exit Sub
@@ -2633,11 +2633,11 @@ Private Sub setPrefsHeight()
    On Error GoTo setPrefsHeight_Error
 
     If gsDpiAwareness = "1" Then
-        gsPrefsFormResizedInCode = True
-        If gsPrefsPrimaryHeightTwips < gsPhysicalScreenHeightTwips Then
+        gbPrefsFormResizedInCode = True
+        If gsPrefsPrimaryHeightTwips < glPhysicalScreenHeightTwips Then
             widgetPrefs.Height = CLng(gsPrefsPrimaryHeightTwips) ' 16450
         Else
-            widgetPrefs.Height = gsPhysicalScreenHeightTwips - 1000
+            widgetPrefs.Height = glPhysicalScreenHeightTwips - 1000
         End If
     End If
 
@@ -2719,7 +2719,7 @@ Private Sub subClassControls()
     
    On Error GoTo subClassControls_Error
 
-    If InIDE And gsReload = False Then
+    If InIDE And gbReload = False Then
         MsgBox "NOTE: Running in IDE so Sub classing is disabled" & vbCrLf & "Mousewheel will not scroll icon maps and balloon tooltips will not display on comboboxes" & vbCrLf & vbCrLf & _
             "In addition, the display screen will not show messages as it currently crashes when run within the IDE."
     Else
@@ -2860,7 +2860,7 @@ Public Sub positionPrefsMonitor()
     End If
     
     'monitorCount = fGetMonitorCount
-    If gsMonitorCount > 1 Then Call SetFormOnMonitor(Me.hWnd, formLeftTwips / fTwipsPerPixelX, formTopTwips / fTwipsPerPixelY)
+    If glMonitorCount > 1 Then Call SetFormOnMonitor(Me.hWnd, formLeftTwips / fTwipsPerPixelX, formTopTwips / fTwipsPerPixelY)
     
     ' calculate the on-screen widget position
     If Me.Left < 0 Then
@@ -2869,21 +2869,21 @@ Public Sub positionPrefsMonitor()
     If Me.Top < 0 Then
         widgetPrefs.Top = 0
     End If
-    If Me.Left > gsVirtualScreenWidthTwips - 2500 Then
-        widgetPrefs.Left = gsVirtualScreenWidthTwips - 2500
+    If Me.Left > glVirtualScreenWidthTwips - 2500 Then
+        widgetPrefs.Left = glVirtualScreenWidthTwips - 2500
     End If
-    If Me.Top > gsVirtualScreenHeightTwips - 2500 Then
-        widgetPrefs.Top = gsVirtualScreenHeightTwips - 2500
+    If Me.Top > glVirtualScreenHeightTwips - 2500 Then
+        widgetPrefs.Top = glVirtualScreenHeightTwips - 2500
     End If
     
     ' if just one monitor or the global switch is off then exit
-    If gsMonitorCount > 1 And LTrim$(gsMultiMonitorResize) = "2" Then
+    If glMonitorCount > 1 And LTrim$(gsMultiMonitorResize) = "2" Then
     
-        ' note the monitor primary at the preferences form_load and store as gsOldwidgetFormMonitorPrimary
+        ' note the monitor primary at the preferences form_load and store as glOldwidgetFormMonitorPrimary
         Call identifyPrefsPrimaryMonitor
 
         If prefsMonitorStruct.IsPrimary = True Then
-            gsPrefsFormResizedInCode = True
+            gbPrefsFormResizedInCode = True
             gsPrefsPrimaryHeightTwips = fGetINISetting("Software\TenShillings", "prefsPrimaryHeightTwips", gsSettingsFile)
             If Val(gsPrefsPrimaryHeightTwips) <= 0 Then
                 widgetPrefs.Height = gsPrefsStartHeight
@@ -2892,7 +2892,7 @@ Public Sub positionPrefsMonitor()
             End If
         Else
             gsPrefsSecondaryHeightTwips = fGetINISetting("Software\TenShillings", "prefsSecondaryHeightTwips", gsSettingsFile)
-            gsPrefsFormResizedInCode = True
+            gbPrefsFormResizedInCode = True
             If Val(gsPrefsSecondaryHeightTwips) <= 0 Then
                 widgetPrefs.Height = gsPrefsStartHeight
             Else
@@ -2927,8 +2927,8 @@ Private Sub chkDpiAwareness_Click()
 
     On Error GoTo chkDpiAwareness_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
-    If pvtPrefsStartupFlg = False Then ' don't run this on startup
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If pPrefsStartupFlg = False Then ' don't run this on startup
                     
         answer = vbYes
         answerMsg = "You must close this widget and HARD restart it, in order to change the widget's DPI awareness (a simple soft reload just won't cut it), do you want me to close and restart this widget? I can do it now for you."
@@ -2982,7 +2982,7 @@ Private Sub chkShowTaskbar_Click()
 
    On Error GoTo chkShowTaskbar_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     If chkShowTaskbar.Value = 1 Then
         gsShowTaskbar = "1"
     Else
@@ -3037,7 +3037,7 @@ End Sub
 Private Sub btnAboutDebugInfo_Click()
 
    On Error GoTo btnAboutDebugInfo_Click_Error
-   'If gsDebugFlg = 1 Then Debug.Print "%btnAboutDebugInfo_Click"
+   'If giDebugFlg = 1 Then Debug.Print "%btnAboutDebugInfo_Click"
 
     'mnuDebug_Click
     MsgBox "The debug mode is not yet enabled."
@@ -3079,7 +3079,7 @@ End Sub
 '
 Private Sub btnFacebook_Click()
    On Error GoTo btnFacebook_Click_Error
-   'If gsDebugFlg = 1 Then DebugPrint "%btnFacebook_Click"
+   'If giDebugFlg = 1 Then DebugPrint "%btnFacebook_Click"
 
     Call menuForm.mnuFacebook_Click
     
@@ -3152,7 +3152,7 @@ End Sub
 '
 Private Sub btnUpdate_Click()
    On Error GoTo btnUpdate_Click_Error
-   'If gsDebugFlg = 1 Then DebugPrint "%btnUpdate_Click"
+   'If giDebugFlg = 1 Then DebugPrint "%btnUpdate_Click"
 
     'MsgBox "The update button is not yet enabled."
     menuForm.mnuLatest_Click
@@ -3179,7 +3179,7 @@ End Sub
 Private Sub chkGenStartup_Click()
     On Error GoTo chkGenStartup_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
     On Error GoTo 0
     Exit Sub
@@ -3259,7 +3259,7 @@ Private Sub chkIgnoreMouse_Click()
         gsIgnoreMouse = "1"
     End If
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
    On Error GoTo 0
    Exit Sub
@@ -3279,7 +3279,7 @@ End Sub
 Private Sub chkPreventDragging_Click()
     On Error GoTo chkPreventDragging_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     ' immediately make the widget locked in place
     If chkPreventDragging.Value = 0 Then
         TenShillingsWidget.Locked = False
@@ -3348,7 +3348,7 @@ Private Sub chkWidgetHidden_Click()
     
     sPutINISetting "Software\TenShillings", "widgetHidden", gsWidgetHidden, gsSettingsFile
     
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
    On Error GoTo 0
    Exit Sub
@@ -3381,7 +3381,7 @@ Private Sub cmbAspectHidden_Click()
         fMain.TenShillingsForm.Visible = True
     End If
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
    On Error GoTo 0
    Exit Sub
@@ -3401,7 +3401,7 @@ End Sub
 Private Sub cmbDebug_Click()
     On Error GoTo cmbDebug_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     If cmbDebug.ListIndex = 0 Then
         txtDefaultEditor.Text = "eg. E:\vb6\TenShillings-" & gsRichClientEnvironment & "-Widget-VB6MkII\TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment & ".vbp"
         txtDefaultEditor.Enabled = False
@@ -3446,7 +3446,7 @@ End Sub
 Private Sub cmbHidingTime_Click()
    On Error GoTo cmbHidingTime_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
    On Error GoTo 0
    Exit Sub
@@ -3466,7 +3466,7 @@ End Sub
 Private Sub cmbScrollWheelDirection_Click()
    On Error GoTo cmbScrollWheelDirection_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     'TenShillingsWidget.ZoomDirection = cmbScrollWheelDirection.List(cmbScrollWheelDirection.ListIndex)
 
    On Error GoTo 0
@@ -3489,7 +3489,7 @@ End Sub
 Private Sub cmbWidgetLandscape_Click()
    On Error GoTo cmbWidgetLandscape_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
    On Error GoTo 0
    Exit Sub
@@ -3509,7 +3509,7 @@ End Sub
 Private Sub cmbWidgetPortrait_Click()
    On Error GoTo cmbWidgetPortrait_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
    On Error GoTo 0
    Exit Sub
@@ -3529,7 +3529,7 @@ End Sub
 Private Sub cmbWidgetPosition_Click()
     On Error GoTo cmbWidgetPosition_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     If cmbWidgetPosition.ListIndex = 1 Then
         cmbWidgetLandscape.ListIndex = 0
         cmbWidgetPortrait.ListIndex = 0
@@ -3718,7 +3718,7 @@ Private Sub positionPrefsFramesButtons()
     Dim leftHandGutterWidth As Long: leftHandGutterWidth = 0
        
     ' constrain the height/width ratio
-    gsConstraintRatio = pvtcPrefsFormHeight / pvtcPrefsFormWidth
+    gsConstraintRatio = pcPrefsFormHeight / pcPrefsFormWidth
     
     ' align frames rightmost and leftmost to the buttons at the top
     buttonTop = -15
@@ -4069,8 +4069,8 @@ Private Sub btnSave_Click()
     btnSave.Enabled = False ' disable the save button showing it has successfully saved
     
     ' reload here if the gsWindowLevel Was Changed
-    If gsWindowLevelWasChanged = True Then
-        gsWindowLevelWasChanged = False
+    If gbWindowLevelWasChanged = True Then
+        gbWindowLevelWasChanged = False
         Call reloadProgram
     End If
     
@@ -4094,7 +4094,7 @@ End Sub
 Private Sub chkEnableSounds_Click()
    On Error GoTo chkEnableSounds_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
    On Error GoTo 0
    Exit Sub
@@ -4115,8 +4115,8 @@ End Sub
 ' ----------------------------------------------------------------
 Private Sub cmbWindowLevel_Click()
     On Error GoTo cmbWindowLevel_Click_Error
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
-    If pvtPrefsStartupFlg = False Then gsWindowLevelWasChanged = True
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If pPrefsStartupFlg = False Then gbWindowLevelWasChanged = True
     
     On Error GoTo 0
     Exit Sub
@@ -4146,7 +4146,7 @@ Private Sub btnPrefsFont_Click()
     
     On Error GoTo btnPrefsFont_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     
     ' set the preliminary vars to feed and populate the changefont routine
     fntFont = gsPrefsFont
@@ -4228,7 +4228,7 @@ Private Sub btnDisplayScreenFont_Click()
     
     On Error GoTo btnDisplayScreenFont_Click_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     
     ' set the preliminary vars to feed and populate the changefont routine
     fntFont = gsDisplayScreenFont
@@ -4246,7 +4246,7 @@ Private Sub btnDisplayScreenFont_Click()
     gsDisplayScreenFontItalics = CStr(fntItalics)
     gsDisplayScreenFontColour = CStr(fntColour)
     
-    If gsTenShillingsWidgetAvailable = True Then
+    If gbThisWidgetAvailable = True Then
         fMain.TenShillingsForm.Widgets("lblTerminalText").Widget.FontSize = gsDisplayScreenFontSize
         fMain.TenShillingsForm.Widgets("lblTerminalText").Widget.FontName = gsDisplayScreenFont
     End If
@@ -4409,7 +4409,7 @@ Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
     cmbHidingTime.ListIndex = Val(gsHidingTime)
     cmbMultiMonitorResize.ListIndex = Val(gsMultiMonitorResize)
     
-    If gsMonitorCount > 1 Then
+    If glMonitorCount > 1 Then
         cmbMultiMonitorResize.Visible = True
         lblWindowLevel(10).Visible = True
         lblWindowLevel(11).Visible = True
@@ -4622,18 +4622,18 @@ Private Sub Form_Resize()
 
     On Error GoTo Form_Resize_Error
 
-    pvtPrefsFormResizedByDrag = True
+    pPrefsFormResizedByDrag = True
          
     ' do not call the resizing function when the form is resized by dragging the border
     ' only call this if the resize is done in code
         
-    If InIDE Or gsPrefsFormResizedInCode = True Then
+    If InIDE Or gbPrefsFormResizedInCode = True Then
         Call PrefsFormResizeEvent
-        If gsPrefsFormResizedInCode = True Then Exit Sub
+        If gbPrefsFormResizedInCode = True Then Exit Sub
     End If
     
     ' when resizing the form enable the save button to allow the recently set width/height to be saved.
-    If gsMonitorCount > 1 And Val(gsMultiMonitorResize) > 0 And widgetPrefs.IsVisible = True Then
+    If glMonitorCount > 1 And Val(gsMultiMonitorResize) > 0 And widgetPrefs.IsVisible = True Then
         btnSave.Enabled = True
     End If
             
@@ -4670,7 +4670,7 @@ Public Sub PrefsFormResizeEvent()
     ' When minimised and a resize is called then simply exit.
     If Me.WindowState = vbMinimized Then Exit Sub
         
-    If pvtPrefsDynamicSizingFlg = True And pvtPrefsFormResizedByDrag = True Then
+    If pPrefsDynamicSizingFlg = True And pPrefsFormResizedByDrag = True Then
     
         widgetPrefs.Width = widgetPrefs.Height / gsConstraintRatio ' maintain the aspect ratio, note: this change calls this routine again...
         
@@ -4692,15 +4692,15 @@ Public Sub PrefsFormResizeEvent()
         If Me.WindowState = 0 Then ' normal
             If widgetPrefs.Width > 9090 Then widgetPrefs.Width = 9090
             If widgetPrefs.Width < 9085 Then widgetPrefs.Width = 9090
-            If pvtLastFormHeight <> 0 Then
-               gsPrefsFormResizedInCode = True
-               widgetPrefs.Height = pvtLastFormHeight
+            If pLastFormHeight <> 0 Then
+               gbPrefsFormResizedInCode = True
+               widgetPrefs.Height = pLastFormHeight
             End If
         End If
     End If
     
-    gsPrefsFormResizedInCode = False
-    pvtPrefsFormResizedByDrag = False
+    gbPrefsFormResizedInCode = False
+    pPrefsFormResizedByDrag = False
 
    On Error GoTo 0
    Exit Sub
@@ -4845,18 +4845,18 @@ Public Sub FormResizedOrMoved(sForm As String)
     Select Case sForm
         Case "widgetPrefs"
             ' call a resize of all controls only when the form resize (by dragging) has completed (mouseUP)
-            If pvtPrefsFormResizedByDrag = True Then
+            If pPrefsFormResizedByDrag = True Then
             
                 ' test the current form height and width, if the same then it is a Form Moved on the same monitor and not a form_resize.
-                If widgetPrefs.Height = widgetPrefsOldHeight And widgetPrefs.Width = widgetPrefsOldWidth Then
+                If widgetPrefs.Height = glWidgetPrefsOldHeightTwips And widgetPrefs.Width = glWidgetPrefsOldWidthTwips Then
                     Exit Sub
                 Else
                 
-                    widgetPrefsOldHeight = widgetPrefs.Height
-                    widgetPrefsOldWidth = widgetPrefs.Width
+                    glWidgetPrefsOldHeightTwips = widgetPrefs.Height
+                    glWidgetPrefsOldWidthTwips = widgetPrefs.Width
                     
                     Call PrefsFormResizeEvent
-                    pvtPrefsFormResizedByDrag = False
+                    pPrefsFormResizedByDrag = False
                     
                 End If
             Else
@@ -5053,17 +5053,17 @@ Private Sub sliSkewDegrees_Change()
 
     On Error GoTo sliSkewDegrees_Change_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     
-    ' pvtAllowSkewChangeFlg prevents the slider altering the skew on the tenshillings widget unless the slider is the active user control.
+    ' pAllowSkewChangeFlg prevents the slider altering the skew on the tenshillings widget unless the slider is the active user control.
     ' It does this in order to avoid reciprocal back and forth between the main widget form and the prefs form,
     
     ' ie. the slider slides but does not itself change the widget rotation, that is happening elsewhere
     ' the widget rotation is modified in W_MouseWheel in cwTenShillings
     
-    ' the pvtAllowSkewChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
+    ' the pAllowSkewChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
        
-    If pvtAllowSkewChangeFlg = True Then
+    If pAllowSkewChangeFlg = True Then
         TenShillingsWidget.SkewDegrees = sliSkewDegrees.Value
     End If
     
@@ -5509,7 +5509,7 @@ Private Sub lblDragCorner_MouseDown(Button As Integer, Shift As Integer, x As Si
     On Error GoTo lblDragCorner_MouseDown_Error
     
     If Button = vbLeftButton Then
-        pvtPrefsFormResizedByDrag = True
+        pPrefsFormResizedByDrag = True
         ReleaseCapture
         SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTBOTTOMRIGHT, 0
     End If
@@ -5917,19 +5917,19 @@ End Sub
 
 
 Private Sub sliSkewDegrees_GotFocus()
-    pvtAllowSkewChangeFlg = True
+    pAllowSkewChangeFlg = True
 End Sub
 
 Private Sub sliSkewDegrees_LostFocus()
-    pvtAllowSkewChangeFlg = False
+    pAllowSkewChangeFlg = False
 End Sub
 
 Private Sub sliWidgetSize_GotFocus()
-    pvtAllowSizeChangeFlg = True
+    pAllowSizeChangeFlg = True
 End Sub
 
 Private Sub sliWidgetSize_LostFocus()
-    pvtAllowSizeChangeFlg = False
+    pAllowSizeChangeFlg = False
 End Sub
 
 
@@ -5953,9 +5953,9 @@ Private Sub sliOpacity_Click()
     
     On Error GoTo sliOpacity_Change_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
-    If pvtPrefsStartupFlg = False Then
+    If pPrefsStartupFlg = False Then
         gsOpacity = CStr(sliOpacity.Value)
     
         sPutINISetting "Software\TenShillings", "opacity", gsOpacity, gsSettingsFile
@@ -5992,7 +5992,7 @@ End Sub
 Private Sub sliOpacity_Change()
    On Error GoTo sliOpacity_Change_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
    On Error GoTo 0
    Exit Sub
@@ -6012,16 +6012,16 @@ End Sub
 Public Sub sliWidgetSize_Change()
     On Error GoTo sliWidgetSize_Change_Error
 
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     
-    ' pvtAllowSizeChangeFlg prevents the slider altering the skew on the tenshillings widget unless the slider is the active user control.
+    ' pAllowSizeChangeFlg prevents the slider altering the skew on the tenshillings widget unless the slider is the active user control.
     ' It does this in order to avoid reciprocal back and forth between the main widget form and the prefs form
     
     ' ie. the slider slides but does not itself change the widget size, that is happening elsewhere
     ' the widget size is modified in W_MouseWheel in cwTenShillings
     
-    ' the pvtAllowSizeChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
-    If pvtAllowSizeChangeFlg = True Then
+    ' the pAllowSizeChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
+    If pAllowSizeChangeFlg = True Then
         Me.WidgetSize = sliWidgetSize.Value / 100
     End If
     
@@ -6080,38 +6080,38 @@ End Property
 
 
 Private Sub txtDblClickCommand_Change()
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
 End Sub
 
 Private Sub txtDefaultEditor_Change()
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
 End Sub
 
 Private Sub txtLandscapeHoffset_Change()
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
 End Sub
 
 Private Sub txtLandscapeVoffset_Change()
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 End Sub
 Private Sub txtOpenFile_Change()
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 End Sub
 
 Private Sub txtPortraitHoffset_Change()
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 End Sub
 
 Private Sub txtPortraitYoffset_Change()
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
 End Sub
 
 Private Sub txtPrefsFont_Change()
-    If gsStartupFlg = False Then btnSave.Enabled = True ' enable the save button
+    If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 End Sub
 
 
@@ -6446,7 +6446,7 @@ End Sub
 '
 Private Sub loadPrefsAboutText()
     On Error GoTo loadPrefsAboutText_Error
-    'If gsDebugFlg = 1 Then Debug.Print "%loadPrefsAboutText"
+    'If giDebugFlg = 1 Then Debug.Print "%loadPrefsAboutText"
     
     lblMajorVersion.Caption = App.Major
     lblMinorVersion.Caption = App.Minor
@@ -6530,12 +6530,12 @@ Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName
     captionHeight = widgetPrefs.Height - Me.ScaleHeight - BorderWidth
         
     ' under windows 10+ the internal window calcs are all wrong due to the bigger title bars
-    If pvtPrefsDynamicSizingFlg = False Then
+    If pPrefsDynamicSizingFlg = False Then
         padding = 200 ' add normal padding below the help button to position the bottom of the form
 
-        pvtLastFormHeight = btnHelp.Top + btnHelp.Height + captionHeight + BorderWidth + padding
-        gsPrefsFormResizedInCode = True
-        widgetPrefs.Height = pvtLastFormHeight
+        pLastFormHeight = btnHelp.Top + btnHelp.Height + captionHeight + BorderWidth + padding
+        gbPrefsFormResizedInCode = True
+        widgetPrefs.Height = pLastFormHeight
     End If
     
     If gsDpiAwareness = "0" Then
@@ -6860,7 +6860,7 @@ Private Sub setThemeColour()
     Dim SysClr As Long: SysClr = 0
     
    On Error GoTo setThemeColour_Error
-   'If gsDebugFlg = 1  Then Debug.Print "%setThemeColour"
+   'If giDebugFlg = 1  Then Debug.Print "%setThemeColour"
 
     If IsThemeActive() = False Then
         'MsgBox "Windows Classic Theme detected"
@@ -6904,7 +6904,7 @@ Private Sub adjustPrefsTheme()
             Call setThemeShade(240, 240, 240)
         End If
     Else
-        If gsClassicThemeCapable = True Then
+        If gbClassicThemeCapable = True Then
             mnuAuto.Caption = "Auto Theme Enabled - Click to Disable"
             themeTimer.Enabled = True
         Else
@@ -7050,13 +7050,13 @@ Private Sub chkEnableResizing_Click()
    On Error GoTo chkEnableResizing_Click_Error
 
     If chkEnableResizing.Value = 1 Then
-        pvtPrefsDynamicSizingFlg = True
+        pPrefsDynamicSizingFlg = True
         txtPrefsFontCurrentSize.Visible = True
         'lblCurrentFontsTab.Visible = True
         'Call writePrefsPositionAndSize
         chkEnableResizing.Caption = "Disable Corner Resizing"
     Else
-        pvtPrefsDynamicSizingFlg = False
+        pPrefsDynamicSizingFlg = False
         txtPrefsFontCurrentSize.Visible = False
         'lblCurrentFontsTab.Visible = False
         Unload widgetPrefs
@@ -7091,7 +7091,7 @@ End Sub
 Private Sub setframeHeights()
    On Error GoTo setframeHeights_Error
 
-    If pvtPrefsDynamicSizingFlg = True Then
+    If pPrefsDynamicSizingFlg = True Then
         fraGeneral.Height = fraAbout.Height
         fraFonts.Height = fraAbout.Height
         fraConfig.Height = fraAbout.Height
@@ -7123,7 +7123,7 @@ Private Sub setframeHeights()
 '        fraWindowInner.Height = 8085
         
 '        ' the lowest window controls are not displayed on a single monitor
-        If gsMonitorCount > 1 Then
+        If glMonitorCount > 1 Then
             fraWindow.Height = 8700
             fraWindowInner.Height = 8085
         Else

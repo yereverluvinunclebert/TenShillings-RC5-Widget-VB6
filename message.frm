@@ -113,9 +113,9 @@ Attribute VB_Exposed = False
 ' .74 DAEB 22/05/2022 rDIConConfig.frm Msgbox replacement that can be placed on top of the form instead as the middle of the screen STARTS
 Option Explicit
 
-Private pvtYesNoReturnValue As Integer
-Private pvtFormMsgContext As String
-Private pvtFormShowAgainChkBox As Boolean
+Private pYesNoReturnValue As Integer
+Private pFormMsgContext As String
+Private pFormShowAgainChkBox As Boolean
 
 Private Const cMsgBoxAFormHeight As Long = 2565
 Private Const cMsgBoxAFormWidth  As Long = 11055
@@ -166,7 +166,7 @@ Private Sub Form_Load()
 
     On Error GoTo Form_Load_Error
     
-    If gsMessageAHeightTwips = "" Then gsMessageAHeightTwips = gsPhysicalScreenHeightTwips / 5.5
+    If gsMessageAHeightTwips = "" Then gsMessageAHeightTwips = glPhysicalScreenHeightTwips / 5.5
     
     msgBoxACurrentWidth = Val(gsMessageAWidthTwips)
     msgBoxACurrentHeight = Val(gsMessageAHeightTwips)
@@ -219,7 +219,7 @@ Private Sub Form_Resize()
         currentFont = Val(gsPrefsFontSizeLowDPI)
     End If
     
-    If gsMsgBoxADynamicSizingFlg = True Then
+    If gbMsgBoxADynamicSizingFlg = True Then
         Call setMessageIconImagesLight(1920)
         Call resizeControls(Me, msgBoxAControlPositions(), msgBoxACurrentWidth, msgBoxACurrentHeight, currentFont)
         Me.Width = Me.Height / ratio ' maintain the aspect ratio
@@ -250,8 +250,8 @@ End Sub
 Private Sub btnButtonTwo_Click()
    On Error GoTo btnButtonTwo_Click_Error
 
-    If pvtFormShowAgainChkBox = True Then SaveSetting App.EXEName, "Options", "Show message" & pvtFormMsgContext, chkShowAgain.Value
-    pvtYesNoReturnValue = 7
+    If pFormShowAgainChkBox = True Then SaveSetting App.EXEName, "Options", "Show message" & pFormMsgContext, chkShowAgain.Value
+    pYesNoReturnValue = 7
     Me.Hide
 
    On Error GoTo 0
@@ -273,8 +273,8 @@ Private Sub btnButtonOne_Click()
    On Error GoTo btnButtonOne_Click_Error
 
     Me.Visible = False
-    If pvtFormShowAgainChkBox = True Then SaveSetting App.EXEName, "Options", "Show message" & pvtFormMsgContext, chkShowAgain.Value
-    pvtYesNoReturnValue = 6
+    If pFormShowAgainChkBox = True Then SaveSetting App.EXEName, "Options", "Show message" & pFormMsgContext, chkShowAgain.Value
+    pYesNoReturnValue = 6
     Me.Hide
 
    On Error GoTo 0
@@ -298,11 +298,11 @@ Public Sub Display()
     
     On Error GoTo Display_Error
 
-    If pvtFormShowAgainChkBox = True Then
+    If pFormShowAgainChkBox = True Then
     
         chkShowAgain.Visible = True
         ' Returns a key setting value from an application's entry in the Windows registry
-        intShow = GetSetting(App.EXEName, "Options", "Show message" & pvtFormMsgContext, vbUnchecked)
+        intShow = GetSetting(App.EXEName, "Options", "Show message" & pFormMsgContext, vbUnchecked)
         
         If intShow = vbUnchecked Then
             Me.Show vbModal
@@ -341,9 +341,9 @@ Public Property Let propMessage(ByVal newValue As String)
     
     ' Expand the form and move the other controls if the message is too long to show.
           
-    If gsMsgBoxADynamicSizingFlg = True Then
+    If gbMsgBoxADynamicSizingFlg = True Then
         ' this causes a resize event
-        ' Me.Height = (gsPhysicalScreenHeightTwips / 5.5) '+ intDiff
+        ' Me.Height = (glPhysicalScreenHeightTwips / 5.5) '+ intDiff
     Else
         fraPicVB.Top = 285
     End If
@@ -434,7 +434,7 @@ Public Property Let propMsgContext(ByVal newValue As String)
    
    If mPropMsgContext <> newValue Then mPropMsgContext = newValue Else Exit Property
 
-   pvtFormMsgContext = mPropMsgContext
+   pFormMsgContext = mPropMsgContext
 
    On Error GoTo 0
    Exit Property
@@ -472,7 +472,7 @@ End Property
 Public Property Get propReturnedValue() As Integer
    On Error GoTo propReturnedValue_Error
    
-    propReturnedValue = pvtYesNoReturnValue
+    propReturnedValue = pYesNoReturnValue
 
    On Error GoTo 0
    Exit Property
@@ -495,7 +495,7 @@ Public Property Let propReturnedValue(ByVal newValue As Integer)
    
     If mPropReturnedValue <> newValue Then mPropReturnedValue = newValue Else Exit Property
 
-    pvtFormShowAgainChkBox = mPropReturnedValue
+    pFormShowAgainChkBox = mPropReturnedValue
 
    On Error GoTo 0
    Exit Property
@@ -517,7 +517,7 @@ Public Property Let propShowAgainChkBox(ByVal newValue As Boolean)
    
     If mPropShowAgainChkBox <> newValue Then mPropShowAgainChkBox = newValue Else Exit Property
 
-    pvtFormShowAgainChkBox = mPropShowAgainChkBox
+    pFormShowAgainChkBox = mPropShowAgainChkBox
 
    On Error GoTo 0
    Exit Property
