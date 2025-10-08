@@ -227,7 +227,7 @@ Private Function Form_Proc(ByVal hWnd As Long, ByVal uMsg As Long, ByVal wParam 
         ' due to the RC form being created in code then there is no default form that we can insert a form-specific mouseMove/mouseOver event into.
         ' Instead I have subclassed the form and place the code to generate a balloon tooltip here.
         If frm.Name = "TenShillingsForm" Then
-            If gblWidgetTooltips = "0" Then
+            If gsWidgetTooltips = "0" Then
                 sTitle = "TenShillings Desktop Widget"
                 sText = "Right Click to open the menu and the preferences. Mouse scrollwheel UP/DOWN to rotate, press CTRL at same time to resize. You can turn off the balloon tooltips in the preferences."
                 CreateToolTip fMain.TenShillingsForm.hWnd, sText, , sTitle, , , , True

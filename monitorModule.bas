@@ -679,7 +679,7 @@ Public Sub resizeLocateRCFormByMoveToNewMonitor()
                     
                     'now calculate the size of the widget according to the screen HeightTwips.
                     resizeProportion = widgetMonitorStruct.Height / oldMonitorStructHeightTwips
-                    resizeProportion = (Val(gblWidgetSize) / 100) * resizeProportion
+                    resizeProportion = (Val(gsWidgetSize) / 100) * resizeProportion
                     
                     fMain.TenShillingsForm.Refresh
                     TenShillingsWidget.Zoom = (resizeProportion)

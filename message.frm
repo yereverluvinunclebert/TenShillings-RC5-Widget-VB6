@@ -178,7 +178,7 @@ Private Sub Form_Load()
          If (TypeOf Ctrl Is CommandButton) Or (TypeOf Ctrl Is textBox) Or (TypeOf Ctrl Is FileListBox) Or (TypeOf Ctrl Is Label) Or (TypeOf Ctrl Is ComboBox) Or (TypeOf Ctrl Is CheckBox) Or (TypeOf Ctrl Is OptionButton) Or (TypeOf Ctrl Is Frame) Or (TypeOf Ctrl Is ListBox) Then
             If gblPrefsFont <> "" Then Ctrl.Font.Name = gblPrefsFont
            
-            If gblDpiAwareness = "1" Then
+            If gsDpiAwareness = "1" Then
                 If Val(Abs(gblPrefsFontSizeHighDPI)) > 0 Then Ctrl.Font.Size = Val(Abs(gblPrefsFontSizeHighDPI))
             Else
                 If Val(Abs(gblPrefsFontSizeLowDPI)) > 0 Then Ctrl.Font.Size = Val(Abs(gblPrefsFontSizeLowDPI))
@@ -213,7 +213,7 @@ Private Sub Form_Resize()
     If Me.WindowState = vbMinimized Then Exit Sub
 
     ratio = cMsgBoxAFormHeight / cMsgBoxAFormWidth
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         currentFont = Val(gblPrefsFontSizeHighDPI)
     Else
         currentFont = Val(gblPrefsFontSizeLowDPI)

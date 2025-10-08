@@ -290,54 +290,51 @@ Private Declare Function PathFileExists Lib "shlwapi" Alias "PathFileExistsA" (B
 Private Declare Function PathIsDirectory Lib "shlwapi" Alias "PathIsDirectoryA" (ByVal pszPath As String) As Long
 '------------------------------------------------------ ENDS
              
+'------------------------------------------------------ STARTS
+' private vars used as local vars in properties replacing global vars
+
+Private m_sWidgetSize As String
+'------------------------------------------------------ ENDS
+
 
 '------------------------------------------------------ STARTS
-' Stored vars read from settings.ini
+' global variables - mostly read from and written to settings.ini
 ' There are so many global vars because the old YWE javascript version of this program used global vars, this was a conversion.
-'
+' Note: In VB6 public variables used in class modules are treated as properties, passed by value, not by reference
+
 ' general
  
-Public gblStartup As String
-Public gblWidgetFunctions As String
-'Public gblSmoothSecondHand As String
-
-Public gblPointerAnimate As String
-Public gblSamplingInterval As String
+Public gsStartup As String
+Public gsWidgetFunctions As String
+Public gsPointerAnimate As String
+Public gsSamplingInterval As String
 
 ' config
 
-Public gblWidgetTooltips As String
-Public gblPrefsTooltips As String
-Public gblShowTaskbar As String
-Public gblShowHelp As String
-
-Public gblDpiAwareness As String
-Private m_sgblWidgetSize As String
-Public gblSkewDegrees As String
-
-Public gblScrollWheelDirection As String
-
+Public gsWidgetTooltips As String
+Public gsPrefsTooltips As String
+Public gsShowTaskbar As String
+Public gsShowHelp As String
+Public gsDpiAwareness As String
+Public gsSkewDegrees As String
+Public gsScrollWheelDirection As String
 
 ' position
 
-Public gblAspectHidden As String
-Public gblWidgetPosition As String
-Public gblWidgetLandscape As String
-Public gblWidgetPortrait As String
-Public gblLandscapeFormHoffset As String
-Public gblLandscapeFormVoffset As String
-Public gblPortraitHoffset As String
-Public gblPortraitYoffset As String
-Public gblvLocationPercPrefValue As String
+Public gsAspectHidden As String
+Public gsWidgetPosition As String
+Public gsWidgetLandscape As String
+Public gsWidgetPortrait As String
+Public gsLandscapeFormHoffset As String
+Public gsLandscapeFormVoffset As String
+Public gsPortraitHoffset As String
+Public gsPortraitYoffset As String
+Public gsVLocationPercPrefValue As String
 Public gblhLocationPercPrefValue As String
 
 ' sounds
 
 Public gblEnableSounds  As String
-'Public gblEnableTicks  As String
-'Public gblEnableChimes  As String
-'Public gblEnableAlarms  As String
-'Public gblVolumeBoost  As String
 
 ' development
 
@@ -473,18 +470,6 @@ Public gblRichClientEnvironment As String
 Public widgetPrefsOldHeight As Long
 Public widgetPrefsOldWidth As Long
 
-'Public tzDelta As Long
-'Public tzDelta1 As Long
-
-'Public msgBoxADynamicSizingFlg As Boolean
-
-
-'
-
-
-
-
-
 '------------------------------------------------------ ENDS
 
 
@@ -615,7 +600,7 @@ End Sub
 Public Sub setDPIaware()
     On Error GoTo setDPIaware_Error
        
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         If Not InIDE Then
             Cairo.SetDPIAwareness ' this way avoids the VB6 IDE shrinking (sadly, VB6 has a high DPI unaware IDE)
             gblMsgBoxADynamicSizingFlg = True
@@ -644,7 +629,7 @@ Public Sub testDPIAndSetInitialAwareness()
     'If fPixelsPerInchX() > 96 Then ' always seems to provide 96, no matter what I do.
     
      If gblPhysicalScreenWidthPixels > 1960 Then
-        gblDpiAwareness = "1"
+        gsDpiAwareness = "1"
         Call setDPIaware
     End If
 
@@ -1648,7 +1633,7 @@ End Sub
 Public Sub setRichClientTooltips()
    On Error GoTo setRichClientTooltips_Error
 
-    If gblWidgetTooltips = "1" Then
+    If gsWidgetTooltips = "1" Then
         TenShillingsWidget.Widget.ToolTip = "Use Mouse scrollwheel UP/DOWN to rotate, press CTRL at same time to resize. "
         aboutWidget.Widget.ToolTip = "Click on me to make me go away."
     Else
@@ -1709,7 +1694,7 @@ Public Sub makeVisibleFormElements()
 
     'NOTE that when you position a widget you are positioning the form it is drawn upon.
 
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         formLeftPixels = Val(gblWidgetHighDpiXPos)
         formTopPixels = Val(gblWidgetHighDpiYPos)
     Else
@@ -1862,13 +1847,13 @@ Public Sub mainScreen()
     
     ' check if the widget has a lock for the screen type.
     If gblAspectRatio = "landscape" Then
-        If gblWidgetLandscape = "1" Then
-            If gblLandscapeFormHoffset <> vbNullString Then
-                fMain.TenShillingsForm.Left = Val(gblLandscapeFormHoffset)
-                fMain.TenShillingsForm.Top = Val(gblLandscapeFormVoffset)
+        If gsWidgetLandscape = "1" Then
+            If gsLandscapeFormHoffset <> vbNullString Then
+                fMain.TenShillingsForm.Left = Val(gsLandscapeFormHoffset)
+                fMain.TenShillingsForm.Top = Val(gsLandscapeFormVoffset)
             End If
         End If
-        If gblAspectHidden = "2" Then
+        If gsAspectHidden = "2" Then
             Debug.Print "Hiding the widget for landscape mode"
             fMain.TenShillingsForm.Visible = False
         End If
@@ -1876,11 +1861,11 @@ Public Sub mainScreen()
     
     ' check if the widget has a lock for the screen type.
     If gblAspectRatio = "portrait" Then
-        If gblWidgetPortrait = "1" Then
-            fMain.TenShillingsForm.Left = Val(gblPortraitHoffset)
-            fMain.TenShillingsForm.Top = Val(gblPortraitYoffset)
+        If gsWidgetPortrait = "1" Then
+            fMain.TenShillingsForm.Left = Val(gsPortraitHoffset)
+            fMain.TenShillingsForm.Top = Val(gsPortraitYoffset)
         End If
-        If gblAspectHidden = "1" Then
+        If gsAspectHidden = "1" Then
             Debug.Print "Hiding the widget for portrait mode"
             fMain.TenShillingsForm.Visible = False
         End If
@@ -1900,9 +1885,9 @@ Public Sub mainScreen()
 
     ' calculate the current hlocation in % of the screen
     ' store the current hlocation in % of the screen
-    If gblWidgetPosition = "1" Then
+    If gsWidgetPosition = "1" Then
         gblhLocationPercPrefValue = CStr(fMain.TenShillingsForm.Left / gblVirtualScreenWidthPixels * 100)
-        gblvLocationPercPrefValue = CStr(fMain.TenShillingsForm.Top / gblVirtualScreenHeightPixels * 100)
+        gsVLocationPercPrefValue = CStr(fMain.TenShillingsForm.Top / gblVirtualScreenHeightPixels * 100)
     End If
 
    On Error GoTo 0
@@ -2220,7 +2205,7 @@ Public Sub saveMainRCFormPosition()
 
    On Error GoTo saveMainRCFormPosition_Error
 
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         gblWidgetHighDpiXPos = CStr(fMain.TenShillingsForm.Left) ' saving in pixels
         gblWidgetHighDpiYPos = CStr(fMain.TenShillingsForm.Top)
         sPutINISetting "Software\TenShillings", "widgetHighDpiXPos", gblWidgetHighDpiXPos, gblSettingsFile
@@ -2235,11 +2220,11 @@ Public Sub saveMainRCFormPosition()
     
     sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
     sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
-    gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
-    gblSkewDegrees = CStr(TenShillingsWidget.SkewDegrees)
+    gsWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
+    gsSkewDegrees = CStr(TenShillingsWidget.SkewDegrees)
     
-    sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
-    sPutINISetting "Software\TenShillings", "skewDegrees", gblSkewDegrees, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gblSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -2263,10 +2248,10 @@ Public Sub saveMainRCFormSize()
 
     sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gblWidgetPrimaryHeightRatio, gblSettingsFile
     sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gblWidgetSecondaryHeightRatio, gblSettingsFile
-    gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
-    gblSkewDegrees = CStr(TenShillingsWidget.SkewDegrees)
-    sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
-    sPutINISetting "Software\TenShillings", "skewDegrees", gblSkewDegrees, gblSettingsFile
+    gsWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
+    gsSkewDegrees = CStr(TenShillingsWidget.SkewDegrees)
+    sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gblSettingsFile
+    sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gblSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -2331,7 +2316,7 @@ Public Sub readPrefsPosition()
             
     On Error GoTo readPrefsPosition_Error
 
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         gblPrefsHighDpiXPosTwips = fGetINISetting("Software\TenShillings", "prefsHighDpiXPosTwips", gblSettingsFile)
         gblPrefsHighDpiYPosTwips = fGetINISetting("Software\TenShillings", "prefsHighDpiYPosTwips", gblSettingsFile)
         
@@ -2406,7 +2391,7 @@ Public Sub writePrefsPositionAndSize()
     On Error GoTo writePrefsPositionAndSize_Error
 
     If widgetPrefs.IsVisible = True And widgetPrefs.WindowState = vbNormal Then ' when vbMinimised the value = -48000  !
-        If gblDpiAwareness = "1" Then
+        If gsDpiAwareness = "1" Then
             gblPrefsHighDpiXPosTwips = CStr(widgetPrefs.Left)
             gblPrefsHighDpiYPosTwips = CStr(widgetPrefs.Top)
             
@@ -2541,8 +2526,8 @@ Public Sub SwitchOff()
     menuForm.mnuSwitchOff.Checked = True
     menuForm.mnuTurnFunctionsOn.Checked = False
     
-    gblWidgetFunctions = "0"
-    sPutINISetting "Software\TenShillings", "widgetFunctions", gblWidgetFunctions, gblSettingsFile
+    gsWidgetFunctions = "0"
+    sPutINISetting "Software\TenShillings", "widgetFunctions", gsWidgetFunctions, gblSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -2576,8 +2561,8 @@ Public Sub TurnFunctionsOn()
     menuForm.mnuSwitchOff.Checked = False
     menuForm.mnuTurnFunctionsOn.Checked = True
     
-    gblWidgetFunctions = "1"
-    sPutINISetting "Software\TenShillings", "widgetFunctions", gblWidgetFunctions, gblSettingsFile
+    gsWidgetFunctions = "1"
+    sPutINISetting "Software\TenShillings", "widgetFunctions", gsWidgetFunctions, gblSettingsFile
 
    On Error GoTo 0
    Exit Sub
@@ -2791,52 +2776,6 @@ End Function
 
 
 
-
-' ----------------------------------------------------------------
-' Procedure Name: fDayOfWeek
-' Purpose: Returns the day of the week when given today's date
-' Procedure Kind: Function
-' Procedure Access: Public
-' Return Type: String
-' Author: beededea
-' Date: 17/06/2024
-' ----------------------------------------------------------------
-Public Function fDayOfWeek() As String
-    On Error GoTo fDayOfWeek_Error
-     Dim vb6DateTime As Date
-     
-     vb6DateTime = Date
-
-     Select Case DatePart("w", vb6DateTime)
-         Case vbSunday
-             fDayOfWeek = "sunday"
-         Case vbMonday
-             fDayOfWeek = "monday"
-         Case vbTuesday
-             fDayOfWeek = "tuesday"
-         Case vbWednesday
-             fDayOfWeek = "wednesday"
-         Case vbThursday
-             fDayOfWeek = "thursday"
-         Case vbFriday
-             fDayOfWeek = "friday"
-         Case vbSaturday
-             fDayOfWeek = "saturday"
-     End Select
-     
-    
-    On Error GoTo 0
-    Exit Function
-
-fDayOfWeek_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure fDayOfWeek, line " & Erl & "."
-
-End Function
-
-
-
-
 '---------------------------------------------------------------------------------------
 ' Procedure : hideBusyTimer
 ' Author    : beededea
@@ -2875,49 +2814,6 @@ End Sub
 
 
 
-'---------------------------------------------------------------------------------------
-' Procedure : gblWidgetSize
-' Author    : beededea
-' Date      : 06/09/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Public Property Get gblWidgetSize() As String
-
-    On Error GoTo gblWidgetSize_Error
-
-    gblWidgetSize = m_sgblWidgetSize
-
-    On Error GoTo 0
-    Exit Property
-
-gblWidgetSize_Error:
-
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gblWidgetSize of Module Module1"
-
-End Property
-
-'---------------------------------------------------------------------------------------
-' Procedure : gblWidgetSize
-' Author    : beededea
-' Date      : 06/09/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
-'
-Public Property Let gblWidgetSize(ByVal sgblWidgetSize As String)
-
-    On Error GoTo gblWidgetSize_Error
-
-    m_sgblWidgetSize = sgblWidgetSize
-
-    On Error GoTo 0
-    Exit Property
-
-gblWidgetSize_Error:
-
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gblWidgetSize of Module Module1"
-
-End Property
 
 '---------------------------------------------------------------------------------------
 ' Procedure : saveRCFormCurrentSizeRatios
@@ -3009,3 +2905,49 @@ saveMainFormsCurrentSizeAndRatios_Error:
      MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure saveMainFormsCurrentSizeAndRatios of Form widgetPrefs"
     
 End Sub
+
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetSize
+' Author    : beededea
+' Date      : 06/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get gsWidgetSize() As String
+
+    On Error GoTo gsWidgetSize_Error
+
+    gsWidgetSize = m_sWidgetSize
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetSize_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetSize of Module Module1"
+
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : gsWidgetSize
+' Author    : beededea
+' Date      : 06/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let gsWidgetSize(ByVal sgblWidgetSize As String)
+
+    On Error GoTo gsWidgetSize_Error
+
+    m_sWidgetSize = sgblWidgetSize
+
+    On Error GoTo 0
+    Exit Property
+
+gsWidgetSize_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gsWidgetSize of Module Module1"
+
+End Property

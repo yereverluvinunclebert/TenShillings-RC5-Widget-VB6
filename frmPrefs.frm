@@ -2104,7 +2104,7 @@ Private gblConstraintRatio As Double
 
 
 Private Sub btnDefaultEditor_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnDefaultEditor.hWnd, "Field to hold the path to a Visual Basic Project (VBP) file you would like to execute on a right click menu, edit option, if you select the adjacent button a file explorer will appear allowing you to select the VBP file, this field is automatically filled with the chosen file.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnDefaultEditor.hWnd, "Field to hold the path to a Visual Basic Project (VBP) file you would like to execute on a right click menu, edit option, if you select the adjacent button a file explorer will appear allowing you to select the VBP file, this field is automatically filled with the chosen file.", _
                   TTIconInfo, "Help on the Default Editor Field", , , , True
 End Sub
 
@@ -2244,13 +2244,13 @@ Private Sub optWidgetTooltips_Click(Index As Integer)
     If gblStartupFlg = False Then btnSave.Enabled = True ' enable the save button
 
     If pvtPrefsStartupFlg = False Then
-        gblWidgetTooltips = CStr(Index)
+        gsWidgetTooltips = CStr(Index)
     
         optWidgetTooltips(0).Tag = CStr(Index)
         optWidgetTooltips(1).Tag = CStr(Index)
         optWidgetTooltips(2).Tag = CStr(Index)
         
-        sPutINISetting "Software\TenShillings", "widgetTooltips", gblWidgetTooltips, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "widgetTooltips", gsWidgetTooltips, gblSettingsFile
 
         answer = vbYes
         answerMsg = "You must soft reload this widget, in order to change the tooltip setting, do you want me to reload this widget? I can do it now for you."
@@ -2312,12 +2312,12 @@ Private Sub optPrefsTooltips_Click(Index As Integer)
     If pvtPrefsStartupFlg = False Then
     
         If gblStartupFlg = False Then btnSave.Enabled = True ' enable the save button
-        gblPrefsTooltips = CStr(Index)
+        gsPrefsTooltips = CStr(Index)
         optPrefsTooltips(0).Tag = CStr(Index)
         optPrefsTooltips(1).Tag = CStr(Index)
         optPrefsTooltips(2).Tag = CStr(Index)
         
-        sPutINISetting "Software\TenShillings", "prefsTooltips", gblPrefsTooltips, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "prefsTooltips", gsPrefsTooltips, gblSettingsFile
         
         ' set the tooltips on the prefs screen
         Call setPrefsTooltips
@@ -2377,9 +2377,9 @@ Private Sub chkShowHelp_Click()
 
     If gblStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     If chkShowHelp.Value = 1 Then
-        gblShowHelp = "1"
+        gsShowHelp = "1"
     Else
-        gblShowHelp = "0"
+        gsShowHelp = "0"
     End If
 
    On Error GoTo 0
@@ -2577,7 +2577,7 @@ Private Sub setFormResizingVars()
       .Visible = False
     End With
     
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         pvtPrefsDynamicSizingFlg = True
         chkEnableResizing.Value = 1
         lblDragCorner.Visible = True
@@ -2632,7 +2632,7 @@ Private Sub setPrefsHeight()
 
    On Error GoTo setPrefsHeight_Error
 
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         gblPrefsFormResizedInCode = True
         If gblPrefsPrimaryHeightTwips < gblPhysicalScreenHeightTwips Then
             widgetPrefs.Height = CLng(gblPrefsPrimaryHeightTwips) ' 16450
@@ -2770,40 +2770,40 @@ Public Sub MouseMoveOnComboText(sComboName As String)
         Case "cmbMultiMonitorResize"
             sTitle = "Help on the Drop Down Icon Filter"
             sText = pCmbMultiMonitorResizeBalloonTooltip
-            If gblPrefsTooltips = "0" Then CreateToolTip cmbMultiMonitorResize.hWnd, sText, , sTitle, , , , True
+            If gsPrefsTooltips = "0" Then CreateToolTip cmbMultiMonitorResize.hWnd, sText, , sTitle, , , , True
         Case "cmbScrollWheelDirection"
             sTitle = "Help on the Scroll Wheel Direction"
             sText = pCmbScrollWheelDirectionBalloonTooltip
-            If gblPrefsTooltips = "0" Then CreateToolTip cmbScrollWheelDirection.hWnd, sText, , sTitle, , , , True
+            If gsPrefsTooltips = "0" Then CreateToolTip cmbScrollWheelDirection.hWnd, sText, , sTitle, , , , True
         Case "cmbWindowLevel"
             sTitle = "Help on the Window Level"
             sText = pCmbWindowLevelBalloonTooltip
-            If gblPrefsTooltips = "0" Then CreateToolTip cmbWindowLevel.hWnd, sText, , sTitle, , , , True
+            If gsPrefsTooltips = "0" Then CreateToolTip cmbWindowLevel.hWnd, sText, , sTitle, , , , True
         Case "cmbHidingTime"
             sTitle = "Help on the Hiding Time"
             sText = pCmbHidingTimeBalloonTooltip
-            If gblPrefsTooltips = "0" Then CreateToolTip cmbHidingTime.hWnd, sText, , sTitle, , , , True
+            If gsPrefsTooltips = "0" Then CreateToolTip cmbHidingTime.hWnd, sText, , sTitle, , , , True
             
         Case "cmbAspectHidden"
             sTitle = "Help on Hiding in Landscape/Portrait Mode"
             sText = pCmbAspectHiddenBalloonTooltip
-            If gblPrefsTooltips = "0" Then CreateToolTip cmbAspectHidden.hWnd, sText, , sTitle, , , , True
+            If gsPrefsTooltips = "0" Then CreateToolTip cmbAspectHidden.hWnd, sText, , sTitle, , , , True
         Case "cmbWidgetPosition"
             sTitle = "Help on Widget Position in Landscape/Portrait Modes"
             sText = pCmbWidgetPositionBalloonTooltip
-            If gblPrefsTooltips = "0" Then CreateToolTip cmbWidgetPosition.hWnd, sText, , sTitle, , , , True
+            If gsPrefsTooltips = "0" Then CreateToolTip cmbWidgetPosition.hWnd, sText, , sTitle, , , , True
         Case "cmbWidgetLandscape"
             sTitle = "Help on Widget Locking in Landscape Mode"
             sText = pCmbWidgetLandscapeBalloonTooltip
-            If gblPrefsTooltips = "0" Then CreateToolTip cmbWidgetLandscape.hWnd, sText, , sTitle, , , , True
+            If gsPrefsTooltips = "0" Then CreateToolTip cmbWidgetLandscape.hWnd, sText, , sTitle, , , , True
         Case "cmbWidgetPortrait"
             sTitle = "Help on Widget Locking in Portrait Mode"
             sText = pCmbWidgetPortraitBalloonTooltip
-            If gblPrefsTooltips = "0" Then CreateToolTip cmbWidgetPortrait.hWnd, sText, , sTitle, , , , True
+            If gsPrefsTooltips = "0" Then CreateToolTip cmbWidgetPortrait.hWnd, sText, , sTitle, , , , True
         Case "cmbDebug"
             sTitle = "Help on Debug Mode"
             sText = pCmbDebugBalloonTooltip
-            If gblPrefsTooltips = "0" Then CreateToolTip cmbDebug.hWnd, sText, , sTitle, , , , True
+            If gsPrefsTooltips = "0" Then CreateToolTip cmbDebug.hWnd, sText, , sTitle, , , , True
             
     End Select
     
@@ -2831,7 +2831,7 @@ Public Sub positionPrefsMonitor()
     
     On Error GoTo positionPrefsMonitor_Error
     
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         formLeftTwips = Val(gblPrefsHighDpiXPosTwips)
         formTopTwips = Val(gblPrefsHighDpiYPosTwips)
     Else
@@ -2935,12 +2935,12 @@ Private Sub chkDpiAwareness_Click()
         answer = msgBoxA(answerMsg, vbYesNo, "DpiAwareness Confirmation", True, "chkDpiAwarenessRestart")
         
         If chkDpiAwareness.Value = 0 Then
-            gblDpiAwareness = "0"
+            gsDpiAwareness = "0"
         Else
-            gblDpiAwareness = "1"
+            gsDpiAwareness = "1"
         End If
 
-        sPutINISetting "Software\TenShillings", "dpiAwareness", gblDpiAwareness, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "dpiAwareness", gsDpiAwareness, gblSettingsFile
         
         If answer = vbNo Then
             answer = vbYes
@@ -2950,7 +2950,7 @@ Private Sub chkDpiAwareness_Click()
             Exit Sub
         Else
 
-            sPutINISetting "Software\TenShillings", "dpiAwareness", gblDpiAwareness, gblSettingsFile
+            sPutINISetting "Software\TenShillings", "dpiAwareness", gsDpiAwareness, gblSettingsFile
             'Call reloadProgram ' this is insufficient, image controls still fail to resize and autoscale correctly
             Call hardRestart
         End If
@@ -2984,9 +2984,9 @@ Private Sub chkShowTaskbar_Click()
 
     If gblStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     If chkShowTaskbar.Value = 1 Then
-        gblShowTaskbar = "1"
+        gsShowTaskbar = "1"
     Else
-        gblShowTaskbar = "0"
+        gsShowTaskbar = "0"
     End If
 
    On Error GoTo 0
@@ -3895,21 +3895,21 @@ Private Sub btnSave_Click()
     On Error GoTo btnSave_Click_Error
 
     ' configuration
-    gblWidgetTooltips = CStr(optWidgetTooltips(0).Tag)
-    gblPrefsTooltips = CStr(optPrefsTooltips(0).Tag)
+    gsWidgetTooltips = CStr(optWidgetTooltips(0).Tag)
+    gsPrefsTooltips = CStr(optPrefsTooltips(0).Tag)
     
-    gblShowTaskbar = CStr(chkShowTaskbar.Value)
-    gblShowHelp = CStr(chkShowHelp.Value)
+    gsShowTaskbar = CStr(chkShowTaskbar.Value)
+    gsShowHelp = CStr(chkShowHelp.Value)
     
-    gblDpiAwareness = CStr(chkDpiAwareness.Value)
-    gblWidgetSize = CStr(sliWidgetSize.Value)
-    gblSkewDegrees = CStr(sliSkewDegrees.Value)
+    gsDpiAwareness = CStr(chkDpiAwareness.Value)
+    gsWidgetSize = CStr(sliWidgetSize.Value)
+    gsSkewDegrees = CStr(sliSkewDegrees.Value)
     
-    gblScrollWheelDirection = CStr(cmbScrollWheelDirection.ListIndex)
+    gsScrollWheelDirection = CStr(cmbScrollWheelDirection.ListIndex)
         
     ' general
-    gblWidgetFunctions = CStr(chkWidgetFunctions.Value)
-    gblStartup = CStr(chkGenStartup.Value)
+    gsWidgetFunctions = CStr(chkWidgetFunctions.Value)
+    gsStartup = CStr(chkGenStartup.Value)
     
     
     ' sounds
@@ -3930,16 +3930,16 @@ Private Sub btnSave_Click()
     #End If
     
     ' position
-    gblAspectHidden = CStr(cmbAspectHidden.ListIndex)
-    gblWidgetPosition = CStr(cmbWidgetPosition.ListIndex)
-    gblWidgetLandscape = CStr(cmbWidgetLandscape.ListIndex)
-    gblWidgetPortrait = CStr(cmbWidgetPortrait.ListIndex)
-    gblLandscapeFormHoffset = txtLandscapeHoffset.Text
-    gblLandscapeFormVoffset = txtLandscapeVoffset.Text
-    gblPortraitHoffset = txtPortraitHoffset.Text
-    gblPortraitYoffset = txtPortraitYoffset.Text
+    gsAspectHidden = CStr(cmbAspectHidden.ListIndex)
+    gsWidgetPosition = CStr(cmbWidgetPosition.ListIndex)
+    gsWidgetLandscape = CStr(cmbWidgetLandscape.ListIndex)
+    gsWidgetPortrait = CStr(cmbWidgetPortrait.ListIndex)
+    gsLandscapeFormHoffset = txtLandscapeHoffset.Text
+    gsLandscapeFormVoffset = txtLandscapeVoffset.Text
+    gsPortraitHoffset = txtPortraitHoffset.Text
+    gsPortraitYoffset = txtPortraitYoffset.Text
     
-'    gblvLocationPercPrefValue
+'    gsVLocationPercPrefValue
 '    gblhLocationPercPrefValue
 
     ' fonts
@@ -3955,7 +3955,7 @@ Private Sub btnSave_Click()
 
     ' the sizing is not saved here again as it saved during the setting phase.
     
-'    If gblDpiAwareness = "1" Then
+'    If gsDpiAwareness = "1" Then
 '        gblPrefsFontSizeHighDPI = txtPrefsFontSize.Text
 '    Else
 '        gblPrefsFontSizeLowDPI = txtPrefsFontSize.Text
@@ -3974,7 +3974,7 @@ Private Sub btnSave_Click()
     gblMultiMonitorResize = CStr(cmbMultiMonitorResize.ListIndex)
      
             
-    If gblStartup = "1" Then
+    If gsStartup = "1" Then
         Call writeRegistry(HKEY_CURRENT_USER, "SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "TenShillings" & gblRichClientEnvironment & "Widget" & gblCodingEnvironment, """" & App.Path & "\" & "TenShillings-" & gblRichClientEnvironment & "-Widget-" & gblCodingEnvironment & ".exe""")
     Else
         Call writeRegistry(HKEY_CURRENT_USER, "SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "TenShillings" & gblRichClientEnvironment & "Widget" & gblCodingEnvironment, vbNullString)
@@ -3982,28 +3982,28 @@ Private Sub btnSave_Click()
 
     ' save the values from the general tab
     If fFExists(gblSettingsFile) Then
-        sPutINISetting "Software\TenShillings", "widgetTooltips", gblWidgetTooltips, gblSettingsFile
-        sPutINISetting "Software\TenShillings", "prefsTooltips", gblPrefsTooltips, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "widgetTooltips", gsWidgetTooltips, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "prefsTooltips", gsPrefsTooltips, gblSettingsFile
 
-        sPutINISetting "Software\TenShillings", "showTaskbar", gblShowTaskbar, gblSettingsFile
-        sPutINISetting "Software\TenShillings", "showHelp", gblShowHelp, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "showTaskbar", gsShowTaskbar, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "showHelp", gsShowHelp, gblSettingsFile
         
-        sPutINISetting "Software\TenShillings", "dpiAwareness", gblDpiAwareness, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "dpiAwareness", gsDpiAwareness, gblSettingsFile
         
         
-        sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
-        sPutINISetting "Software\TenShillings", "scrollWheelDirection", gblScrollWheelDirection, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "scrollWheelDirection", gsScrollWheelDirection, gblSettingsFile
                 
-        sPutINISetting "Software\TenShillings", "widgetFunctions", gblWidgetFunctions, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "widgetFunctions", gsWidgetFunctions, gblSettingsFile
         
-        sPutINISetting "Software\TenShillings", "pointerAnimate", gblPointerAnimate, gblSettingsFile
-        sPutINISetting "Software\TenShillings", "samplingInterval", gblSamplingInterval, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "pointerAnimate", gsPointerAnimate, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "samplingInterval", gsSamplingInterval, gblSettingsFile
         
               
-        sPutINISetting "Software\TenShillings", "aspectHidden", gblAspectHidden, gblSettingsFile
-        sPutINISetting "Software\TenShillings", "widgetPosition", gblWidgetPosition, gblSettingsFile
-        sPutINISetting "Software\TenShillings", "widgetLandscape", gblWidgetLandscape, gblSettingsFile
-        sPutINISetting "Software\TenShillings", "widgetPortrait", gblWidgetPortrait, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "aspectHidden", gsAspectHidden, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "widgetPosition", gsWidgetPosition, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "widgetLandscape", gsWidgetLandscape, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "widgetPortrait", gsWidgetPortrait, gblSettingsFile
 
         sPutINISetting "Software\TenShillings", "prefsFont", gblPrefsFont, gblSettingsFile
         sPutINISetting "Software\TenShillings", "widgetFont", gblWidgetFont, gblSettingsFile
@@ -4031,7 +4031,7 @@ Private Sub btnSave_Click()
         sPutINISetting "Software\TenShillings", "multiMonitorResize", gblMultiMonitorResize, gblSettingsFile
         
         
-        sPutINISetting "Software\TenShillings", "startup", gblStartup, gblSettingsFile
+        sPutINISetting "Software\TenShillings", "startup", gsStartup, gblSettingsFile
 
         sPutINISetting "Software\TenShillings", "enableSounds", gblEnableSounds, gblSettingsFile
 '        sPutINISetting "Software\TenShillings", "enableTicks", gblEnableTicks, gblSettingsFile
@@ -4152,7 +4152,7 @@ Private Sub btnPrefsFont_Click()
     fntFont = gblPrefsFont
     ' gblWidgetFont
     
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         fntSize = Val(gblPrefsFontSizeHighDPI)
     Else
         fntSize = Val(gblPrefsFontSizeLowDPI)
@@ -4167,7 +4167,7 @@ Private Sub btnPrefsFont_Click()
     gblPrefsFont = CStr(fntFont)
     gblWidgetFont = gblPrefsFont
     
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         gblPrefsFontSizeHighDPI = CStr(fntSize)
         Call Form_Resize
     Else
@@ -4296,33 +4296,33 @@ Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
     'widgetPrefs.Height = CLng(gblPrefsPrimaryHeightTwips)
             
     ' general tab
-    chkWidgetFunctions.Value = Val(gblWidgetFunctions)
-    chkGenStartup.Value = Val(gblStartup)
+    chkWidgetFunctions.Value = Val(gsWidgetFunctions)
+    chkGenStartup.Value = Val(gsStartup)
             
      ' check whether the size has been previously altered via ctrl+mousewheel on the widget
     sliWidgetSizeOldValue = sliWidgetSize.Value
-    sliWidgetSize.Value = Val(gblWidgetSize)
+    sliWidgetSize.Value = Val(gsWidgetSize)
     If sliWidgetSize.Value <> sliWidgetSizeOldValue Then
         btnSave.Visible = True
     End If
     
-    sliSkewDegrees.Value = Val(gblSkewDegrees)
+    sliSkewDegrees.Value = Val(gsSkewDegrees)
         
-    cmbScrollWheelDirection.ListIndex = Val(gblScrollWheelDirection)
+    cmbScrollWheelDirection.ListIndex = Val(gsScrollWheelDirection)
     
-    optWidgetTooltips(CStr(gblWidgetTooltips)).Value = True
-    optWidgetTooltips(0).Tag = CStr(gblWidgetTooltips)
-    optWidgetTooltips(1).Tag = CStr(gblWidgetTooltips)
-    optWidgetTooltips(2).Tag = CStr(gblWidgetTooltips)
+    optWidgetTooltips(CStr(gsWidgetTooltips)).Value = True
+    optWidgetTooltips(0).Tag = CStr(gsWidgetTooltips)
+    optWidgetTooltips(1).Tag = CStr(gsWidgetTooltips)
+    optWidgetTooltips(2).Tag = CStr(gsWidgetTooltips)
         
-    optPrefsTooltips(CStr(gblPrefsTooltips)).Value = True
-    optPrefsTooltips(0).Tag = CStr(gblPrefsTooltips)
-    optPrefsTooltips(1).Tag = CStr(gblPrefsTooltips)
-    optPrefsTooltips(2).Tag = CStr(gblPrefsTooltips)
+    optPrefsTooltips(CStr(gsPrefsTooltips)).Value = True
+    optPrefsTooltips(0).Tag = CStr(gsPrefsTooltips)
+    optPrefsTooltips(1).Tag = CStr(gsPrefsTooltips)
+    optPrefsTooltips(2).Tag = CStr(gsPrefsTooltips)
     
-    chkShowTaskbar.Value = Val(gblShowTaskbar)
-    chkShowHelp.Value = Val(gblShowHelp)
-    chkDpiAwareness.Value = Val(gblDpiAwareness)
+    chkShowTaskbar.Value = Val(gsShowTaskbar)
+    chkShowHelp.Value = Val(gsShowHelp)
+    chkDpiAwareness.Value = Val(gsDpiAwareness)
 
     ' sounds tab
     chkEnableSounds.Value = Val(gblEnableSounds)
@@ -4343,7 +4343,7 @@ Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
         ' fonts tab
         If gblPrefsFont <> vbNullString Then
             txtPrefsFont.Text = gblPrefsFont
-            If gblDpiAwareness = "1" Then
+            If gsDpiAwareness = "1" Then
                 Call changeFormFont(widgetPrefs, gblPrefsFont, Val(gblPrefsFontSizeHighDPI), fntWeight, fntStyle, gblPrefsFontItalics, gblPrefsFontColour)
                 txtPrefsFontSize.Text = gblPrefsFontSizeHighDPI
             Else
@@ -4361,14 +4361,14 @@ Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
     ' position tab
     
     
-    cmbAspectHidden.ListIndex = Val(gblAspectHidden)
-    cmbWidgetPosition.ListIndex = Val(gblWidgetPosition)
+    cmbAspectHidden.ListIndex = Val(gsAspectHidden)
+    cmbWidgetPosition.ListIndex = Val(gsWidgetPosition)
         
     If gblPreventDragging = "1" Then
         If gblAspectRatio = "landscape" Then
 '            txtLandscapeHoffset.Text = fMain.TenShillingsForm.Left
 '            txtLandscapeVoffset.Text = fMain.TenShillingsForm.Top
-            If gblDpiAwareness = "1" Then
+            If gsDpiAwareness = "1" Then
                 txtLandscapeHoffset.ToolTipText = "Last Sampled Form X Horizontal Position : " & gblWidgetHighDpiXPos & "px"
                 txtLandscapeVoffset.ToolTipText = "Last Sampled Form Y Vertical Position : " & gblWidgetHighDpiYPos & "px"
             Else
@@ -4378,7 +4378,7 @@ Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
         Else
 '            txtPortraitHoffset.Text = fMain.TenShillingsForm.Left
 '            txtPortraitYoffset.Text = fMain.TenShillingsForm.Top
-            If gblDpiAwareness = "1" Then
+            If gsDpiAwareness = "1" Then
                 txtPortraitHoffset.ToolTipText = "Last Sampled Form X Horizontal Position : " & gblWidgetHighDpiXPos & "px"
                 txtPortraitYoffset.ToolTipText = "Last Sampled Form Y Vertical Position : " & gblWidgetHighDpiYPos & "px"
             Else
@@ -4390,12 +4390,12 @@ Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
     
     'cmbWidgetLandscape
     
-    cmbWidgetLandscape.ListIndex = Val(gblWidgetLandscape)
-    cmbWidgetPortrait.ListIndex = Val(gblWidgetPortrait)
-    txtLandscapeHoffset.Text = gblLandscapeFormHoffset
-    txtLandscapeVoffset.Text = gblLandscapeFormVoffset
-    txtPortraitHoffset.Text = gblPortraitHoffset
-    txtPortraitYoffset.Text = gblPortraitYoffset
+    cmbWidgetLandscape.ListIndex = Val(gsWidgetLandscape)
+    cmbWidgetPortrait.ListIndex = Val(gsWidgetPortrait)
+    txtLandscapeHoffset.Text = gsLandscapeFormHoffset
+    txtLandscapeVoffset.Text = gsLandscapeFormVoffset
+    txtPortraitHoffset.Text = gsPortraitHoffset
+    txtPortraitYoffset.Text = gsPortraitYoffset
 
     ' Windows tab
     
@@ -4674,7 +4674,7 @@ Public Sub PrefsFormResizeEvent()
     
         widgetPrefs.Width = widgetPrefs.Height / gblConstraintRatio ' maintain the aspect ratio, note: this change calls this routine again...
         
-        If gblDpiAwareness = "1" Then
+        If gsDpiAwareness = "1" Then
             currentFontSize = gblPrefsFontSizeHighDPI
         Else
             currentFontSize = gblPrefsFontSizeLowDPI
@@ -4983,7 +4983,7 @@ Private Sub optWidgetTooltips_MouseMove(Index As Integer, Button As Integer, Shi
     Dim thisToolTip As String: thisToolTip = vbNullString
     On Error GoTo optWidgetTooltips_MouseMove_Error
 
-    If gblPrefsTooltips = "0" Then
+    If gsPrefsTooltips = "0" Then
         If Index = 0 Then
             thisToolTip = "This setting enables the balloon tooltips for elements within the Steampunk GUI. These tooltips are multi-line and in general more attractive than standard windows style tooltips, note that their font size will match the Windows system font size."
             CreateToolTip optWidgetTooltips(Index).hWnd, thisToolTip, _
@@ -5018,7 +5018,7 @@ End Sub
 Private Sub btnResetMessages_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     On Error GoTo btnResetMessages_MouseMove_Error
 
-    If gblPrefsTooltips = "0" Then CreateToolTip btnResetMessages.hWnd, "The various pop-up messages that this program generates can be manually hidden. This button restores them to their original visible state.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnResetMessages.hWnd, "The various pop-up messages that this program generates can be manually hidden. This button restores them to their original visible state.", _
                   TTIconInfo, "Help on the message reset button", , , , True
 
     On Error GoTo 0
@@ -5034,7 +5034,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, x As Single, y A
 End Sub
 
 Private Sub chkEnableResizing_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkEnableResizing.hWnd, "This allows you to resize the whole prefs window by dragging the bottom right corner of the window. It provides an alternative method of supporting high DPI screens.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkEnableResizing.hWnd, "This allows you to resize the whole prefs window by dragging the bottom right corner of the window. It provides an alternative method of supporting high DPI screens.", _
                   TTIconInfo, "Help on Resizing", , , , True
 End Sub
 
@@ -5078,7 +5078,7 @@ sliSkewDegrees_Change_Error:
 End Sub
 
 Private Sub sliSkewDegrees_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip sliSkewDegrees.hWnd, "Adjust to rotate the whole widget. Any adjustment in skew made here takes place instantly (you can also use the Mousewheel when hovering over the widget itself).", _
+    If gsPrefsTooltips = "0" Then CreateToolTip sliSkewDegrees.hWnd, "Adjust to rotate the whole widget. Any adjustment in skew made here takes place instantly (you can also use the Mousewheel when hovering over the widget itself).", _
                   TTIconInfo, "Help on the Size Rotate Slider", , , , True
 End Sub
 
@@ -5087,17 +5087,17 @@ End Sub
 
 
 Private Sub txtPrefsFont_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtPrefsFont.hWnd, "This is a read-only text box. It displays the current font as set when you click the font selector button. This is in operation for informational purposes only. When resizing the form (drag bottom right) the font size will change in relation to form height. The base font determines the initial size, the resulting resized font will dynamically change.  My preferred font for this utility is Centurion Light SF at 8pt size.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtPrefsFont.hWnd, "This is a read-only text box. It displays the current font as set when you click the font selector button. This is in operation for informational purposes only. When resizing the form (drag bottom right) the font size will change in relation to form height. The base font determines the initial size, the resulting resized font will dynamically change.  My preferred font for this utility is Centurion Light SF at 8pt size.", _
                   TTIconInfo, "Help on the Currently Selected Font", , , , True
 End Sub
 
 Private Sub txtPrefsFontCurrentSize_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtPrefsFontCurrentSize.hWnd, "This is a read-only text box. It displays the current font size as set when dynamic form resizing is enabled. Drag the right hand corner of the window downward and the form will auto-resize. This text box will display the resized font currently in operation for informational purposes only.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtPrefsFontCurrentSize.hWnd, "This is a read-only text box. It displays the current font size as set when dynamic form resizing is enabled. Drag the right hand corner of the window downward and the form will auto-resize. This text box will display the resized font currently in operation for informational purposes only.", _
                   TTIconInfo, "Help on Setting the Font size Dynamically", , , , True
 End Sub
 
 Private Sub txtPrefsFontSize_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtPrefsFontSize.hWnd, "This is a read-only text box. It displays the current base font size as set when dynamic form resizing is enabled. The adjacent text box will display the automatically resized font currently in operation, for informational purposes only.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtPrefsFontSize.hWnd, "This is a read-only text box. It displays the current base font size as set when dynamic form resizing is enabled. The adjacent text box will display the automatically resized font currently in operation, for informational purposes only.", _
                   TTIconInfo, "Help on the Base Font Size", , , , True
 End Sub
 
@@ -5126,103 +5126,103 @@ End Sub
 
 
 Private Sub btnAboutDebugInfo_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnAboutDebugInfo.hWnd, "Here you can switch on Debug mode, not yet functional for this widget.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnAboutDebugInfo.hWnd, "Here you can switch on Debug mode, not yet functional for this widget.", _
                   TTIconInfo, "Help on the Debug Info. Buttton", , , , True
 End Sub
 
 
 
 Private Sub btnClose_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnClose.hWnd, "Close the Preference Utility", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnClose.hWnd, "Close the Preference Utility", _
                   TTIconInfo, "Help on the Close Buttton", , , , True
 End Sub
 
 'Private Sub btnDefaultVB6Editor_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-'    If gblPrefsTooltips = "0" Then CreateToolTip btnDefaultEditor.hWnd, "Clicking on this button will cause a file explorer window to appear allowing you to select a Visual Basic Project (VBP) file for opening via the right click menu edit option. Once selected the adjacent text field will be automatically filled with the chosen path and file.", _
+'    If gsPrefsTooltips = "0" Then CreateToolTip btnDefaultEditor.hWnd, "Clicking on this button will cause a file explorer window to appear allowing you to select a Visual Basic Project (VBP) file for opening via the right click menu edit option. Once selected the adjacent text field will be automatically filled with the chosen path and file.", _
 '                  TTIconInfo, "Help on the VBP File Explorer Button", , , , True
 'End Sub
 
 Private Sub btnDisplayScreenFont_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnDisplayScreenFont.hWnd, "This is the font selector button, if you click it the font selection window will pop up for you to select your chosen font. When resizing the main widget the display screen font size will change in relation to widget size. The base font determines the initial size, the resulting resized font will dynamically change. ", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnDisplayScreenFont.hWnd, "This is the font selector button, if you click it the font selection window will pop up for you to select your chosen font. When resizing the main widget the display screen font size will change in relation to widget size. The base font determines the initial size, the resulting resized font will dynamically change. ", _
                   TTIconInfo, "Help on the Font Selector Button", , , , True
 End Sub
 
 Private Sub btnDonate_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnDonate.hWnd, "Here you can visit my KofI page and donate a Coffee if you like my creations.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnDonate.hWnd, "Here you can visit my KofI page and donate a Coffee if you like my creations.", _
                   TTIconInfo, "Help on the Donate Buttton", , , , True
 End Sub
 
 Private Sub btnFacebook_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnFacebook.hWnd, "Here you can visit the Facebook page for the steampunk Widget community.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnFacebook.hWnd, "Here you can visit the Facebook page for the steampunk Widget community.", _
                   TTIconInfo, "Help on the Update Buttton", , , , True
 End Sub
 
 Private Sub btnGithubHome_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnGithubHome.hWnd, "Here you can visit the widget's home page on github, when you click the button it will open a browser window and take you to the github home page.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnGithubHome.hWnd, "Here you can visit the widget's home page on github, when you click the button it will open a browser window and take you to the github home page.", _
                   TTIconInfo, "Help on the Update Buttton", , , , True
 End Sub
 
 Private Sub btnHelp_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnHelp.hWnd, "Opens the help document, this will open as a compiled HTML file.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnHelp.hWnd, "Opens the help document, this will open as a compiled HTML file.", _
                   TTIconInfo, "Help on the Help Buttton", , , , True
 End Sub
 
 
 
 Private Sub btnOpenFile_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnOpenFile.hWnd, "Clicking on this button will cause a file explorer window to appear allowing you to select any file you would like to execute on a shift+DBlClick. Once selected the adjacent text field will be automatically filled with the chosen path and file.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnOpenFile.hWnd, "Clicking on this button will cause a file explorer window to appear allowing you to select any file you would like to execute on a shift+DBlClick. Once selected the adjacent text field will be automatically filled with the chosen path and file.", _
                   TTIconInfo, "Help on the shift+DBlClick File Explorer Button", , , , True
 End Sub
 
 Private Sub btnPrefsFont_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnPrefsFont.hWnd, "This is the font selector button, if you click it the font selection window will pop up for you to select your chosen font. Centurion Light SF is a good one and my personal favourite. When resizing the form (drag bottom right) the font size will change in relation to form height. The base font determines the initial size, the resulting resized font will dynamically change. ", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnPrefsFont.hWnd, "This is the font selector button, if you click it the font selection window will pop up for you to select your chosen font. Centurion Light SF is a good one and my personal favourite. When resizing the form (drag bottom right) the font size will change in relation to form height. The base font determines the initial size, the resulting resized font will dynamically change. ", _
                   TTIconInfo, "Help on Setting the Font Selector Button", , , , True
 End Sub
 
 Private Sub btnSave_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnSave.hWnd, "Save the changes you have made to the preferences", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnSave.hWnd, "Save the changes you have made to the preferences", _
                   TTIconInfo, "Help on the Save Buttton", , , , True
 End Sub
 
 Private Sub btnUpdate_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip btnUpdate.hWnd, "Here you can able to download a new version of the program from github, when you click the button it will open a browser window and take you to the github page.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip btnUpdate.hWnd, "Here you can able to download a new version of the program from github, when you click the button it will open a browser window and take you to the github page.", _
                   TTIconInfo, "Help on the Update Buttton", , , , True
 End Sub
 
 
 Private Sub chkDpiAwareness_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkDpiAwareness.hWnd, "Check here to make the program DPI aware. NOT required on small to medium screens that are less than 1920 bytes wide. Try it and see which suits your system. RESTART required.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkDpiAwareness.hWnd, "Check here to make the program DPI aware. NOT required on small to medium screens that are less than 1920 bytes wide. Try it and see which suits your system. RESTART required.", _
                   TTIconInfo, "Help on DPI Awareness Mode", , , , True
 End Sub
 
 
 
 Private Sub chkEnableSounds_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkEnableSounds.hWnd, "Check this box to enable or disable all of the sounds used during any animation on the main steampunk GUI, as well as all other chimes, tick sounds &c.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkEnableSounds.hWnd, "Check this box to enable or disable all of the sounds used during any animation on the main steampunk GUI, as well as all other chimes, tick sounds &c.", _
                   TTIconInfo, "Help on Enabling/Disabling Sounds", , , , True
 End Sub
 
 
 
 Private Sub chkGenStartup_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkGenStartup.hWnd, "Check this box to enable the automatic start of the program when Windows is started.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkGenStartup.hWnd, "Check this box to enable the automatic start of the program when Windows is started.", _
                   TTIconInfo, "Help on the Widget Automatic Start Toggle", , , , True
 End Sub
 
 Private Sub chkIgnoreMouse_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkIgnoreMouse.hWnd, "Checking this box causes the program to ignore all mouse events. A strange option, a left-over from the Yahoo Widgets days that offered this additional option. Replicated here as a homage to the old widget platform.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkIgnoreMouse.hWnd, "Checking this box causes the program to ignore all mouse events. A strange option, a left-over from the Yahoo Widgets days that offered this additional option. Replicated here as a homage to the old widget platform.", _
                   TTIconInfo, "Help on the Ignore Mouse button", , , , True
 End Sub
 
 
 Private Sub chkFormVisible_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkFormVisible.hWnd, "Checking this box makes the underlying form visible. This only helps when developing/debugging. Requires a restart.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkFormVisible.hWnd, "Checking this box makes the underlying form visible. This only helps when developing/debugging. Requires a restart.", _
                   TTIconInfo, "Help on the Form Visible button", , , , True
 End Sub
 
 
 Private Sub chkPreventDragging_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkPreventDragging.hWnd, "Checking this box causes the program to lock in place and ignore all attempts to move it with the mouse. " & vbCrLf & vbCrLf & _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkPreventDragging.hWnd, "Checking this box causes the program to lock in place and ignore all attempts to move it with the mouse. " & vbCrLf & vbCrLf & _
         "The widget can be locked into a certain position in either landscape/portrait mode, ensuring that the widget always appears exactly where you want it to.  " & vbCrLf & vbCrLf & _
         "Using the fields adjacent, you can assign a default x/y position for both Landscape or Portrait mode.  " & vbCrLf & vbCrLf & _
         "When the widget is locked in place (using the Widget Position Locked option in the Window Tab), this value is set automatically.  " & vbCrLf & vbCrLf & _
@@ -5231,12 +5231,12 @@ Private Sub chkPreventDragging_MouseMove(Button As Integer, Shift As Integer, x 
 End Sub
 
 Private Sub chkShowHelp_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkShowHelp.hWnd, "Checking this box causes the rather attractive help canvas to appear every time the widget is started.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkShowHelp.hWnd, "Checking this box causes the rather attractive help canvas to appear every time the widget is started.", _
                   TTIconInfo, "Help on the Ignore Mouse option", , , , True
 End Sub
 
 Private Sub chkShowTaskbar_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkShowTaskbar.hWnd, "Check the box to show the widget in the Windows taskbar. A typical user may have multiple desktop widgets and it makes no sense to fill the taskbar with taskbar entries, this option allows you to enable a single one or two at your whim.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkShowTaskbar.hWnd, "Check the box to show the widget in the Windows taskbar. A typical user may have multiple desktop widgets and it makes no sense to fill the taskbar with taskbar entries, this option allows you to enable a single one or two at your whim.", _
                   TTIconInfo, "Help on the Showing Entries in the Taskbar", , , , True
 End Sub
 
@@ -5244,66 +5244,66 @@ End Sub
 
 
 Private Sub chkWidgetFunctions_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkWidgetFunctions.hWnd, "When checked this box enables this widget's functionality. Any adjustment takes place instantly.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkWidgetFunctions.hWnd, "When checked this box enables this widget's functionality. Any adjustment takes place instantly.", _
                   TTIconInfo, "Help on the Widget Function Toggle", , , , True
 End Sub
 
 Private Sub chkWidgetHidden_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip chkWidgetHidden.hWnd, "Checking this box causes the program to hide for a certain number of minutes. More useful from the widget's right click menu where you can hide the widget at will. Seemingly, a strange option, a left-over from the Yahoo Widgets days that offered this additional option. Replicated here as a homage to the old widget platform.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip chkWidgetHidden.hWnd, "Checking this box causes the program to hide for a certain number of minutes. More useful from the widget's right click menu where you can hide the widget at will. Seemingly, a strange option, a left-over from the Yahoo Widgets days that offered this additional option. Replicated here as a homage to the old widget platform.", _
                   TTIconInfo, "Help on the Hidden option", , , , True
 End Sub
 Private Sub fraAbout_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
     fraScrollbarCover.Visible = True
-    If gblPrefsTooltips = "0" Then CreateToolTip fraAbout.hWnd, "The About tab tells you all about this program and its creation using " & gblCodingEnvironment & ".", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraAbout.hWnd, "The About tab tells you all about this program and its creation using " & gblCodingEnvironment & ".", _
                   TTIconInfo, "Help on the About Tab", , , , True
 End Sub
 Private Sub fraConfigInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraConfigInner.hWnd, "The configuration panel is the location for optional configuration items. These items change how the widget operates, configure them to suit your needs and your mode of operation.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraConfigInner.hWnd, "The configuration panel is the location for optional configuration items. These items change how the widget operates, configure them to suit your needs and your mode of operation.", _
                   TTIconInfo, "Help on Configuration", , , , True
 End Sub
 Private Sub fraConfig_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraConfig.hWnd, "The configuration panel is the location for important configuration items. These items change how the widget operates, configure them to suit your needs and your mode of operation.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraConfig.hWnd, "The configuration panel is the location for important configuration items. These items change how the widget operates, configure them to suit your needs and your mode of operation.", _
                   TTIconInfo, "Help on Configuration", , , , True
 End Sub
 Private Sub fraDevelopment_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraDevelopment.hWnd, "This tab contains elements that will assist in debugging and developing this program further. ", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraDevelopment.hWnd, "This tab contains elements that will assist in debugging and developing this program further. ", _
                   TTIconInfo, "Help on the Development Tab", , , , True
 End Sub
 'Private Sub fraDefaultVB6Editor_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
 '    lblGitHub.ForeColor = &H80000012
 'End Sub
 Private Sub fraDevelopmentInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraDevelopmentInner.hWnd, "This tab contains elements that will assist in debugging and developing this program further. ", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraDevelopmentInner.hWnd, "This tab contains elements that will assist in debugging and developing this program further. ", _
                   TTIconInfo, "Help on the Development Tab", , , , True
 
 End Sub
 Private Sub fraFonts_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraFonts.hWnd, "This tab allows you to set a specific font for the preferences only as there are no textual elements in the main program. We suggest Centurion Light SF at 8pt, which you will find bundled in the gbl program folder. Choose a small 8pt font for each.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraFonts.hWnd, "This tab allows you to set a specific font for the preferences only as there are no textual elements in the main program. We suggest Centurion Light SF at 8pt, which you will find bundled in the gbl program folder. Choose a small 8pt font for each.", _
                   TTIconInfo, "Help on Setting the Fonts", , , , True
 End Sub
 
 Private Sub fraFontsInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraFontsInner.hWnd, "This tab allows you to set a specific font for the preferences only as there are no textual elements in the main program. We suggest Centurion Light SF at 8pt, which you will find bundled in the gbl program folder. Choose a small 8pt font for each.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraFontsInner.hWnd, "This tab allows you to set a specific font for the preferences only as there are no textual elements in the main program. We suggest Centurion Light SF at 8pt, which you will find bundled in the gbl program folder. Choose a small 8pt font for each.", _
                   TTIconInfo, "Help on Setting the Fonts", , , , True
 End Sub
 
 
 Private Sub fraGeneral_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraGeneral.hWnd, "The General Panel contains the most important user-configurable items required for the program to operate correctly.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraGeneral.hWnd, "The General Panel contains the most important user-configurable items required for the program to operate correctly.", _
                   TTIconInfo, "Help on Essential Configuration", , , , True
 End Sub
 
 Private Sub fraGeneralInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraGeneralInner.hWnd, "The General Panel contains the most important user-configurable items required for the program to operate correctly.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraGeneralInner.hWnd, "The General Panel contains the most important user-configurable items required for the program to operate correctly.", _
                   TTIconInfo, "Help on Essential Configuration", , , , True
 End Sub
 
 Private Sub fraPosition_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-     If gblPrefsTooltips = "0" Then CreateToolTip fraPosition.hWnd, "This tab allows you to determine the X and Y positioning of your widget in landscape and portrait screen modes. Best left well alone unless you use Windows on a tablet.", _
+     If gsPrefsTooltips = "0" Then CreateToolTip fraPosition.hWnd, "This tab allows you to determine the X and Y positioning of your widget in landscape and portrait screen modes. Best left well alone unless you use Windows on a tablet.", _
                   TTIconInfo, "Help on Tablet Positioning", , , , True
 End Sub
 Private Sub fraPositionInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraPositionInner.hWnd, "This tab allows you to determine the X and Y positioning of your widget in landscape and portrait screen modes. Best left well alone unless you use Windows on a tablet.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraPositionInner.hWnd, "This tab allows you to determine the X and Y positioning of your widget in landscape and portrait screen modes. Best left well alone unless you use Windows on a tablet.", _
                   TTIconInfo, "Help on Tablet Positioning", , , , True
 End Sub
 
@@ -5312,55 +5312,55 @@ Private Sub fraScrollbarCover_MouseMove(Button As Integer, Shift As Integer, x A
 
 End Sub
 Private Sub fraSounds_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
- If gblPrefsTooltips = "0" Then CreateToolTip fraSounds.hWnd, "The sound panel allows you to configure the sounds that occur within gbl. Some of the animations have associated sounds, you can control these here..", _
+ If gsPrefsTooltips = "0" Then CreateToolTip fraSounds.hWnd, "The sound panel allows you to configure the sounds that occur within gbl. Some of the animations have associated sounds, you can control these here..", _
                   TTIconInfo, "Help on Configuring Sounds", , , , True
 End Sub
 Private Sub fraSoundsInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-     If gblPrefsTooltips = "0" Then CreateToolTip fraSoundsInner.hWnd, "The sound panel allows you to configure the sounds that occur within gbl. Some of the animations have associated sounds, you can control these here..", _
+     If gsPrefsTooltips = "0" Then CreateToolTip fraSoundsInner.hWnd, "The sound panel allows you to configure the sounds that occur within gbl. Some of the animations have associated sounds, you can control these here..", _
                   TTIconInfo, "Help on Configuring Sounds", , , , True
 End Sub
 Private Sub fraWindow_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-     If gblPrefsTooltips = "0" Then CreateToolTip fraWindow.hWnd, "The Opacity and Window Level of the program are rather strange characteristics to change in a Windows program, however this widget is a copy of a Yahoo Widget of the same name. All widgets have similar window tab options including the capability to change the opacity and window level. Whether these options are useful to you or anyone is a moot point but as this tool aims to replicate the YWE version functionality it has been reproduced here. It is here as more of an experiment as to how to implement a feature, one carried over from the Yahoo Widget (javascript) version of this program.", _
+     If gsPrefsTooltips = "0" Then CreateToolTip fraWindow.hWnd, "The Opacity and Window Level of the program are rather strange characteristics to change in a Windows program, however this widget is a copy of a Yahoo Widget of the same name. All widgets have similar window tab options including the capability to change the opacity and window level. Whether these options are useful to you or anyone is a moot point but as this tool aims to replicate the YWE version functionality it has been reproduced here. It is here as more of an experiment as to how to implement a feature, one carried over from the Yahoo Widget (javascript) version of this program.", _
                   TTIconInfo, "Help on YWE Quirk Mode Options", , , , True
 End Sub
 Private Sub fraWindowInner_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-     If gblPrefsTooltips = "0" Then CreateToolTip fraWindowInner.hWnd, "The Opacity and Window Level of the program are rather strange characteristics to change in a Windows program, however this widget is a copy of a Yahoo Widget of the same name. All widgets have similar window tab options including the capability to change the opacity and window level. Whether these options are useful to you or anyone is a moot point but as this tool aims to replicate the YWE version functionality it has been reproduced here. It is here as more of an experiment as to how to implement a feature, one carried over from the Yahoo Widget (javascript) version of this program.", _
+     If gsPrefsTooltips = "0" Then CreateToolTip fraWindowInner.hWnd, "The Opacity and Window Level of the program are rather strange characteristics to change in a Windows program, however this widget is a copy of a Yahoo Widget of the same name. All widgets have similar window tab options including the capability to change the opacity and window level. Whether these options are useful to you or anyone is a moot point but as this tool aims to replicate the YWE version functionality it has been reproduced here. It is here as more of an experiment as to how to implement a feature, one carried over from the Yahoo Widget (javascript) version of this program.", _
                   TTIconInfo, "Help on YWE Quirk Mode Options", , , , True
 End Sub
 
 
 Private Sub fraGeneralButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraGeneralButton.hWnd, "Clicking on the General icon reveals the General Tab where the essential items can be configured, alarms, startup &c.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraGeneralButton.hWnd, "Clicking on the General icon reveals the General Tab where the essential items can be configured, alarms, startup &c.", _
                   TTIconInfo, "Help on the General Tab Icon", , , , True
 End Sub
 
 Private Sub fraConfigButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraConfigButton.hWnd, "Clicking on the Config icon reveals the Configuration Tab where the optional items can be configured, DPI, tooltips &c.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraConfigButton.hWnd, "Clicking on the Config icon reveals the Configuration Tab where the optional items can be configured, DPI, tooltips &c.", _
                   TTIconInfo, "Help on the Configuration Tab Icon", , , , True
 End Sub
 
 Private Sub fraFontsButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraFontsButton.hWnd, "Clicking on the Fonts icon reveals the Fonts Tab where the font related items can be configured, size, type, popups &c.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraFontsButton.hWnd, "Clicking on the Fonts icon reveals the Fonts Tab where the font related items can be configured, size, type, popups &c.", _
                   TTIconInfo, "Help on the Font Tab Icon", , , , True
 End Sub
 Private Sub fraSoundsButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraSoundsButton.hWnd, "Clicking on the Sounds icon reveals the Sounds Tab where sound related items can be configured, volume, type &c.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraSoundsButton.hWnd, "Clicking on the Sounds icon reveals the Sounds Tab where sound related items can be configured, volume, type &c.", _
                   TTIconInfo, "Help on the Sounds Tab Icon", , , , True
 End Sub
 Private Sub fraPositionButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraPositionButton.hWnd, "Clicking on the Position icon reveals the Position Tab where items related to Positioning can be configured, aspect ratios, landscape, &c.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraPositionButton.hWnd, "Clicking on the Position icon reveals the Position Tab where items related to Positioning can be configured, aspect ratios, landscape, &c.", _
                   TTIconInfo, "Help on the Position Tab Icon", , , , True
 End Sub
 Private Sub fraDevelopmentButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraDevelopmentButton.hWnd, "Clicking on the Development icon reveals the Development Tab where items relating to Development can be configured, debug, VBP location, &c.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraDevelopmentButton.hWnd, "Clicking on the Development icon reveals the Development Tab where items relating to Development can be configured, debug, VBP location, &c.", _
                   TTIconInfo, "Help on the Development Tab Icon", , , , True
 End Sub
 Private Sub fraWindowButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraWindowButton.hWnd, "Clicking on the Window icon reveals the Window Tab where items relating to window sizing and layering can be configured &c.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraWindowButton.hWnd, "Clicking on the Window icon reveals the Window Tab where items relating to window sizing and layering can be configured &c.", _
                   TTIconInfo, "Help on the Window Tab Icon", , , , True
 End Sub
 Private Sub fraAboutButton_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip fraAboutButton.hWnd, "Clicking on the About icon reveals the About Tab where information about this desktop widget can be revealed.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip fraAboutButton.hWnd, "Clicking on the About icon reveals the About Tab where information about this desktop widget can be revealed.", _
                   TTIconInfo, "Help on the About Tab Icon", , , , True
 End Sub
 Private Sub lblGitHub_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -5379,7 +5379,7 @@ Private Sub optPrefsTooltips_MouseMove(Index As Integer, Button As Integer, Shif
 
     On Error GoTo optPrefsTooltips_MouseMove_Error
 
-    If gblPrefsTooltips = "0" Then
+    If gsPrefsTooltips = "0" Then
         If Index = 0 Then
             thisToolTip = "This setting enables the balloon tooltips for elements within the Steampunk GUI. These tooltips are multi-line and in general more attractive than standard windows style tooltips, note that their font size will match the Windows system font size."
             CreateToolTip optPrefsTooltips(Index).hWnd, thisToolTip, _
@@ -5404,12 +5404,12 @@ optPrefsTooltips_MouseMove_Error:
 End Sub
 
 Private Sub sliWidgetSize_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip sliWidgetSize.hWnd, "Adjust to a percentage of the original size. Any adjustment in size made here takes place instantly (you can also use Ctrl+Mousewheel when hovering over the widget itself).", _
+    If gsPrefsTooltips = "0" Then CreateToolTip sliWidgetSize.hWnd, "Adjust to a percentage of the original size. Any adjustment in size made here takes place instantly (you can also use Ctrl+Mousewheel when hovering over the widget itself).", _
                   TTIconInfo, "Help on the Size sliSkewDegrees", , , , True
 End Sub
 
 Private Sub sliOpacity_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip sliOpacity.hWnd, "Sliding this causes the program's opacity to change from solidly opaque to fully transparent or some way in-between. Seemingly, a strange option for a windows program, a useful left-over from the Yahoo Widgets days that offered this additional option. Replicated here as a homage to the old widget platform.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip sliOpacity.hWnd, "Sliding this causes the program's opacity to change from solidly opaque to fully transparent or some way in-between. Seemingly, a strange option for a windows program, a useful left-over from the Yahoo Widgets days that offered this additional option. Replicated here as a homage to the old widget platform.", _
                   TTIconInfo, "Help on the Opacity sliSkewDegrees", , , , True
 
 End Sub
@@ -5420,47 +5420,47 @@ End Sub
 
 
 Private Sub txtDblClickCommand_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtDblClickCommand.hWnd, "Field to hold the any double click command that you have assigned to this widget. For example: taskmgr or %systemroot%\syswow64\ncpa.cpl", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtDblClickCommand.hWnd, "Field to hold the any double click command that you have assigned to this widget. For example: taskmgr or %systemroot%\syswow64\ncpa.cpl", _
                   TTIconInfo, "Help on the Double Click Command", , , , True
 End Sub
 
 Private Sub txtDefaultEditor_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtDefaultEditor.hWnd, "Field to hold the path to a Visual Basic Project (VBP) file you would like to execute on a right click menu, edit option, if you select the adjacent button a file explorer will appear allowing you to select the VBP file, this field is automatically filled with the chosen file.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtDefaultEditor.hWnd, "Field to hold the path to a Visual Basic Project (VBP) file you would like to execute on a right click menu, edit option, if you select the adjacent button a file explorer will appear allowing you to select the VBP file, this field is automatically filled with the chosen file.", _
                   TTIconInfo, "Help on the Default Editor Field", , , , True
 End Sub
 
 Private Sub txtDisplayScreenFont_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtDisplayScreenFont.hWnd, "This is a read-only text box. It displays the current font - as set when you click the font selector button. This field is in operation for informational purposes only. When resizing the main widget (CTRL+ mouse scroll wheel) the font size will change in relation to widget size. The base font determines the initial size, the resulting resized font will dynamically change. My preferred font for the display screen is Courier New at 6pt size.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtDisplayScreenFont.hWnd, "This is a read-only text box. It displays the current font - as set when you click the font selector button. This field is in operation for informational purposes only. When resizing the main widget (CTRL+ mouse scroll wheel) the font size will change in relation to widget size. The base font determines the initial size, the resulting resized font will dynamically change. My preferred font for the display screen is Courier New at 6pt size.", _
                   TTIconInfo, "Help on the Display Screen Font", , , , True
 End Sub
 
 Private Sub txtDisplayScreenFontSize_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtDisplayScreenFontSize.hWnd, "This is a read-only text box. It displays the current base font size as set when dynamic form resizing is enabled. The adjacent text box will display the automatically resized font currently in operation, for informational purposes only.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtDisplayScreenFontSize.hWnd, "This is a read-only text box. It displays the current base font size as set when dynamic form resizing is enabled. The adjacent text box will display the automatically resized font currently in operation, for informational purposes only.", _
                   TTIconInfo, "Help on the Base Font Size for Display Screen", , , , True
 End Sub
 
 Private Sub txtLandscapeHoffset_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtLandscapeHoffset.hWnd, "Field to hold the horizontal offset for the widget position in landscape mode. When you lock the widget using the lock button above, this field is automatically filled.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtLandscapeHoffset.hWnd, "Field to hold the horizontal offset for the widget position in landscape mode. When you lock the widget using the lock button above, this field is automatically filled.", _
                   TTIconInfo, "Help on the Landscape X Horizontal Field", , , , True
 End Sub
 
 Private Sub txtLandscapeVoffset_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtLandscapeVoffset.hWnd, "Field to hold the vertical offset for the widget position in landscape mode. When you lock the widget using the lock button above, this field is automatically filled.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtLandscapeVoffset.hWnd, "Field to hold the vertical offset for the widget position in landscape mode. When you lock the widget using the lock button above, this field is automatically filled.", _
                   TTIconInfo, "Help on the Landscape Y Vertical Field", , , , True
 End Sub
 
 Private Sub txtOpenFile_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtOpenFile.hWnd, "Field to hold the path to a file you would like to execute on a shift+DBlClick, if you select the adjacent button a file explorer will appear allowing you to select any file, this field is automatically filled with the chosen file.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtOpenFile.hWnd, "Field to hold the path to a file you would like to execute on a shift+DBlClick, if you select the adjacent button a file explorer will appear allowing you to select any file, this field is automatically filled with the chosen file.", _
                   TTIconInfo, "Help on the shift+DBlClick Field", , , , True
 End Sub
 
 Private Sub txtPortraitHoffset_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtPortraitHoffset.hWnd, "Field to hold the horizontal offset for the widget position in Portrait mode. When you lock the widget using the lock button above, this field is automatically filled.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtPortraitHoffset.hWnd, "Field to hold the horizontal offset for the widget position in Portrait mode. When you lock the widget using the lock button above, this field is automatically filled.", _
                   TTIconInfo, "Help on the Portrait X Horizontal Field", , , , True
 End Sub
 
 Private Sub txtPortraitYoffset_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If gblPrefsTooltips = "0" Then CreateToolTip txtPortraitYoffset.hWnd, "Field to hold the vertical offset for the widget position in Portrait mode. When you lock the widget using the lock button above, this field is automatically filled.", _
+    If gsPrefsTooltips = "0" Then CreateToolTip txtPortraitYoffset.hWnd, "Field to hold the vertical offset for the widget position in Portrait mode. When you lock the widget using the lock button above, this field is automatically filled.", _
                   TTIconInfo, "Help on the Portrait Y Vertical Field", , , , True
 End Sub
 
@@ -5674,7 +5674,7 @@ Private Sub lblGitHub_dblClick()
     
     On Error GoTo lblGitHub_dblClick_Error
     
-    If gblWidgetFunctions = "0" Or gblIgnoreMouse = "1" Then Exit Sub
+    If gsWidgetFunctions = "0" Or gblIgnoreMouse = "1" Then Exit Sub
 
     answer = vbYes
     answerMsg = "This option opens a browser window and take you straight to Github. Proceed?"
@@ -6507,7 +6507,7 @@ Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName
     ' Get the form's current scale factors.
     y_scale = Me.ScaleHeight / gblPrefsStartHeight
     
-    If gblDpiAwareness = "1" Then
+    If gsDpiAwareness = "1" Then
         btnHelp.Top = fraGeneral.Top + fraGeneral.Height + (100 * y_scale)
     Else
         btnHelp.Top = thisFraName.Top + thisFraName.Height + (200 * y_scale)
@@ -6538,7 +6538,7 @@ Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName
         widgetPrefs.Height = pvtLastFormHeight
     End If
     
-    If gblDpiAwareness = "0" Then
+    If gsDpiAwareness = "0" Then
         If thisTabName = "about" Then
             lblAsterix.Visible = False
             chkEnableResizing.Visible = True
@@ -7108,7 +7108,7 @@ Private Sub setframeHeights()
         fraDevelopment.Width = fraAbout.Width
         fraWindow.Width = fraAbout.Width
     
-        'If gblDpiAwareness = "1" Then
+        'If gsDpiAwareness = "1" Then
             ' save the initial positions of ALL the controls on the prefs form
             Call SaveSizes(widgetPrefs, prefsControlPositions(), gblPrefsStartWidth, gblPrefsStartHeight)
         'End If

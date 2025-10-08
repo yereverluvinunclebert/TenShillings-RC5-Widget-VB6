@@ -452,14 +452,14 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
         Else
             Me.Zoom = Me.Zoom + 0.02 * LineOffset
         End If
-        gblWidgetSize = CStr(TenShillingsWidget.Zoom * 100) ' store the value dynamically
-        sPutINISetting "Software\TenShillings", "widgetSize", gblWidgetSize, gblSettingsFile
+        gsWidgetSize = CStr(TenShillingsWidget.Zoom * 100) ' store the value dynamically
+        sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gblSettingsFile
         
         ' saves the current ratios for the RC form
         Call saveRCFormCurrentSizeRatios
         
         If widgetPrefs.IsVisible = True Then
-            widgetPrefs.sliWidgetSize.Value = Val(gblWidgetSize)
+            widgetPrefs.sliWidgetSize.Value = Val(gsWidgetSize)
         End If
         W.Refresh
         
@@ -469,11 +469,11 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
         If SkewDegrees > 360 Then SkewDegrees = SkewDegrees - 360
         If SkewDegrees < 0 Then SkewDegrees = SkewDegrees + 360
          
-        gblSkewDegrees = CStr(TenShillingsWidget.SkewDegrees) ' store the value dynamically
-        sPutINISetting "Software\TenShillings", "skewDegrees", gblSkewDegrees, gblSettingsFile
+        gsSkewDegrees = CStr(TenShillingsWidget.SkewDegrees) ' store the value dynamically
+        sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gblSettingsFile
         
         If widgetPrefs.IsVisible = True Then
-            widgetPrefs.sliSkewDegrees.Value = Val(gblSkewDegrees)
+            widgetPrefs.sliSkewDegrees.Value = Val(gsSkewDegrees)
         End If
     End Select
 

@@ -392,7 +392,7 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal dx As Single, ByVal dy As Sing
 
     W.SelectFontSettingsInto CC
     
-    If gblDpiAwareness = "0" Then
+    If gsDpiAwareness = "0" Then
         CC.DrawText 330, -20, dx, dy - 275, gblCodingEnvironment & " " & gblRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
     Else
         CC.DrawText 330, 0, dx, dy - 1050, gblCodingEnvironment & " " & gblRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
