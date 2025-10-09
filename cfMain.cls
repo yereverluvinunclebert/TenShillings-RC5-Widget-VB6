@@ -32,11 +32,6 @@ Attribute TenShillingsForm.VB_VarHelpID = -1
 
 Public FX As Long   ' available externally, to allow the gaugeForm to be moved, need to add set/let for these public vars
 Public FY As Long
-'Public FZ As Single
-
-'Public licenceFormX As Long
-'Public licenceFormY As Long
-' Public licenceFormZ As Single
 
 Private WithEvents btnAccept As cwButton
 Attribute btnAccept.VB_VarHelpID = -1
@@ -44,7 +39,7 @@ Private WithEvents btnDecline As cwButton
 Attribute btnDecline.VB_VarHelpID = -1
 Private WithEvents textBox As cwTextBox
 Attribute textBox.VB_VarHelpID = -1
-'Private lblDeclineOrNot As cwLabel
+
  
 
 '---------------------------------------------------------------------------------------

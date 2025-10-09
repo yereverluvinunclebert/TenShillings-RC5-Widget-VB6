@@ -23,18 +23,7 @@ Private Const SWP_NOSIZE  As Long = &H1
 Public Const OnTopFlags  As Long = SWP_NOMOVE Or SWP_NOSIZE
 '------------------------------------------------------ ENDS
 
-
 '------------------------------------------------------ STARTS
-' to set the full window Opacity
-'Private Declare Function SetLayeredWindowAttributes Lib "user32" (ByVal hWnd As Long, ByVal crKey As Long, ByVal bAlpha As Byte, ByVal dwFlags As Long) As Long
-'Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long) As Long
-'Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
-'
-'Private Const WS_EX_LAYERED  As Long = &H80000
-'Private Const GWL_EXSTYLE  As Long = (-20)
-'Private Const LWA_COLORKEY  As Long = &H1       'to transparent
-'Private Const LWA_ALPHA  As Long = &H2          'to semi transparent
-'------------------------------------------------------ ENDS
 
 ' class objects instantiated
 Public fMain As New cfMain
@@ -45,6 +34,9 @@ Public TenShillingsWidget As cwTenShillings
 
 ' any other private vars for public properties
 Private m_sgsWidgetName As String
+'------------------------------------------------------ ENDS
+
+
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Main
@@ -78,7 +70,6 @@ End Sub
 Public Sub mainRoutine(ByVal restart As Boolean)
 
     Dim extractCommand As String: extractCommand = vbNullString
-    'Dim thisPSDFullPath As String: thisPSDFullPath = vbNullString
     Dim licenceState As Integer: licenceState = 0
 
     On Error GoTo main_routine_Error
@@ -88,7 +79,6 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     
     gbStartupFlg = True
     gsWidgetName = "TenShillings Widget"
-    'thisPSDFullPath = App.Path & "\Res\TenShillings Widget VB6.psd"
     
     extractCommand = Command$ ' capture any parameter passed, remove if a soft reload
     If restart = True Then extractCommand = vbNullString
@@ -331,19 +321,16 @@ Private Sub initialiseGlobalVars()
     ' config
     gsWidgetTooltips = vbNullString
     gsPrefsTooltips = vbNullString
-    'gsEnablePrefsTooltips = vbNullString
     
     gsShowTaskbar = vbNullString
     gsShowHelp = vbNullString
-'    gsTogglePendulum = vbNullString
-'    gs24HourWidgetMode = vbNullString
+
     
     gsDpiAwareness = vbNullString
     
     gsWidgetSize = vbNullString
     gsSkewDegrees = vbNullString
     gsScrollWheelDirection = vbNullString
-'    gsNumericDisplayRotation = vbNullString
     
     ' position
     gsAspectHidden = vbNullString
@@ -359,10 +346,6 @@ Private Sub initialiseGlobalVars()
     
     ' sounds
     gsEnableSounds = vbNullString
-'    gsEnableTicks = vbNullString
-'    gsEnableChimes = vbNullString
-'    gsEnableAlarms = vbNullString
-'    gsVolumeBoost = vbNullString
     
     ' development
     gsDebug = vbNullString
@@ -450,11 +433,8 @@ Private Sub initialiseGlobalVars()
     giDebugFlg = 0
     giMinutesToHide = 0
     gsAspectRatio = vbNullString
-'    gtOldSettingsModificationTime = #1/1/2000 12:00:00 PM#
     gsCodingEnvironment = vbNullString
     gsRichClientEnvironment = vbNullString
-
-    'gsTimeAreaClicked = vbNullString
     
    On Error GoTo 0
    Exit Sub

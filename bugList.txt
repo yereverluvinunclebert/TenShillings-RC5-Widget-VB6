@@ -48,21 +48,22 @@ removed manifest for TB
 
 ' module1.bas globals renamed, eg. gbl to gblS gblL &c and tested.
 ' other modules globals renamed, eg. gbl to gblS gblL &c and tested.
+' module1.bas globals to properties? 
+
+' r/h and bottom gutter width resolved
+' removed lots of redundant commented out code
+' remove ltrim$ where not needed
+' added cstr() to some numeric to string coercions
+
 
 TODO
 ====
 
-' module1.bas globals to properties?  WIP
-'   avoids breaking encapsulation
-'   allows validation during let
-'   allows addition of logic to provide potential constraint of values during each LET
 
-' update PZ CPU RC5 to same standard
 ' convert latest to TB
 ' TB - test 256 x 256 icon
 
 ' update 10/- RC6 to same standard
-' update PZ CPU RC6 to same standard
 
 ' test the icon sizes on 32bit Win7, XP and ReactOS, find out if 48x48 causes a crash
 ' 32x32 (24 bit)

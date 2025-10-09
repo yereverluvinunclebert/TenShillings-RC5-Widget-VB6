@@ -679,7 +679,7 @@ Public Sub resizeLocateRCFormByMoveToNewMonitor()
                     resizeProportion = (Val(gsWidgetSize) / 100) * resizeProportion
                     
                     fMain.TenShillingsForm.Refresh
-                    TenShillingsWidget.Zoom = (resizeProportion)
+                    TenShillingsWidget.Zoom = resizeProportion
                 End If
             ElseIf LTrim$(gsMultiMonitorResize) = "2" Then
                 ' screenWrite ("Resizing per monitor stored size ")
@@ -692,7 +692,7 @@ Public Sub resizeLocateRCFormByMoveToNewMonitor()
                 End If
                 
                 fMain.TenShillingsForm.Refresh
-                TenShillingsWidget.Zoom = (resizeProportion)
+                TenShillingsWidget.Zoom = resizeProportion
             End If
         End If
     

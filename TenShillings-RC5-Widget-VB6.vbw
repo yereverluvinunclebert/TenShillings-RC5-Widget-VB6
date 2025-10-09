@@ -1,7 +1,7 @@
 modRegFree = 26, 26, 1437, 868, 
 cwTenShillings = 316, 106, 1488, 845, 
 modTooltips = 26, 26, 1397, 802, 
-cwAbout = 130, 130, 1302, 869, Z
+cwAbout = 130, 130, 1302, 869, 
 cfMain = 156, 156, 1328, 895, 
 menuForm = 260, 260, 1432, 999, , 312, 312, 1484, 1051, C
 cwLicence = 364, 0, 1819, 1303, 
@@ -10,7 +10,7 @@ modResize = 50, 0, 1117, 741,
 cwAlphaImg = 104, 104, 1276, 843, 
 modCenter = 260, 260, 1464, 1030, 
 SoundManager = 182, 182, 1443, 958, 
-modMain = 220, 119, 1392, 858, 
+modMain = 220, 119, 1392, 858, Z
 frmTimer = 26, 26, 1198, 765, , 52, 52, 1224, 791, C
 Module1 = 283, 65, 1455, 804, 
 monitorModule = 286, 286, 1458, 1025, 

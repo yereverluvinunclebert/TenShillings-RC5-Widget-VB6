@@ -2072,13 +2072,10 @@ Private Declare Function IsThemeActive Lib "uxtheme" () As Boolean
 ' Private Types for determining prefs sizing
 Private pPrefsDynamicSizingFlg As Boolean
 Private pLastFormHeight As Long
-Private Const pcPrefsFormHeight As Long = 11055
-Private Const pcPrefsFormWidth  As Long = 9090
+Private Const pcPrefsFormHeight As Long = 10750
+Private Const pcPrefsFormWidth  As Long = 8940
 
 Private pPrefsFormResizedByDrag As Boolean
-
-'    gdPrefsStartWidth = 9075
-'    gdPrefsStartHeight = 16450
 '------------------------------------------------------ ENDS
 
 Private pPrefsStartupFlg As Boolean
@@ -2096,10 +2093,8 @@ Private pCmbWidgetLandscapeBalloonTooltip As String
 Private pCmbWidgetPortraitBalloonTooltip As String
 Private pCmbDebugBalloonTooltip As String
 
-
 Private mIsLoaded As Boolean ' property
 Private mWidgetSize As Single   ' property
-
 Private gsConstraintRatio As Double
 
 
@@ -2127,62 +2122,6 @@ btnGithubHome_Click_Error:
 
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure btnGithubHome_Click of Form widgetPrefs"
 End Sub
-
-
-
-
-
-''---------------------------------------------------------------------------------------
-'' Procedure : btnSelectMonitor_Click
-'' Author    : beededea
-'' Date      : 02/05/2023
-'' Purpose   :
-''---------------------------------------------------------------------------------------
-''
-'Private Sub btnSelectMonitor_Click()
-'    Dim retFileName As String: retFileName = vbNullString
-'    Dim answer As VbMsgBoxResult: answer = vbNo
-'    Dim answerMsg As String: answerMsg = vbNullString
-'
-'    On Error GoTo btnSelectMonitor_Click_Error
-'
-'    Call addTargetFile(txtDefaultEditor.Text, retFileName)
-'
-'    If retFileName <> vbNullString Then
-'        txtDefaultEditor.Text = retFileName ' strips the buffered bit, leaving just the filename
-'    End If
-'
-'    If retFileName = vbNullString Then
-'        Exit Sub
-'    End If
-'
-'    If Not fFExists(retFileName) Then
-'        answer = vbYes
-'        answerMsg = "The file doesn't currently exist, do you want me to create the chosen file, " & "   -  are you sure?"
-'        answer = msgBoxA(answerMsg, vbYesNo, "Default Editor Confirmation", False)
-'        If answer = vbNo Then
-'            Exit Sub
-'        End If
-'
-'        'create new
-'        Open retFileName For Output As #1
-'        Close #1
-'    End If
-'
-'    On Error GoTo 0
-'    Exit Sub
-'
-'btnSelectMonitor_Click_Error:
-'
-'    With Err
-'         If .Number <> 0 Then
-'            MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure btnSelectMonitor_Click of Form widgetPrefs"
-'            Resume Next
-'          End If
-'    End With
-'
-'End Sub
-
 
 
 '---------------------------------------------------------------------------------------
@@ -2362,9 +2301,6 @@ End Sub
 
 
 
-
-
-
 '---------------------------------------------------------------------------------------
 ' Procedure : chkShowHelp_Click
 ' Author    : beededea
@@ -2391,9 +2327,6 @@ chkShowHelp_Click_Error:
 End Sub
 
 
-
-
-
 ' ----------------------------------------------------------------
 ' Procedure Name: Form_Initialize
 ' Purpose:
@@ -2418,8 +2351,6 @@ Form_Initialize_Error:
     End Sub
 
 
-
-
 '---------------------------------------------------------------------------------------
 ' Procedure : Form_Load     WidgetPrefs
 ' Author    : beededea
@@ -2431,11 +2362,9 @@ Private Sub Form_Load()
     On Error GoTo Form_Load_Error
     
     Me.Visible = False
-    btnSave.Enabled = False ' disable the save button
     Me.mnuAbout.Caption = "About TenShillings Widget Cairo" & gsRichClientEnvironment & " Cairo " & gsCodingEnvironment & " widget"
 
     pPrefsStartupFlg = True ' this is used to prevent some control initialisations from running code at startup
-    'pPrefsDynamicSizingFlg = False
     IsLoaded = True
     gbWindowLevelWasChanged = False
     gdPrefsStartWidth = pcPrefsFormWidth
@@ -2503,7 +2432,7 @@ Private Sub Form_Load()
     
     ' end the startup by un-setting the start global-ish flag
     pPrefsStartupFlg = False
-    btnSave.Enabled = False
+    btnSave.Enabled = False ' disable the save button
 
    On Error GoTo 0
    Exit Sub
@@ -2634,8 +2563,8 @@ Private Sub setPrefsHeight()
 
     If gsDpiAwareness = "1" Then
         gbPrefsFormResizedInCode = True
-        If gsPrefsPrimaryHeightTwips < glPhysicalScreenHeightTwips Then
-            widgetPrefs.Height = CLng(gsPrefsPrimaryHeightTwips) ' 16450
+        If CLng(gsPrefsPrimaryHeightTwips) < glPhysicalScreenHeightTwips Then
+            widgetPrefs.Height = CLng(gsPrefsPrimaryHeightTwips) ' on first run this also sets the prefs to one third of the screen height (value set in readPrefsPosition)
         Else
             widgetPrefs.Height = glPhysicalScreenHeightTwips - 1000
         End If
@@ -3713,7 +3642,6 @@ Private Sub positionPrefsFramesButtons()
     Dim frameTop As Integer: frameTop = 0
     Dim frameLeft As Integer: frameLeft = 0
     Dim buttonTop As Integer:    buttonTop = 0
-    'Dim currentFrameHeight As Integer: currentFrameHeight = 0
     Dim rightHandAlignment As Long: rightHandAlignment = 0
     Dim leftHandGutterWidth As Long: leftHandGutterWidth = 0
        
@@ -3729,7 +3657,7 @@ Private Sub positionPrefsFramesButtons()
     frameWidth = rightHandAlignment - frameLeft
     fraScrollbarCover.Left = rightHandAlignment - 690
     
-    'widgetPrefs.Width = rightHandAlignment + leftHandGutterWidth + 75 ' (not quite sure why we need the 75 twips padding) ' this triggers a resize '
+    ' widgetPrefs.Width = rightHandAlignment + leftHandGutterWidth + 75 ' (not quite sure why we need the 75 twips padding) ' this triggers a resize '
      
     ' align the top buttons
     fraGeneralButton.Top = buttonTop
