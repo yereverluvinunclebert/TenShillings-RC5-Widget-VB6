@@ -58,7 +58,7 @@ removed manifest for TB
 ' setup2go
 ' TB - test 256 x 256 icon - does not inherit the icon form a form  - bug raised
 
-' resize controls error when testing on windows 11  messagebox
+' resize controls error when testing on windows 11 messagebox
 ' message box too small
 ' XML generated
 ' installer generated
@@ -67,6 +67,7 @@ removed manifest for TB
 ' update 10/- RC6 TB to same standard and test - does not show background form
 ' RC6 version does not show background  form whereas RC5 and an older RC6 widget does!
 ' Removed unnecessary code, cwAlphaImg.cls and CAIRO_OPERATOR_CLEAR
+' renamed cwOverlay.cls to cwTenshillings.cls
 
 TODO
 ====
