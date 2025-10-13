@@ -215,9 +215,9 @@ Private Sub Form_Resize()
 
     ratio = cMsgBoxAFormHeight / cMsgBoxAFormWidth
     If gsDpiAwareness = "1" Then
-        currentFont = Val(gsPrefsFontSizeHighDPI)
+        currentFont = CLng(gsPrefsFontSizeHighDPI)
     Else
-        currentFont = Val(gsPrefsFontSizeLowDPI)
+        currentFont = CLng(gsPrefsFontSizeLowDPI)
     End If
     
 '    If gblMsgBoxADynamicSizingFlg = True Then
@@ -228,8 +228,8 @@ Private Sub Form_Resize()
 '        Call setMessageIconImagesLight(600)
 '    End If
     
-    gsMessageAHeightTwips = Trim$(CStr(frmMessage.Height))
-    gsMessageAWidthTwips = Trim$(CStr(frmMessage.Width))
+    gsMessageAHeightTwips = CStr(frmMessage.Height)
+    gsMessageAWidthTwips = CStr(frmMessage.Width)
     sPutINISetting "Software\TenShillings", "messageAHeightTwips", gsMessageAHeightTwips, gsSettingsFile
     sPutINISetting "Software\TenShillings", "messageAWidthTwips", gsMessageAWidthTwips, gsSettingsFile
     
@@ -391,7 +391,7 @@ Public Property Let propTitle(ByVal newValue As String)
     If mPropTitle <> newValue Then mPropTitle = newValue Else Exit Property
 
     If mPropTitle = "" Then
-        Me.Caption = "Panzer-Pagefile-Gauge-" & gsCodingEnvironment & " Message."
+        Me.Caption = "TenShillings-" & gsCodingEnvironment & " Message."
     Else
         Me.Caption = mPropTitle
     End If
