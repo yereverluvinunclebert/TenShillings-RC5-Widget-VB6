@@ -23,12 +23,13 @@ Public gMsgBoxAControlPositions() As ControlPositionType
 ' private property declarations replacing globals - see property LET/GETs at end.
 Private m_dgdPrefsStartWidth As Double
 Private m_dgdPrefsStartHeight As Double
-Private m_dgMsgBoxACurrentWidth As Double
-Private m_dgMsgBoxACurrentHeight As Double
+
+'Private m_dgdMsgBoxACurrentWidth As Double
+'Private m_dgdMsgBoxACurrentHeight As Double
 
 
-'Public gMsgBoxACurrentWidth As Double
-'Public gMsgBoxACurrentHeight As Double
+Public gdMsgBoxACurrentWidth As Double ' don't change this to a property
+Public gdMsgBoxACurrentHeight As Double ' don't change this to a property
 
 '---------------------------------------------------------------------------------------
 ' Procedure : ResizeControls
@@ -230,90 +231,90 @@ gdPrefsStartHeight_Error:
 
 End Property
 
-'---------------------------------------------------------------------------------------
-' Procedure : gMsgBoxACurrentWidth
-' Author    : beededea
-' Date      : 08/10/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
+''---------------------------------------------------------------------------------------
+'' Procedure : gdMsgBoxACurrentWidth
+'' Author    : beededea
+'' Date      : 08/10/2025
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Public Property Get gdMsgBoxACurrentWidth() As Double
 '
-Public Property Get gMsgBoxACurrentWidth() As Double
-
-    On Error GoTo gMsgBoxACurrentWidth_Error
-
-    gMsgBoxACurrentWidth = m_dgMsgBoxACurrentWidth
-
-    On Error GoTo 0
-    Exit Property
-
-gMsgBoxACurrentWidth_Error:
-
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gMsgBoxACurrentWidth of Module modResize"
-
-End Property
-
-'---------------------------------------------------------------------------------------
-' Procedure : gMsgBoxACurrentWidth
-' Author    : beededea
-' Date      : 08/10/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
+'    On Error GoTo gdMsgBoxACurrentWidth_Error
 '
-Public Property Let gMsgBoxACurrentWidth(ByVal dgMsgBoxACurrentWidth As Double)
-
-    On Error GoTo gMsgBoxACurrentWidth_Error
-
-    m_dgMsgBoxACurrentWidth = dgMsgBoxACurrentWidth
-
-    On Error GoTo 0
-    Exit Property
-
-gMsgBoxACurrentWidth_Error:
-
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gMsgBoxACurrentWidth of Module modResize"
-
-End Property
-
-'---------------------------------------------------------------------------------------
-' Procedure : gMsgBoxACurrentHeight
-' Author    : beededea
-' Date      : 08/10/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
+'    gdMsgBoxACurrentWidth = m_dgdMsgBoxACurrentWidth
 '
-Public Property Get gMsgBoxACurrentHeight() As Double
-
-    On Error GoTo gMsgBoxACurrentHeight_Error
-
-    gMsgBoxACurrentHeight = m_dgMsgBoxACurrentHeight
-
-    On Error GoTo 0
-    Exit Property
-
-gMsgBoxACurrentHeight_Error:
-
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gMsgBoxACurrentHeight of Module modResize"
-
-End Property
-
-'---------------------------------------------------------------------------------------
-' Procedure : gMsgBoxACurrentHeight
-' Author    : beededea
-' Date      : 08/10/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
+'    On Error GoTo 0
+'    Exit Property
 '
-Public Property Let gMsgBoxACurrentHeight(ByVal dgMsgBoxACurrentHeight As Double)
-
-    On Error GoTo gMsgBoxACurrentHeight_Error
-
-    m_dgMsgBoxACurrentHeight = dgMsgBoxACurrentHeight
-
-    On Error GoTo 0
-    Exit Property
-
-gMsgBoxACurrentHeight_Error:
-
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gMsgBoxACurrentHeight of Module modResize"
-
-End Property
+'gdMsgBoxACurrentWidth_Error:
+'
+'     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gdMsgBoxACurrentWidth of Module modResize"
+'
+'End Property
+'
+''---------------------------------------------------------------------------------------
+'' Procedure : gdMsgBoxACurrentWidth
+'' Author    : beededea
+'' Date      : 08/10/2025
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Public Property Let gdMsgBoxACurrentWidth(ByVal dgdMsgBoxACurrentWidth As Double)
+'
+'    On Error GoTo gdMsgBoxACurrentWidth_Error
+'
+'    m_dgdMsgBoxACurrentWidth = dgdMsgBoxACurrentWidth
+'
+'    On Error GoTo 0
+'    Exit Property
+'
+'gdMsgBoxACurrentWidth_Error:
+'
+'     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gdMsgBoxACurrentWidth of Module modResize"
+'
+'End Property
+'
+''---------------------------------------------------------------------------------------
+'' Procedure : gdMsgBoxACurrentHeight
+'' Author    : beededea
+'' Date      : 08/10/2025
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Public Property Get gdMsgBoxACurrentHeight() As Double
+'
+'    On Error GoTo gdMsgBoxACurrentHeight_Error
+'
+'    gdMsgBoxACurrentHeight = m_dgdMsgBoxACurrentHeight
+'
+'    On Error GoTo 0
+'    Exit Property
+'
+'gdMsgBoxACurrentHeight_Error:
+'
+'     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gdMsgBoxACurrentHeight of Module modResize"
+'
+'End Property
+'
+''---------------------------------------------------------------------------------------
+'' Procedure : gdMsgBoxACurrentHeight
+'' Author    : beededea
+'' Date      : 08/10/2025
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Public Property Let gdMsgBoxACurrentHeight(ByVal dgdMsgBoxACurrentHeight As Double)
+'
+'    On Error GoTo gdMsgBoxACurrentHeight_Error
+'
+'    m_dgdMsgBoxACurrentHeight = dgdMsgBoxACurrentHeight
+'
+'    On Error GoTo 0
+'    Exit Property
+'
+'gdMsgBoxACurrentHeight_Error:
+'
+'     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gdMsgBoxACurrentHeight of Module modResize"
+'
+'End Property

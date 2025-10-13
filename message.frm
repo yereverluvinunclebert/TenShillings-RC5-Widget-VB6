@@ -169,11 +169,11 @@ Private Sub Form_Load()
     
     If gsMessageAHeightTwips = "" Then gsMessageAHeightTwips = glPhysicalScreenHeightTwips / 5.5
     
-    gMsgBoxACurrentWidth = Val(gsMessageAWidthTwips)
-    gMsgBoxACurrentHeight = Val(gsMessageAHeightTwips)
+    gdMsgBoxACurrentWidth = CDbl(gsMessageAWidthTwips)
+    gdMsgBoxACurrentHeight = CDbl(gsMessageAHeightTwips)
         
     ' save the initial positions of ALL the controls on the msgbox form
-    Call SaveSizes(Me, gMsgBoxAControlPositions(), gMsgBoxACurrentWidth, gMsgBoxACurrentHeight)
+    Call SaveSizes(Me, gMsgBoxAControlPositions(), gdMsgBoxACurrentWidth, gdMsgBoxACurrentHeight)
         
     For Each Ctrl In Me.Controls
          If (TypeOf Ctrl Is CommandButton) Or (TypeOf Ctrl Is textBox) Or (TypeOf Ctrl Is FileListBox) Or (TypeOf Ctrl Is Label) Or (TypeOf Ctrl Is ComboBox) Or (TypeOf Ctrl Is CheckBox) Or (TypeOf Ctrl Is OptionButton) Or (TypeOf Ctrl Is Frame) Or (TypeOf Ctrl Is ListBox) Then
@@ -222,7 +222,7 @@ Private Sub Form_Resize()
     
 '    If gblMsgBoxADynamicSizingFlg = True Then
         Call setMessageIconImagesLight(1920)
-        Call resizeControls(Me, gMsgBoxAControlPositions(), gMsgBoxACurrentWidth, gMsgBoxACurrentHeight, currentFont)
+        Call resizeControls(Me, gMsgBoxAControlPositions(), gdMsgBoxACurrentWidth, gdMsgBoxACurrentHeight, currentFont)
         Me.Width = Me.Height / ratio ' maintain the aspect ratio
 '    Else
 '        Call setMessageIconImagesLight(600)
