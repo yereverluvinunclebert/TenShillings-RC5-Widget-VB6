@@ -60,6 +60,8 @@ removed manifest for TB
 
 ' resize controls error when testing on windows 11  messagebox
 ' message box too small
+' XML generated
+' installer generated
 
 TODO
 ====
