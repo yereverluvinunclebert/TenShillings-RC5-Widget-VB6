@@ -20,11 +20,15 @@ End Type
 Public gcPrefsControlPositions() As ControlPositionType
 Public gMsgBoxAControlPositions() As ControlPositionType
 
+' private property declarations replacing globals - see property LET/GETs at end.
 Private m_dgdPrefsStartWidth As Double
 Private m_dgdPrefsStartHeight As Double
-
 Private m_dgMsgBoxACurrentWidth As Double
 Private m_dgMsgBoxACurrentHeight As Double
+
+
+'Public gMsgBoxACurrentWidth As Double
+'Public gMsgBoxACurrentHeight As Double
 
 '---------------------------------------------------------------------------------------
 ' Procedure : ResizeControls
@@ -62,6 +66,8 @@ Public Sub resizeControls(ByRef thisForm As Form, ByRef m_ControlPositions() As 
 
                     Ctrl.Refresh
                 Else
+                    Dim a As String
+                    a = Ctrl.Name
                     Ctrl.Left = x_scale * .Left
                     Ctrl.Top = y_scale * .Top
                     Ctrl.Width = x_scale * .Width

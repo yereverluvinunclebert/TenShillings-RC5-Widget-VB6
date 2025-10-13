@@ -408,7 +408,7 @@ Private m_lglMonitorCount As Long
 Private m_lglOldPrefsFormMonitorPrimary As Long
 Private m_lglOldWidgetFormMonitorPrimary As Long
 
-Private m_bgbMsgBoxADynamicSizingFlg As Boolean
+'Private m_bgbMsgBoxADynamicSizingFlg As Boolean
 Private m_bgbPrefsFormResizedInCode As Boolean
 
 ' General variables declared
@@ -445,7 +445,7 @@ Private m_bgbReload As Boolean
 ' General private variables declared
 Private pbDebugMode As Boolean ' .30 DAEB 03/03/2021 frmMain.frm replaced the inIDE function that used a variant to one without
 
-
+'Public gblMsgBoxADynamicSizingFlg As Boolean
 
 '---------------------------------------------------------------------------------------
 ' Procedure : fFExists
@@ -573,7 +573,7 @@ Public Sub setDPIaware()
     If gsDpiAwareness = "1" Then
         If Not InIDE Then
             Cairo.SetDPIAwareness ' this way avoids the VB6 IDE shrinking (sadly, VB6 has a high DPI unaware IDE)
-            gbMsgBoxADynamicSizingFlg = True
+            'gbMsgBoxADynamicSizingFlg = True
         End If
     End If
 
@@ -2057,7 +2057,7 @@ End Sub
 ' Procedure : unloadAllForms
 ' Author    : beededea
 ' Date      : 28/06/2023
-' Purpose   : unload all VB6 and RC6 forms
+' Purpose   : unload all VB6 and RichClient forms
 '---------------------------------------------------------------------------------------
 '
 Public Sub unloadAllForms(ByVal endItAll As Boolean)
@@ -2080,7 +2080,7 @@ Public Sub unloadAllForms(ByVal endItAll As Boolean)
     widgetPrefs.tmrPrefsScreenResolution.Enabled = False
     widgetPrefs.tmrWritePositionAndSize.Enabled = False
 
-    'unload the RC6 widgets on the RC6 forms first
+    'unload the RichClient widgets on the RichClient forms first
     
     aboutWidget.Widgets.RemoveAll
     helpWidget.Widgets.RemoveAll
@@ -2093,7 +2093,7 @@ Public Sub unloadAllForms(ByVal endItAll As Boolean)
     Unload frmTimer
     Unload menuForm
 
-    ' RC6's own method for killing forms
+    ' RichClient's own method for killing forms
     
     fMain.aboutForm.Unload
     fMain.helpForm.Unload
@@ -2147,8 +2147,8 @@ Public Sub reloadProgram()
     
     Call unloadAllForms(False) ' unload forms but do not END
     
-    ' this will call the routines as called by sub main() and initialise the program and RELOAD the RC6 forms.
-    Call mainRoutine(True) ' sets the restart flag to avoid repriming the RC6 message pump.
+    ' this will call the routines as called by sub main() and initialise the program and RELOAD the RichClient forms.
+    Call mainRoutine(True) ' sets the restart flag to avoid repriming the RichClient message pump.
 
     On Error GoTo 0
     Exit Sub
@@ -6486,49 +6486,49 @@ glOldWidgetFormMonitorPrimary_Error:
 
 End Property
 
-'---------------------------------------------------------------------------------------
-' Procedure : gbMsgBoxADynamicSizingFlg
-' Author    : beededea
-' Date      : 08/10/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
+''---------------------------------------------------------------------------------------
+'' Procedure : gbMsgBoxADynamicSizingFlg
+'' Author    : beededea
+'' Date      : 08/10/2025
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Public Property Get gbMsgBoxADynamicSizingFlg() As Boolean
 '
-Public Property Get gbMsgBoxADynamicSizingFlg() As Boolean
-
-    On Error GoTo gbMsgBoxADynamicSizingFlg_Error
-
-    gbMsgBoxADynamicSizingFlg = m_bgbMsgBoxADynamicSizingFlg
-
-    On Error GoTo 0
-    Exit Property
-
-gbMsgBoxADynamicSizingFlg_Error:
-
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gbMsgBoxADynamicSizingFlg of Module Module1"
-
-End Property
-
-'---------------------------------------------------------------------------------------
-' Procedure : gbMsgBoxADynamicSizingFlg
-' Author    : beededea
-' Date      : 08/10/2025
-' Purpose   :
-'---------------------------------------------------------------------------------------
+'    On Error GoTo gbMsgBoxADynamicSizingFlg_Error
 '
-Public Property Let gbMsgBoxADynamicSizingFlg(ByVal bgbMsgBoxADynamicSizingFlg As Boolean)
-
-    On Error GoTo gbMsgBoxADynamicSizingFlg_Error
-
-    m_bgbMsgBoxADynamicSizingFlg = bgbMsgBoxADynamicSizingFlg
-
-    On Error GoTo 0
-    Exit Property
-
-gbMsgBoxADynamicSizingFlg_Error:
-
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gbMsgBoxADynamicSizingFlg of Module Module1"
-
-End Property
+'    gbMsgBoxADynamicSizingFlg = m_bgbMsgBoxADynamicSizingFlg
+'
+'    On Error GoTo 0
+'    Exit Property
+'
+'gbMsgBoxADynamicSizingFlg_Error:
+'
+'     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gbMsgBoxADynamicSizingFlg of Module Module1"
+'
+'End Property
+'
+''---------------------------------------------------------------------------------------
+'' Procedure : gbMsgBoxADynamicSizingFlg
+'' Author    : beededea
+'' Date      : 08/10/2025
+'' Purpose   :
+''---------------------------------------------------------------------------------------
+''
+'Public Property Let gbMsgBoxADynamicSizingFlg(ByVal bgbMsgBoxADynamicSizingFlg As Boolean)
+'
+'    On Error GoTo gbMsgBoxADynamicSizingFlg_Error
+'
+'    m_bgbMsgBoxADynamicSizingFlg = bgbMsgBoxADynamicSizingFlg
+'
+'    On Error GoTo 0
+'    Exit Property
+'
+'gbMsgBoxADynamicSizingFlg_Error:
+'
+'     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gbMsgBoxADynamicSizingFlg of Module Module1"
+'
+'End Property
 
 '---------------------------------------------------------------------------------------
 ' Procedure : gbPrefsFormResizedInCode

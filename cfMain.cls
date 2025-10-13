@@ -322,10 +322,10 @@ Public Sub initAndCreateLicenceForm(Optional ByVal Caption As String)
         licenceWidget.Zoom = licenceWidgetZoomValue
     End If
 
-    ' When running in the IDE the RC6 DLLs are required to be registered. If for some reason they become unregistered then
+    ' When running in the IDE the RC DLLs are required to be registered. If for some reason they become unregistered then
     ' the following 'set' commands will generate an error, to handle this we have a temporary error trap for the IDE only.
     
-    If InIDE Then On Error GoTo RC6NotRegistered_Error
+    If InIDE Then On Error GoTo RCNotRegistered_Error
 
     ' add two RC predefined button controls to the licence form
     If gsDpiAwareness = "1" Then
@@ -398,9 +398,9 @@ initAndCreateLicenceForm_Error:
     
     Exit Sub
    
-RC6NotRegistered_Error:
+RCNotRegistered_Error:
     
-    MsgBox "Error in procedure initAndCreateLicenceForm_Error of Class Module cfMain. vbRichClient5.dll is NOT registered, use the registration script to register vbRichClient5.dll."
+    MsgBox "Error in procedure initAndCreateLicenceForm_Error of Class Module cfMain. vbRichClient.dll is NOT registered, use the registration script to register vbRichClient.dll."
 
 End Sub
 '---------------------------------------------------------------------------------------

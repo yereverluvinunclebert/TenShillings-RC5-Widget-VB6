@@ -55,12 +55,14 @@ removed manifest for TB
 ' remove ltrim$ where not needed
 ' added cstr() to some numeric to string coercions
 ' convert latest to TB
+' setup2go
+' TB - test 256 x 256 icon - does not inherit the icon form a form  - bug raised
+
+' resize controls error when testing on windows 11  messagebox
+' message box too small
 
 TODO
 ====
-
-' setup2go
-' TB - test 256 x 256 icon - does not inherit the icon form a form
 
 ' update 10/- RC6 to same standard
 
