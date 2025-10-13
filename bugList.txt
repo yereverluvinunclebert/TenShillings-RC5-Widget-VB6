@@ -62,11 +62,17 @@ removed manifest for TB
 ' message box too small
 ' XML generated
 ' installer generated
+' update 10/- RC6 to same standard
+' update 10/- RC5 TB to same standard and test - all good
+' update 10/- RC6 TB to same standard and test - does not show background form
+' RC6 version does not show background  form whereas RC5 and an older RC6 widget does!
+' Removed unnecessary code, cwAlphaImg.cls and CAIRO_OPERATOR_CLEAR
 
 TODO
 ====
 
-' update 10/- RC6 to same standard
+' better splash screen
+' better help screen
 
 ' test the icon sizes on 32bit Win7, XP and ReactOS, find out if 48x48 causes a crash
 ' 32x32 (24 bit)

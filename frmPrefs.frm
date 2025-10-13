@@ -2136,6 +2136,8 @@ Private Sub chkFormVisible_Click()
     Dim answerMsg As String: answerMsg = vbNullString
 
     On Error GoTo chkFormVisible_Click_Error
+    
+    If gbStartupFlg = True Then Exit Sub
 
     If chkFormVisible.Value = 0 Then
         gsFormVisible = "0"
