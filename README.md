@@ -8,12 +8,14 @@ The program does very little but place some eye-candy on the desktop in the mann
 
 <img width="829" height="520" alt="TenShillings" src="https://github.com/user-attachments/assets/07f63cb6-c0fe-4f70-ad02-b57a9ab18b58" />
 
+It is an example for how to create a simple single-image desktop widget in the style of the old Yahoo widget engine with a full preference utility, right click menu, an about image, a help image and tooltips.
+
 If you want a template for a more complex program with multi-function, clickable areas then try this program, 
 https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-VB6
 
 BUILD: The program runs without any Microsoft plugins.
  
- Built using: VB6, MZ-TOOLS 3.0, VBAdvance, CodeHelp Core IDE Extender
+ Built using: VB6/TwinBasic, MZ-TOOLS 3.0, VBAdvance, CodeHelp Core IDE Extender
  Framework 2.2 & Rubberduck 2.4.1, RichClient 5
 
   ![vb6-logo-200](https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-VB6/assets/2788342/bf00fa3d-f1d4-417b-bc50-9446f2c3e674)
@@ -121,7 +123,7 @@ This will allow the custom controls to be accessible to the VB6 IDE
 at design time and the sliders will function as intended (if this ocx is
 not registered correctly then the relevant controls will be replaced by picture boxes).
 
-The above is only for development, for ordinary users, during runtime there is no need to do the above. The OCX will reside in the program folder. The program reference to this OCX is contained within the supplied resource file, Panzer CPU Gauge.RES. The reference to this file is already compiled into the binary. As long as the OCX is in the same folder as the binary the program will run without the need to register the OCX manually.
+The above is only for development, for ordinary users, during runtime there is no need to do the above. The OCX will reside in the program folder. The program reference to this OCX is contained within the supplied resource file, TenShillings.RES. The reference to this file is already compiled into the binary. As long as the OCX is in the same folder as the binary the program will run without the need to register the OCX manually.
 
  <img width="451" height="406" alt="components" src="https://github.com/user-attachments/assets/0dad6c34-439c-4fbd-8522-23036269a89e" />
  
