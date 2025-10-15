@@ -128,32 +128,7 @@ Private mPropShowAgainChkBox As Boolean
 Private mPropButtonVal As Integer
 Private mPropReturnedValue As Integer
 
-
-
-'---------------------------------------------------------------------------------------
-' Procedure : Form_Activate
-' Author    : beededea
-' Date      : 20/02/2025
-' Purpose   : The form activate event for the enhanced message box
-'---------------------------------------------------------------------------------------
-'
-Private Sub Form_Activate()
-
-   On Error GoTo Form_Activate_Error
-
-    gsMessageAHeightTwips = fGetINISetting("Software\TenShillings", "messageAHeightTwips", gsSettingsFile)
-    gsMessageAWidthTwips = fGetINISetting("Software\TenShillings", "messageAWidthTwips ", gsSettingsFile)
-    
-    frmMessage.Height = Val(gsMessageAHeightTwips)
-    frmMessage.Width = Val(gsMessageAWidthTwips)
-
-   On Error GoTo 0
-   Exit Sub
-
-Form_Activate_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Form_Activate of Form frmMessage"
-End Sub
+Private gdMsgBoxConstraintRatio As Double
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Form_Load
@@ -167,7 +142,15 @@ Private Sub Form_Load()
 
     On Error GoTo Form_Load_Error
     
-    If gsMessageAHeightTwips = "" Then gsMessageAHeightTwips = glPhysicalScreenHeightTwips / 5.5
+    ' constrain the height/width ratio
+    gdMsgBoxConstraintRatio = cMsgBoxAFormHeight / cMsgBoxAFormWidth
+    
+    gsMessageAHeightTwips = fGetINISetting("Software\TenShillings", "messageAHeightTwips", gsSettingsFile)
+    gsMessageAWidthTwips = fGetINISetting("Software\TenShillings", "messageAWidthTwips ", gsSettingsFile)
+    
+    'first time read the values will be ""
+    If gsMessageAHeightTwips = "" Then gsMessageAHeightTwips = CStr(glPhysicalScreenHeightTwips / 5.5)
+    If gsMessageAWidthTwips = "" Then gsMessageAWidthTwips = CStr(glPhysicalScreenWidthTwips * gdMsgBoxConstraintRatio)
     
     gdMsgBoxACurrentWidth = CDbl(gsMessageAWidthTwips)
     gdMsgBoxACurrentHeight = CDbl(gsMessageAHeightTwips)
@@ -207,13 +190,13 @@ End Sub
 '
 Private Sub Form_Resize()
     Dim currentFont As Long: currentFont = 0
-    Dim ratio As Double: ratio = 0
+    'Dim ratio As Double: ratio = 0
     
     On Error GoTo Form_Resize_Error
     
     If Me.WindowState = vbMinimized Then Exit Sub
 
-    ratio = cMsgBoxAFormHeight / cMsgBoxAFormWidth
+    'gdMsgBoxConstraintRatio = cMsgBoxAFormHeight / cMsgBoxAFormWidth
     If gsDpiAwareness = "1" Then
         currentFont = CLng(gsPrefsFontSizeHighDPI)
     Else
@@ -223,7 +206,7 @@ Private Sub Form_Resize()
 '    If gblMsgBoxADynamicSizingFlg = True Then
         Call setMessageIconImagesLight(1920)
         Call resizeControls(Me, gMsgBoxAControlPositions(), gdMsgBoxACurrentWidth, gdMsgBoxACurrentHeight, currentFont)
-        Me.Width = Me.Height / ratio ' maintain the aspect ratio
+        Me.Width = Me.Height / gdMsgBoxConstraintRatio ' maintain the aspect ratio
 '    Else
 '        Call setMessageIconImagesLight(600)
 '    End If

@@ -601,6 +601,8 @@ Public Sub testDPIAndSetInitialAwareness()
      If glPhysicalScreenWidthPixels > 1366 Then
         gsDpiAwareness = "1"
         Call setDPIaware
+        
+        sPutINISetting "Software\TenShillings", "dpiAwareness", gsDpiAwareness, gsSettingsFile
     End If
 
     On Error GoTo 0

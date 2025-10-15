@@ -2103,7 +2103,8 @@ Private pCmbDebugBalloonTooltip As String
 
 Private mIsLoaded As Boolean ' property
 Private mWidgetSize As Single   ' property
-Private gsConstraintRatio As Double
+Private gdConstraintRatio As Double
+
 
 
 Private Sub btnDefaultEditor_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
@@ -3663,7 +3664,7 @@ Private Sub positionPrefsFramesButtons()
     Dim leftHandGutterWidth As Long: leftHandGutterWidth = 0
        
     ' constrain the height/width ratio
-    gsConstraintRatio = pcPrefsFormHeight / pcPrefsFormWidth
+    gdConstraintRatio = pcPrefsFormHeight / pcPrefsFormWidth
     
     ' align frames rightmost and leftmost to the buttons at the top
     buttonTop = -15
@@ -4617,7 +4618,7 @@ Public Sub PrefsFormResizeEvent()
         
     If pPrefsDynamicSizingFlg = True And pPrefsFormResizedByDrag = True Then
     
-        widgetPrefs.Width = widgetPrefs.Height / gsConstraintRatio ' maintain the aspect ratio, note: this change calls this routine again...
+        widgetPrefs.Width = widgetPrefs.Height / gdConstraintRatio ' maintain the aspect ratio, note: this change calls this routine again...
         
         If gsDpiAwareness = "1" Then
             currentFontSize = gsPrefsFontSizeHighDPI

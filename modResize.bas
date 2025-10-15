@@ -91,7 +91,7 @@ Public Sub resizeControls(ByRef thisForm As Form, ByRef m_ControlPositions() As 
 
 ResizeControls_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ResizeControls of Form formSoftwareList"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ResizeControls of Form modResize"
 End Sub
 
 
@@ -140,7 +140,7 @@ Public Sub SaveSizes(ByVal thisForm As Form, ByRef m_ControlPositions() As Contr
 
 SaveSizes_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure SaveSizes of Form formSoftwareList"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure SaveSizes of Form modResize"
 End Sub
 
 '---------------------------------------------------------------------------------------

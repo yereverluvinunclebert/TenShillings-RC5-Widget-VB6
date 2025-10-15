@@ -92,6 +92,8 @@ Attribute VB_Exposed = False
 Option Explicit
 
 
+
+
 '---------------------------------------------------------------------------------------
 ' Procedure : revealWidgetTimer_Timer
 ' Author    : beededea
