@@ -598,7 +598,7 @@ Public Sub testDPIAndSetInitialAwareness()
 
     'If fPixelsPerInchX() > 96 Then ' always seems to provide 96, no matter what I do.
     
-     If glPhysicalScreenWidthPixels > 1960 Then
+     If glPhysicalScreenWidthPixels > 1366 Then
         gsDpiAwareness = "1"
         Call setDPIaware
     End If

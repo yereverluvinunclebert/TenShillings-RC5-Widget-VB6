@@ -84,22 +84,12 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     If restart = True Then extractCommand = vbNullString
     
     'Test for the coding environment and set a global variable to alter conditions throughout, mostly in text
-    #If TWINBASIC Then
-        gsCodingEnvironment = "TwinBasic"
-    #Else
-        gsCodingEnvironment = "VB6"
-    #End If
+    Call testForCodingEnvironment
     
     ' Test for the version of RichClient and set a global variable to alter conditions throughout, mostly in text, there is no new_c.version in RC5
-    If fFExists(App.Path & "\BIN\vbRichClient5.dll") Then
-        gsRichClientEnvironment = "RC5"
-    ElseIf fFExists(App.Path & "\BIN\RC6.dll") Then
-        gsRichClientEnvironment = "RC6"
-    End If
+    Call testForRichClientVersion
       
-    menuForm.mnuAbout.Caption = "About TenShillings " & gsRichClientEnvironment & " Cairo " & gsCodingEnvironment & " widget"
-       
-    ' Load the sounds into numbered buffers ready for playing
+    ' Load the sounds into numbered buffers ready for playing, not currently required, this particular widget does not have complex sound usage
     'Call loadAsynchSoundFiles
     
     ' resolve VB6 sizing width bug
@@ -128,10 +118,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
             
     ' initialise and create the three main RC forms (widget, about and licence) on the current display
     Call createRCFormsOnCurrentDisplay
-    
-'    ' Set the opacity of the widget, passing just this one global variable to a public property within the class
-    TenShillingsWidget.opacity = Val(gsOpacity) / 100
-    
+        
     ' place the form at the saved location and configure all the form elements
     Call makeVisibleFormElements
         
@@ -185,7 +172,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     
     ' don't put anything here, place it above the Cairo.WidgetForms.EnterMessageLoop
     
-    ' note: the final act in startup is the form_resize_event that is triggered by the subclassed WM_EXITSIZEMOVE when the form is finally revealed
+    ' NOTE: the final act in startup is the form_resize_event that is triggered by the subclassed WM_EXITSIZEMOVE when the form is finally revealed
      
    On Error GoTo 0
    Exit Sub
@@ -196,6 +183,60 @@ main_routine_Error:
     
 End Sub
  
+'---------------------------------------------------------------------------------------
+' Procedure : testForRichClientVersion
+' Author    : beededea
+' Date      : 14/10/2025
+' Purpose   : Test for the version of RichClient and set a global variable to alter conditions throughout, mostly in text, there is no new_c.version in RC5
+'---------------------------------------------------------------------------------------
+'
+Private Sub testForRichClientVersion()
+
+    On Error GoTo testForRichClientVersion_Error
+
+    If fFExists(App.Path & "\BIN\vbRichClient5.dll") Then
+        gsRichClientEnvironment = "RC5"
+    ElseIf fFExists(App.Path & "\BIN\RC6.dll") Then
+        gsRichClientEnvironment = "RC6"
+    End If
+
+    On Error GoTo 0
+    Exit Sub
+
+testForRichClientVersion_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure testForRichClientVersion of Module modMain"
+
+End Sub
+ 
+ 
+'---------------------------------------------------------------------------------------
+' Procedure : testForCodingEnvironment
+' Author    : beededea
+' Date      : 14/10/2025
+' Purpose   : Test for the coding environment and set a global variable to alter conditions throughout, mostly in text
+'---------------------------------------------------------------------------------------
+'
+Private Sub testForCodingEnvironment()
+
+    On Error GoTo testForCodingEnvironment_Error
+
+    #If TWINBASIC Then
+        gsCodingEnvironment = "TwinBasic"
+    #Else
+        gsCodingEnvironment = "VB6"
+    #End If
+
+    On Error GoTo 0
+    Exit Sub
+
+testForCodingEnvironment_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure testForCodingEnvironment of Module modMain"
+
+End Sub
+
+
 
 '---------------------------------------------------------------------------------------
 ' Procedure : loadPreferenceForm
@@ -543,6 +584,11 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
             gsWidgetSize = CStr((glPhysicalScreenWidthPixels / bigScreen) * 100)
         End If
     End If
+    
+    menuForm.mnuAbout.Caption = "About TenShillings " & gsRichClientEnvironment & " Cairo " & gsCodingEnvironment & " widget"
+    
+'    ' Set the opacity of the widget, passing just this one global variable to a public property within the class
+    TenShillingsWidget.opacity = Val(gsOpacity) / 100
     
     TenShillingsWidget.SkewDegrees = CDbl(gsSkewDegrees)
     

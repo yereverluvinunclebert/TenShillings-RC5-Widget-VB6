@@ -80,13 +80,13 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
         tenShillingsFormWidth = imageWidth * 2.4
         tenShillingsFormHeight = imageHeight * 2.4 '
         If tenShillingsFormWidth > glVirtualScreenWidthPixels Then
-            tenShillingsFormWidth = glVirtualScreenWidthPixels
+            'tenShillingsFormWidth = glVirtualScreenWidthPixels
             tenShillingsWidgetZoomValue = 1
         Else
             tenShillingsWidgetZoomValue = 1
         End If
         If tenShillingsFormHeight > glVirtualScreenHeightPixels Then
-            tenShillingsFormHeight = glVirtualScreenHeightPixels
+            'tenShillingsFormHeight = glVirtualScreenHeightPixels
             tenShillingsWidgetZoomValue = 1
         Else
             tenShillingsWidgetZoomValue = 1
@@ -536,8 +536,8 @@ End Sub
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Private Sub TenShillingsForm_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-   Static x0 As Single, y0 As Single: If Button = 0 Then x0 = x: y0 = y 'just store the offsets when no button is down
+Private Sub TenShillingsForm_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+   Static x0 As Single, y0 As Single: If Button = 0 Then x0 = X: y0 = Y 'just store the offsets when no button is down
    
     On Error GoTo TenShillingsForm_MouseMove_Error
     
@@ -551,8 +551,8 @@ Private Sub TenShillingsForm_MouseMove(Button As Integer, Shift As Integer, x As
             Exit Sub
         End If
 
-        FX = (x - x0) * TenShillingsForm.WidgetRoot.Zoom + TenShillingsForm.Left
-        FY = (y - y0) * TenShillingsForm.WidgetRoot.Zoom + TenShillingsForm.Top
+        FX = (X - x0) * TenShillingsForm.WidgetRoot.Zoom + TenShillingsForm.Left
+        FY = (Y - y0) * TenShillingsForm.WidgetRoot.Zoom + TenShillingsForm.Top
         TenShillingsForm.Move FX, FY
         
 '        Debug.Print "FX " & FX
@@ -599,7 +599,7 @@ End Sub
 ' Purpose   : save the form x,y position when ever the TenShillings/form is dragged
 '---------------------------------------------------------------------------------------
 '
-Private Sub TenShillingsForm_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub TenShillingsForm_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
     On Error GoTo TenShillingsForm_MouseUp_Error
     
     frmTimer.tmrScreenResolution.Interval = 4500

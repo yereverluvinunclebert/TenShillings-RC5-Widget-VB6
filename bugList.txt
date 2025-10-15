@@ -68,19 +68,41 @@ removed manifest for TB
 ' RC6 version does not show background  form whereas RC5 and an older RC6 widget does!
 ' Removed unnecessary code, cwAlphaImg.cls and CAIRO_OPERATOR_CLEAR
 ' renamed cwOverlay.cls to cwTenshillings.cls
+' better splash screen
+' better help screen
+' XML generated again
+' installer generated again
+
+' mainRoutine new testForRichClientVersion
+' mainRoutine new testForCodingEnvironment
+' TenShillingsWidget.opacity = Val(gsOpacity) / 100 moved to adjustMainControls
+' DPI aware balloon text and label text improved
+' drag me balloon tooltip
+
+' underlying form cropped on smaller monitors
+
 
 TODO
 ====
 
-' better splash screen
-' better help screen
+' why is DPi aware not automatically enabled on large monitors? It should be, code looks good, needs testing with no settings.ini
 
-' test the icon sizes on 32bit Win7, XP and ReactOS, find out if 48x48 causes a crash
+
+
+' unsubclass the dialog form and see if the IDE still crashes when exiting within the IDE
+
+
+
+' test the icon sizes on 32bit Win7, XP and ReactOS, find out if greater than 48x48 causes a crash.
 ' 32x32 (24 bit)
 ' 16x16 (24 bit)
 ' 48x48 (32 bit)
 ' 32x32 (32 bit)
 ' 16x16 (32 bit)
+
+' test a new installation by removing the settings.ini
+
+' error resizing on first run
 
 ' test on 32bit win 7
 ' test on XP
