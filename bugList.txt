@@ -80,27 +80,20 @@ removed manifest for TB
 ' drag me balloon tooltip
 
 ' underlying form cropped on smaller monitors
-
+' unsubclass the various forms and see if the IDE still crashes when exiting within the IDE - TenShillingsForm balloon tooltip
 
 TODO
 ====
 
+' test a new installation by removing the settings.ini
 ' why is DPi aware not automatically enabled on large monitors? It should be, code looks good, needs testing with no settings.ini
 
-
-
-' unsubclass the dialog form and see if the IDE still crashes when exiting within the IDE
-
-
-
-' test the icon sizes on 32bit Win7, XP and ReactOS, find out if greater than 48x48 causes a crash.
+' test the icon sizes on 32bit Win7, XP and ReactOS, find out if greater than 48x48 causes a crash, therefore excluding the 256x256 icon
 ' 32x32 (24 bit)
 ' 16x16 (24 bit)
 ' 48x48 (32 bit)
 ' 32x32 (32 bit)
 ' 16x16 (32 bit)
-
-' test a new installation by removing the settings.ini
 
 ' error resizing on first run
 

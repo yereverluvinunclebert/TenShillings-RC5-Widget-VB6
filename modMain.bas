@@ -156,7 +156,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     Call hideBusyTimer
             
     'subclassed the widget form to generate a balloon tooltip
-    Call SubclassForm(fMain.TenShillingsForm.hWnd, ObjPtr(fMain.TenShillingsForm))
+    If Not InIDE Then Call SubclassForm(fMain.TenShillingsForm.hWnd, ObjPtr(fMain.TenShillingsForm))
     
     ' end the startup by un-setting the start global flag
     gbStartupFlg = False
