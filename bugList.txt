@@ -83,8 +83,8 @@ removed manifest for TB
 ' unsubclass the various forms and see if the IDE still crashes when exiting within the IDE - TenShillingsForm balloon tooltip
 
 ' test a new installation by removing the settings.ini
-' frmmessage form_load type mismatch
-' error resizing on first run when new settings.ini
+' frmmessage form_load type mismatch, missing values for saving as the height/width could not been read
+' error resizing on first run when new settings.ini - ditto
 ' DPi aware not automatically enabled on large monitors testing with no settings.ini, value not written to settings.ini
 
 TODO
