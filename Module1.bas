@@ -447,6 +447,9 @@ Private pbDebugMode As Boolean ' .30 DAEB 03/03/2021 frmMain.frm replaced the in
 
 'Public gblMsgBoxADynamicSizingFlg As Boolean
 
+Public gdResizeRestriction As Double
+
+
 '---------------------------------------------------------------------------------------
 ' Procedure : fFExists
 ' Author    : RobDog888 https://www.vbforums.com/member.php?17511-RobDog888

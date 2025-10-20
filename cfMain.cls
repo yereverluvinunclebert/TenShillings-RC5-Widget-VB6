@@ -63,35 +63,58 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
     Dim tenShillingsWidgetWidth As Long: tenShillingsWidgetWidth = 0
     Dim tenShillingsWidgetHeight As Long: tenShillingsWidgetHeight = 0
     Dim tenShillingsWidgetZoomValue As Double: tenShillingsWidgetZoomValue = 1
+    Dim imageModifier As Long: imageModifier = 0
     
     Const WFFStyleTool As Integer = 7 ' additional styles above the normal five  WFFStyleTool = 7 makes the taskbar button go away
     
     On Error GoTo initAndCreateTenShillingsForm_Error
     
+    gdResizeRestriction = 1
     imageWidth = dx
     imageHeight = dy
     
-    If gsDpiAwareness = "0" Then
-        tenShillingsFormWidth = imageWidth * 2.4 ' roughly twice the width of the main image plus a bit, the image is non-square and needs room to rotate
-        tenShillingsFormHeight = imageHeight * 2.4 '
-'        If tenShillingsFormWidth > glVirtualScreenWidthPixels Then tenShillingsFormWidth = glVirtualScreenWidthPixels
-'        If tenShillingsFormHeight > glVirtualScreenHeightPixels Then tenShillingsFormHeight = glVirtualScreenHeightPixels
+    ' take the LARGEST size and make that the square size
+    If imageWidth > imageHeight Then
+        imageModifier = imageWidth * 2.4
     Else
-        tenShillingsFormWidth = imageWidth * 2.4
-        tenShillingsFormHeight = imageHeight * 2.4 '
+        imageModifier = imageHeight * 2.4
+    End If
+    
+    ' make it square
+    tenShillingsFormWidth = imageModifier ' roughly twice the width of the main image plus a bit, the image is non-square and needs room to rotate
+    tenShillingsFormHeight = imageModifier '
+        
+    ' test the virtual screenheight against the intended height of the form
+    If tenShillingsFormHeight > glVirtualScreenHeightPixels Then
+        gdResizeRestriction = tenShillingsFormHeight / glVirtualScreenHeightPixels
+        
+        ' alter the zoom according to the proportion
+        tenShillingsWidgetZoomValue = gdResizeRestriction
+        
+        'limit the form size to the screen size (RC limits the form size to the virtual size in any case)
+        tenShillingsFormHeight = glVirtualScreenHeightPixels
+    Else
+        tenShillingsWidgetZoomValue = 1
+    End If
+    
+    ' this situation never occurs but just in case the width is greater than the height
+    ' test the virtual screenwidth against the intended width of the form
+
+    If glVirtualScreenWidthPixels > glVirtualScreenHeightPixels Then
         If tenShillingsFormWidth > glVirtualScreenWidthPixels Then
-            'tenShillingsFormWidth = glVirtualScreenWidthPixels
-            tenShillingsWidgetZoomValue = 1
+            gdResizeRestriction = tenShillingsFormWidth / glVirtualScreenWidthPixels
+            
+            ' alter the zoom according to the proportion
+            tenShillingsWidgetZoomValue = gdResizeRestriction
+            
+            'limit the form size to the screen size (RC limits the form size to the virtual size in any case)
+            tenShillingsFormWidth = glVirtualScreenWidthPixels
         Else
             tenShillingsWidgetZoomValue = 1
-        End If
-        If tenShillingsFormHeight > glVirtualScreenHeightPixels Then
-            'tenShillingsFormHeight = glVirtualScreenHeightPixels
-            tenShillingsWidgetZoomValue = 1
-        Else
-            tenShillingsWidgetZoomValue = 1
+            
         End If
     End If
+
     tenShillingsWidgetWidth = tenShillingsFormWidth
     tenShillingsWidgetHeight = tenShillingsFormHeight
     
@@ -104,12 +127,13 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
     ' create a new tenShillings widget with a name, position and size, first step of that is to run Class_Initialize
     Set TenShillingsWidget = TenShillingsForm.Widgets.Add(New cwTenShillings, "tenShillings", 1, 1, tenShillingsWidgetWidth, tenShillingsWidgetHeight)
     
-    If gsDpiAwareness = "0" Then
-        TenShillingsWidget.Zoom = tenShillingsWidgetZoomValue
-    Else
-        TenShillingsWidget.Zoom = tenShillingsWidgetZoomValue
-    End If
-    
+'    Dim a As Long
+'    Dim b As Long
+'
+'    a = TenShillingsWidget.Widget.Height
+'    b = TenShillingsForm.Height
+
+    TenShillingsWidget.Zoom = tenShillingsWidgetZoomValue
     TenShillingsWidget.imageWidth = imageWidth
     TenShillingsWidget.imageHeight = imageHeight
     

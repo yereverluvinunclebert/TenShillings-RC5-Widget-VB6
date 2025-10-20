@@ -164,9 +164,24 @@ End Property
 Public Property Let Zoom(ByVal newValue As Double)
    On Error GoTo ZoomLet_Error
 
-  If mZoom <> newValue Then mZoom = newValue Else Exit Property
-  If mZoom > 2 Then mZoom = 2 Else If mZoom < 0.05 Then mZoom = 0.05 'keep FZ within a sane ZoomInterval
-  W.Refresh
+    If mZoom <> newValue Then
+      mZoom = newValue
+    Else
+      Exit Property
+    End If
+    
+    If mZoom > 2 Then
+        mZoom = 2
+    ElseIf mZoom < 0.05 Then
+        mZoom = 0.05 'keep FZ within a sane ZoomInterval
+    End If
+    
+    If gdResizeRestriction < 1 Then
+        If mZoom > gdResizeRestriction Then mZoom = gdResizeRestriction
+    End If
+    
+    
+    W.Refresh
 
    On Error GoTo 0
    Exit Property
@@ -536,10 +551,11 @@ Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByV
 '        ' extra code not needed when using RC5 but now required in RC6 - ends
 '    End If
     
-    ' note: default origin point is always top left, needs to be adjusted
+    ' note: default origin point is always TOP LEFT, needs to be adjusted
     
     ' move the image into the form a little to prevent cropping when rotating
-    CC.TranslateDrawings 150, 150
+    'CC.TranslateDrawings 150 * gdResizeRestriction, 150 * gdResizeRestriction
+    CC.TranslateDrawings 100, 100
 
     ' set the origin point prior to rotation
     CC.TranslateDrawings mImageHeight, mImageHeight

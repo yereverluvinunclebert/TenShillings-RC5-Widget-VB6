@@ -479,6 +479,8 @@ Private Sub initialiseGlobalVars()
     gsCodingEnvironment = vbNullString
     gsRichClientEnvironment = vbNullString
     
+    gdResizeRestriction = 0
+    
    On Error GoTo 0
    Exit Sub
 
