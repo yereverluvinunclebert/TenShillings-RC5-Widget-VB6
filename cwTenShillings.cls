@@ -70,15 +70,12 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub Class_Initialize()
-    'Dim intervalValue As Integer: intervalValue = 0
     
     On Error GoTo Class_Initialize_Error
     
     Call initialisePrivateVars
     
     mZoom = 0
-
-    'TenShillingsxo = 15: TenShillingsyo = 27
 
     Set W = Cairo.WidgetBase
         W.BackColor = -1  'we don't use any BackColor here, transparent
@@ -176,11 +173,8 @@ Public Property Let Zoom(ByVal newValue As Double)
         mZoom = 0.05 'keep FZ within a sane ZoomInterval
     End If
     
-    If gdResizeRestriction < 1 Then
-        If mZoom > gdResizeRestriction Then mZoom = gdResizeRestriction
-    End If
-    
-    
+    If mZoom > gdResizeRestriction Then mZoom = gdResizeRestriction
+
     W.Refresh
 
    On Error GoTo 0
@@ -530,53 +524,55 @@ End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : W_Paint
-' Author    : olaf schmidt
+' Author    :
 ' Date      : 01/08/2023
-' Purpose   :
+' Purpose   : Paint event for RC ten shillings class
+'             this only works with a fully square image
+'             form width being 1894, image width being square 789x789px, a PNG with 5 pixels of padding left/right and 175px top/bottom
+'             note: Default origin point is always top left
+'             note: It is good practice to put all modifications to the graphics state between save()/restore() function call
 '---------------------------------------------------------------------------------------
 '
 Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByVal yAbs As Single, ByVal dx_Aligned As Single, ByVal dy_Aligned As Single, UserObj As Object)
-    Dim reverseOrigin As Long: reverseOrigin = 0
+    Dim lReverseOrigin As Long: lReverseOrigin = 0
+    Dim lImageXoffset As Long: lImageXoffset = 0
+    Dim lImageYoffset As Long: lImageYoffset = 0
+    Dim cXPadding As Long
+    Dim cYPadding As Long
+    Dim heightpadding As Long
     
     On Error GoTo W_Paint_Error
- 
-    reverseOrigin = (mImageHeight / 2) - (mImageHeight)
     
-'    If gsRichClientEnvironment = "RC6" Then
-'        ' Widgets are refreshed "from the ground up" in RC5 and not so in RC6
-'        ' extra code NOT needed when using RC5 but now required in RC6 - starts
-'        CC.Operator = CAIRO_OPERATOR_CLEAR
-'        CC.Paint 'clear the whole background of this Widgets underlying Surface via Clear-Operator
-'        CC.Operator = CAIRO_OPERATOR_OVER 'switch back to the default-Operator
-'        ' extra code not needed when using RC5 but now required in RC6 - ends
-'    End If
+    ' set the top left origin point prior to rotation, nudging the image into the form a little 150px to prevent cropping on the left/upper parts when rotating
+    cXPadding = 120
+    cYPadding = 50
     
-    ' note: default origin point is always TOP LEFT, needs to be adjusted
+    lImageXoffset = mImageWidth + cXPadding ' the 150 padding will do for top and left gap
+    heightpadding = (cYPadding * (gdResizeRestriction))
+    lImageYoffset = mImageHeight + heightpadding
     
-    ' move the image into the form a little to prevent cropping when rotating
-    'CC.TranslateDrawings 150 * gdResizeRestriction, 150 * gdResizeRestriction
-    CC.TranslateDrawings 100, 100
+    ' save the current image state of a Cairo::Context created so far, saved to an internal stack of saved states, otherwise nothing will show
+    ' This allows you to make temporary changes for a specific drawing operation and then restore the previous state later using CC.restore
+    'CC.Save
+    
+    ' translate or slide the image over from the r/h side, the full size width of the image so that the top left of the image is at the top left of the form, complete with padding
+    CC.TranslateDrawings lImageXoffset, lImageYoffset
 
-    ' set the origin point prior to rotation
-    CC.TranslateDrawings mImageHeight, mImageHeight
-    
     ' set the scaling ratio for all images
     CC.ScaleDrawings mZoom, mZoom
-    
-    ' save the current state created so far
-    CC.Save
-    
+
     ' set the rotation in degrees only for the coming render of the tenshillings image
-    CC.RotateDrawingsDeg SkewDegrees
+    CC.RotateDrawingsDeg mSkewDegrees
     
-    ' reverse the origin point prior to rotation
-    CC.TranslateDrawings reverseOrigin, reverseOrigin
-    
-    'render the tenshillings in relation to the reversed translated origin above
+    ' reverse the origin point prior to rotation, sliding the top left in the correct position
+    lReverseOrigin = (mImageHeight / 2) - (mImageHeight) ' height or width does not matter, the image is square
+    CC.TranslateDrawings lReverseOrigin, lReverseOrigin
+
+    ' from the global ImageList render the tenshillings image in relation to the reversed translated origin above
     CC.RenderSurfaceContent "tenshillings", 0, 0, , , , mOpacity
-    
+
     ' restores to the state saved by a preceding call to CC.Save
-    CC.Restore
+    'CC.Restore
     
     On Error GoTo 0
    Exit Sub

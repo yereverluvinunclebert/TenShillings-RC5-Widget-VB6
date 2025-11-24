@@ -90,6 +90,12 @@ removed manifest for TB
 TODO
 ====
 
+' On smaller screen sizes, when the 10/-note is resized to larger size, the bottom of the 10/- note is cut off as the RC form height is limited by the screen dimensions.
+' so, temporarily we need to constrain the note maximum size to the extents of the form.
+' position the note to the middle off the form Y position
+
+' later on we can use a canvas to write the image to a larger background.
+
 ' test the icon sizes on 32bit Win7, XP and ReactOS, find out if greater than 48x48 causes a crash, therefore excluding the 256x256 icon
 ' 32x32 (24 bit)
 ' 16x16 (24 bit)
@@ -106,6 +112,8 @@ TODO
 ' https://www.vbforums.com/showthread.php?896944-VB6-QUESTION-Check-if-API-exists
 
 ' windevlib - observe, test and determine whether to use within TB version, implications WIP
+
+' oleexp
 
 Final Tasks
 ===========
