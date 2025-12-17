@@ -22,21 +22,27 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
+
+Private Declare Function SetTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
+Private Declare Function KillTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEvent As Long) As Long
+
 'Private TenShillingsxo As Integer
 'Private TenShillingsyo  As Integer
 
 Private WithEvents W As cWidgetBase
 Attribute W.VB_VarHelpID = -1
+
+' member variables for locally holding property values
+
 Private mZoom As Double
 Private mZoomDirection As String
 Private mSkewDegrees As Double
-
-Private mLocked As Boolean ' property Locked
-Private mHidden As Boolean ' property Hidden
+Private mLocked As Boolean
+Private mHidden As Boolean
 Private mImageWidth As Long
 Private mImageHeight As Long
 Private mOpacity As Double
-
+Private mSampleDelay As Long
 
 
 
@@ -70,13 +76,13 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub Class_Initialize()
-    
+
     On Error GoTo Class_Initialize_Error
     
     Call initialisePrivateVars
     
     mZoom = 0
-
+    
     Set W = Cairo.WidgetBase
         W.BackColor = -1  'we don't use any BackColor here, transparent
         W.ImplementsWheelMessages = True ' enables gsPlivate Sub W_MouseWheel
@@ -91,6 +97,7 @@ Class_Initialize_Error:
 
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class Module cwTenShillings"
 End Sub
+    
 
 
 '---------------------------------------------------------------------------------------
@@ -582,4 +589,5 @@ W_Paint_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure W_Paint of Class Module cwTenShillings"
 End Sub
  
+
 

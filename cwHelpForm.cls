@@ -31,14 +31,12 @@ Attribute tmrHelpFadeOut.VB_VarHelpID = -1
 Private helpxo As Integer
 Private helpyo As Integer
 
+' member variables for locally holding property values
+
 Private mMyOpacity As Double
 Private mShowMe As Boolean
 Private mZoom As Double
 
-
-'property MyOpacity is a property that populates mMyOpacity used by RenderSurfaceContent
-'property ShowMe is a property that populates mShowMe that triggers a fade in timer
-'property mZoom
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Class_Initialize

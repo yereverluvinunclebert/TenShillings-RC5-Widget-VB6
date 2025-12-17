@@ -48,7 +48,7 @@ End Type
 
 Private Type FONTSTRUC
   lStructSize As Long
-  hWnd As Long
+  hwnd As Long
   hDC As Long
   lpLogFont As Long
   iPointSize As Long
@@ -142,7 +142,7 @@ End Enum
 
 '------------------------------------------------------ STARTS
 ' APIs for useful functions START
-Public Declare Function ShellExecute Lib "Shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+Public Declare Function ShellExecute Lib "Shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 ' APIs for useful functions END
 '------------------------------------------------------ ENDS
 
@@ -448,6 +448,7 @@ Private pbDebugMode As Boolean ' .30 DAEB 03/03/2021 frmMain.frm replaced the in
 'Public gblMsgBoxADynamicSizingFlg As Boolean
 
 Public gdResizeRestriction As Double
+
 
 
 '---------------------------------------------------------------------------------------
@@ -1535,7 +1536,7 @@ Public Sub mnuCoffee_ClickEvent()
     answer = msgBoxA(answerMsg, vbExclamation + vbYesNo, "Request to Donate a Kofi", True, "mnuCoffeeClickEvent")
 
     If answer = vbYes Then
-        Call ShellExecute(menuForm.hWnd, "Open", "https://www.ko-fi.com/yereverluvinunclebert", vbNullString, App.Path, 1)
+        Call ShellExecute(menuForm.hwnd, "Open", "https://www.ko-fi.com/yereverluvinunclebert", vbNullString, App.Path, 1)
     End If
 
    On Error GoTo 0
@@ -1565,7 +1566,7 @@ Public Sub mnuSupport_ClickEvent()
     answer = msgBoxA(answerMsg, vbExclamation + vbYesNo, "Request to Contact Support", True, "mnuSupportClickEvent")
 
     If answer = vbYes Then
-        Call ShellExecute(menuForm.hWnd, "Open", "https://github.com/yereverluvinunclebert/TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment & "/issues", vbNullString, App.Path, 1)
+        Call ShellExecute(menuForm.hwnd, "Open", "https://github.com/yereverluvinunclebert/TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment & "/issues", vbNullString, App.Path, 1)
     End If
 
    On Error GoTo 0
@@ -2567,7 +2568,7 @@ Public Sub hardRestart()
     If fFExists(thisCommand) Then
         
         ' run the helper program that kills the current process and restarts it
-        Call ShellExecute(widgetPrefs.hWnd, "open", thisCommand, "TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment & ".exe prefs", "", 1)
+        Call ShellExecute(widgetPrefs.hwnd, "open", thisCommand, "TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment & ".exe prefs", "", 1)
     Else
         'answer = MsgBox(thisCommand & " is missing", vbOKOnly + vbExclamation)
         answerMsg = thisCommand & " is missing"
@@ -2583,6 +2584,7 @@ hardRestart_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure hardRestart of Module Module1"
 
 End Sub
+
 
 
 '---------------------------------------------------------------------------------------
@@ -7414,3 +7416,5 @@ gbReload_Error:
      MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure gbReload of Module Module1"
 
 End Property
+
+

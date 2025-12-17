@@ -41,7 +41,6 @@ Private WithEvents textBox As cwTextBox
 Attribute textBox.VB_VarHelpID = -1
 
  
-
 '---------------------------------------------------------------------------------------
 ' Procedure : initAndCreateTenShillingsForm
 ' Author    :
@@ -530,9 +529,9 @@ Public Sub TenShillingsForm_DblClick()
     
     If gbSHIFT_1 = True Then
         gbSHIFT_1 = False
-        Call ShellExecute(fMain.TenShillingsForm.hWnd, "Open", gsOpenFile, vbNullString, App.Path, 1)
+        Call ShellExecute(fMain.TenShillingsForm.hwnd, "Open", gsOpenFile, vbNullString, App.Path, 1)
     Else
-        Call ShellExecute(fMain.TenShillingsForm.hWnd, "runas", thisCommand, vbNullString, App.Path, 1)
+        Call ShellExecute(fMain.TenShillingsForm.hwnd, "runas", thisCommand, vbNullString, App.Path, 1)
     End If
 
     On Error GoTo 0

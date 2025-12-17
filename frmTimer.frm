@@ -85,13 +85,96 @@ Attribute VB_Exposed = False
 ' Module    : frmTimer
 ' Author    : beededea
 ' Date      : 25/10/2024
-' Purpose   : holds all the VB6 timers used by the program
+' Purpose   : holds all the VB6 timers AND the events and startup of the in-code timers used by the program
 '---------------------------------------------------------------------------------------
 
 '@IgnoreModule ModuleWithoutFolder
 Option Explicit
 
+' create in-code timer vars as class timers enabling the tick event for each instance
+Private WithEvents timer1 As clsTimer
+Attribute timer1.VB_VarHelpID = -1
+Private WithEvents timer2 As clsTimer
+Attribute timer2.VB_VarHelpID = -1
 
+'---------------------------------------------------------------------------------------
+' Procedure : Form_Load
+' Author    : beededea
+' Date      : 17/12/2025
+' Purpose   : The load event for the form is only used to start the in-code timers
+'---------------------------------------------------------------------------------------
+'
+Private Sub Form_Load()
+    
+    On Error GoTo Form_Load_Error
+
+    Set timer1 = New clsTimer
+    Set timer2 = New clsTimer
+
+    ' rename the timers as you see fit
+    
+    'timer1.Start 5000 ' 5 seconds
+    'timer2.Start 90000 ' 90 seconds
+
+    On Error GoTo 0
+    Exit Sub
+
+Form_Load_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Form_Load of Form frmTimer"
+
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : timer1_Tick
+' Author    : beededea
+' Date      : 17/12/2025
+' Purpose   : Sample event for timer-in-code no. 1
+'---------------------------------------------------------------------------------------
+'
+Public Sub timer1_Tick()
+    On Error GoTo timer1_Tick_Error
+
+    timer1.StopTimer
+    
+    Debug.Print "1 second"
+   ' MsgBox "Tick 5 seconds"
+
+    On Error GoTo 0
+    Exit Sub
+
+timer1_Tick_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure timer1_Tick of Form frmTimer"
+End Sub
+
+'---------------------------------------------------------------------------------------
+' Procedure : timer2_Tick
+' Author    : beededea
+' Date      : 17/12/2025
+' Purpose   : Sample event for timer-in-code no. 2
+'---------------------------------------------------------------------------------------
+'
+Public Sub timer2_Tick()
+    On Error GoTo timer2_Tick_Error
+
+    timer2.StopTimer
+    
+    Debug.Print "90"
+    'MsgBox "Tick 90 seconds"
+
+    On Error GoTo 0
+    Exit Sub
+
+timer2_Tick_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure timer2_Tick of Form frmTimer"
+End Sub
+
+
+' ====================================================================
+' from this point onward the code is solely for the VB6 on-form timers
+' ====================================================================
 
 
 '---------------------------------------------------------------------------------------

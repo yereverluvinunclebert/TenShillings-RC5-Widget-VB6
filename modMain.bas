@@ -13,7 +13,7 @@ Option Explicit
 
 '------------------------------------------------------ STARTS
 ' for SetWindowPos z-ordering
-Public Declare Function SetWindowPos Lib "user32" (ByVal hWnd As Long, ByVal hWndInsertAfter As Long, ByVal x As Long, ByVal y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
+Public Declare Function SetWindowPos Lib "user32" (ByVal hwnd As Long, ByVal hWndInsertAfter As Long, ByVal x As Long, ByVal y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
 
 Public Const HWND_TOP As Long = 0 ' for SetWindowPos z-ordering
 Public Const HWND_TOPMOST As Long = -1
@@ -35,7 +35,6 @@ Public TenShillingsWidget As cwTenShillings
 ' any other private vars for public properties
 Private m_sgsWidgetName As String
 '------------------------------------------------------ ENDS
-
 
 
 '---------------------------------------------------------------------------------------
@@ -156,7 +155,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     Call hideBusyTimer
             
     'subclassed the widget form to generate a balloon tooltip
-    If Not InIDE Then Call SubclassForm(fMain.TenShillingsForm.hWnd, ObjPtr(fMain.TenShillingsForm))
+    If Not InIDE Then Call SubclassForm(fMain.TenShillingsForm.hwnd, ObjPtr(fMain.TenShillingsForm))
     
     ' end the startup by un-setting the start global flag
     gbStartupFlg = False
@@ -182,6 +181,9 @@ main_routine_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure main_routine of Module modMain at "
     
 End Sub
+ 
+ 
+
  
 '---------------------------------------------------------------------------------------
 ' Procedure : testForRichClientVersion
@@ -697,11 +699,11 @@ Public Sub setAlphaFormZordering()
    On Error GoTo setAlphaFormZordering_Error
 
     If Val(gsWindowLevel) = 0 Then
-        Call SetWindowPos(fMain.TenShillingsForm.hWnd, HWND_BOTTOM, 0&, 0&, 0&, 0&, OnTopFlags)
+        Call SetWindowPos(fMain.TenShillingsForm.hwnd, HWND_BOTTOM, 0&, 0&, 0&, 0&, OnTopFlags)
     ElseIf Val(gsWindowLevel) = 1 Then
-        Call SetWindowPos(fMain.TenShillingsForm.hWnd, HWND_TOP, 0&, 0&, 0&, 0&, OnTopFlags)
+        Call SetWindowPos(fMain.TenShillingsForm.hwnd, HWND_TOP, 0&, 0&, 0&, 0&, OnTopFlags)
     ElseIf Val(gsWindowLevel) = 2 Then
-        Call SetWindowPos(fMain.TenShillingsForm.hWnd, HWND_TOPMOST, 0&, 0&, 0&, 0&, OnTopFlags)
+        Call SetWindowPos(fMain.TenShillingsForm.hwnd, HWND_TOPMOST, 0&, 0&, 0&, 0&, OnTopFlags)
     End If
 
    On Error GoTo 0
