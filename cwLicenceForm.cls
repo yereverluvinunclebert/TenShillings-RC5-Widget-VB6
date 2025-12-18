@@ -23,7 +23,6 @@ Option Explicit
  
 Private WithEvents W As cWidgetBase '<- this is required in each cwImplementation...
 Attribute W.VB_VarHelpID = -1
-
 ' RC timers
 
 'Private WithEvents tmrLicenceFadeIn As cTimer
@@ -35,6 +34,7 @@ Private WithEvents tmrLicenceFadeIn As clsTimer
 Attribute tmrLicenceFadeIn.VB_VarHelpID = -1
 Private WithEvents tmrLicenceFadeOut As clsTimer
 Attribute tmrLicenceFadeOut.VB_VarHelpID = -1
+
 
 ' private members for property assignment
 

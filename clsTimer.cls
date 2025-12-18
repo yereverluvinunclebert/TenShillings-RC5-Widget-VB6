@@ -179,7 +179,14 @@ Friend Property Let Interval(ByVal newValue As Long)
     On Error GoTo Interval_Error
     
     mInterval = newValue
-
+    
+    'if the timer is already running then stop and restart the timer with the new interval
+    If mRunning = True Then
+        StopTimer
+        TimerManager.StartTimer Me, mInterval
+        mRunning = True
+    End If
+    
     On Error GoTo 0
     Exit Property
 

@@ -87,12 +87,11 @@ removed manifest for TB
 ' error resizing on first run when new settings.ini - ditto
 ' DPi aware not automatically enabled on large monitors testing with no settings.ini, value not written to settings.ini
 
-' add a sample API timer in code from firecall that runs only witihin the context of the class to replace any RC timers
+' add a sample API timer in code that runs within the context of the class to replace any RC timers
+' replace the few uses of the RC5 timers with the new timer code just implemented, about, licence and help fade in and outs.
 
 TODO
 ====
-
-' replace the few uses of the RC5 timers with the new timer code just implemented.
 
 ' make the same changes to the RC5 PZ CPU gauge
 
@@ -102,7 +101,7 @@ TODO
 ' so, temporarily we need to constrain the note maximum size to the extents of the form.
 ' position the note to the middle off the form Y position
 
-' later on we can use a canvas to write the image to a larger background. 
+' later on we can use a canvas to write the image to a larger background.
 ' Have a sample canvas RC project by Olaf alpha* that shows how to use a canvas as Olaf suggests
 
 ' test the icon sizes on 32bit Win7, XP and ReactOS, find out if greater than 48x48 causes a crash, therefore excluding the 256x256 icon
