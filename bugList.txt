@@ -87,12 +87,16 @@ removed manifest for TB
 ' error resizing on first run when new settings.ini - ditto
 ' DPi aware not automatically enabled on large monitors testing with no settings.ini, value not written to settings.ini
 
+' add a sample API timer in code from firecall that runs only witihin the context of the class to replace any RC timers
+
 TODO
 ====
 
-' add the capability to move the widget manually using CTRL+up/down/left/right &c to the RC5 and RC6 versions of the widget
+' replace the few uses of the RC5 timers with the new timer code just implemented.
 
-' add a sample API timer in code from firecall that runs only witihin the context of the class to replace any RC timers
+' make the same changes to the RC5 PZ CPU gauge
+
+' add the capability to move the widget manually using CTRL+up/down/left/right &c to the RC5 and RC6 versions of the widget
 
 ' On smaller screen sizes, when the 10/-note is resized to larger size, the bottom of the 10/- note is cut off as the RC form height is limited by the screen dimensions.
 ' so, temporarily we need to constrain the note maximum size to the extents of the form.

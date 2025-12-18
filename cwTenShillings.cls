@@ -44,9 +44,6 @@ Private mImageHeight As Long
 Private mOpacity As Double
 Private mSampleDelay As Long
 
-
-
-
 '---------------------------------------------------------------------------------------
 ' Procedure : initialisePrivateVars
 ' Author    : beededea

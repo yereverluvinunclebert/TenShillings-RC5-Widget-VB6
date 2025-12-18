@@ -71,6 +71,7 @@ End Type
 
 Private m_hWnd As Long
 
+
 '---------------------------------------------------------------------------------------
 ' Procedure : CreateTimerWindow
 ' Author    : beededea & chatGPT (with corrections/documentation by me)

@@ -16,6 +16,7 @@ Option Explicit
 ' Member variables IDs for the in-code timers.
 
 Private mTimerID As Long
+Private mEnabled As Boolean
 Private mRunning As Boolean
 Private mInterval As Long
 
@@ -23,6 +24,27 @@ Private mInterval As Long
 
 Public Event Tick()
 
+
+'---------------------------------------------------------------------------------------
+' Procedure : Class_Initialize
+' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Date      : 17/12/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Private Sub Class_Initialize()
+    On Error GoTo Class_Initialize_Error
+
+    mInterval = 1000 ' one second by default
+    mEnabled = False
+
+    On Error GoTo 0
+    Exit Sub
+
+Class_Initialize_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class Module clsTimerManager"
+End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : TimerID
@@ -41,7 +63,7 @@ Friend Property Get TimerID() As Long
 
 TimerID_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure TimerID of Class Module cwTenShillings"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure TimerID of Class Module clsTimer"
 End Property
 
 '---------------------------------------------------------------------------------------
@@ -51,19 +73,114 @@ End Property
 ' Purpose   : property to set the timer ID number
 '---------------------------------------------------------------------------------------
 '
-Friend Property Let TimerID(ByVal v As Long)
+Friend Property Let TimerID(ByVal newValue As Long)
     On Error GoTo TimerID_Error
 
-    mTimerID = v
+    mTimerID = newValue
 
     On Error GoTo 0
     Exit Property
 
 TimerID_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure TimerID of Class Module cwTenShillings"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure TimerID of Class Module clsTimer"
 End Property
 
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : Enabled
+' Author    : beededea
+' Date      : 17/12/2025
+' Purpose   : property to obtain status
+'---------------------------------------------------------------------------------------
+'
+Friend Property Get Enabled() As Boolean
+    On Error GoTo Enabled_Error
+
+    Enabled = mEnabled
+
+    On Error GoTo 0
+    Exit Property
+
+Enabled_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Enabled of Class Module clsTimer"
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : Enabled
+' Author    : beededea
+' Date      : 17/12/2025
+' Purpose   : property to start or disable a new timer according to previously supplied interval
+'---------------------------------------------------------------------------------------
+'
+Friend Property Let Enabled(ByVal newValue As Boolean)
+    On Error GoTo Enabled_Error
+    
+    'if we are going to start the timer but the timer is already running then stop the timer
+    If mRunning = True Then
+        StopTimer
+    End If
+    
+    mEnabled = newValue
+
+    If mEnabled = True Then
+        TimerManager.StartTimer Me, mInterval
+        mRunning = True
+    Else
+        StopTimer
+    End If
+
+    On Error GoTo 0
+    Exit Property
+
+Enabled_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Enabled of Class Module clsTimer"
+End Property
+
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : Interval
+' Author    : beededea
+' Date      : 17/12/2025
+' Purpose   : property to obtain the Interval
+'---------------------------------------------------------------------------------------
+'
+Friend Property Get Interval() As Long
+    On Error GoTo Interval_Error
+
+    Interval = mInterval
+
+    On Error GoTo 0
+    Exit Property
+
+Interval_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Interval of Class Module clsTimer"
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : Interval
+' Author    : beededea
+' Date      : 17/12/2025
+' Purpose   : property to set the interval
+'---------------------------------------------------------------------------------------
+'
+Friend Property Let Interval(ByVal newValue As Long)
+    On Error GoTo Interval_Error
+    
+    mInterval = newValue
+
+    On Error GoTo 0
+    Exit Property
+
+Interval_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Interval of Class Module clsTimer"
+End Property
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Start
