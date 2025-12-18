@@ -16,6 +16,7 @@ Attribute VB_Exposed = False
 ' Author    : beededea & chatGPT (with corrections/documentation by me)
 ' Date      : 17/12/2025
 ' Purpose   : requires a reference to the Microsoft scripting dictionary
+'             This module contains the routines that do the behind-the-scenes stuff with APIs and populating the scripting dictionary
 '---------------------------------------------------------------------------------------
 
 Option Explicit

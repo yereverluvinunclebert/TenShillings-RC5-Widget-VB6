@@ -11,6 +11,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+'---------------------------------------------------------------------------------------
+' Module    : clsTimer
+' Author    : beededea & chatGPT (with corrections/new properties/documentation by me)
+' Date      : 18/12/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+
 Option Explicit
 
 ' Member variables IDs for the in-code timers.
@@ -22,14 +29,13 @@ Private mInterval As Long
 
 ' public tick event for an object of this class
 
-Public Event Tick()
-
+Public Event Tick() ' the tick event appears to be the standard named event for most timers in other languages
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Class_Initialize
 ' Author    : beededea & chatGPT (with corrections/documentation by me)
 ' Date      : 17/12/2025
-' Purpose   :
+' Purpose   : just set a few base member variables
 '---------------------------------------------------------------------------------------
 '
 Private Sub Class_Initialize()
