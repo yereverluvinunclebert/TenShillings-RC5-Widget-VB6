@@ -162,24 +162,24 @@ Public Sub initAndCreateAboutForm(Optional ByVal Caption As String)
     On Error GoTo initAndCreateAboutForm_Error
     
     If gsDpiAwareness = "0" Then
-        aboutFormWidth = 900
-        aboutFormHeight = 850
+        aboutFormWidth = 1050
+        aboutFormHeight = 750
         If aboutFormWidth > glVirtualScreenWidthPixels Then aboutFormWidth = glVirtualScreenWidthPixels
         If aboutFormHeight > glVirtualScreenHeightPixels Then aboutFormHeight = glVirtualScreenHeightPixels
     Else
-        aboutFormWidth = 1800
-        aboutFormHeight = 1600
+        aboutFormWidth = 1050
+        aboutFormHeight = 750
         If aboutFormWidth > glVirtualScreenWidthPixels Then
             aboutFormWidth = glVirtualScreenWidthPixels
             aboutWidgetZoomValue = 1
         Else
-            aboutWidgetZoomValue = 1.6
+            aboutWidgetZoomValue = 1
         End If
         If aboutFormHeight > glVirtualScreenHeightPixels Then
             aboutFormHeight = glVirtualScreenHeightPixels
             aboutWidgetZoomValue = 1
         Else
-            aboutWidgetZoomValue = 1.6
+            aboutWidgetZoomValue = 1
         End If
     End If
     aboutWidgetWidth = aboutFormWidth - 100

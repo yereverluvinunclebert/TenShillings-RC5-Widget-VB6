@@ -1,7 +1,7 @@
 modRegFree = 26, 26, 1437, 868, 
 cwTenShillings = 316, 106, 1488, 845, 
 modTooltips = 26, 26, 1397, 802, 
-cwAbout = 130, 130, 1302, 869, 
+cwAbout = 130, 130, 1302, 869, Z
 cfMain = 156, 156, 1328, 895, 
 menuForm = 260, 260, 1432, 999, , 312, 312, 1484, 1051, C
 cwLicence = 364, 0, 1819, 1303, 
@@ -18,4 +18,4 @@ Subclasser = 52, 52, 1420, 828,
 cwHelp = 33, 43, 1449, 982, 
 clsTimer = 52, 52, 1412, 946, 
 clsTimerManager = 78, 78, 1438, 972, 
-modTimerWnd = 52, 52, 1412, 946, Z
+modTimerWnd = 52, 52, 1412, 946, 

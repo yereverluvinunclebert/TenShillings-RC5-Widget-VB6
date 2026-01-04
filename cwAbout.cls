@@ -502,14 +502,26 @@ Private Sub Draw(ByRef CC As cCairoContext, ByVal dx As Single, ByVal dy As Sing
     W.FontName = gsWidgetFont
     W.ForeColor = vbBlack
     W.FontBold = True
-    W.FontSize = 9
+    W.FontSize = 11
 
     W.SelectFontSettingsInto CC
     
     If gsDpiAwareness = "0" Then
         CC.DrawText 330, -20, dx, dy - 275, gsCodingEnvironment & " " & gsRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
+        
+        W.FontSize = 9
+        W.SelectFontSettingsInto CC
+
+        CC.DrawText 330, 25, dx, dy, "https://github.com/yereverluvinunclebert/", , , 2, True, , mMyOpacity
+        CC.DrawText 360, 45, dx, dy, "TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment, , , 2, True, , mMyOpacity
     Else
-        CC.DrawText 330, 0, dx, dy - 1050, gsCodingEnvironment & " " & gsRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
+        CC.DrawText 340, -165, dx, dy, gsCodingEnvironment & " " & gsRichClientEnvironment & " " & "version " & App.Major & "." & App.Minor & "." & App.Revision & " beta", , , 2, True, , mMyOpacity
+        
+        W.FontSize = 9
+        W.SelectFontSettingsInto CC
+
+        CC.DrawText 330, 25, dx, dy, "https://github.com/yereverluvinunclebert/", , , 2, True, , mMyOpacity
+        CC.DrawText 360, 45, dx, dy, "TenShillings-" & gsRichClientEnvironment & "-Widget-" & gsCodingEnvironment, , , 2, True, , mMyOpacity
     End If
     W.Refresh
 

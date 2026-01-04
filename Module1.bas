@@ -1745,23 +1745,27 @@ Public Sub getKeyPress(ByVal KeyCode As Integer, ByVal Shift As Integer)
             Else
                 Call reloadProgram 'f5 refresh button as per all browsers
             End If
+            
         Case vbKeyUp
             If Shift = 1 Then
+                ' move the the tenShillingsForm upward
                 fMain.TenShillingsForm.Top = fMain.TenShillingsForm.Top - 5
             End If
         Case vbKeyDown
             If Shift = 1 Then
+                ' move the the tenShillingsForm downward
                 fMain.TenShillingsForm.Top = fMain.TenShillingsForm.Top + 5
             End If
         Case vbKeyLeft
              If Shift = 1 Then
+                ' move the the tenShillingsForm to the left
                 fMain.TenShillingsForm.Left = fMain.TenShillingsForm.Left - 5
             End If
         Case vbKeyRight
             If Shift = 1 Then
+                ' move the the tenShillingsForm to the right
                 fMain.TenShillingsForm.Left = fMain.TenShillingsForm.Left + 5
             End If
-        
         End Select
  
     On Error GoTo 0

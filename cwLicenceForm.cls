@@ -23,6 +23,7 @@ Option Explicit
  
 Private WithEvents W As cWidgetBase '<- this is required in each cwImplementation...
 Attribute W.VB_VarHelpID = -1
+
 ' RC timers
 
 'Private WithEvents tmrLicenceFadeIn As cTimer
@@ -443,6 +444,7 @@ End Sub
 '
 '    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure tmrLicenceFadeOut_Timer of Class Module cwLicence"
 'End Sub
+
 '---------------------------------------------------------------------------------------
 ' Procedure : W_Paint
 ' Author    : beededea

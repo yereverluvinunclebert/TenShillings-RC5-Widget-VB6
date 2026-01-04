@@ -5849,85 +5849,85 @@ End Sub
 ' Date      : 14/08/2023
 ' Purpose   : due to a bug/difference with TwinBasic versus VB6
 '---------------------------------------------------------------------------------------
-#If TWINBASIC Then
-    Private Sub imgAboutClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-        Call picButtonMouseUpEvent("about", imgAbout, imgAboutClicked, fraAbout, fraAboutButton)
-    End Sub
-#Else
+'#If TWINBASIC Then
+'    Private Sub imgAboutClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+'        Call picButtonMouseUpEvent("about", imgAbout, imgAboutClicked, fraAbout, fraAboutButton)
+'    End Sub
+'#Else
     Private Sub imgAbout_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
         Call picButtonMouseUpEvent("about", imgAbout, imgAboutClicked, fraAbout, fraAboutButton)
     End Sub
-#End If
+'#End If
 
-#If TWINBASIC Then
-    Private Sub imgDevelopmentClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-        Call picButtonMouseUpEvent("development", imgDevelopment, imgDevelopmentClicked, fraDevelopment, fraDevelopmentButton)
-    End Sub
-#Else
+'#If TWINBASIC Then
+'    Private Sub imgDevelopmentClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+'        Call picButtonMouseUpEvent("development", imgDevelopment, imgDevelopmentClicked, fraDevelopment, fraDevelopmentButton)
+'    End Sub
+'#Else
     Private Sub imgDevelopment_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
         Call picButtonMouseUpEvent("development", imgDevelopment, imgDevelopmentClicked, fraDevelopment, fraDevelopmentButton)
     End Sub
-#End If
+'#End If
 
-#If TWINBASIC Then
-    Private Sub imgFontsClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-        Call picButtonMouseUpEvent("fonts", imgFonts, imgFontsClicked, fraFonts, fraFontsButton)
-    End Sub
-#Else
+'#If TWINBASIC Then
+'    Private Sub imgFontsClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+'        Call picButtonMouseUpEvent("fonts", imgFonts, imgFontsClicked, fraFonts, fraFontsButton)
+'    End Sub
+'#Else
     Private Sub imgFonts_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
         Call picButtonMouseUpEvent("fonts", imgFonts, imgFontsClicked, fraFonts, fraFontsButton)
     End Sub
-#End If
+'#End If
 
-#If TWINBASIC Then
-    Private Sub imgConfigClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-        Call picButtonMouseUpEvent("config", imgConfig, imgConfigClicked, fraConfig, fraConfigButton) ' was imgConfigMouseUpEvent
-    End Sub
-#Else
+'#If TWINBASIC Then
+'    Private Sub imgConfigClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+'        Call picButtonMouseUpEvent("config", imgConfig, imgConfigClicked, fraConfig, fraConfigButton) ' was imgConfigMouseUpEvent
+'    End Sub
+'#Else
     Private Sub imgConfig_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
         Call picButtonMouseUpEvent("config", imgConfig, imgConfigClicked, fraConfig, fraConfigButton) ' was imgConfigMouseUpEvent
     End Sub
-#End If
+'#End If
 
-#If TWINBASIC Then
-    Private Sub imgPositionClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-        Call picButtonMouseUpEvent("position", imgPosition, imgPositionClicked, fraPosition, fraPositionButton)
-    End Sub
-#Else
+'#If TWINBASIC Then
+'    Private Sub imgPositionClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+'        Call picButtonMouseUpEvent("position", imgPosition, imgPositionClicked, fraPosition, fraPositionButton)
+'    End Sub
+'#Else
     Private Sub imgPosition_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
         Call picButtonMouseUpEvent("position", imgPosition, imgPositionClicked, fraPosition, fraPositionButton)
     End Sub
-#End If
+'#End If
 
-#If TWINBASIC Then
-    Private Sub imgSoundsClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-        Call picButtonMouseUpEvent("sounds", imgSounds, imgSoundsClicked, fraSounds, fraSoundsButton)
-    End Sub
-#Else
+'#If TWINBASIC Then
+'    Private Sub imgSoundsClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+'        Call picButtonMouseUpEvent("sounds", imgSounds, imgSoundsClicked, fraSounds, fraSoundsButton)
+'    End Sub
+'#Else
     Private Sub imgSounds_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
         Call picButtonMouseUpEvent("sounds", imgSounds, imgSoundsClicked, fraSounds, fraSoundsButton)
     End Sub
-#End If
+'#End If
 
-#If TWINBASIC Then
-    Private Sub imgWindowClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-        Call picButtonMouseUpEvent("window", imgWindow, imgWindowClicked, fraWindow, fraWindowButton)
-    End Sub
-#Else
+'#If TWINBASIC Then
+'    Private Sub imgWindowClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+'        Call picButtonMouseUpEvent("window", imgWindow, imgWindowClicked, fraWindow, fraWindowButton)
+'    End Sub
+'#Else
     Private Sub imgWindow_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
         Call picButtonMouseUpEvent("window", imgWindow, imgWindowClicked, fraWindow, fraWindowButton)
     End Sub
-#End If
+'#End If
 
-#If TWINBASIC Then
-    Private Sub imgGeneralClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-        Call picButtonMouseUpEvent("general", imgGeneral, imgGeneralClicked, fraGeneral, fraGeneralButton) ' was imgGeneralMouseUpEvent
-    End Sub
-#Else
+'#If TWINBASIC Then
+'    Private Sub imgGeneralClicked_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+'        Call picButtonMouseUpEvent("general", imgGeneral, imgGeneralClicked, fraGeneral, fraGeneralButton) ' was imgGeneralMouseUpEvent
+'    End Sub
+'#Else
     Private Sub imgGeneral_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
         Call picButtonMouseUpEvent("general", imgGeneral, imgGeneralClicked, fraGeneral, fraGeneralButton) ' was imgGeneralMouseUpEvent
     End Sub
-#End If
+'#End If
 
 
 
