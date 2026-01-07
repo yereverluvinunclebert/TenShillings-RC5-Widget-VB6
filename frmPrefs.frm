@@ -2388,7 +2388,7 @@ Private Sub Form_Load()
     pPrefsFormResizedByDrag = False
             
     ' subclass ALL forms created by intercepting WM_Create messages, identifying dialog forms to centre them in the middle of the monitor - specifically the font form.
-    If Not InIDE Then subclassDialogForms
+    If Not InIde Then subclassDialogForms
     
     ' subclass specific WidgetPrefs controls that need additional functionality that VB6 does not provide (scrollwheel/balloon tooltips)
     Call subClassControls
@@ -2443,8 +2443,8 @@ Private Sub Form_Load()
     ' start the timers
     Call startPrefsTimers
     
-    glWidgetPrefsOldHeightTwips = widgetPrefs.Height
-    glWidgetPrefsOldWidthTwips = widgetPrefs.Width
+    glWidgetPrefsOldHeightTwips = widgetPrefs.height
+    glWidgetPrefsOldWidthTwips = widgetPrefs.width
     
     ' end the startup by un-setting the start global-ish flag
     pPrefsStartupFlg = False
@@ -2528,8 +2528,8 @@ Private Sub setFormResizingVars()
         lblDragCorner.Visible = True
     End If
     
-    glWidgetPrefsOldHeightTwips = widgetPrefs.Height
-    glWidgetPrefsOldWidthTwips = widgetPrefs.Width
+    glWidgetPrefsOldHeightTwips = widgetPrefs.height
+    glWidgetPrefsOldWidthTwips = widgetPrefs.width
 
    On Error GoTo 0
    Exit Sub
@@ -2580,9 +2580,9 @@ Private Sub setPrefsHeight()
     If gsDpiAwareness = "1" Then
         gbPrefsFormResizedInCode = True
         If CLng(gsPrefsPrimaryHeightTwips) < glPhysicalScreenHeightTwips Then
-            widgetPrefs.Height = CLng(gsPrefsPrimaryHeightTwips) ' on first run this also sets the prefs to one third of the screen height (value set in readPrefsPosition)
+            widgetPrefs.height = CLng(gsPrefsPrimaryHeightTwips) ' on first run this also sets the prefs to one third of the screen height (value set in readPrefsPosition)
         Else
-            widgetPrefs.Height = glPhysicalScreenHeightTwips - 1000
+            widgetPrefs.height = glPhysicalScreenHeightTwips - 1000
         End If
     End If
 
@@ -2664,7 +2664,7 @@ Private Sub subClassControls()
     
    On Error GoTo subClassControls_Error
 
-    If InIDE And gbReload = False Then
+    If InIde And gbReload = False Then
         MsgBox "NOTE: Running in IDE so Sub classing is disabled" & vbCrLf & "Mousewheel will not scroll icon maps and balloon tooltips will not display on comboboxes" & vbCrLf & vbCrLf & _
             "In addition, the display screen will not show messages as it currently crashes when run within the IDE."
     Else
@@ -2785,8 +2785,8 @@ Public Sub positionPrefsMonitor()
     End If
     
     If formLeftTwips = 0 Then
-        If ((fMain.TenShillingsForm.Left + fMain.TenShillingsForm.Width) * glScreenTwipsPerPixelX) + 200 + widgetPrefs.Width > glPhysicalScreenWidthTwips Then
-            widgetPrefs.Left = (fMain.TenShillingsForm.Left * glScreenTwipsPerPixelX) - (widgetPrefs.Width + 200)
+        If ((fMain.TenShillingsForm.Left + fMain.TenShillingsForm.width) * glScreenTwipsPerPixelX) + 200 + widgetPrefs.width > glPhysicalScreenWidthTwips Then
+            widgetPrefs.Left = (fMain.TenShillingsForm.Left * glScreenTwipsPerPixelX) - (widgetPrefs.width + 200)
         End If
     End If
 
@@ -2795,13 +2795,13 @@ Public Sub positionPrefsMonitor()
     If formLeftTwips <> 0 Then
         widgetPrefs.Left = formLeftTwips
     Else
-        widgetPrefs.Left = glPhysicalScreenWidthTwips / 2 - widgetPrefs.Width / 2
+        widgetPrefs.Left = glPhysicalScreenWidthTwips / 2 - widgetPrefs.width / 2
     End If
     
     If formTopTwips <> 0 Then
         widgetPrefs.Top = formTopTwips
     Else
-        widgetPrefs.Top = Screen.Height / 2 - widgetPrefs.Height / 2
+        widgetPrefs.Top = Screen.height / 2 - widgetPrefs.height / 2
     End If
     
     'monitorCount = fGetMonitorCount
@@ -2831,17 +2831,17 @@ Public Sub positionPrefsMonitor()
             gbPrefsFormResizedInCode = True
             gsPrefsPrimaryHeightTwips = fGetINISetting("Software\TenShillings", "prefsPrimaryHeightTwips", gsSettingsFile)
             If Val(gsPrefsPrimaryHeightTwips) <= 0 Then
-                widgetPrefs.Height = gdPrefsStartHeight
+                widgetPrefs.height = gdPrefsStartHeight
             Else
-                widgetPrefs.Height = CLng(gsPrefsPrimaryHeightTwips)
+                widgetPrefs.height = CLng(gsPrefsPrimaryHeightTwips)
             End If
         Else
             gsPrefsSecondaryHeightTwips = fGetINISetting("Software\TenShillings", "prefsSecondaryHeightTwips", gsSettingsFile)
             gbPrefsFormResizedInCode = True
             If Val(gsPrefsSecondaryHeightTwips) <= 0 Then
-                widgetPrefs.Height = gdPrefsStartHeight
+                widgetPrefs.height = gdPrefsStartHeight
             Else
-                widgetPrefs.Height = CLng(gsPrefsSecondaryHeightTwips)
+                widgetPrefs.height = CLng(gsPrefsSecondaryHeightTwips)
             End If
         End If
     End If
@@ -3669,7 +3669,7 @@ Private Sub positionPrefsFramesButtons()
     frameTop = 1250
     leftHandGutterWidth = 240
     frameLeft = leftHandGutterWidth ' use the first frame leftmost as reference
-    rightHandAlignment = fraAboutButton.Left + fraAboutButton.Width ' use final button rightmost as reference
+    rightHandAlignment = fraAboutButton.Left + fraAboutButton.width ' use final button rightmost as reference
     frameWidth = rightHandAlignment - frameLeft
     fraScrollbarCover.Left = rightHandAlignment - 690
     
@@ -3704,14 +3704,14 @@ Private Sub positionPrefsFramesButtons()
     fraWindow.Left = frameLeft
     fraAbout.Left = frameLeft
     
-    fraGeneral.Width = frameWidth
-    fraConfig.Width = frameWidth
-    fraSounds.Width = frameWidth
-    fraPosition.Width = frameWidth
-    fraFonts.Width = frameWidth
-    fraWindow.Width = frameWidth
-    fraDevelopment.Width = frameWidth
-    fraAbout.Width = frameWidth
+    fraGeneral.width = frameWidth
+    fraConfig.width = frameWidth
+    fraSounds.width = frameWidth
+    fraPosition.width = frameWidth
+    fraFonts.width = frameWidth
+    fraWindow.width = frameWidth
+    fraDevelopment.width = frameWidth
+    fraAbout.width = frameWidth
     
     ' set the base visibility of the frames
     fraGeneral.Visible = True
@@ -3729,8 +3729,8 @@ Private Sub positionPrefsFramesButtons()
         fraGeneralButton.Refresh
     #End If
 
-    btnClose.Left = fraWindow.Left + fraWindow.Width - btnClose.Width
-    btnSave.Left = btnClose.Left - btnSave.Width - 50
+    btnClose.Left = fraWindow.Left + fraWindow.width - btnClose.width
+    btnSave.Left = btnClose.Left - btnSave.width - 50
     btnHelp.Left = frameLeft
     
     '' TenShillingsWidget.RotateBusyTimer = True
@@ -4571,7 +4571,7 @@ Private Sub Form_Resize()
     ' do not call the resizing function when the form is resized by dragging the border
     ' only call this if the resize is done in code
         
-    If InIDE Or gbPrefsFormResizedInCode = True Then
+    If InIde Or gbPrefsFormResizedInCode = True Then
         Call PrefsFormResizeEvent
         If gbPrefsFormResizedInCode = True Then Exit Sub
     End If
@@ -4616,7 +4616,7 @@ Public Sub PrefsFormResizeEvent()
         
     If pPrefsDynamicSizingFlg = True And pPrefsFormResizedByDrag = True Then
     
-        widgetPrefs.Width = widgetPrefs.Height / gdConstraintRatio ' maintain the aspect ratio, note: this change calls this routine again...
+        widgetPrefs.width = widgetPrefs.height / gdConstraintRatio ' maintain the aspect ratio, note: this change calls this routine again...
         
         If gsDpiAwareness = "1" Then
             currentFontSize = gsPrefsFontSizeHighDPI
@@ -4634,11 +4634,11 @@ Public Sub PrefsFormResizeEvent()
         
     Else
         If Me.WindowState = 0 Then ' normal
-            If widgetPrefs.Width > 9090 Then widgetPrefs.Width = 9090
-            If widgetPrefs.Width < 9085 Then widgetPrefs.Width = 9090
+            If widgetPrefs.width > 9090 Then widgetPrefs.width = 9090
+            If widgetPrefs.width < 9085 Then widgetPrefs.width = 9090
             If pLastFormHeight <> 0 Then
                gbPrefsFormResizedInCode = True
-               widgetPrefs.Height = pLastFormHeight
+               widgetPrefs.height = pLastFormHeight
             End If
         End If
     End If
@@ -4792,12 +4792,12 @@ Public Sub FormResizedOrMoved(sForm As String)
             If pPrefsFormResizedByDrag = True Then
             
                 ' test the current form height and width, if the same then it is a Form Moved on the same monitor and not a form_resize.
-                If widgetPrefs.Height = glWidgetPrefsOldHeightTwips And widgetPrefs.Width = glWidgetPrefsOldWidthTwips Then
+                If widgetPrefs.height = glWidgetPrefsOldHeightTwips And widgetPrefs.width = glWidgetPrefsOldWidthTwips Then
                     Exit Sub
                 Else
                 
-                    glWidgetPrefsOldHeightTwips = widgetPrefs.Height
-                    glWidgetPrefsOldWidthTwips = widgetPrefs.Width
+                    glWidgetPrefsOldHeightTwips = widgetPrefs.height
+                    glWidgetPrefsOldWidthTwips = widgetPrefs.width
                     
                     Call PrefsFormResizeEvent
                     pPrefsFormResizedByDrag = False
@@ -4862,12 +4862,12 @@ Private Sub tweakgcPrefsControlPositions(ByVal thisForm As Form, ByVal m_FormWid
     
     ' final tweak the bottom button positions
     
-    btnHelp.Top = fraGeneral.Top + fraGeneral.Height + (100 * y_scale)
+    btnHelp.Top = fraGeneral.Top + fraGeneral.height + (100 * y_scale)
     btnSave.Top = btnHelp.Top
     btnClose.Top = btnHelp.Top
     
-    btnClose.Left = fraWindow.Left + fraWindow.Width - btnClose.Width
-    btnSave.Left = btnClose.Left - btnSave.Width - (150 * x_scale)
+    btnClose.Left = fraWindow.Left + fraWindow.width - btnClose.width
+    btnSave.Left = btnClose.Left - btnSave.width - (150 * x_scale)
     btnHelp.Left = fraGeneral.Left
 
     txtPrefsFontCurrentSize.Text = y_scale * txtPrefsFontCurrentSize.FontSize
@@ -4896,7 +4896,7 @@ Private Sub Form_Unload(Cancel As Integer)
    On Error GoTo Form_Unload_Error
         
     ' Release the subclass hook for dialog forms
-    If Not InIDE Then ReleaseHook
+    If Not InIde Then ReleaseHook
     
     IsLoaded = False
     
@@ -6478,7 +6478,7 @@ End Sub
 ' Purpose   : capture the icon button clicks avoiding creating a control array
 '---------------------------------------------------------------------------------------
 '
-Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName As Image, ByRef thisPicNameClicked As Image, ByRef thisFraName As Frame, Optional ByRef thisFraButtonName As Frame)
+Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName As image, ByRef thisPicNameClicked As image, ByRef thisFraName As Frame, Optional ByRef thisFraButtonName As Frame)
     
     On Error GoTo picButtonMouseUpEvent_Error
     
@@ -6511,9 +6511,9 @@ Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName
     y_scale = Me.ScaleHeight / gdPrefsStartHeight
     
     If gsDpiAwareness = "1" Then
-        btnHelp.Top = fraGeneral.Top + fraGeneral.Height + (100 * y_scale)
+        btnHelp.Top = fraGeneral.Top + fraGeneral.height + (100 * y_scale)
     Else
-        btnHelp.Top = thisFraName.Top + thisFraName.Height + (200 * y_scale)
+        btnHelp.Top = thisFraName.Top + thisFraName.height + (200 * y_scale)
     End If
     
     btnSave.Top = btnHelp.Top
@@ -6529,16 +6529,16 @@ Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName
     chkEnableResizing.Top = btnSave.Top + 50
     'chkEnableResizing.Left = lblAsterix.Left
     
-    BorderWidth = (widgetPrefs.Width - Me.ScaleWidth) / 2
-    captionHeight = widgetPrefs.Height - Me.ScaleHeight - BorderWidth
+    BorderWidth = (widgetPrefs.width - Me.ScaleWidth) / 2
+    captionHeight = widgetPrefs.height - Me.ScaleHeight - BorderWidth
         
     ' under windows 10+ the internal window calcs are all wrong due to the bigger title bars
     If pPrefsDynamicSizingFlg = False Then
         padding = 200 ' add normal padding below the help button to position the bottom of the form
 
-        pLastFormHeight = btnHelp.Top + btnHelp.Height + captionHeight + BorderWidth + padding
+        pLastFormHeight = btnHelp.Top + btnHelp.height + captionHeight + BorderWidth + padding
         gbPrefsFormResizedInCode = True
-        widgetPrefs.Height = pLastFormHeight
+        widgetPrefs.height = pLastFormHeight
     End If
     
     If gsDpiAwareness = "0" Then
@@ -7095,47 +7095,47 @@ Private Sub setframeHeights()
    On Error GoTo setframeHeights_Error
 
     If pPrefsDynamicSizingFlg = True Then
-        fraGeneral.Height = fraAbout.Height
-        fraFonts.Height = fraAbout.Height
-        fraConfig.Height = fraAbout.Height
-        fraSounds.Height = fraAbout.Height
-        fraPosition.Height = fraAbout.Height
-        fraDevelopment.Height = fraAbout.Height
-        fraWindow.Height = fraAbout.Height
+        fraGeneral.height = fraAbout.height
+        fraFonts.height = fraAbout.height
+        fraConfig.height = fraAbout.height
+        fraSounds.height = fraAbout.height
+        fraPosition.height = fraAbout.height
+        fraDevelopment.height = fraAbout.height
+        fraWindow.height = fraAbout.height
         
-        fraGeneral.Width = fraAbout.Width
-        fraFonts.Width = fraAbout.Width
-        fraConfig.Width = fraAbout.Width
-        fraSounds.Width = fraAbout.Width
-        fraPosition.Width = fraAbout.Width
-        fraDevelopment.Width = fraAbout.Width
-        fraWindow.Width = fraAbout.Width
+        fraGeneral.width = fraAbout.width
+        fraFonts.width = fraAbout.width
+        fraConfig.width = fraAbout.width
+        fraSounds.width = fraAbout.width
+        fraPosition.width = fraAbout.width
+        fraDevelopment.width = fraAbout.width
+        fraWindow.width = fraAbout.width
     
         'If gsDpiAwareness = "1" Then
             ' save the initial positions of ALL the controls on the prefs form
             Call SaveSizes(widgetPrefs, gcPrefsControlPositions(), gdPrefsStartWidth, gdPrefsStartHeight)
         'End If
     Else
-        fraGeneral.Height = 2205
-        fraConfig.Height = 8777
-        fraSounds.Height = 3985
-        fraPosition.Height = 7544
-        fraFonts.Height = 5643
+        fraGeneral.height = 2205
+        fraConfig.height = 8777
+        fraSounds.height = 3985
+        fraPosition.height = 7544
+        fraFonts.height = 5643
         
 '        fraWindow.Height = 8700
 '        fraWindowInner.Height = 8085
         
 '        ' the lowest window controls are not displayed on a single monitor
         If glMonitorCount > 1 Then
-            fraWindow.Height = 8700
-            fraWindowInner.Height = 8085
+            fraWindow.height = 8700
+            fraWindowInner.height = 8085
         Else
-            fraWindow.Height = 7225
-            fraWindowInner.Height = 6345
+            fraWindow.height = 7225
+            fraWindowInner.height = 6345
         End If
 
-        fraDevelopment.Height = 6297
-        fraAbout.Height = 8700
+        fraDevelopment.height = 6297
+        fraAbout.height = 8700
     End If
     
    On Error GoTo 0
@@ -7206,23 +7206,44 @@ Private Sub setPrefsIconImagesDark()
 '
 '    #Else
         
-        Set imgGeneral.Picture = Cairo.ImageList("general-icon-dark").Picture
-        Set imgConfig.Picture = Cairo.ImageList("config-icon-dark").Picture
-        Set imgFonts.Picture = Cairo.ImageList("font-icon-dark").Picture
-        Set imgSounds.Picture = Cairo.ImageList("sounds-icon-dark").Picture
-        Set imgPosition.Picture = Cairo.ImageList("position-icon-dark").Picture
-        Set imgDevelopment.Picture = Cairo.ImageList("development-icon-dark").Picture
-        Set imgWindow.Picture = Cairo.ImageList("windows-icon-dark").Picture
-        Set imgAbout.Picture = Cairo.ImageList("about-icon-dark").Picture
-        Set imgGeneralClicked.Picture = Cairo.ImageList("general-icon-dark-clicked").Picture
-        Set imgConfigClicked.Picture = Cairo.ImageList("config-icon-dark-clicked").Picture
-        Set imgFontsClicked.Picture = Cairo.ImageList("font-icon-dark-clicked").Picture
-        Set imgSoundsClicked.Picture = Cairo.ImageList("sounds-icon-dark-clicked").Picture
-        Set imgPositionClicked.Picture = Cairo.ImageList("position-icon-dark-clicked").Picture
-        Set imgDevelopmentClicked.Picture = Cairo.ImageList("development-icon-dark-clicked").Picture
-        Set imgWindowClicked.Picture = Cairo.ImageList("windows-icon-dark-clicked").Picture
-        Set imgAboutClicked.Picture = Cairo.ImageList("about-icon-dark-clicked").Picture
-    
+'        Set imgGeneral.Picture = Cairo.ImageList("general-icon-dark").Picture
+'        Set imgConfig.Picture = Cairo.ImageList("config-icon-dark").Picture
+'        Set imgFonts.Picture = Cairo.ImageList("font-icon-dark").Picture
+'        Set imgSounds.Picture = Cairo.ImageList("sounds-icon-dark").Picture
+'        Set imgPosition.Picture = Cairo.ImageList("position-icon-dark").Picture
+'        Set imgDevelopment.Picture = Cairo.ImageList("development-icon-dark").Picture
+'        Set imgWindow.Picture = Cairo.ImageList("windows-icon-dark").Picture
+'        'Set imgAbout.Picture = Cairo.ImageList("about-icon-dark").Picture
+'        Set imgGeneralClicked.Picture = Cairo.ImageList("general-icon-dark-clicked").Picture
+'        Set imgConfigClicked.Picture = Cairo.ImageList("config-icon-dark-clicked").Picture
+'        Set imgFontsClicked.Picture = Cairo.ImageList("font-icon-dark-clicked").Picture
+'        Set imgSoundsClicked.Picture = Cairo.ImageList("sounds-icon-dark-clicked").Picture
+'        Set imgPositionClicked.Picture = Cairo.ImageList("position-icon-dark-clicked").Picture
+'        Set imgDevelopmentClicked.Picture = Cairo.ImageList("development-icon-dark-clicked").Picture
+'        Set imgWindowClicked.Picture = Cairo.ImageList("windows-icon-dark-clicked").Picture
+'        Set imgAboutClicked.Picture = Cairo.ImageList("about-icon-dark-clicked").Picture
+           
+        
+'        Set imgAbout.Picture = gdipImageList.Picture("about-icon-dark")
+
+        Set imgGeneral.Picture = gdipImageList.Picture("general-icon-dark")
+        Set imgConfig.Picture = gdipImageList.Picture("config-icon-dark")
+        Set imgFonts.Picture = gdipImageList.Picture("font-icon-dark")
+        Set imgSounds.Picture = gdipImageList.Picture("sounds-icon-dark")
+        Set imgPosition.Picture = gdipImageList.Picture("position-icon-dark")
+        Set imgDevelopment.Picture = gdipImageList.Picture("development-icon-dark")
+        Set imgWindow.Picture = gdipImageList.Picture("windows-icon-dark")
+        Set imgAbout.Picture = gdipImageList.Picture("about-icon-dark")
+        Set imgGeneralClicked.Picture = gdipImageList.Picture("general-icon-dark-clicked")
+        Set imgConfigClicked.Picture = gdipImageList.Picture("config-icon-dark-clicked")
+        Set imgFontsClicked.Picture = gdipImageList.Picture("font-icon-dark-clicked")
+        Set imgSoundsClicked.Picture = gdipImageList.Picture("sounds-icon-dark-clicked")
+        Set imgPositionClicked.Picture = gdipImageList.Picture("position-icon-dark-clicked")
+        Set imgDevelopmentClicked.Picture = gdipImageList.Picture("development-icon-dark-clicked")
+        Set imgWindowClicked.Picture = gdipImageList.Picture("windows-icon-dark-clicked")
+        Set imgAboutClicked.Picture = gdipImageList.Picture("about-icon-dark-clicked")
+
+        
 '    #End If
 
    On Error GoTo 0

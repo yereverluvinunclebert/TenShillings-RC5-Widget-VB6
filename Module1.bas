@@ -52,7 +52,7 @@ Private Type FONTSTRUC
   hDC As Long
   lpLogFont As Long
   iPointSize As Long
-  flags As Long
+  Flags As Long
   rgbColors As Long
   lCustData As Long
   lpfnHook As Long
@@ -218,7 +218,7 @@ Private Type OPENFILENAME
     nMaxFileTitle As Long        'The length of lpstrFileTitle + 1
     lpstrInitialDir As String    'The path to the initial path :) If you pass an empty string the initial path is the current path.
     lpstrTitle As String         'The caption of the dialog.
-    flags As FileOpenConstants                'Flags. See the values in MSDN Library (you can look at the flags property of the common dialog control)
+    Flags As FileOpenConstants                'Flags. See the values in MSDN Library (you can look at the flags property of the common dialog control)
     nFileOffset As Integer       'Points to the what character in lpstrFile where the actual filename begins (zero based)
     nFileExtension As Integer    'Same as nFileOffset except that it points to the file extention.
     lpstrDefExt As String        'Can contain the extention Windows should add to a file if the user doesn't provide one (used with the GetSaveFileName API function)
@@ -449,7 +449,7 @@ Private pbDebugMode As Boolean ' .30 DAEB 03/03/2021 frmMain.frm replaced the in
 
 Public gdResizeRestriction As Double
 
-
+Public gdipImageList As New cImageList32
 
 '---------------------------------------------------------------------------------------
 ' Procedure : fFExists
@@ -575,7 +575,7 @@ Public Sub setDPIaware()
     On Error GoTo setDPIaware_Error
        
     If gsDpiAwareness = "1" Then
-        If Not InIDE Then
+        If Not InIde Then
             Cairo.SetDPIAwareness ' this way avoids the VB6 IDE shrinking (sadly, VB6 has a high DPI unaware IDE)
             'gbMsgBoxADynamicSizingFlg = True
         End If
@@ -1252,7 +1252,7 @@ Public Function fDialogFont(ByRef f As FormFontInfo) As Boolean
     CopyMemory ByVal lLogFontAddress, logFnt, Len(logFnt)
     ftStruc.lpLogFont = lLogFontAddress
     'ftStruc.flags = CF_SCREENFONTS Or CF_EFFECTS Or CF_INITTOLOGFONTSTRUCT
-    ftStruc.flags = CF_SCREENFONTS Or CF_INITTOLOGFONTSTRUCT
+    ftStruc.Flags = CF_SCREENFONTS Or CF_INITTOLOGFONTSTRUCT
     If ChooseFont(ftStruc) = 1 Then
       CopyMemory logFnt, ByVal lLogFontAddress, Len(logFnt)
       f.Weight = logFnt.lfWeight
@@ -2615,7 +2615,7 @@ End Sub
 ' Purpose   : checks whether the code is running in the VB6 IDE or not
 '---------------------------------------------------------------------------------------
 '
-Public Function InIDE() As Boolean
+Public Function InIde() As Boolean
 
    On Error GoTo InIDE_Error
 
@@ -2623,7 +2623,7 @@ Public Function InIDE() As Boolean
     ' This will only be done if in the IDE
     Debug.Assert InDebugMode
     If pbDebugMode Then
-        InIDE = True
+        InIde = True
     End If
 
    On Error GoTo 0
@@ -2755,14 +2755,14 @@ End Sub
 Public Function ArrayString(ParamArray tokens()) As String() ' always byval
     On Error GoTo ArrayString_Error
     
-    Dim Arr() As String
+    Dim arr() As String
 
-    ReDim Arr(UBound(tokens)) As String
-    Dim I As Long
-    For I = 0 To UBound(tokens)
-        Arr(I) = tokens(I)
+    ReDim arr(UBound(tokens)) As String
+    Dim i As Long
+    For i = 0 To UBound(tokens)
+        arr(i) = tokens(i)
     Next
-    ArrayString = Arr
+    ArrayString = arr
 
     On Error GoTo 0
     Exit Function

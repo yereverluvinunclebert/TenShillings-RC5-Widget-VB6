@@ -155,7 +155,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     Call hideBusyTimer
             
     'subclassed the widget form to generate a balloon tooltip
-    If Not InIDE Then Call SubclassForm(fMain.TenShillingsForm.hwnd, ObjPtr(fMain.TenShillingsForm))
+    If Not InIde Then Call SubclassForm(fMain.TenShillingsForm.hwnd, ObjPtr(fMain.TenShillingsForm))
     
     ' end the startup by un-setting the start global flag
     gbStartupFlg = False
@@ -516,41 +516,84 @@ Private Sub addImagesToImageList()
     Cairo.ImageList.AddImage "tenshillings", App.Path & "\Resources\images\TenShillings.png"
     
     ' prefs icons
+'
+'    Cairo.ImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
+'    Cairo.ImageList.AddImage "about-icon-light", App.Path & "\Resources\images\about-icon-light-1010.jpg"
+'    Cairo.ImageList.AddImage "config-icon-dark", App.Path & "\Resources\images\config-icon-dark-1010.jpg"
+'    Cairo.ImageList.AddImage "config-icon-light", App.Path & "\Resources\images\config-icon-light-1010.jpg"
+'    Cairo.ImageList.AddImage "development-icon-light", App.Path & "\Resources\images\development-icon-light-1010.jpg"
+'    Cairo.ImageList.AddImage "development-icon-dark", App.Path & "\Resources\images\development-icon-dark-1010.jpg"
+'    Cairo.ImageList.AddImage "general-icon-dark", App.Path & "\Resources\images\general-icon-dark-1010.jpg"
+'    Cairo.ImageList.AddImage "general-icon-light", App.Path & "\Resources\images\general-icon-light-1010.jpg"
+'    Cairo.ImageList.AddImage "sounds-icon-light", App.Path & "\Resources\images\sounds-icon-light-1010.jpg"
+'    Cairo.ImageList.AddImage "sounds-icon-dark", App.Path & "\Resources\images\sounds-icon-dark-1010.jpg"
+'    Cairo.ImageList.AddImage "windows-icon-light", App.Path & "\Resources\images\windows-icon-light-1010.jpg"
+'    Cairo.ImageList.AddImage "windows-icon-dark", App.Path & "\Resources\images\windows-icon-dark-1010.jpg"
+'    Cairo.ImageList.AddImage "font-icon-dark", App.Path & "\Resources\images\font-icon-dark-1010.jpg"
+'    Cairo.ImageList.AddImage "font-icon-light", App.Path & "\Resources\images\font-icon-light-1010.jpg"
+'    Cairo.ImageList.AddImage "position-icon-light", App.Path & "\Resources\images\position-icon-light-1010.jpg"
+'    Cairo.ImageList.AddImage "position-icon-dark", App.Path & "\Resources\images\position-icon-dark-1010.jpg"
+'
+'    Cairo.ImageList.AddImage "general-icon-dark-clicked", App.Path & "\Resources\images\general-icon-dark-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "config-icon-dark-clicked", App.Path & "\Resources\images\config-icon-dark-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "font-icon-dark-clicked", App.Path & "\Resources\images\font-icon-dark-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "sounds-icon-dark-clicked", App.Path & "\Resources\images\sounds-icon-dark-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "position-icon-dark-clicked", App.Path & "\Resources\images\position-icon-dark-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "development-icon-dark-clicked", App.Path & "\Resources\images\development-icon-dark-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "windows-icon-dark-clicked", App.Path & "\Resources\images\windows-icon-dark-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "about-icon-dark-clicked", App.Path & "\Resources\images\about-icon-dark-600-clicked.jpg"
+'
+'    Cairo.ImageList.AddImage "general-icon-light-clicked", App.Path & "\Resources\images\general-icon-light-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "config-icon-light-clicked", App.Path & "\Resources\images\config-icon-light-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "font-icon-light-clicked", App.Path & "\Resources\images\font-icon-light-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "sounds-icon-light-clicked", App.Path & "\Resources\images\sounds-icon-light-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "position-icon-light-clicked", App.Path & "\Resources\images\position-icon-light-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "development-icon-light-clicked", App.Path & "\Resources\images\development-icon-light-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "windows-icon-light-clicked", App.Path & "\Resources\images\windows-icon-light-600-clicked.jpg"
+'    Cairo.ImageList.AddImage "about-icon-light-clicked", App.Path & "\Resources\images\about-icon-light-600-clicked.jpg"
     
-    Cairo.ImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
-    Cairo.ImageList.AddImage "about-icon-light", App.Path & "\Resources\images\about-icon-light-1010.jpg"
-    Cairo.ImageList.AddImage "config-icon-dark", App.Path & "\Resources\images\config-icon-dark-1010.jpg"
-    Cairo.ImageList.AddImage "config-icon-light", App.Path & "\Resources\images\config-icon-light-1010.jpg"
-    Cairo.ImageList.AddImage "development-icon-light", App.Path & "\Resources\images\development-icon-light-1010.jpg"
-    Cairo.ImageList.AddImage "development-icon-dark", App.Path & "\Resources\images\development-icon-dark-1010.jpg"
-    Cairo.ImageList.AddImage "general-icon-dark", App.Path & "\Resources\images\general-icon-dark-1010.jpg"
-    Cairo.ImageList.AddImage "general-icon-light", App.Path & "\Resources\images\general-icon-light-1010.jpg"
-    Cairo.ImageList.AddImage "sounds-icon-light", App.Path & "\Resources\images\sounds-icon-light-1010.jpg"
-    Cairo.ImageList.AddImage "sounds-icon-dark", App.Path & "\Resources\images\sounds-icon-dark-1010.jpg"
-    Cairo.ImageList.AddImage "windows-icon-light", App.Path & "\Resources\images\windows-icon-light-1010.jpg"
-    Cairo.ImageList.AddImage "windows-icon-dark", App.Path & "\Resources\images\windows-icon-dark-1010.jpg"
-    Cairo.ImageList.AddImage "font-icon-dark", App.Path & "\Resources\images\font-icon-dark-1010.jpg"
-    Cairo.ImageList.AddImage "font-icon-light", App.Path & "\Resources\images\font-icon-light-1010.jpg"
-    Cairo.ImageList.AddImage "position-icon-light", App.Path & "\Resources\images\position-icon-light-1010.jpg"
-    Cairo.ImageList.AddImage "position-icon-dark", App.Path & "\Resources\images\position-icon-dark-1010.jpg"
+    'gdipImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
     
-    Cairo.ImageList.AddImage "general-icon-dark-clicked", App.Path & "\Resources\images\general-icon-dark-600-clicked.jpg"
-    Cairo.ImageList.AddImage "config-icon-dark-clicked", App.Path & "\Resources\images\config-icon-dark-600-clicked.jpg"
-    Cairo.ImageList.AddImage "font-icon-dark-clicked", App.Path & "\Resources\images\font-icon-dark-600-clicked.jpg"
-    Cairo.ImageList.AddImage "sounds-icon-dark-clicked", App.Path & "\Resources\images\sounds-icon-dark-600-clicked.jpg"
-    Cairo.ImageList.AddImage "position-icon-dark-clicked", App.Path & "\Resources\images\position-icon-dark-600-clicked.jpg"
-    Cairo.ImageList.AddImage "development-icon-dark-clicked", App.Path & "\Resources\images\development-icon-dark-600-clicked.jpg"
-    Cairo.ImageList.AddImage "windows-icon-dark-clicked", App.Path & "\Resources\images\windows-icon-dark-600-clicked.jpg"
-    Cairo.ImageList.AddImage "about-icon-dark-clicked", App.Path & "\Resources\images\about-icon-dark-600-clicked.jpg"
+        
+    gdipImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
+    gdipImageList.AddImage "about-icon-light", App.Path & "\Resources\images\about-icon-light-1010.jpg"
+    gdipImageList.AddImage "config-icon-dark", App.Path & "\Resources\images\config-icon-dark-1010.jpg"
+    gdipImageList.AddImage "config-icon-light", App.Path & "\Resources\images\config-icon-light-1010.jpg"
+    gdipImageList.AddImage "development-icon-light", App.Path & "\Resources\images\development-icon-light-1010.jpg"
+    gdipImageList.AddImage "development-icon-dark", App.Path & "\Resources\images\development-icon-dark-1010.jpg"
+    gdipImageList.AddImage "general-icon-dark", App.Path & "\Resources\images\general-icon-dark-1010.jpg"
+    gdipImageList.AddImage "general-icon-light", App.Path & "\Resources\images\general-icon-light-1010.jpg"
+    gdipImageList.AddImage "sounds-icon-light", App.Path & "\Resources\images\sounds-icon-light-1010.jpg"
+    gdipImageList.AddImage "sounds-icon-dark", App.Path & "\Resources\images\sounds-icon-dark-1010.jpg"
+    gdipImageList.AddImage "windows-icon-light", App.Path & "\Resources\images\windows-icon-light-1010.jpg"
+    gdipImageList.AddImage "windows-icon-dark", App.Path & "\Resources\images\windows-icon-dark-1010.jpg"
+    gdipImageList.AddImage "font-icon-dark", App.Path & "\Resources\images\font-icon-dark-1010.jpg"
+    gdipImageList.AddImage "font-icon-light", App.Path & "\Resources\images\font-icon-light-1010.jpg"
+    gdipImageList.AddImage "position-icon-light", App.Path & "\Resources\images\position-icon-light-1010.jpg"
+    gdipImageList.AddImage "position-icon-dark", App.Path & "\Resources\images\position-icon-dark-1010.jpg"
     
-    Cairo.ImageList.AddImage "general-icon-light-clicked", App.Path & "\Resources\images\general-icon-light-600-clicked.jpg"
-    Cairo.ImageList.AddImage "config-icon-light-clicked", App.Path & "\Resources\images\config-icon-light-600-clicked.jpg"
-    Cairo.ImageList.AddImage "font-icon-light-clicked", App.Path & "\Resources\images\font-icon-light-600-clicked.jpg"
-    Cairo.ImageList.AddImage "sounds-icon-light-clicked", App.Path & "\Resources\images\sounds-icon-light-600-clicked.jpg"
-    Cairo.ImageList.AddImage "position-icon-light-clicked", App.Path & "\Resources\images\position-icon-light-600-clicked.jpg"
-    Cairo.ImageList.AddImage "development-icon-light-clicked", App.Path & "\Resources\images\development-icon-light-600-clicked.jpg"
-    Cairo.ImageList.AddImage "windows-icon-light-clicked", App.Path & "\Resources\images\windows-icon-light-600-clicked.jpg"
-    Cairo.ImageList.AddImage "about-icon-light-clicked", App.Path & "\Resources\images\about-icon-light-600-clicked.jpg"
+    gdipImageList.AddImage "general-icon-dark-clicked", App.Path & "\Resources\images\general-icon-dark-600-clicked.jpg"
+    gdipImageList.AddImage "config-icon-dark-clicked", App.Path & "\Resources\images\config-icon-dark-600-clicked.jpg"
+    gdipImageList.AddImage "font-icon-dark-clicked", App.Path & "\Resources\images\font-icon-dark-600-clicked.jpg"
+    gdipImageList.AddImage "sounds-icon-dark-clicked", App.Path & "\Resources\images\sounds-icon-dark-600-clicked.jpg"
+    gdipImageList.AddImage "position-icon-dark-clicked", App.Path & "\Resources\images\position-icon-dark-600-clicked.jpg"
+    gdipImageList.AddImage "development-icon-dark-clicked", App.Path & "\Resources\images\development-icon-dark-600-clicked.jpg"
+    gdipImageList.AddImage "windows-icon-dark-clicked", App.Path & "\Resources\images\windows-icon-dark-600-clicked.jpg"
+    gdipImageList.AddImage "about-icon-dark-clicked", App.Path & "\Resources\images\about-icon-dark-600-clicked.jpg"
+    
+    gdipImageList.AddImage "general-icon-light-clicked", App.Path & "\Resources\images\general-icon-light-600-clicked.jpg"
+    gdipImageList.AddImage "config-icon-light-clicked", App.Path & "\Resources\images\config-icon-light-600-clicked.jpg"
+    gdipImageList.AddImage "font-icon-light-clicked", App.Path & "\Resources\images\font-icon-light-600-clicked.jpg"
+    gdipImageList.AddImage "sounds-icon-light-clicked", App.Path & "\Resources\images\sounds-icon-light-600-clicked.jpg"
+    gdipImageList.AddImage "position-icon-light-clicked", App.Path & "\Resources\images\position-icon-light-600-clicked.jpg"
+    gdipImageList.AddImage "development-icon-light-clicked", App.Path & "\Resources\images\development-icon-light-600-clicked.jpg"
+    gdipImageList.AddImage "windows-icon-light-clicked", App.Path & "\Resources\images\windows-icon-light-600-clicked.jpg"
+    gdipImageList.AddImage "about-icon-light-clicked", App.Path & "\Resources\images\about-icon-light-600-clicked.jpg"
+
+    
+'    If gdipImageList.Exists("about-icon-dark") Then
+'        MsgBox "found"
+'    End If
     
  
    On Error GoTo 0
@@ -1097,8 +1140,8 @@ Private Sub createRCFormsOnCurrentDisplay()
     
     If Cairo.ImageList.Exists("tenshillings") Then Set thisSrf = Cairo.ImageList("tenshillings")
     
-    imageWidth = thisSrf.Width
-    imageHeight = thisSrf.Height
+    imageWidth = thisSrf.width
+    imageHeight = thisSrf.height
 
     With New_c.Displays(1) 'get the current Display
       Call fMain.initAndCreateTenShillingsForm(imageWidth, imageHeight, gsWidgetName)
