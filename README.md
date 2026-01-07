@@ -8,22 +8,18 @@ The inital stage is a downgrade to RC5 for testing purposes on older 32bit versi
 
 **RC5 Removal:** All of these tasks are steps toward RC independence and 64bit capability.
 
-    DPI aware switch replaced with a API to do the same.
-    SimplePSD parser replaced with an XML reader and extracting the image layers to PNG files.
-    RC Timers replaced by an in-code implementation of timers.
-    RC imageLists for non-Cairo renders replaced by scripting.dictionary importing JPGs using GDI+.
+    * DPI aware switch replaced with a API to do the same.
+    * SimplePSD parser replaced with an XML reader and extracting the image layers to PNG files.
+    * RC Timers replaced by an in-code implementation of timers.
+    * RC imageLists for non-Cairo renders replaced by scripting.dictionary importing JPGs using GDI+.
+	* scripting.dictionary eventually replaced by cristianbuse/VBA-FastDictionary.
 
 **Yet to do:**
 
-    scripting.dictionary eventually replaced by cristianbuse/VBA-FastDictionary.
-
-    TB's native collection with PNG handling is possibly the best future solution for this requirement as the image handling will be done by TB.
-
-    Cairo replacement using vbCairo.dll COM wrapper.
-
-    import of PNG images into collections using Cairo load PNG
-
-    Creation of transparent PNG 'widgets' with properties and events using Cairo or GDI+
+    * TB's native collection with PNG handling is possibly the best future solution for this requirement as the image handling will be done by TB.
+    * Cairo replacement using vbCairo.dll COM wrapper.
+    * import of PNG images into collections using Cairo load PNG
+    * Creation of transparent PNG 'widgets' with properties and events using Cairo or GDI+
 
 The program does very little in practice but is a test bed for playing with alternative technologies in order to place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine. You can add more logic as you require or replace the main image with your own.  This is merely a template for other single-image VB6 / TwinBasic RC5/6 programs - one that I knocked up late at night whilst drinking gin and tonic.
 
