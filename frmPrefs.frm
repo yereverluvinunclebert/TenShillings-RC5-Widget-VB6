@@ -15,9 +15,9 @@ Begin VB.Form widgetPrefs
    Begin VB.Frame fraTimers 
       Caption         =   "Timers"
       Height          =   2175
-      Left            =   0
+      Left            =   90
       TabIndex        =   177
-      Top             =   0
+      Top             =   6270
       Visible         =   0   'False
       Width           =   2385
       Begin VB.Timer themeTimer 
@@ -620,14 +620,6 @@ Begin VB.Form widgetPrefs
          TabIndex        =   163
          Top             =   60
          Width           =   930
-         Begin VB.Image imgConfig 
-            Height          =   600
-            Left            =   165
-            Picture         =   "frmPrefs.frx":479E
-            Stretch         =   -1  'True
-            Top             =   240
-            Width           =   600
-         End
          Begin VB.Label lblConfig 
             Caption         =   "Config."
             Height          =   240
@@ -637,12 +629,20 @@ Begin VB.Form widgetPrefs
             Top             =   855
             Width           =   510
          End
+         Begin VB.Image imgConfig 
+            Height          =   600
+            Left            =   165
+            Picture         =   "frmPrefs.frx":479E
+            Stretch         =   -1  'True
+            Top             =   195
+            Width           =   600
+         End
          Begin VB.Image imgConfigClicked 
             Height          =   600
             Left            =   165
             Picture         =   "frmPrefs.frx":4D7D
             Stretch         =   -1  'True
-            Top             =   225
+            Top             =   195
             Width           =   600
          End
       End
@@ -7160,72 +7160,9 @@ Private Sub setPrefsIconImagesDark()
     
     On Error GoTo setPrefsIconImagesDark_Error
     
-'    #If TWINBASIC Then
-'
-'        Set imgGeneral.Picture = LoadPicture(App.path & "\Resources\images\general-icon-dark-1010.jpg")
-'        Set imgConfig.Picture = LoadPicture(App.path & "\Resources\images\config-icon-dark-1010.jpg")
-'        Set imgFonts.Picture = LoadPicture(App.path & "\Resources\images\font-icon-dark-1010.jpg")
-'        Set imgSounds.Picture = LoadPicture(App.path & "\Resources\images\sounds-icon-dark-1010.jpg")
-'        Set imgPosition.Picture = LoadPicture(App.path & "\Resources\images\position-icon-dark-1010.jpg")
-'        Set imgDevelopment.Picture = LoadPicture(App.path & "\Resources\images\development-icon-dark-1010.jpg")
+        ' setting the Prefs tab Jpeg icon images to the GDIP imageList dictionary, previously used Cairo.ImageList("about-icon-dark-clicked").Picture
 
-'
-'        Set imgWindow.Picture = LoadPicture(App.path & "\Resources\images\windows-icon-dark-1010.jpg")
-
-'
-'        Set imgAbout.Picture = LoadPicture(App.path & "\Resources\images\about-icon-dark-1010.jpg")
-
-'
-'    '
-
-'
-'        Set imgGeneralClicked.Picture = LoadPicture(App.path & "\Resources\images\general-icon-dark-600-clicked.jpg")
-
-'
-'        Set imgConfigClicked.Picture = LoadPicture(App.path & "\Resources\images\config-icon-dark-600-clicked.jpg")
-
-'
-'        Set imgFontsClicked.Picture = LoadPicture(App.path & "\Resources\images\font-icon-dark-600-clicked.jpg")
-
-'
-'        Set imgSoundsClicked.Picture = LoadPicture(App.path & "\Resources\images\sounds-icon-dark-600-clicked.jpg")
-
-'
-'        Set imgPositionClicked.Picture = LoadPicture(App.path & "\Resources\images\position-icon-dark-600-clicked.jpg")
-
-'
-'        Set imgDevelopmentClicked.Picture = LoadPicture(App.path & "\Resources\images\development-icon-dark-600-clicked.jpg")
-
-'
-'        Set imgWindowClicked.Picture = LoadPicture(App.path & "\Resources\images\windows-icon-dark-600-clicked.jpg")
-
-'
-'        Set imgAboutClicked.Picture = LoadPicture(App.path & "\Resources\images\about-icon-dark-600-clicked.jpg")
-
-'
-'
-'    #Else
-        
-'        Set imgGeneral.Picture = Cairo.ImageList("general-icon-dark").Picture
-'        Set imgConfig.Picture = Cairo.ImageList("config-icon-dark").Picture
-'        Set imgFonts.Picture = Cairo.ImageList("font-icon-dark").Picture
-'        Set imgSounds.Picture = Cairo.ImageList("sounds-icon-dark").Picture
-'        Set imgPosition.Picture = Cairo.ImageList("position-icon-dark").Picture
-'        Set imgDevelopment.Picture = Cairo.ImageList("development-icon-dark").Picture
-'        Set imgWindow.Picture = Cairo.ImageList("windows-icon-dark").Picture
-'        'Set imgAbout.Picture = Cairo.ImageList("about-icon-dark").Picture
-'        Set imgGeneralClicked.Picture = Cairo.ImageList("general-icon-dark-clicked").Picture
-'        Set imgConfigClicked.Picture = Cairo.ImageList("config-icon-dark-clicked").Picture
-'        Set imgFontsClicked.Picture = Cairo.ImageList("font-icon-dark-clicked").Picture
-'        Set imgSoundsClicked.Picture = Cairo.ImageList("sounds-icon-dark-clicked").Picture
-'        Set imgPositionClicked.Picture = Cairo.ImageList("position-icon-dark-clicked").Picture
-'        Set imgDevelopmentClicked.Picture = Cairo.ImageList("development-icon-dark-clicked").Picture
-'        Set imgWindowClicked.Picture = Cairo.ImageList("windows-icon-dark-clicked").Picture
-'        Set imgAboutClicked.Picture = Cairo.ImageList("about-icon-dark-clicked").Picture
-           
-        
-'        Set imgAbout.Picture = gdipImageList.Picture("about-icon-dark")
-
+        ' normal images
         Set imgGeneral.Picture = gdipImageList.Picture("general-icon-dark")
         Set imgConfig.Picture = gdipImageList.Picture("config-icon-dark")
         Set imgFonts.Picture = gdipImageList.Picture("font-icon-dark")
@@ -7234,6 +7171,8 @@ Private Sub setPrefsIconImagesDark()
         Set imgDevelopment.Picture = gdipImageList.Picture("development-icon-dark")
         Set imgWindow.Picture = gdipImageList.Picture("windows-icon-dark")
         Set imgAbout.Picture = gdipImageList.Picture("about-icon-dark")
+        
+        ' clicked images
         Set imgGeneralClicked.Picture = gdipImageList.Picture("general-icon-dark-clicked")
         Set imgConfigClicked.Picture = gdipImageList.Picture("config-icon-dark-clicked")
         Set imgFontsClicked.Picture = gdipImageList.Picture("font-icon-dark-clicked")
@@ -7242,9 +7181,6 @@ Private Sub setPrefsIconImagesDark()
         Set imgDevelopmentClicked.Picture = gdipImageList.Picture("development-icon-dark-clicked")
         Set imgWindowClicked.Picture = gdipImageList.Picture("windows-icon-dark-clicked")
         Set imgAboutClicked.Picture = gdipImageList.Picture("about-icon-dark-clicked")
-
-        
-'    #End If
 
    On Error GoTo 0
    Exit Sub
@@ -7267,112 +7203,27 @@ Private Sub setPrefsIconImagesLight()
     
     On Error GoTo setPrefsIconImagesLight_Error
     
-'    #If TWINBASIC Then
-'
-'        Set imgGeneral.Picture = LoadPicture(App.path & "\Resources\images\general-icon-light-1010.jpg")
+        ' setting the Prefs tab Jpeg icon images to the GDIP imageList dictionary, previously used Cairo.ImageList("about-icon-dark-clicked").Picture
 
-'
-'        Set imgConfig.Picture = LoadPicture(App.path & "\Resources\images\config-icon-light-1010.jpg")
-
-'
-'        Set imgFonts.Picture = LoadPicture(App.path & "\Resources\images\font-icon-light-1010.jpg")
-
-'
-'        Set imgSounds.Picture = LoadPicture(App.path & "\Resources\images\sounds-icon-light-1010.jpg")
-
-'
-'        Set imgPosition.Picture = LoadPicture(App.path & "\Resources\images\position-icon-light-1010.jpg")
-
-'
-'        Set imgDevelopment.Picture = LoadPicture(App.path & "\Resources\images\development-icon-light-1010.jpg")
-
-'
-'        Set imgWindow.Picture = LoadPicture(App.path & "\Resources\images\windows-icon-light-1010.jpg")
-
-'
-'        Set imgAbout.Picture = LoadPicture(App.path & "\Resources\images\about-icon-light-1010.jpg")
-
-'
-'        Set imgGeneralClicked.Picture = LoadPicture(App.path & "\Resources\images\general-icon-light-600-clicked.jpg")
-
-'
-'        Set imgConfigClicked.Picture = LoadPicture(App.path & "\Resources\images\config-icon-light-600-clicked.jpg")
-
-'
-'        Set imgFontsClicked.Picture = LoadPicture(App.path & "\Resources\images\font-icon-light-600-clicked.jpg")
-
-'
-'        Set imgSoundsClicked.Picture = LoadPicture(App.path & "\Resources\images\sounds-icon-light-600-clicked.jpg")
-
-'
-'        Set imgPositionClicked.Picture = LoadPicture(App.path & "\Resources\images\position-icon-light-600-clicked.jpg")
-
-'
-'        Set imgDevelopmentClicked.Picture = LoadPicture(App.path & "\Resources\images\development-icon-light-600-clicked.jpg")
-
-'
-'        Set imgWindowClicked.Picture = LoadPicture(App.path & "\Resources\images\windows-icon-light-600-clicked.jpg")
-
-'
-'        Set imgAboutClicked.Picture = LoadPicture(App.path & "\Resources\images\about-icon-light-600-clicked.jpg")
-
-'
-'
-'    #Else
+        ' normal images
+        Set imgGeneral.Picture = gdipImageList.Picture("general-icon-light")
+        Set imgConfig.Picture = gdipImageList.Picture("config-icon-light")
+        Set imgFonts.Picture = gdipImageList.Picture("font-icon-light")
+        Set imgSounds.Picture = gdipImageList.Picture("sounds-icon-light")
+        Set imgPosition.Picture = gdipImageList.Picture("position-icon-light")
+        Set imgDevelopment.Picture = gdipImageList.Picture("development-icon-light")
+        Set imgWindow.Picture = gdipImageList.Picture("windows-icon-light")
+        Set imgAbout.Picture = gdipImageList.Picture("about-icon-light")
         
-        Set imgGeneral.Picture = Cairo.ImageList("general-icon-light").Picture
-
-        
-        Set imgConfig.Picture = Cairo.ImageList("config-icon-light").Picture
-
-        
-        
-'        Set imgConfig.Picture = LoadPicture(App.path & "\Resources\images\config-icon-light-1010.jpg")
-
-        
-        Set imgFonts.Picture = Cairo.ImageList("font-icon-light").Picture
-
-        
-        Set imgSounds.Picture = Cairo.ImageList("sounds-icon-light").Picture
-
-        
-        Set imgPosition.Picture = Cairo.ImageList("position-icon-light").Picture
-
-        
-        Set imgDevelopment.Picture = Cairo.ImageList("development-icon-light").Picture
-
-        
-        Set imgWindow.Picture = Cairo.ImageList("windows-icon-light").Picture
-
-        
-        Set imgAbout.Picture = Cairo.ImageList("about-icon-light").Picture
-
-        
-        Set imgGeneralClicked.Picture = Cairo.ImageList("general-icon-light-clicked").Picture
-
-        
-        Set imgConfigClicked.Picture = Cairo.ImageList("config-icon-light-clicked").Picture
-
-        
-        Set imgFontsClicked.Picture = Cairo.ImageList("font-icon-light-clicked").Picture
-
-        
-        Set imgSoundsClicked.Picture = Cairo.ImageList("sounds-icon-light-clicked").Picture
-
-        
-        Set imgPositionClicked.Picture = Cairo.ImageList("position-icon-light-clicked").Picture
-
-        
-        Set imgDevelopmentClicked.Picture = Cairo.ImageList("development-icon-light-clicked").Picture
-
-        
-        Set imgWindowClicked.Picture = Cairo.ImageList("windows-icon-light-clicked").Picture
-
-        
-        Set imgAboutClicked.Picture = Cairo.ImageList("about-icon-light-clicked").Picture
-
-            
-'    #End If
+        ' clicked images
+        Set imgGeneralClicked.Picture = gdipImageList.Picture("general-icon-light-clicked")
+        Set imgConfigClicked.Picture = gdipImageList.Picture("config-icon-light-clicked")
+        Set imgFontsClicked.Picture = gdipImageList.Picture("font-icon-light-clicked")
+        Set imgSoundsClicked.Picture = gdipImageList.Picture("sounds-icon-light-clicked")
+        Set imgPositionClicked.Picture = gdipImageList.Picture("position-icon-light-clicked")
+        Set imgDevelopmentClicked.Picture = gdipImageList.Picture("development-icon-light-clicked")
+        Set imgWindowClicked.Picture = gdipImageList.Picture("windows-icon-light-clicked")
+        Set imgAboutClicked.Picture = gdipImageList.Picture("about-icon-light-clicked")
         
    On Error GoTo 0
    Exit Sub

@@ -54,9 +54,8 @@ Private Declare Function GdipCreateBitmapFromFile Lib "GDIPlus" _
 
 Private Declare Function GdipDisposeImage Lib "GDIPlus" _
     (ByVal image As Long) As Long
-'
+
 Private Declare Function GdipCreateHBITMAPFromBitmap Lib "GDIPlus" (ByVal bitmap As Long, ByRef hbmReturn As Long, ByVal background As Long) As Long
-    
 Private Declare Function CreateStreamOnHGlobal Lib "ole32" (ByVal hGlob&, ByVal fDeleteOnRelease As Long, ppstm As stdole.IUnknown) As Long
 Private Declare Function GdipLoadImageFromStream Lib "GDIPlus" (ByVal pStream As Long, image As Long) As Long
 Private Declare Function GdipGetImageWidth Lib "GdiPlus.dll" (ByVal image As Long, width As Long) As Long
@@ -237,7 +236,7 @@ Public Enum SmoothingModeEnum
     SmoothingModeAntiAlias8x8 = 5&
 End Enum
 
-' vars for GDI+ colour matrix STARTS
+' Enum vars for GDI+ colour matrix STARTS
 Private Enum ColorAdjustType
    ColorAdjustTypeDefault
    ColorAdjustTypeBitmap
@@ -253,7 +252,7 @@ Private Enum ColorMatrixFlags
    ColorMatrixFlagsSkipGrays = 1
    ColorMatrixFlagsAltGray = 2
 End Enum
-
+' Enum vars for GDI+ colour matrix ENDS
 
 Private lngGDI As Long
 Private gdipInit As GDIPLUS_STARTINPUT
@@ -460,7 +459,7 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Public Function Picture(ByVal Key As String) As StdPicture
-    Dim gpImage  As Long
+    Dim gpImage As Long: gpImage = 0
     
     On Error GoTo Picture_Error
 
@@ -492,7 +491,6 @@ Public Function fBmpToStdPicture(ByVal lhImageBitmap As Long, ByVal width As Lon
     Dim hBitmap As Long: hBitmap = 0
     Dim hOld As Long: hOld = 0
     Dim lhGraphics As Long: lhGraphics = 0
-    Dim filename As String
     Dim lRes As Long: lRes = 0
     
     ' Create target bitmap
@@ -552,7 +550,7 @@ End Function
 '
 Private Function fCreateNewGdipDIBsection(ByVal cx As Long, ByVal cy As Long, ByRef hDC As Long) As Long
     Dim bmi As BITMAPINFO
-    Dim bits As Long
+    Dim bits As Long: bits = 0
     Dim hBmpMemory As Long: hBmpMemory = 0
     
     On Error GoTo fCreateNewGdipDIBsection_Error
@@ -658,7 +656,7 @@ Private Function ReadBytesFromFile(ByVal filename As String) As Byte()
 
 ReadBytesFromFile_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ReadBytesFromFile of module mdlMain.bas"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ReadBytesFromFile of Class Module cImageList32"
 End Function
 
 
@@ -689,9 +687,9 @@ End Function
 '---------------------------------------------------------------------------------------
 
 Private Function GetEncoderClsid(strMimeType As String, ClassID As CLSID) As Long
-   Dim num As Long
-   Dim Size As Long
-   Dim i As Long
+   Dim num As Long: num = 0
+   Dim Size As Long: Size = 0
+   Dim i As Long: i = 0
 
    Dim ICI() As ImageCodecInfo
    Dim Buffer() As Byte
@@ -733,7 +731,7 @@ Private Function GetEncoderClsid(strMimeType As String, ClassID As CLSID) As Lon
 
 GetEncoderClsid_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure GetEncoderClsid of Module mdlMain"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure GetEncoderClsid of Class Module cImageList32"
 End Function
 
 
@@ -747,10 +745,10 @@ End Function
 '---------------------------------------------------------------------------------------
 '
 Private Function PtrToStrW(ByVal lpsz As Long) As String
-    Dim sOut As String
-    Dim lLen As Long
+    Dim sOut As String: sOut = 0
+    Dim lLen As Long: lLen = 0
 
-   On Error GoTo PtrToStrW_Error
+    On Error GoTo PtrToStrW_Error
 
     lLen = lstrlenW(lpsz)
 
@@ -760,12 +758,12 @@ Private Function PtrToStrW(ByVal lpsz As Long) As String
         PtrToStrW = StrConv(sOut, vbFromUnicode)
     End If
 
-   On Error GoTo 0
-   Exit Function
+    On Error GoTo 0
+    Exit Function
 
 PtrToStrW_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure PtrToStrW of Module mdlMain"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure PtrToStrW of Class Module cImageList32"
 End Function
 
 '---------------------------------------------------------------------------------------
@@ -777,11 +775,11 @@ End Function
 '---------------------------------------------------------------------------------------
 '
 Private Function createGdipBitmap(SrcImg As Long, dxSrc As Long, dySrc As Long, dxDst As Long, dyDst As Long, opacity As Integer) As Long
-    Dim img As Long
-    Dim Ctx As Long
-    Dim imgQuality As Long
-    Dim SmoothingMode As Long
-    Dim imgAttr As Long
+    Dim img As Long: img = 0
+    Dim Ctx As Long: Ctx = 0
+    Dim imgQuality As Long: imgQuality = 0
+    Dim SmoothingMode As Long: SmoothingMode = 0
+    Dim imgAttr As Long: imgAttr = 0
     Dim clrMatrix As ColorMatrix
     Dim graMatrix As ColorMatrix
     Dim sImageQuality As String: sImageQuality = vbNullString
@@ -858,7 +856,7 @@ Private Function createGdipBitmap(SrcImg As Long, dxSrc As Long, dySrc As Long, 
 
 createGdipBitmap_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure createGdipBitmap of module mdlMain.bas"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure createGdipBitmap of Class Module cImageList32"
 End Function
 
 
@@ -875,21 +873,21 @@ End Function
 '
 Private Function resizeAndLoadImgToDict(ByRef thisDictionary As Object, ByVal Key As String, ByVal strFilename As String, ByVal Left As Long, ByVal Top As Long, ByVal width As Long, ByVal height As Long, Optional ByVal fullStringKey As String = "", Optional ByVal imageOpacity As Integer) As Long
 
-    Dim thiskey As String
-    Dim saveStatus As Boolean
+    Dim thiskey As String: thiskey = 0
+    Dim saveStatus As Boolean: saveStatus = 0
     Dim encoderCLSID As CLSID
     Dim bytesFromFile() As Byte
     Dim Strm As stdole.IUnknown
-    Dim img As Long
-    Dim imgCrop As Long
-    Dim imgCrop2 As Long
-    Dim dx As Long
-    Dim dy As Long
-    Dim dockSkinWidth As Long
-    Dim cropWidth As Long
-    Dim action As String
-    Dim lngPixelFormat As Long
-    Dim picBitmap As Long
+    Dim img As Long: img = 0
+    Dim imgCrop As Long: imgCrop = 0
+    Dim imgCrop2 As Long: imgCrop2 = 0
+    Dim dx As Long: dx = 0
+    Dim dy As Long: dy = 0
+    Dim dockSkinWidth As Long: dockSkinWidth = 0
+    Dim cropWidth As Long: cropWidth = 0
+    Dim action As String: action = 0
+    Dim lngPixelFormat As Long: lngPixelFormat = 0
+    Dim picBitmap As Long: picBitmap = 0
 
     On Error GoTo resizeAndLoadImgToDict_Error
     
@@ -937,7 +935,7 @@ Private Function resizeAndLoadImgToDict(ByRef thisDictionary As Object, ByVal Ke
 
 resizeAndLoadImgToDict_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure resizeAndLoadImgToDict with this file - " & strFilename & " of module mdlMain.bas"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure resizeAndLoadImgToDict with this file - " & strFilename & " of Class Module cImageList32"
         
 End Function
 
@@ -950,7 +948,7 @@ End Function
 '---------------------------------------------------------------------------------------
 '
 Private Sub initialiseGDIPStartup()
-    '
+
    On Error GoTo initialiseGDIPStartup_Error
    
     gdipInit.GdiplusVersion = 1

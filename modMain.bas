@@ -514,47 +514,13 @@ Private Sub addImagesToImageList()
     'add Resources to the global ImageList
     
     Cairo.ImageList.AddImage "tenshillings", App.Path & "\Resources\images\TenShillings.png"
+
+    ' NOTE: cannot yet add the above images to the GDIP imageList yet as the Cairo functions extract their images directly from RC's own Cairo-based imageList
     
-    ' prefs icons
-'
-'    Cairo.ImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
-'    Cairo.ImageList.AddImage "about-icon-light", App.Path & "\Resources\images\about-icon-light-1010.jpg"
-'    Cairo.ImageList.AddImage "config-icon-dark", App.Path & "\Resources\images\config-icon-dark-1010.jpg"
-'    Cairo.ImageList.AddImage "config-icon-light", App.Path & "\Resources\images\config-icon-light-1010.jpg"
-'    Cairo.ImageList.AddImage "development-icon-light", App.Path & "\Resources\images\development-icon-light-1010.jpg"
-'    Cairo.ImageList.AddImage "development-icon-dark", App.Path & "\Resources\images\development-icon-dark-1010.jpg"
-'    Cairo.ImageList.AddImage "general-icon-dark", App.Path & "\Resources\images\general-icon-dark-1010.jpg"
-'    Cairo.ImageList.AddImage "general-icon-light", App.Path & "\Resources\images\general-icon-light-1010.jpg"
-'    Cairo.ImageList.AddImage "sounds-icon-light", App.Path & "\Resources\images\sounds-icon-light-1010.jpg"
-'    Cairo.ImageList.AddImage "sounds-icon-dark", App.Path & "\Resources\images\sounds-icon-dark-1010.jpg"
-'    Cairo.ImageList.AddImage "windows-icon-light", App.Path & "\Resources\images\windows-icon-light-1010.jpg"
-'    Cairo.ImageList.AddImage "windows-icon-dark", App.Path & "\Resources\images\windows-icon-dark-1010.jpg"
-'    Cairo.ImageList.AddImage "font-icon-dark", App.Path & "\Resources\images\font-icon-dark-1010.jpg"
-'    Cairo.ImageList.AddImage "font-icon-light", App.Path & "\Resources\images\font-icon-light-1010.jpg"
-'    Cairo.ImageList.AddImage "position-icon-light", App.Path & "\Resources\images\position-icon-light-1010.jpg"
-'    Cairo.ImageList.AddImage "position-icon-dark", App.Path & "\Resources\images\position-icon-dark-1010.jpg"
-'
-'    Cairo.ImageList.AddImage "general-icon-dark-clicked", App.Path & "\Resources\images\general-icon-dark-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "config-icon-dark-clicked", App.Path & "\Resources\images\config-icon-dark-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "font-icon-dark-clicked", App.Path & "\Resources\images\font-icon-dark-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "sounds-icon-dark-clicked", App.Path & "\Resources\images\sounds-icon-dark-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "position-icon-dark-clicked", App.Path & "\Resources\images\position-icon-dark-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "development-icon-dark-clicked", App.Path & "\Resources\images\development-icon-dark-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "windows-icon-dark-clicked", App.Path & "\Resources\images\windows-icon-dark-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "about-icon-dark-clicked", App.Path & "\Resources\images\about-icon-dark-600-clicked.jpg"
-'
-'    Cairo.ImageList.AddImage "general-icon-light-clicked", App.Path & "\Resources\images\general-icon-light-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "config-icon-light-clicked", App.Path & "\Resources\images\config-icon-light-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "font-icon-light-clicked", App.Path & "\Resources\images\font-icon-light-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "sounds-icon-light-clicked", App.Path & "\Resources\images\sounds-icon-light-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "position-icon-light-clicked", App.Path & "\Resources\images\position-icon-light-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "development-icon-light-clicked", App.Path & "\Resources\images\development-icon-light-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "windows-icon-light-clicked", App.Path & "\Resources\images\windows-icon-light-600-clicked.jpg"
-'    Cairo.ImageList.AddImage "about-icon-light-clicked", App.Path & "\Resources\images\about-icon-light-600-clicked.jpg"
     
-    'gdipImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
+    ' addition of the Prefs tab Jpeg icon images to the GDIP imageList dictionary, previously used Cairo.ImageList.AddImage "filename"
     
-        
+    ' normal images
     gdipImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
     gdipImageList.AddImage "about-icon-light", App.Path & "\Resources\images\about-icon-light-1010.jpg"
     gdipImageList.AddImage "config-icon-dark", App.Path & "\Resources\images\config-icon-dark-1010.jpg"
@@ -572,6 +538,7 @@ Private Sub addImagesToImageList()
     gdipImageList.AddImage "position-icon-light", App.Path & "\Resources\images\position-icon-light-1010.jpg"
     gdipImageList.AddImage "position-icon-dark", App.Path & "\Resources\images\position-icon-dark-1010.jpg"
     
+    ' clicked images
     gdipImageList.AddImage "general-icon-dark-clicked", App.Path & "\Resources\images\general-icon-dark-600-clicked.jpg"
     gdipImageList.AddImage "config-icon-dark-clicked", App.Path & "\Resources\images\config-icon-dark-600-clicked.jpg"
     gdipImageList.AddImage "font-icon-dark-clicked", App.Path & "\Resources\images\font-icon-dark-600-clicked.jpg"
@@ -580,7 +547,6 @@ Private Sub addImagesToImageList()
     gdipImageList.AddImage "development-icon-dark-clicked", App.Path & "\Resources\images\development-icon-dark-600-clicked.jpg"
     gdipImageList.AddImage "windows-icon-dark-clicked", App.Path & "\Resources\images\windows-icon-dark-600-clicked.jpg"
     gdipImageList.AddImage "about-icon-dark-clicked", App.Path & "\Resources\images\about-icon-dark-600-clicked.jpg"
-    
     gdipImageList.AddImage "general-icon-light-clicked", App.Path & "\Resources\images\general-icon-light-600-clicked.jpg"
     gdipImageList.AddImage "config-icon-light-clicked", App.Path & "\Resources\images\config-icon-light-600-clicked.jpg"
     gdipImageList.AddImage "font-icon-light-clicked", App.Path & "\Resources\images\font-icon-light-600-clicked.jpg"
@@ -589,13 +555,7 @@ Private Sub addImagesToImageList()
     gdipImageList.AddImage "development-icon-light-clicked", App.Path & "\Resources\images\development-icon-light-600-clicked.jpg"
     gdipImageList.AddImage "windows-icon-light-clicked", App.Path & "\Resources\images\windows-icon-light-600-clicked.jpg"
     gdipImageList.AddImage "about-icon-light-clicked", App.Path & "\Resources\images\about-icon-light-600-clicked.jpg"
-
     
-'    If gdipImageList.Exists("about-icon-dark") Then
-'        MsgBox "found"
-'    End If
-    
- 
    On Error GoTo 0
    Exit Sub
 
