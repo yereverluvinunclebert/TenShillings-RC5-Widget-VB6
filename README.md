@@ -4,7 +4,28 @@ An example of a moveable/resizable single-image, VB6 / TwinBasic program using t
 
 The RC5 version here operates on XP/ReactOS, Vista+ to Windows 11+. There is another version on github in my repo. that operates with RC6, the latest version of RichClient. Other than being able to run on XP type systems, there is no other difference.
 
-The program does very little but place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine. You can add more logic as you require or replace the main image with your own.  This is merely a template for other single-image VB6 / TwinBasic RC5/6 programs - one that I knocked up late at night whilst drinking gin and tonic.
+The inital stage is a downgrade to RC5 for testing purposes on older 32bit versions of Windows. It should run on XP/ReactOS with no problems at all.
+
+RC5 Removal : All of these tasks are steps toward RC independence and 64bit capability.
+
+    DPI aware switch replaced with a API to do the same.
+    SimplePSD parser replaced with an XML reader and extracting the image layers to PNG files.
+    RC Timers replaced by an in-code implementation of timers.
+    RC imageLists for non-Cairo renders replaced by scripting.dictionary importing JPGs using GDI+.
+
+Yet to do:
+
+    scripting.dictionary eventually replaced by cristianbuse/VBA-FastDictionary.
+
+    TB's native collection with PNG handling is possibly the best future solution for this requirement as the image handling will be done by TB.
+
+    Cairo replacement using vbCairo.dll COM wrapper.
+
+    import of PNG images into collections using Cairo load PNG
+
+    Creation of transparent PNG 'widgets' with properties and events using Cairo or GDI+
+
+The program does very little in practice but is a test bed for playing with alternative technologies in order to place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine. You can add more logic as you require or replace the main image with your own.  This is merely a template for other single-image VB6 / TwinBasic RC5/6 programs - one that I knocked up late at night whilst drinking gin and tonic.
 
 <img width="829" height="520" alt="TenShillings" src="https://github.com/user-attachments/assets/07f63cb6-c0fe-4f70-ad02-b57a9ab18b58" />
 
