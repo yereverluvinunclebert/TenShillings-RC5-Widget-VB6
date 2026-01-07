@@ -12,7 +12,7 @@ The inital stage is a downgrade to RC5 for testing purposes on older 32bit versi
     * SimplePSD parser replaced with an XML reader and extracting the image layers to PNG files.
     * RC Timers replaced by an in-code implementation of timers.
     * RC imageLists for non-Cairo renders replaced by scripting.dictionary importing JPGs using GDI+.
-	* scripting.dictionary eventually replaced by cristianbuse/VBA-FastDictionary.
+	* scripting.dictionary replaced by cristianbuse/VBA-FastDictionary.
 
 **Yet to do:**
 
