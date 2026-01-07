@@ -20,8 +20,6 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private mDict As Object ' Scripting.Dictionary or Cristian Buse's dictionary class
-
 ' ===========================
 ' Win32 / GDI
 ' ===========================
@@ -257,6 +255,19 @@ End Enum
 Private lngGDI As Long
 Private gdipInit As GDIPLUS_STARTINPUT
 
+'Private mDict As Object ' Scripting.Dictionary or Cristian Buse's dictionary class
+
+Private Type JustMyUDT
+    dict As Dictionary
+End Type
+
+#Const x64StackIssues = ((Mac = 0) And Win64 And (TWINBASIC = 0))
+
+'#If twinbasic Then
+    'Private mDict As Collection ' std TB collection
+'#Else
+    Private mDict As Dictionary ' scripting.dictionary
+'#End If
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Class_Initialize
@@ -268,7 +279,8 @@ Private gdipInit As GDIPLUS_STARTINPUT
 Private Sub Class_Initialize()
     On Error GoTo Class_Initialize_Error
 
-    Set mDict = CreateObject("Scripting.Dictionary")
+    'Set mDict = CreateObject("Scripting.Dictionary")
+    Set mDict = New Dictionary
     
     Call initialiseGDIPStartup
 

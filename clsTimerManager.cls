@@ -25,7 +25,19 @@ Option Explicit
 
 Private mHWnd As Long
 Private mNextID As Long
-Private mTimers As Object
+'Private mTimers As Object
+
+Private Type JustMyUDT
+    dict As Dictionary
+End Type
+
+#Const x64StackIssues = ((Mac = 0) And Win64 And (TWINBASIC = 0))
+
+'#If twinbasic Then
+    'Private mTimers As Collection ' std TB collection
+'#Else
+    Private mTimers As Dictionary ' scripting.dictionary
+'#End If
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Class_Initialize
@@ -38,7 +50,8 @@ Private Sub Class_Initialize()
     On Error GoTo Class_Initialize_Error
 
     ' create a dictionary containing the timers by timerID
-    Set mTimers = CreateObject("Scripting.Dictionary")
+    'Set mTimers = CreateObject("Scripting.Dictionary")
+    Set mTimers = New Dictionary
     
     ' Create a hidden timer window returning the window handle
     mHWnd = CreateTimerWindow
