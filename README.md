@@ -6,14 +6,14 @@ The RC5 version here operates on XP/ReactOS, Vista+ to Windows 11+. There is ano
 
 The inital stage is a downgrade to RC5 for testing purposes on older 32bit versions of Windows. It should run on XP/ReactOS with no problems at all.
 
-RC5 Removal : All of these tasks are steps toward RC independence and 64bit capability.
+**RC5 Removal:** All of these tasks are steps toward RC independence and 64bit capability.
 
     DPI aware switch replaced with a API to do the same.
     SimplePSD parser replaced with an XML reader and extracting the image layers to PNG files.
     RC Timers replaced by an in-code implementation of timers.
     RC imageLists for non-Cairo renders replaced by scripting.dictionary importing JPGs using GDI+.
 
-Yet to do:
+**Yet to do:**
 
     scripting.dictionary eventually replaced by cristianbuse/VBA-FastDictionary.
 
