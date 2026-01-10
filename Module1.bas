@@ -2178,6 +2178,9 @@ Public Sub reloadProgram()
     
     Call unloadAllForms(False) ' unload forms but do not END
     
+    ' remove the contents of the main imageList
+    gdipImageList.Clear
+    
     ' this will call the routines as called by sub main() and initialise the program and RELOAD the RichClient forms.
     Call mainRoutine(True) ' sets the restart flag to avoid repriming the RichClient message pump.
 
