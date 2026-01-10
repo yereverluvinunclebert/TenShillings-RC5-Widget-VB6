@@ -6,16 +6,57 @@ BEGIN
   DataSourceBehavior  = 0  'vbNone
   MTSTransactionMode  = 0  'NotAnMTSObject
 END
-Attribute VB_Name = "cImageList32"
+Attribute VB_Name = "cGdipImageList"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 '---------------------------------------------------------------------------------------
-' Module    : cImageList32
-' Author    : The vast majority from beededea but the basic class boilerplate and some bug-fixing from chatGPT
+' Module    : cGdipImageList
+' Author    : The vast majority from beededea but the basic class-boilerplate and some bug-fixing from chatGPT
 ' Date      : 04/01/2026
-' Purpose   : replacement of the RichClient imageList using the scripting.dictionary and GDI+ to store images.
+' Purpose   : Replacement of the RichClient imageList using the scripting.dictionary and GDI+ to store and pull VB6 native type images.
+'             JPG, BMP, PNG tested so far. PNGs will display correctly with transparency if displayed using GDI+.
+'             Alpha PNGs will display with a black background on any standard VB6 control but should display perfectly
+'             using TwinBasic's native controls that have automatic PNG support built in.
+'
+'             Why is this ImageList useful?
+
+'             * It is a Dictionary-backed ImageList, when using Cristian Buse's dictionary replacement, no scripting runtime dependency.
+'             * It can store JPG, BMP, PNG files and others too.
+'             * It can store images with alpha transparency as GDI+ provides this capability
+'             * It can store images of varying size, not just small 16x16 or 32x32 icons as per the old VB6 imageList.
+'             * Avoids RichClient dependency.
+'             * Avoids runtime obsolescence.
+'             * Uses dependable GDI+ to load and unload the images.
+'             * You have full control as it is FOSS.
+'             * The usage syntax is very similar to Rich Client's for easy drop-in replacement.
+'             * It is quicker to pull images from the dictionary than directly from file.
+'             * If used with Elroy's standard picture Ex project it can parse and render alpha images (PNGs &c) directly to VB6 picture/imageboxes.
+'
+'             Limitations?
+'
+'             * You can't currently use this imageList with RichClient as Olaf's code is designed specifically to work with his own imageList, eg. CC.RenderSurfaceContent
+'             * VB6 still can't handle PNGs with alpha unless you use something like Elroy's standard picture Ex project.
+'
+'             Usage:
+'
+'             Add a public or private variable to a module (BAS) in order to create a new GDI+ image list instance.
+'             Public gdipImageList As New cGdipImageList
+'
+'             Add a public variable to a module (BAS) to provide an instance counter for each usage of the class.
+'             Public gGdipImageListInstanceCount As Long
+'
+'             gdipImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
+'             Set imgAbout.Picture = gdipImageList.Picture("about-icon-dark")
+'             gdipImageList.Remove "about-icon-dark"
+'             dictionaryCount = gdipImageList.count
+'             If gdipImageList.Exists(thiskey) Then ...
+'             gdipImageList.ImageWidth = 150 ' sets the imageWidth, a value of zero causes the image's real width to be used
+'             gdipImageList.ImageHeight ' ditto
+'             gdipImageList.ImageOpacity = 100 ' 0-100% prior to loading will set the opacity
+'             gdipImageList.Clear  ' clears the imageList
+'
 '---------------------------------------------------------------------------------------
 
 Option Explicit
@@ -37,7 +78,7 @@ Private Declare Function CreateDIBSection Lib "gdi32" _
 Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
 Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
 Private Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObj As Long) As Long
-Private Declare Function DeleteObject Lib "gdi32" (ByVal hObj As Long) As Long
+'Private Declare Function DeleteObject Lib "gdi32" (ByVal hObj As Long) As Long
 Private Declare Function OleCreatePictureIndirect Lib "oleaut32" _
     (ByRef PicDesc As PICTDESC, _
      ByRef RefIID As GUID, _
@@ -56,7 +97,7 @@ Private Declare Function GdipDisposeImage Lib "GDIPlus" _
 Private Declare Function GdipCreateHBITMAPFromBitmap Lib "GDIPlus" (ByVal bitmap As Long, ByRef hbmReturn As Long, ByVal background As Long) As Long
 Private Declare Function CreateStreamOnHGlobal Lib "ole32" (ByVal hGlob&, ByVal fDeleteOnRelease As Long, ppstm As stdole.IUnknown) As Long
 Private Declare Function GdipLoadImageFromStream Lib "GDIPlus" (ByVal pStream As Long, image As Long) As Long
-Private Declare Function GdipGetImageWidth Lib "GdiPlus.dll" (ByVal image As Long, width As Long) As Long
+Private Declare Function GdipGetImageWidth Lib "GdiPlus.dll" (ByVal image As Long, Width As Long) As Long
 Private Declare Function GdipGetImageHeight Lib "GdiPlus.dll" (ByVal image As Long, height As Long) As Long
 Private Declare Function GdipCreateBitmapFromScan0 Lib "GDIPlus" (ByVal dx As Long, ByVal dy As Long, ByVal stride As Long, ByVal PixelFormat As Long, ByVal pScanData As Long, image As Long) As Long
 Private Declare Function GdipGetImageGraphicsContext Lib "GDIPlus" (ByVal img As Long, Context As Long) As Long
@@ -75,7 +116,7 @@ Private Declare Function GdipCreateBitmapFromHBITMAP Lib "GdiPlus.dll" (ByVal hB
 
 ' APIs image cropping
 Private Declare Function GdipGetImagePixelFormat Lib "GDIPlus" (ByVal image As Long, ByRef PixelFormat As Long) As Long
-Private Declare Function GdipCloneBitmapAreaI Lib "GDIPlus" (ByVal x As Long, ByVal y As Long, ByVal width As Long, ByVal height As Long, ByVal PixelFormat As Long, ByVal srcBitmap As Long, dstBitmap As Long) As GpStatus
+Private Declare Function GdipCloneBitmapAreaI Lib "GDIPlus" (ByVal x As Long, ByVal y As Long, ByVal Width As Long, ByVal height As Long, ByVal PixelFormat As Long, ByVal srcBitmap As Long, dstBitmap As Long) As GpStatus
 
 Private Declare Function GdipCreateFromHDC Lib "GDIPlus" _
     (ByVal hDC As Long, ByRef graphics As Long) As Long
@@ -85,7 +126,7 @@ Private Declare Function GdipDrawImageRectI Lib "GDIPlus" _
      ByVal image As Long, _
      ByVal x As Long, _
      ByVal y As Long, _
-     ByVal width As Long, _
+     ByVal Width As Long, _
      ByVal height As Long) As Long
      
 ' Windows constants Start
@@ -255,19 +296,31 @@ End Enum
 Private lngGDI As Long
 Private gdipInit As GDIPLUS_STARTINPUT
 
-'Private mDict As Object ' Scripting.Dictionary or Cristian Buse's dictionary class
+'Private mDict As Object ' You will need a project reference to the Scripting.Dictionary
+
+'-----------------------------------------------------------
+' Declarations for the scripting.dictionary replacement START
+'-----------------------------------------------------------
 
 Private Type JustMyUDT
     dict As Dictionary
 End Type
 
-#Const x64StackIssues = ((Mac = 0) And Win64 And (TWINBASIC = 0))
+#Const x64StackIssues = ((Mac = 0) And Win64 And (TwinBASIC = 0))
 
 '#If twinbasic Then
     'Private mDict As Collection ' std TB collection
 '#Else
     Private mDict As Dictionary ' scripting.dictionary
 '#End If
+'-----------------------------------------------------------
+' Declarations for the scripting.dictionary replacements END
+'-----------------------------------------------------------
+
+' member property variables
+Private mImageWidth As Long
+Private mImageHeight As Long
+Private mImageOpacity As Integer
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Class_Initialize
@@ -277,19 +330,28 @@ End Type
 '---------------------------------------------------------------------------------------
 '
 Private Sub Class_Initialize()
+
     On Error GoTo Class_Initialize_Error
+    
+    gGdipImageListInstanceCount = gGdipImageListInstanceCount + 1
 
     'Set mDict = CreateObject("Scripting.Dictionary")
-    Set mDict = New Dictionary
+    
+    Set mDict = New Dictionary ' if you are using Cristian Buse's Dictionary replacement for the Scripting.Dictionary
     
     Call initialiseGDIPStartup
-
+    
+    ' with image dimensions set to 0, the image's default dimensions will be extracted from the image itself
+    mImageWidth = 0
+    mImageHeight = 0
+    ImageOpacity = 100
+    
     On Error GoTo 0
     Exit Sub
 
 Class_Initialize_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class Module cGdipImageList"
 End Sub
 
 '---------------------------------------------------------------------------------------
@@ -302,18 +364,24 @@ End Sub
 Private Sub Class_Terminate()
     On Error GoTo Class_Terminate_Error
 
+    ' Clear the whole image list
     Clear
+    
     Set mDict = Nothing
     
-    ' Shutdown GDI+
-    If lngGDI Then Call GdiplusShutdown(lngGDI)
-
+    gGdipImageListInstanceCount = gGdipImageListInstanceCount - 1
+        
+    ' Only Shutdown GDI+ when there are no users of this class left
+    If lngGDI Then
+        If gGdipImageListInstanceCount = 0 Then Call GdiplusShutdown(lngGDI)
+    End If
+    
     On Error GoTo 0
     Exit Sub
 
 Class_Terminate_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Terminate of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Terminate of Class Module cGdipImageList"
 End Sub
 
 
@@ -324,17 +392,141 @@ End Sub
 ' Purpose   : Obtain the current count of items in the dictionary
 '---------------------------------------------------------------------------------------
 '
-Public Property Get Count() As Long
+Public Property Get count() As Long
     On Error GoTo Count_Error
 
-    Count = mDict.Count
+    count = mDict.count
 
     On Error GoTo 0
     Exit Property
 
 Count_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Count of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Count of Class Module cGdipImageList"
+End Property
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : ImageWidth
+' Author    : beededea
+' Date      : 05/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get ImageWidth() As Long
+    On Error GoTo ImageWidth_Error
+
+    ImageWidth = mImageWidth
+
+    On Error GoTo 0
+    Exit Property
+
+ImageWidth_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ImageWidth of Class Module cGdipImageList"
+End Property
+'---------------------------------------------------------------------------------------
+' Procedure : ImageWidth
+' Author    : beededea
+' Date      : 05/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let ImageWidth(ByVal newValue As Long)
+    On Error GoTo ImageWidth_Error
+
+    If mImageWidth <> newValue Then mImageWidth = newValue Else Exit Property
+
+    On Error GoTo 0
+    Exit Property
+
+ImageWidth_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ImageWidth of Class Module cGdipImageList"
+End Property
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : ImageHeight
+' Author    : beededea
+' Date      : 05/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Get ImageHeight() As Long
+    On Error GoTo ImageHeight_Error
+
+    ImageHeight = mImageHeight
+
+    On Error GoTo 0
+    Exit Property
+
+ImageHeight_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ImageHeight of Class Module cGdipImageList"
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : ImageHeight
+' Author    : beededea
+' Date      : 05/09/2025
+' Purpose   :
+'---------------------------------------------------------------------------------------
+'
+Public Property Let ImageHeight(ByVal newValue As Long)
+    On Error GoTo ImageHeight_Error
+
+    If mImageHeight <> newValue Then mImageHeight = newValue Else Exit Property
+
+    On Error GoTo 0
+    Exit Property
+
+ImageHeight_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ImageHeight of Class Module cGdipImageList"
+End Property
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : ImageOpacity
+' Author    : beededea
+' Date      : 05/09/2025
+' Purpose   : image Opacity is not much use when using VB6 resulting in a black background
+'             better for use with TwinBasic
+'---------------------------------------------------------------------------------------
+'
+Public Property Get ImageOpacity() As Integer
+    On Error GoTo ImageOpacity_Error
+
+    ImageOpacity = mImageOpacity
+
+    On Error GoTo 0
+    Exit Property
+
+ImageOpacity_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ImageOpacity of Class Module cGdipImageList"
+End Property
+
+'---------------------------------------------------------------------------------------
+' Procedure : ImageOpacity
+' Author    : beededea
+' Date      : 05/09/2025
+' Purpose   : image Opacity is not much use when using VB6 resulting in a black background
+'             better for use with TwinBasic
+'---------------------------------------------------------------------------------------
+'
+Public Property Let ImageOpacity(ByVal newValue As Integer)
+    On Error GoTo ImageOpacity_Error
+
+    If mImageOpacity <> newValue Then mImageOpacity = newValue Else Exit Property
+
+    On Error GoTo 0
+    Exit Property
+
+ImageOpacity_Error:
+
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ImageOpacity of Class Module cGdipImageList"
 End Property
 
 '---------------------------------------------------------------------------------------
@@ -354,7 +546,7 @@ Public Function Exists(ByVal Key As String) As Boolean
 
 Exists_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Exists of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Exists of Class Module cGdipImageList"
 End Function
 
 '---------------------------------------------------------------------------------------
@@ -380,7 +572,7 @@ Public Sub Remove(ByVal Key As String)
 
 Remove_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Remove of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Remove of Class Module cGdipImageList"
 End Sub
 
 '---------------------------------------------------------------------------------------
@@ -407,7 +599,7 @@ Public Sub Clear()
 
 Clear_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Clear of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Clear of Class Module cGdipImageList"
 End Sub
 
 '---------------------------------------------------------------------------------------
@@ -429,7 +621,7 @@ Public Function GetImage(ByVal Key As String) As Long
 
 GetImage_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure GetImage of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure GetImage of Class Module cGdipImageList"
 End Function
 
 '---------------------------------------------------------------------------------------
@@ -441,16 +633,12 @@ End Function
 '
 Public Sub AddImage(ByVal Key As String, ByVal FilePath As String)
 
-    Dim imageOpacity As Long: imageOpacity = 0
-
     On Error GoTo AddImage_Error
-    
-    imageOpacity = 100
 
     If mDict.Exists(Key) Then Err.Raise 457, , "Key already exists"
     
     If fFExists(FilePath) Then
-        resizeAndLoadImgToDict mDict, Key, FilePath, 0, 0, (128), (128), , imageOpacity
+        resizeAndLoadImgToDict mDict, Key, FilePath, mImageWidth, mImageHeight, , mImageOpacity
     Else
         MsgBox " File not found " & FilePath
     End If
@@ -460,7 +648,7 @@ Public Sub AddImage(ByVal Key As String, ByVal FilePath As String)
 
 AddImage_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure AddImage of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure AddImage of Class Module cGdipImageList"
 End Sub
 
 '---------------------------------------------------------------------------------------
@@ -478,14 +666,14 @@ Public Function Picture(ByVal Key As String) As StdPicture
     If Not mDict.Exists(Key) Then Err.Raise 5, , "Image key not found"
     
     gpImage = GetImage(Key)
-    Set Picture = fBmpToStdPicture(gpImage, 150, 150)
+    Set Picture = fBmpToStdPicture(gpImage, mImageWidth, mImageHeight)
 
     On Error GoTo 0
     Exit Function
 
 Picture_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Picture of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Picture of Class Module cGdipImageList"
 End Function
 
 
@@ -496,28 +684,34 @@ End Function
 ' Purpose   : Obtain a stdPicture handle to a bitmap image from the collection
 '---------------------------------------------------------------------------------------
 '
-Public Function fBmpToStdPicture(ByVal lhImageBitmap As Long, ByVal width As Long, ByVal height As Long) As StdPicture
+Public Function fBmpToStdPicture(ByVal lhImageBitmap As Long, ByVal Width As Long, ByVal height As Long) As StdPicture
 
     Dim hDC As Long: hDC = 0
     Dim hDibBitmap As Long: hDibBitmap = 0
-    Dim hBitmap As Long: hBitmap = 0
     Dim hOld As Long: hOld = 0
     Dim lhGraphics As Long: lhGraphics = 0
-    Dim lRes As Long: lRes = 0
+    Dim dx As Long: dx = 0
+    Dim dy As Long: dy = 0
     
-    ' Create target bitmap
     On Error GoTo fBmpToStdPicture_Error
     
     ' Initialises the hDC to draw upon, a handle to the Device Context (HDC) is obtained before output is written and then released after elements have been written.
     ' Get a device context compatible with the screen
     hDC = CreateCompatibleDC(ByVal 0&)
 
+    'GDI+ API to determine image dimensions - note that using GDIP to resize can result in ghost boundaries or 'edging'
+    Call GdipGetImageWidth(lhImageBitmap, dx) ' cairo_image_surface_get_width ' the width of the surface in pixels.
+    If Width <= 0 Then Width = dx ' if no supplied width then use the original width
+    
+    Call GdipGetImageHeight(lhImageBitmap, dy) ' cairo_image_surface_get_height ()
+    If height <= 0 Then height = dy
+
     ' create an alpha channel RGB DIB target bitmap
-    hDibBitmap = fCreateNewGdipDIBsection(width, height, hDC)
+    hDibBitmap = fCreateNewGdipDIBsection(Width, height, hDC)
 
     If hDibBitmap <> 0 Then
-'       select the bitmap into the memory DC
-        ' Make the device context hDC use the bitmap.  hOld is a return value giving a handle which determines success and allows reverting later to release GDI handles
+        ' select the bitmap into the memory DC
+        ' make the device context hDC use the bitmap.  hOld is a return value giving a handle which determines success and allows reverting later to release GDI handles
         hOld = SelectObject(hDC, hDibBitmap)
     Else
       DeleteDC hDC
@@ -527,29 +721,31 @@ Public Function fBmpToStdPicture(ByVal lhImageBitmap As Long, ByVal width As Lon
     ' Create GDI+ graphics, wrap target DC in GDI+, creating a GDIP graphic object with a pointer 'lhGraphics' using a handle to the bitmap graphic section assigned to the device context
     GdipCreateFromHDC hDC, lhGraphics
 
-    ' get the image width to retain the ratio
-'    GdipGetImageWidth lhImageBitmap, width
-'    GdipGetImageHeight lhImageBitmap, height
-
     ' Draw image (scaled if required)
-    GdipDrawImageRectI lhGraphics, lhImageBitmap, 0, 0, width, height
-
-    ' Cleanup GDI+
-    GdipDeleteGraphics lhGraphics
-    SelectObject hDC, hOld
-    DeleteDC hDC
+    GdipDrawImageRectI lhGraphics, lhImageBitmap, 0, 0, Width, height
 
     ' Convert hDibBitmap to StdPicture
     Set fBmpToStdPicture = fOleCreatePicFromHBitmap(hDibBitmap) ' return
 
     ' StdPicture now owns the bitmap
-
-    On Error GoTo 0
-    Exit Function
+    
+    GoTo fBmpToStdPicture_CleanUp
 
 fBmpToStdPicture_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure fBmpToStdPicture of Class Module cImageList32"
+    On Error GoTo 0
+    
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure fBmpToStdPicture of Class Module cGdipImageList"
+     
+fBmpToStdPicture_CleanUp:
+    
+    ' Cleanup GDI+
+    GdipDeleteGraphics lhGraphics
+    SelectObject hDC, hOld
+    DeleteDC hDC
+
+    Exit Function
+
 End Function
 
 
@@ -588,7 +784,7 @@ Private Function fCreateNewGdipDIBsection(ByVal cx As Long, ByVal cy As Long, By
 
 fCreateNewGdipDIBsection_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure fCreateNewGdipDIBsection of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure fCreateNewGdipDIBsection of Class Module cGdipImageList"
 End Function
 
 
@@ -637,14 +833,14 @@ Private Function fOleCreatePicFromHBitmap(ByVal hBmp As Long) As StdPicture
 
 fOleCreatePicFromHBitmap_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure fOleCreatePicFromHBitmap of Class Module cImageList32"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure fOleCreatePicFromHBitmap of Class Module cGdipImageList"
 End Function
 
 '---------------------------------------------------------------------------------------
 ' Procedure : ReadBytesFromFile
-' Author    : beededea
+' Author    : Credit to Olaf Schmidt
 ' Date      : 07/04/2020
-' Purpose   : Credit to Olaf Schmidt
+' Purpose   : Reads the file as a stream of data using the ADODB.Stream object
 '---------------------------------------------------------------------------------------
 '
 Private Function ReadBytesFromFile(ByVal filename As String) As Byte()
@@ -668,7 +864,7 @@ Private Function ReadBytesFromFile(ByVal filename As String) As Byte()
 
 ReadBytesFromFile_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ReadBytesFromFile of Class Module cImageList32"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ReadBytesFromFile of Class Module cGdipImageList"
 End Function
 
 
@@ -743,7 +939,7 @@ Private Function GetEncoderClsid(strMimeType As String, ClassID As CLSID) As Lon
 
 GetEncoderClsid_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure GetEncoderClsid of Class Module cImageList32"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure GetEncoderClsid of Class Module cGdipImageList"
 End Function
 
 
@@ -775,7 +971,7 @@ Private Function PtrToStrW(ByVal lpsz As Long) As String
 
 PtrToStrW_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure PtrToStrW of Class Module cImageList32"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure PtrToStrW of Class Module cGdipImageList"
 End Function
 
 '---------------------------------------------------------------------------------------
@@ -786,7 +982,7 @@ End Function
 ' Purpose   : Creates the scaled image with quality and opacity attributes
 '---------------------------------------------------------------------------------------
 '
-Private Function createGdipBitmap(SrcImg As Long, dxSrc As Long, dySrc As Long, dxDst As Long, dyDst As Long, opacity As Integer) As Long
+Private Function createGdipBitmap(SrcImg As Long, dxSrc As Long, dySrc As Long, dxDst As Long, dyDst As Long, Opacity As Integer) As Long
     Dim img As Long: img = 0
     Dim Ctx As Long: Ctx = 0
     Dim imgQuality As Long: imgQuality = 0
@@ -805,7 +1001,7 @@ Private Function createGdipBitmap(SrcImg As Long, dxSrc As Long, dySrc As Long, 
     clrMatrix.m(0, 0) = 1
     clrMatrix.m(1, 1) = 1
     clrMatrix.m(2, 2) = 1
-    clrMatrix.m(3, 3) = 1 * opacity / 100 ' 0.5 'Alpha transform (50%) ' cairo_image_surface_create_for_data (BGRA = alpha)
+    clrMatrix.m(3, 3) = 1 * Opacity / 100 ' 0.5 'Alpha transform (50%) ' cairo_image_surface_create_for_data (BGRA = alpha)
     clrMatrix.m(4, 4) = 1
 
     ' Use the existing buffer pCairoBuf that has (iRenderWidth * iRenderHeight * 4) bytes, 4 bytes per pixel for ARGB32 and zero row padding
@@ -829,7 +1025,7 @@ Private Function createGdipBitmap(SrcImg As Long, dxSrc As Long, dySrc As Long, 
     Call GdipCreateBitmapFromScan0(dxDst, dyDst, dxDst * 4, PixelFormat32bppPARGB, 0, img) ' Cairo.CreateSurface & Set_Device_Offset
     
     If img Then
-        createGdipBitmap = img ' set the return value to the bitmap object
+        createGdipBitmap = img ' set the return value to the bitmap object at this point, we still have more to do to it.
         
         'Creates a Graphics object hw context - ctx, that is now associated with an Image bitmap object (surface).
         Call GdipGetImageGraphicsContext(img, Ctx)
@@ -868,7 +1064,7 @@ Private Function createGdipBitmap(SrcImg As Long, dxSrc As Long, dySrc As Long, 
 
 createGdipBitmap_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure createGdipBitmap of Class Module cImageList32"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure createGdipBitmap of Class Module cGdipImageList"
 End Function
 
 
@@ -883,28 +1079,19 @@ End Function
 '             Finally, uses a function GdipCreateBitmapFromScan0 to both create and resize the image.
 '---------------------------------------------------------------------------------------
 '
-Private Function resizeAndLoadImgToDict(ByRef thisDictionary As Object, ByVal Key As String, ByVal strFilename As String, ByVal Left As Long, ByVal Top As Long, ByVal width As Long, ByVal height As Long, Optional ByVal fullStringKey As String = "", Optional ByVal imageOpacity As Integer) As Long
+Private Sub resizeAndLoadImgToDict(ByRef thisDictionary As Object, ByVal Key As String, ByVal strFilename As String, ByVal Width As Long, ByVal height As Long, Optional ByVal fullStringKey As String = "", Optional ByVal ImageOpacity As Integer)
 
     Dim thiskey As String: thiskey = 0
-    Dim saveStatus As Boolean: saveStatus = 0
     Dim encoderCLSID As CLSID
     Dim bytesFromFile() As Byte
     Dim Strm As stdole.IUnknown
     Dim img As Long: img = 0
-    Dim imgCrop As Long: imgCrop = 0
-    Dim imgCrop2 As Long: imgCrop2 = 0
     Dim dx As Long: dx = 0
     Dim dy As Long: dy = 0
-    Dim dockSkinWidth As Long: dockSkinWidth = 0
-    Dim cropWidth As Long: cropWidth = 0
-    Dim action As String: action = 0
-    Dim lngPixelFormat As Long: lngPixelFormat = 0
     Dim picBitmap As Long: picBitmap = 0
 
     On Error GoTo resizeAndLoadImgToDict_Error
-    
-    cropWidth = 100 ' temporary needs a param
-    
+        
     ' Get the CLSID of the PNG encoder
     Call GetEncoderClsid("image/png", encoderCLSID)
     
@@ -912,7 +1099,7 @@ Private Function resizeAndLoadImgToDict(ByRef thisDictionary As Object, ByVal Ke
     bytesFromFile = ReadBytesFromFile(strFilename)
 
     ' creates a stream object stored in global memory using the location address of the variable where the data resides, Olaf Schmidt
-    CreateStreamOnHGlobal VarPtr(bytesFromFile(0)), 0, Strm
+    Call CreateStreamOnHGlobal(VarPtr(bytesFromFile(0)), 0, Strm)
     
     ' Creates a GDI+ Image object based on the stream, loads it into img - Olaf Schmidt
     Call GdipLoadImageFromStream(ObjPtr(Strm), img)       ' cairo_image_surface_create_from_png (const char *filename);
@@ -920,13 +1107,13 @@ Private Function resizeAndLoadImgToDict(ByRef thisDictionary As Object, ByVal Ke
 
     'GDI+ API to determine image dimensions, Olaf Schmidt
     Call GdipGetImageWidth(img, dx) ' cairo_image_surface_get_width ' the width of the surface in pixels.
-    If width <= 0 Then width = dx
+    If Width <= 0 Then Width = dx ' if no supplied width then use the original width
     
     Call GdipGetImageHeight(img, dy) ' cairo_image_surface_get_height ()
     If height <= 0 Then height = dy
         
     ' create a scaled GDI+ bitmap of the image surface using GdipCreateBitmapFromScan0 and context quality attributes
-    picBitmap = createGdipBitmap(img, dx, dy, width, height, imageOpacity)
+    picBitmap = createGdipBitmap(img, dx, dy, Width, height, ImageOpacity)
 
     'override any key
     If fullStringKey = "" Then
@@ -943,13 +1130,13 @@ Private Function resizeAndLoadImgToDict(ByRef thisDictionary As Object, ByVal Ke
     thisDictionary.Add thiskey, picBitmap
 
    On Error GoTo 0
-   Exit Function
+   Exit Sub
 
 resizeAndLoadImgToDict_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure resizeAndLoadImgToDict with this file - " & strFilename & " of Class Module cImageList32"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure resizeAndLoadImgToDict with this file - " & strFilename & " of Class Module cGdipImageList"
         
-End Function
+End Sub
 
 
 '---------------------------------------------------------------------------------------

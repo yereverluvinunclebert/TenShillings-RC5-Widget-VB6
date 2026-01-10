@@ -19,5 +19,5 @@ cwHelp = 33, 43, 1449, 982,
 clsTimer = 52, 52, 1412, 946, 
 clsTimerManager = 78, 78, 1438, 972, 
 modTimerWnd = 52, 52, 1412, 946, 
-Dictionary = 0, 0, 0, 0, C
-cImageList32 = 234, 234, 1594, 1128, 
+Dictionary = 104, 104, 1504, 804, 
+cGdipImageList = 0, 0, 0, 0, C

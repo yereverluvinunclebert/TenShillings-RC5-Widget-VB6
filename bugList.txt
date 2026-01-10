@@ -93,6 +93,8 @@ removed manifest for TB
 TODO
 ====
 
+' document
+' add cleanup
 ' make the same changes to the RC5 PZ CPU gauge
 
 ' add the capability to move the widget manually using CTRL+up/down/left/right &c to the RC5 and RC6 versions of the widget

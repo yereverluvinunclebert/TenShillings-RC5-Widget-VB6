@@ -23,7 +23,7 @@ Private Const CF_SCREENFONTS As Long = &H1
 Private Type FormFontInfo
   Name As String
   Weight As Integer
-  Height As Integer
+  height As Integer
   UnderLine As Boolean
   Italic As Boolean
   Color As Long
@@ -449,7 +449,11 @@ Private pbDebugMode As Boolean ' .30 DAEB 03/03/2021 frmMain.frm replaced the in
 
 Public gdResizeRestriction As Double
 
-Public gdipImageList As New cImageList32
+' new GDI+ image list instance
+Public gdipImageList As New cGdipImageList
+
+' counter for each usage of the class
+Public gGdipImageListInstanceCount As Long
 
 '---------------------------------------------------------------------------------------
 ' Procedure : fFExists
@@ -1132,7 +1136,7 @@ Public Sub displayFontSelector(ByRef currFont As String, ByRef currSize As Integ
 
     With thisFont
       .Color = currColour
-      .Height = currSize
+      .height = currSize
       .Weight = currWeight
       '400     Font is normal.
       '700     Font is bold.
@@ -1150,7 +1154,7 @@ Public Sub displayFontSelector(ByRef currFont As String, ByRef currSize As Integ
     
     With thisFont
         currFont = .Name
-        currSize = .Height
+        currSize = .height
         currWeight = .Weight
         currItalics = .Italic
         currUnderline = .UnderLine
@@ -1232,7 +1236,7 @@ Public Function fDialogFont(ByRef f As FormFontInfo) As Boolean
     logFnt.lfWeight = f.Weight
     logFnt.lfItalic = f.Italic * -1
     logFnt.lfUnderline = f.UnderLine * -1
-    logFnt.lfHeight = -fMulDiv(CLng(f.Height), GetDeviceCaps(GetDC(hWndAccessApp), LOGPIXELSY), 72)
+    logFnt.lfHeight = -fMulDiv(CLng(f.height), GetDeviceCaps(GetDC(hWndAccessApp), LOGPIXELSY), 72)
     Call StringToByte(f.Name, logFnt.lfFaceName())
     ftStruc.rgbColors = f.Color
     ftStruc.lStructSize = Len(ftStruc)
@@ -1259,7 +1263,7 @@ Public Function fDialogFont(ByRef f As FormFontInfo) As Boolean
       f.Italic = CBool(logFnt.lfItalic)
       f.UnderLine = CBool(logFnt.lfUnderline)
       f.Name = fByteToString(logFnt.lfFaceName())
-      f.Height = CLng(ftStruc.iPointSize / 10)
+      f.height = CLng(ftStruc.iPointSize / 10)
       f.Color = ftStruc.rgbColors
       fDialogFont = True
     Else
@@ -1403,7 +1407,7 @@ Public Sub aboutClickEvent()
     
     ' The RC forms are measured in pixels so the positioning needs to pre-convert the twips into pixels
    
-    fMain.aboutForm.Top = (glPhysicalScreenHeightPixels / 2) - (fMain.aboutForm.Height / 2)
+    fMain.aboutForm.Top = (glPhysicalScreenHeightPixels / 2) - (fMain.aboutForm.height / 2)
     fMain.aboutForm.Left = (glPhysicalScreenWidthPixels / 2) - (fMain.aboutForm.Width / 2)
      
     fMain.aboutForm.Load
@@ -1446,7 +1450,7 @@ Public Sub helpSplash()
         playSound App.Path & "\resources\sounds\" & fileToPlay, ByVal 0&, SND_FILENAME Or SND_ASYNC
     End If
 
-    fMain.helpForm.Top = (glPhysicalScreenHeightPixels / 2) - (fMain.helpForm.Height / 2)
+    fMain.helpForm.Top = (glPhysicalScreenHeightPixels / 2) - (fMain.helpForm.height / 2)
     fMain.helpForm.Left = (glPhysicalScreenWidthPixels / 2) - (fMain.helpForm.Width / 2)
      
     'helpWidget.MyOpacity = 0
@@ -1492,7 +1496,7 @@ Public Sub licenceSplash()
     End If
     
     
-    fMain.licenceForm.Top = (glPhysicalScreenHeightPixels / 2) - (fMain.licenceForm.Height / 2)
+    fMain.licenceForm.Top = (glPhysicalScreenHeightPixels / 2) - (fMain.licenceForm.height / 2)
     fMain.licenceForm.Left = (glPhysicalScreenWidthPixels / 2) - (fMain.licenceForm.Width / 2)
      
     'licenceWidget.opacity = 0
@@ -1914,10 +1918,10 @@ Private Sub checkScreenEdgeBottom()
     
     On Error GoTo checkScreenEdgeBottom_Error
 
-    If (fMain.TenShillingsForm.Top + fMain.TenShillingsForm.Height) > glVirtualScreenHeightPixels Then  ' if any part of the form is off screen
+    If (fMain.TenShillingsForm.Top + fMain.TenShillingsForm.height) > glVirtualScreenHeightPixels Then  ' if any part of the form is off screen
         ' the widget height is divided by two as it is doubled earlier
-        widgetCurrentHeightPx = (TenShillingsWidget.Widget.Height / 2 * TenShillingsWidget.Zoom) ' pixels
-        formMidPointY = (fMain.TenShillingsForm.Height / 2) + fMain.TenShillingsForm.Top
+        widgetCurrentHeightPx = (TenShillingsWidget.Widget.height / 2 * TenShillingsWidget.Zoom) ' pixels
+        formMidPointY = (fMain.TenShillingsForm.height / 2) + fMain.TenShillingsForm.Top
         widgetTopY = formMidPointY '- (widgetCurrentHeightPx)
         screenEdge = 100 ' pixels from the edge
         
@@ -2032,14 +2036,14 @@ Private Sub checkScreenEdgeTop()
     On Error GoTo checkScreenEdgeTop_Error
 
     If fMain.TenShillingsForm.Top < 0 Then ' if any part of the form is off screen
-        widgetCurrentHeightPx = (TenShillingsWidget.Widget.Height / 2 * TenShillingsWidget.Zoom) ' pixels
-        formMidPointY = (fMain.TenShillingsForm.Height / 2) + fMain.TenShillingsForm.Top
+        widgetCurrentHeightPx = (TenShillingsWidget.Widget.height / 2 * TenShillingsWidget.Zoom) ' pixels
+        formMidPointY = (fMain.TenShillingsForm.height / 2) + fMain.TenShillingsForm.Top
         widgetBottomY = formMidPointY + widgetCurrentHeightPx / 2
         screenEdge = 100 ' pixels from the edge
         
         ' if the widget itself is close to the left of the screen then reposition it back on screen
         If formMidPointY <= screenEdge Then
-            fMain.TenShillingsForm.Top = (screenEdge - ((fMain.TenShillingsForm.Height / 2) + (widgetCurrentHeightPx / 2))) + 300
+            fMain.TenShillingsForm.Top = (screenEdge - ((fMain.TenShillingsForm.height / 2) + (widgetCurrentHeightPx / 2))) + 300
         End If
     End If
 
@@ -2329,7 +2333,7 @@ Public Sub readPrefsPosition()
         If gsPrefsHighDpiYPosTwips <> "" Then
             widgetPrefs.Top = Val(gsPrefsHighDpiYPosTwips)
         Else
-            widgetPrefs.Top = Screen.Height / 2 - widgetPrefs.Height / 2
+            widgetPrefs.Top = Screen.height / 2 - widgetPrefs.height / 2
         End If
         
         gsPrefsHighDpiYPosTwips = CStr(widgetPrefs.Top)
@@ -2350,7 +2354,7 @@ Public Sub readPrefsPosition()
         If gsPrefsLowDpiYPosTwips <> "" Then
             widgetPrefs.Top = Val(gsPrefsLowDpiYPosTwips)
         Else
-            widgetPrefs.Top = Screen.Height / 2 - widgetPrefs.Height / 2
+            widgetPrefs.Top = Screen.height / 2 - widgetPrefs.height / 2
         End If
         
         gsPrefsLowDpiYPosTwips = CStr(widgetPrefs.Top)
@@ -2361,8 +2365,8 @@ Public Sub readPrefsPosition()
         
    ' on very first install this will be zero, then size of the prefs as a proportion of the screen size
     If gsPrefsPrimaryHeightTwips = "" Then
-        If Screen.Height > gdPrefsStartHeight * 2 Then
-            gsPrefsPrimaryHeightTwips = CStr(Screen.Height / 2)
+        If Screen.height > gdPrefsStartHeight * 2 Then
+            gsPrefsPrimaryHeightTwips = CStr(Screen.height / 2)
         Else
             gsPrefsPrimaryHeightTwips = CStr(gdPrefsStartHeight)
         End If
@@ -2408,10 +2412,10 @@ Public Sub writePrefsPositionAndSize()
         If LTrim$(gsMultiMonitorResize) <> "2" Then Exit Sub
 
         If gPrefsMonitorStruct.IsPrimary = True Then
-            gsPrefsPrimaryHeightTwips = CStr(widgetPrefs.Height)
+            gsPrefsPrimaryHeightTwips = CStr(widgetPrefs.height)
             sPutINISetting "Software\TenShillings", "prefsPrimaryHeightTwips", gsPrefsPrimaryHeightTwips, gsSettingsFile
         Else
-            gsPrefsSecondaryHeightTwips = CStr(widgetPrefs.Height)
+            gsPrefsSecondaryHeightTwips = CStr(widgetPrefs.height)
             sPutINISetting "Software\TenShillings", "prefsSecondaryHeightTwips", gsPrefsSecondaryHeightTwips, gsSettingsFile
         End If
     End If

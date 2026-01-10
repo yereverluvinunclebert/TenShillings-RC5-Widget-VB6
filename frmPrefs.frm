@@ -2397,7 +2397,7 @@ Private Sub Form_Load()
     Call setFormResizingVars
     
     ' reverts TwinBasic form themeing to that of the earlier classic look and feel
-    #If TWINBASIC Then
+    #If TwinBASIC Then
        Call setVisualStyles
     #End If
        
@@ -2444,7 +2444,7 @@ Private Sub Form_Load()
     Call startPrefsTimers
     
     glWidgetPrefsOldHeightTwips = widgetPrefs.height
-    glWidgetPrefsOldWidthTwips = widgetPrefs.width
+    glWidgetPrefsOldWidthTwips = widgetPrefs.Width
     
     ' end the startup by un-setting the start global-ish flag
     pPrefsStartupFlg = False
@@ -2529,7 +2529,7 @@ Private Sub setFormResizingVars()
     End If
     
     glWidgetPrefsOldHeightTwips = widgetPrefs.height
-    glWidgetPrefsOldWidthTwips = widgetPrefs.width
+    glWidgetPrefsOldWidthTwips = widgetPrefs.Width
 
    On Error GoTo 0
    Exit Sub
@@ -2621,7 +2621,7 @@ startPrefsTimers_Error:
 End Sub
     
 
-#If TWINBASIC Then
+#If TwinBASIC Then
     '---------------------------------------------------------------------------------------
     ' Procedure : setVisualStyles
     ' Author    : beededea
@@ -2785,8 +2785,8 @@ Public Sub positionPrefsMonitor()
     End If
     
     If formLeftTwips = 0 Then
-        If ((fMain.TenShillingsForm.Left + fMain.TenShillingsForm.width) * glScreenTwipsPerPixelX) + 200 + widgetPrefs.width > glPhysicalScreenWidthTwips Then
-            widgetPrefs.Left = (fMain.TenShillingsForm.Left * glScreenTwipsPerPixelX) - (widgetPrefs.width + 200)
+        If ((fMain.TenShillingsForm.Left + fMain.TenShillingsForm.Width) * glScreenTwipsPerPixelX) + 200 + widgetPrefs.Width > glPhysicalScreenWidthTwips Then
+            widgetPrefs.Left = (fMain.TenShillingsForm.Left * glScreenTwipsPerPixelX) - (widgetPrefs.Width + 200)
         End If
     End If
 
@@ -2795,7 +2795,7 @@ Public Sub positionPrefsMonitor()
     If formLeftTwips <> 0 Then
         widgetPrefs.Left = formLeftTwips
     Else
-        widgetPrefs.Left = glPhysicalScreenWidthTwips / 2 - widgetPrefs.width / 2
+        widgetPrefs.Left = glPhysicalScreenWidthTwips / 2 - widgetPrefs.Width / 2
     End If
     
     If formTopTwips <> 0 Then
@@ -3354,7 +3354,7 @@ Private Sub cmbDebug_Click()
         btnDefaultEditor.Enabled = False
         lblDebug(9).Enabled = False
     Else
-        #If TWINBASIC Then
+        #If TwinBASIC Then
             txtDefaultEditor.Text = gsDefaultTBEditor
         #Else
             txtDefaultEditor.Text = gsDefaultVB6Editor
@@ -3669,7 +3669,7 @@ Private Sub positionPrefsFramesButtons()
     frameTop = 1250
     leftHandGutterWidth = 240
     frameLeft = leftHandGutterWidth ' use the first frame leftmost as reference
-    rightHandAlignment = fraAboutButton.Left + fraAboutButton.width ' use final button rightmost as reference
+    rightHandAlignment = fraAboutButton.Left + fraAboutButton.Width ' use final button rightmost as reference
     frameWidth = rightHandAlignment - frameLeft
     fraScrollbarCover.Left = rightHandAlignment - 690
     
@@ -3704,14 +3704,14 @@ Private Sub positionPrefsFramesButtons()
     fraWindow.Left = frameLeft
     fraAbout.Left = frameLeft
     
-    fraGeneral.width = frameWidth
-    fraConfig.width = frameWidth
-    fraSounds.width = frameWidth
-    fraPosition.width = frameWidth
-    fraFonts.width = frameWidth
-    fraWindow.width = frameWidth
-    fraDevelopment.width = frameWidth
-    fraAbout.width = frameWidth
+    fraGeneral.Width = frameWidth
+    fraConfig.Width = frameWidth
+    fraSounds.Width = frameWidth
+    fraPosition.Width = frameWidth
+    fraFonts.Width = frameWidth
+    fraWindow.Width = frameWidth
+    fraDevelopment.Width = frameWidth
+    fraAbout.Width = frameWidth
     
     ' set the base visibility of the frames
     fraGeneral.Visible = True
@@ -3725,12 +3725,12 @@ Private Sub positionPrefsFramesButtons()
             
     fraGeneralButton.BorderStyle = 1
     
-    #If TWINBASIC Then
+    #If TwinBASIC Then
         fraGeneralButton.Refresh
     #End If
 
-    btnClose.Left = fraWindow.Left + fraWindow.width - btnClose.width
-    btnSave.Left = btnClose.Left - btnSave.width - 50
+    btnClose.Left = fraWindow.Left + fraWindow.Width - btnClose.Width
+    btnSave.Left = btnClose.Left - btnSave.Width - 50
     btnHelp.Left = frameLeft
     
     '' TenShillingsWidget.RotateBusyTimer = True
@@ -3867,7 +3867,7 @@ Private Sub btnSave_Click()
     gsDebug = CStr(cmbDebug.ListIndex)
     gsDblClickCommand = txtDblClickCommand.Text
     gsOpenFile = txtOpenFile.Text
-    #If TWINBASIC Then
+    #If TwinBASIC Then
         gsDefaultTBEditor = txtDefaultEditor.Text
     #Else
         gsDefaultVB6Editor = txtDefaultEditor.Text
@@ -4275,7 +4275,7 @@ Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
     cmbDebug.ListIndex = Val(gsDebug)
     txtDblClickCommand.Text = gsDblClickCommand
     txtOpenFile.Text = gsOpenFile
-    #If TWINBASIC Then
+    #If TwinBASIC Then
         txtDefaultEditor.Text = gsDefaultTBEditor
     #Else
         txtDefaultEditor.Text = gsDefaultVB6Editor
@@ -4533,7 +4533,7 @@ Private Sub clearBorderStyle()
     fraSoundsButton.BorderStyle = 0
     fraAboutButton.BorderStyle = 0
     
-    #If TWINBASIC Then
+    #If TwinBASIC Then
         fraGeneralButton.Refresh
         fraConfigButton.Refresh
         fraDevelopmentButton.Refresh
@@ -4616,7 +4616,7 @@ Public Sub PrefsFormResizeEvent()
         
     If pPrefsDynamicSizingFlg = True And pPrefsFormResizedByDrag = True Then
     
-        widgetPrefs.width = widgetPrefs.height / gdConstraintRatio ' maintain the aspect ratio, note: this change calls this routine again...
+        widgetPrefs.Width = widgetPrefs.height / gdConstraintRatio ' maintain the aspect ratio, note: this change calls this routine again...
         
         If gsDpiAwareness = "1" Then
             currentFontSize = gsPrefsFontSizeHighDPI
@@ -4634,8 +4634,8 @@ Public Sub PrefsFormResizeEvent()
         
     Else
         If Me.WindowState = 0 Then ' normal
-            If widgetPrefs.width > 9090 Then widgetPrefs.width = 9090
-            If widgetPrefs.width < 9085 Then widgetPrefs.width = 9090
+            If widgetPrefs.Width > 9090 Then widgetPrefs.Width = 9090
+            If widgetPrefs.Width < 9085 Then widgetPrefs.Width = 9090
             If pLastFormHeight <> 0 Then
                gbPrefsFormResizedInCode = True
                widgetPrefs.height = pLastFormHeight
@@ -4792,12 +4792,12 @@ Public Sub FormResizedOrMoved(sForm As String)
             If pPrefsFormResizedByDrag = True Then
             
                 ' test the current form height and width, if the same then it is a Form Moved on the same monitor and not a form_resize.
-                If widgetPrefs.height = glWidgetPrefsOldHeightTwips And widgetPrefs.width = glWidgetPrefsOldWidthTwips Then
+                If widgetPrefs.height = glWidgetPrefsOldHeightTwips And widgetPrefs.Width = glWidgetPrefsOldWidthTwips Then
                     Exit Sub
                 Else
                 
                     glWidgetPrefsOldHeightTwips = widgetPrefs.height
-                    glWidgetPrefsOldWidthTwips = widgetPrefs.width
+                    glWidgetPrefsOldWidthTwips = widgetPrefs.Width
                     
                     Call PrefsFormResizeEvent
                     pPrefsFormResizedByDrag = False
@@ -4866,8 +4866,8 @@ Private Sub tweakgcPrefsControlPositions(ByVal thisForm As Form, ByVal m_FormWid
     btnSave.Top = btnHelp.Top
     btnClose.Top = btnHelp.Top
     
-    btnClose.Left = fraWindow.Left + fraWindow.width - btnClose.width
-    btnSave.Left = btnClose.Left - btnSave.width - (150 * x_scale)
+    btnClose.Left = fraWindow.Left + fraWindow.Width - btnClose.Width
+    btnSave.Left = btnClose.Left - btnSave.Width - (150 * x_scale)
     btnHelp.Left = fraGeneral.Left
 
     txtPrefsFontCurrentSize.Text = y_scale * txtPrefsFontCurrentSize.FontSize
@@ -6503,7 +6503,7 @@ Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName
     
     thisFraButtonName.BorderStyle = 1
 
-    #If TWINBASIC Then
+    #If TwinBASIC Then
         thisFraButtonName.Refresh
     #End If
 
@@ -6529,7 +6529,7 @@ Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName
     chkEnableResizing.Top = btnSave.Top + 50
     'chkEnableResizing.Left = lblAsterix.Left
     
-    BorderWidth = (widgetPrefs.width - Me.ScaleWidth) / 2
+    BorderWidth = (widgetPrefs.Width - Me.ScaleWidth) / 2
     captionHeight = widgetPrefs.height - Me.ScaleHeight - BorderWidth
         
     ' under windows 10+ the internal window calcs are all wrong due to the bigger title bars
@@ -7103,13 +7103,13 @@ Private Sub setframeHeights()
         fraDevelopment.height = fraAbout.height
         fraWindow.height = fraAbout.height
         
-        fraGeneral.width = fraAbout.width
-        fraFonts.width = fraAbout.width
-        fraConfig.width = fraAbout.width
-        fraSounds.width = fraAbout.width
-        fraPosition.width = fraAbout.width
-        fraDevelopment.width = fraAbout.width
-        fraWindow.width = fraAbout.width
+        fraGeneral.Width = fraAbout.Width
+        fraFonts.Width = fraAbout.Width
+        fraConfig.Width = fraAbout.Width
+        fraSounds.Width = fraAbout.Width
+        fraPosition.Width = fraAbout.Width
+        fraDevelopment.Width = fraAbout.Width
+        fraWindow.Width = fraAbout.Width
     
         'If gsDpiAwareness = "1" Then
             ' save the initial positions of ALL the controls on the prefs form
@@ -7157,10 +7157,15 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub setPrefsIconImagesDark()
+
+Dim count As Long
     
     On Error GoTo setPrefsIconImagesDark_Error
     
         ' setting the Prefs tab Jpeg icon images to the GDIP imageList dictionary, previously used Cairo.ImageList("about-icon-dark-clicked").Picture
+
+'        gdipImageList.ImageHeight = 0
+'        gdipImageList.ImageWidth = 0
 
         ' normal images
         Set imgGeneral.Picture = gdipImageList.Picture("general-icon-dark")

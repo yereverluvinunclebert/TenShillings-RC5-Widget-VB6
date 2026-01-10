@@ -163,7 +163,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     
     ' RC message pump will auto-exit when Cairo Forms > 0 so we run it only when 0, this prevents message interruption
     ' when running twice on reload. Do not move this line.
-    #If TWINBASIC Then
+    #If TwinBASIC Then
         Cairo.WidgetForms.EnterMessageLoop
     #Else
         If restart = False Then Cairo.WidgetForms.EnterMessageLoop
@@ -223,7 +223,7 @@ Private Sub testForCodingEnvironment()
 
     On Error GoTo testForCodingEnvironment_Error
 
-    #If TWINBASIC Then
+    #If TwinBASIC Then
         gsCodingEnvironment = "TwinBasic"
     #Else
         gsCodingEnvironment = "VB6"
@@ -519,7 +519,7 @@ Private Sub addImagesToImageList()
     
     
     ' addition of the Prefs tab Jpeg icon images to the GDIP imageList dictionary, previously used Cairo.ImageList.AddImage "filename"
-    
+            
     ' normal images
     gdipImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
     gdipImageList.AddImage "about-icon-light", App.Path & "\Resources\images\about-icon-light-1010.jpg"
@@ -537,6 +537,7 @@ Private Sub addImagesToImageList()
     gdipImageList.AddImage "font-icon-light", App.Path & "\Resources\images\font-icon-light-1010.jpg"
     gdipImageList.AddImage "position-icon-light", App.Path & "\Resources\images\position-icon-light-1010.jpg"
     gdipImageList.AddImage "position-icon-dark", App.Path & "\Resources\images\position-icon-dark-1010.jpg"
+    
     
     ' clicked images
     gdipImageList.AddImage "general-icon-dark-clicked", App.Path & "\Resources\images\general-icon-dark-600-clicked.jpg"
@@ -595,7 +596,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     menuForm.mnuAbout.Caption = "About TenShillings " & gsRichClientEnvironment & " Cairo " & gsCodingEnvironment & " widget"
     
 '    ' Set the opacity of the widget, passing just this one global variable to a public property within the class
-    TenShillingsWidget.opacity = Val(gsOpacity) / 100
+    TenShillingsWidget.Opacity = Val(gsOpacity) / 100
     
     TenShillingsWidget.SkewDegrees = CDbl(gsSkewDegrees)
     
@@ -619,7 +620,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     End If
     
     If gsDebug = "1" Then
-        #If TWINBASIC Then
+        #If TwinBASIC Then
             If gsDefaultTBEditor <> vbNullString Then thisEditor = gsDefaultTBEditor
         #Else
             If gsDefaultVB6Editor <> vbNullString Then thisEditor = gsDefaultVB6Editor
@@ -643,7 +644,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     ' the alpha is already set to zero for all layers found in the PSD, we now turn them back on as we require
         
     If gsDebug = "1" Then
-        #If TWINBASIC Then
+        #If TwinBASIC Then
             If gsDefaultTBEditor <> vbNullString Then thisEditor = gsDefaultTBEditor
         #Else
             If gsDefaultVB6Editor <> vbNullString Then thisEditor = gsDefaultVB6Editor
@@ -664,7 +665,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
         TenShillingsWidget.Locked = True ' this is just here for continuity's sake, it is also set at the time the control is selected
     End If
     
-    TenShillingsWidget.opacity = Val(gsOpacity) / 100
+    TenShillingsWidget.Opacity = Val(gsOpacity) / 100
 
     ' set the z-ordering of the window
     Call setAlphaFormZordering
@@ -1093,18 +1094,18 @@ End Sub
 '
 Private Sub createRCFormsOnCurrentDisplay()
     Dim thisSrf As cCairoSurface
-    Dim imageHeight As Long: imageHeight = 0
-    Dim imageWidth As Long: imageWidth = 0
+    Dim ImageHeight As Long: ImageHeight = 0
+    Dim ImageWidth As Long: ImageWidth = 0
     
     On Error GoTo createRCFormsOnCurrentDisplay_Error
     
     If Cairo.ImageList.Exists("tenshillings") Then Set thisSrf = Cairo.ImageList("tenshillings")
     
-    imageWidth = thisSrf.width
-    imageHeight = thisSrf.height
+    ImageWidth = thisSrf.Width
+    ImageHeight = thisSrf.height
 
     With New_c.Displays(1) 'get the current Display
-      Call fMain.initAndCreateTenShillingsForm(imageWidth, imageHeight, gsWidgetName)
+      Call fMain.initAndCreateTenShillingsForm(ImageWidth, ImageHeight, gsWidgetName)
     End With
 
     With New_c.Displays(1) 'get the current Display
