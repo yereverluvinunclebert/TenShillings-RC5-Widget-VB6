@@ -1,3 +1,73 @@
+
+TODO
+====
+
+' document
+
+' add the enumeration property to both the GDIP and TB collection imagelists and also in the github version
+' amend the credits to incorporate Cristian Buse and chatGPT
+' search for other credits using mz-tools and add  so that they appear on the prefs about tab
+' do the same to the cpu gauge.
+
+' extract the cpu XML reader code to a class? - think about it
+
+' create a window in code without all the form trimmings
+' amend the existing Cairo project to place persistent images on the window
+
+' On smaller screen sizes, when the 10/-note is resized to larger size, the bottom of the 10/- note is cut off as the RC form height is limited by the screen dimensions.
+' so, temporarily we need to constrain the note maximum size to the extents of the form.
+' position the note to the middle off the form Y position
+
+' we can also use a canvas to write the image to a larger background.
+' Have a sample canvas RC project by Olaf alpha* that shows how to use a canvas as Olaf suggests
+
+' test the icon sizes on 32bit Win7, XP and ReactOS, find out if greater than 48x48 causes a crash, therefore excluding the 256x256 icon
+' 32x32 (24 bit)
+' 16x16 (24 bit)
+' 48x48 (32 bit)
+' 32x32 (32 bit)
+' 16x16 (32 bit)
+
+' test on Win 10
+' test on 32bit win 7
+' test on XP
+' test on ReactOS
+
+' if any newer, Vista + API code fails on VB6 then we can start by adding some API checks and removing functionality
+' https://www.vbforums.com/showthread.php?896944-VB6-QUESTION-Check-if-API-exists
+
+' windevlib - observe, test and determine whether to use within TB version, implications WIP
+
+' oleexp
+
+Final Tasks
+===========
+
+' credits update
+' XML
+' setup2go
+' Github release
+
+Not going to do (or much, much later)
+====================================
+
+' 32bit to 64bit conversion but only when RC is 64bit.
+
+' add functionality to the prefs to allow autoscaling dependent upon different monitor scaling factors using WM_DPICHANGED? Think and decide.
+'    we can already size a form per monitor, all we would need is to do the same when a DPI change is detected.
+'    this would help as the form resizing would occur as soon as the form leaves one monitor for another.
+'    the downside is that it would only work when DPI is different on both monitors
+'
+'    if we implemented this would it be significantly better than the current size by monitor?
+'    only because it would occur as soon the form is slotted over to the second monitor
+
+' an alternative would be to use a wm message that indicates when a form is being moved, then we would compare the form current position to the
+'    current monitor height and width or check whether it is within the bounds of the 2nd monitor then trigger a form resize.
+'    for the moment this is quite a big bit work and not high enough priority...
+
+
+
+
 DONE
 
 Rotation
@@ -90,66 +160,10 @@ removed manifest for TB
 ' add a sample API timer in code that runs within the context of the class to replace any RC timers
 ' replace the few uses of the RC5 timers with the new timer code just implemented, about, licence and help fade in and outs.
 
-TODO
-====
+' add the capability to move the widget manually using SHIFT+up/down/left/right &c to the RC5 and RC6 versions of the widget
 
-' document
-' add cleanup
-' make the same changes to the RC5 PZ CPU gauge
+* RC imageLists for non-Cairo renders replaced by scripting.dictionary importing JPGs using GDI+.
+* scripting.dictionary replaced by cristianbuse/VBA-FastDictionary.
 
-' add the capability to move the widget manually using CTRL+up/down/left/right &c to the RC5 and RC6 versions of the widget
-
-' On smaller screen sizes, when the 10/-note is resized to larger size, the bottom of the 10/- note is cut off as the RC form height is limited by the screen dimensions.
-' so, temporarily we need to constrain the note maximum size to the extents of the form.
-' position the note to the middle off the form Y position
-
-' later on we can use a canvas to write the image to a larger background.
-' Have a sample canvas RC project by Olaf alpha* that shows how to use a canvas as Olaf suggests
-
-' test the icon sizes on 32bit Win7, XP and ReactOS, find out if greater than 48x48 causes a crash, therefore excluding the 256x256 icon
-' 32x32 (24 bit)
-' 16x16 (24 bit)
-' 48x48 (32 bit)
-' 32x32 (32 bit)
-' 16x16 (32 bit)
-
-' test on Win 10
-' test on 32bit win 7
-' test on XP
-' test on ReactOS
-
-' if any newer, Vista + API code fails on VB6 then we can start by adding some API checks and removing functionality
-' https://www.vbforums.com/showthread.php?896944-VB6-QUESTION-Check-if-API-exists
-
-' windevlib - observe, test and determine whether to use within TB version, implications WIP
-
-' oleexp
-
-Final Tasks
-===========
-
-' credits update
-' XML
-' setup2go
-' Github release
-
-Not going to do (or much, much later)
-====================================
-
-' 32bit to 64bit conversion but only when RC is 64bit.
-
-' add functionality to the prefs to allow autoscaling dependent upon different monitor scaling factors using WM_DPICHANGED? Think and decide.
-'    we can already size a form per monitor, all we would need is to do the same when a DPI change is detected.
-'    this would help as the form resizing would occur as soon as the form leaves one monitor for another.
-'    the downside is that it would only work when DPI is different on both monitors
-'
-'    if we implemented this would it be significantly better than the current size by monitor?
-'    only because it would occur as soon the form is slotted over to the second monitor
-
-' an alternative would be to use a wm message that indicates when a form is being moved, then we would compare the form current position to the
-'    current monitor height and width or check whether it is within the bounds of the 2nd monitor then trigger a form resize.
-'    for the moment this is quite a big bit work and not high enough priority...
-
-
-
-
+' Test using tB collections to replace the GDIP class
+' Create a wrapper around a TB collection to replace the GDIP class, for TwinBasic use only.

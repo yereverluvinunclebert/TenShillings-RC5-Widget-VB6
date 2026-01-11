@@ -25,13 +25,12 @@ Option Explicit
 
 Private mHWnd As Long
 Private mNextID As Long
-'Private mTimers As Object
 
 Private Type JustMyUDT
     dict As Dictionary
 End Type
 
-#Const x64StackIssues = ((Mac = 0) And Win64 And (TWINBASIC = 0))
+#Const x64StackIssues = ((Mac = 0) And Win64 And (twinbasic = 0))
 
 '#If twinbasic Then
     'Private mTimers As Collection ' std TB collection

@@ -689,10 +689,10 @@ Private Sub setMessageIconImagesLight(ByVal thisIconWidth As Long)
 '    If fFExists(resourcePath & "\windowsCritical" & thisIconWidth & ".jpg") Then Set picVBCritical.Picture = LoadPicture(resourcePath & "\windowsCritical" & thisIconWidth & ".jpg")
     
     ' normal images
-    Set picVBInformation.Picture = gdipImageList.Picture("windowsInformation1920")
-    Set picVBExclamation.Picture = gdipImageList.Picture("windowsOrangeExclamation1920")
-    Set picVBQuestion.Picture = gdipImageList.Picture("windowsShieldQMark1920")
-    Set picVBCritical.Picture = gdipImageList.Picture("windowsCritical1920")
+    Set picVBInformation.Picture = thisImageList.Picture("windowsInformation1920")
+    Set picVBExclamation.Picture = thisImageList.Picture("windowsOrangeExclamation1920")
+    Set picVBQuestion.Picture = thisImageList.Picture("windowsShieldQMark1920")
+    Set picVBCritical.Picture = thisImageList.Picture("windowsCritical1920")
     
     picVBInformation.Refresh
     picVBQuestion.Refresh

@@ -448,9 +448,14 @@ Private pbDebugMode As Boolean ' .30 DAEB 03/03/2021 frmMain.frm replaced the in
 'Public gblMsgBoxADynamicSizingFlg As Boolean
 
 Public gdResizeRestriction As Double
-
-' new GDI+ image list instance
-Public gdipImageList As New cGdipImageList
+            
+#If twinbasic Then
+    ' Wrapper around TwinBasic's collection
+    Public thisImageList As New cTBImageList
+#Else
+    ' new GDI+ image list instance
+    Public thisImageList As New cGdipImageList
+#End If
 
 ' counter for each usage of the class
 Public gGdipImageListInstanceCount As Long
@@ -2179,7 +2184,7 @@ Public Sub reloadProgram()
     Call unloadAllForms(False) ' unload forms but do not END
     
     ' remove the contents of the main imageList
-    gdipImageList.Clear
+    thisImageList.Clear
     
     ' this will call the routines as called by sub main() and initialise the program and RELOAD the RichClient forms.
     Call mainRoutine(True) ' sets the restart flag to avoid repriming the RichClient message pump.

@@ -2397,7 +2397,7 @@ Private Sub Form_Load()
     Call setFormResizingVars
     
     ' reverts TwinBasic form themeing to that of the earlier classic look and feel
-    #If TwinBASIC Then
+    #If twinbasic Then
        Call setVisualStyles
     #End If
        
@@ -2621,7 +2621,7 @@ startPrefsTimers_Error:
 End Sub
     
 
-#If TwinBASIC Then
+#If twinbasic Then
     '---------------------------------------------------------------------------------------
     ' Procedure : setVisualStyles
     ' Author    : beededea
@@ -3354,7 +3354,7 @@ Private Sub cmbDebug_Click()
         btnDefaultEditor.Enabled = False
         lblDebug(9).Enabled = False
     Else
-        #If TwinBASIC Then
+        #If twinbasic Then
             txtDefaultEditor.Text = gsDefaultTBEditor
         #Else
             txtDefaultEditor.Text = gsDefaultVB6Editor
@@ -3725,7 +3725,7 @@ Private Sub positionPrefsFramesButtons()
             
     fraGeneralButton.BorderStyle = 1
     
-    #If TwinBASIC Then
+    #If twinbasic Then
         fraGeneralButton.Refresh
     #End If
 
@@ -3867,7 +3867,7 @@ Private Sub btnSave_Click()
     gsDebug = CStr(cmbDebug.ListIndex)
     gsDblClickCommand = txtDblClickCommand.Text
     gsOpenFile = txtOpenFile.Text
-    #If TwinBASIC Then
+    #If twinbasic Then
         gsDefaultTBEditor = txtDefaultEditor.Text
     #Else
         gsDefaultVB6Editor = txtDefaultEditor.Text
@@ -4275,7 +4275,7 @@ Private Sub adjustPrefsControls(Optional ByVal restartState As Boolean)
     cmbDebug.ListIndex = Val(gsDebug)
     txtDblClickCommand.Text = gsDblClickCommand
     txtOpenFile.Text = gsOpenFile
-    #If TwinBASIC Then
+    #If twinbasic Then
         txtDefaultEditor.Text = gsDefaultTBEditor
     #Else
         txtDefaultEditor.Text = gsDefaultVB6Editor
@@ -4533,7 +4533,7 @@ Private Sub clearBorderStyle()
     fraSoundsButton.BorderStyle = 0
     fraAboutButton.BorderStyle = 0
     
-    #If TwinBASIC Then
+    #If twinbasic Then
         fraGeneralButton.Refresh
         fraConfigButton.Refresh
         fraDevelopmentButton.Refresh
@@ -6503,7 +6503,7 @@ Private Sub picButtonMouseUpEvent(ByVal thisTabName As String, ByRef thisPicName
     
     thisFraButtonName.BorderStyle = 1
 
-    #If TwinBASIC Then
+    #If twinbasic Then
         thisFraButtonName.Refresh
     #End If
 
@@ -7164,28 +7164,28 @@ Dim count As Long
     
         ' setting the Prefs tab Jpeg icon images to the GDIP imageList dictionary, previously used Cairo.ImageList("about-icon-dark-clicked").Picture
 
-'        gdipImageList.ImageHeight = 0
-'        gdipImageList.ImageWidth = 0
+'        thisImageList.ImageHeight = 0
+'        thisImageList.ImageWidth = 0
 
         ' normal images
-        Set imgGeneral.Picture = gdipImageList.Picture("general-icon-dark")
-        Set imgConfig.Picture = gdipImageList.Picture("config-icon-dark")
-        Set imgFonts.Picture = gdipImageList.Picture("font-icon-dark")
-        Set imgSounds.Picture = gdipImageList.Picture("sounds-icon-dark")
-        Set imgPosition.Picture = gdipImageList.Picture("position-icon-dark")
-        Set imgDevelopment.Picture = gdipImageList.Picture("development-icon-dark")
-        Set imgWindow.Picture = gdipImageList.Picture("windows-icon-dark")
-        Set imgAbout.Picture = gdipImageList.Picture("about-icon-dark")
+        Set imgGeneral.Picture = thisImageList.Picture("general-icon-dark")
+        Set imgConfig.Picture = thisImageList.Picture("config-icon-dark")
+        Set imgFonts.Picture = thisImageList.Picture("font-icon-dark")
+        Set imgSounds.Picture = thisImageList.Picture("sounds-icon-dark")
+        Set imgPosition.Picture = thisImageList.Picture("position-icon-dark")
+        Set imgDevelopment.Picture = thisImageList.Picture("development-icon-dark")
+        Set imgWindow.Picture = thisImageList.Picture("windows-icon-dark")
+        Set imgAbout.Picture = thisImageList.Picture("about-icon-dark")
         
         ' clicked images
-        Set imgGeneralClicked.Picture = gdipImageList.Picture("general-icon-dark-clicked")
-        Set imgConfigClicked.Picture = gdipImageList.Picture("config-icon-dark-clicked")
-        Set imgFontsClicked.Picture = gdipImageList.Picture("font-icon-dark-clicked")
-        Set imgSoundsClicked.Picture = gdipImageList.Picture("sounds-icon-dark-clicked")
-        Set imgPositionClicked.Picture = gdipImageList.Picture("position-icon-dark-clicked")
-        Set imgDevelopmentClicked.Picture = gdipImageList.Picture("development-icon-dark-clicked")
-        Set imgWindowClicked.Picture = gdipImageList.Picture("windows-icon-dark-clicked")
-        Set imgAboutClicked.Picture = gdipImageList.Picture("about-icon-dark-clicked")
+        Set imgGeneralClicked.Picture = thisImageList.Picture("general-icon-dark-clicked")
+        Set imgConfigClicked.Picture = thisImageList.Picture("config-icon-dark-clicked")
+        Set imgFontsClicked.Picture = thisImageList.Picture("font-icon-dark-clicked")
+        Set imgSoundsClicked.Picture = thisImageList.Picture("sounds-icon-dark-clicked")
+        Set imgPositionClicked.Picture = thisImageList.Picture("position-icon-dark-clicked")
+        Set imgDevelopmentClicked.Picture = thisImageList.Picture("development-icon-dark-clicked")
+        Set imgWindowClicked.Picture = thisImageList.Picture("windows-icon-dark-clicked")
+        Set imgAboutClicked.Picture = thisImageList.Picture("about-icon-dark-clicked")
 
    On Error GoTo 0
    Exit Sub
@@ -7211,24 +7211,24 @@ Private Sub setPrefsIconImagesLight()
         ' setting the Prefs tab Jpeg icon images to the GDIP imageList dictionary, previously used Cairo.ImageList("about-icon-dark-clicked").Picture
 
         ' normal images
-        Set imgGeneral.Picture = gdipImageList.Picture("general-icon-light")
-        Set imgConfig.Picture = gdipImageList.Picture("config-icon-light")
-        Set imgFonts.Picture = gdipImageList.Picture("font-icon-light")
-        Set imgSounds.Picture = gdipImageList.Picture("sounds-icon-light")
-        Set imgPosition.Picture = gdipImageList.Picture("position-icon-light")
-        Set imgDevelopment.Picture = gdipImageList.Picture("development-icon-light")
-        Set imgWindow.Picture = gdipImageList.Picture("windows-icon-light")
-        Set imgAbout.Picture = gdipImageList.Picture("about-icon-light")
+        Set imgGeneral.Picture = thisImageList.Picture("general-icon-light")
+        Set imgConfig.Picture = thisImageList.Picture("config-icon-light")
+        Set imgFonts.Picture = thisImageList.Picture("font-icon-light")
+        Set imgSounds.Picture = thisImageList.Picture("sounds-icon-light")
+        Set imgPosition.Picture = thisImageList.Picture("position-icon-light")
+        Set imgDevelopment.Picture = thisImageList.Picture("development-icon-light")
+        Set imgWindow.Picture = thisImageList.Picture("windows-icon-light")
+        Set imgAbout.Picture = thisImageList.Picture("about-icon-light")
         
         ' clicked images
-        Set imgGeneralClicked.Picture = gdipImageList.Picture("general-icon-light-clicked")
-        Set imgConfigClicked.Picture = gdipImageList.Picture("config-icon-light-clicked")
-        Set imgFontsClicked.Picture = gdipImageList.Picture("font-icon-light-clicked")
-        Set imgSoundsClicked.Picture = gdipImageList.Picture("sounds-icon-light-clicked")
-        Set imgPositionClicked.Picture = gdipImageList.Picture("position-icon-light-clicked")
-        Set imgDevelopmentClicked.Picture = gdipImageList.Picture("development-icon-light-clicked")
-        Set imgWindowClicked.Picture = gdipImageList.Picture("windows-icon-light-clicked")
-        Set imgAboutClicked.Picture = gdipImageList.Picture("about-icon-light-clicked")
+        Set imgGeneralClicked.Picture = thisImageList.Picture("general-icon-light-clicked")
+        Set imgConfigClicked.Picture = thisImageList.Picture("config-icon-light-clicked")
+        Set imgFontsClicked.Picture = thisImageList.Picture("font-icon-light-clicked")
+        Set imgSoundsClicked.Picture = thisImageList.Picture("sounds-icon-light-clicked")
+        Set imgPositionClicked.Picture = thisImageList.Picture("position-icon-light-clicked")
+        Set imgDevelopmentClicked.Picture = thisImageList.Picture("development-icon-light-clicked")
+        Set imgWindowClicked.Picture = thisImageList.Picture("windows-icon-light-clicked")
+        Set imgAboutClicked.Picture = thisImageList.Picture("about-icon-light-clicked")
         
    On Error GoTo 0
    Exit Sub

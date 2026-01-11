@@ -163,7 +163,7 @@ Public Sub mainRoutine(ByVal restart As Boolean)
     
     ' RC message pump will auto-exit when Cairo Forms > 0 so we run it only when 0, this prevents message interruption
     ' when running twice on reload. Do not move this line.
-    #If TwinBASIC Then
+    #If twinbasic Then
         Cairo.WidgetForms.EnterMessageLoop
     #Else
         If restart = False Then Cairo.WidgetForms.EnterMessageLoop
@@ -223,7 +223,7 @@ Private Sub testForCodingEnvironment()
 
     On Error GoTo testForCodingEnvironment_Error
 
-    #If TwinBASIC Then
+    #If twinbasic Then
         gsCodingEnvironment = "TwinBasic"
     #Else
         gsCodingEnvironment = "VB6"
@@ -519,43 +519,43 @@ Private Sub addImagesToImageList()
     
     
     ' addition of the Prefs tab Jpeg icon images to the GDIP imageList dictionary, previously used Cairo.ImageList.AddImage "filename"
-            
+    
     ' normal images
-    gdipImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
-    gdipImageList.AddImage "about-icon-light", App.Path & "\Resources\images\about-icon-light-1010.jpg"
-    gdipImageList.AddImage "config-icon-dark", App.Path & "\Resources\images\config-icon-dark-1010.jpg"
-    gdipImageList.AddImage "config-icon-light", App.Path & "\Resources\images\config-icon-light-1010.jpg"
-    gdipImageList.AddImage "development-icon-light", App.Path & "\Resources\images\development-icon-light-1010.jpg"
-    gdipImageList.AddImage "development-icon-dark", App.Path & "\Resources\images\development-icon-dark-1010.jpg"
-    gdipImageList.AddImage "general-icon-dark", App.Path & "\Resources\images\general-icon-dark-1010.jpg"
-    gdipImageList.AddImage "general-icon-light", App.Path & "\Resources\images\general-icon-light-1010.jpg"
-    gdipImageList.AddImage "sounds-icon-light", App.Path & "\Resources\images\sounds-icon-light-1010.jpg"
-    gdipImageList.AddImage "sounds-icon-dark", App.Path & "\Resources\images\sounds-icon-dark-1010.jpg"
-    gdipImageList.AddImage "windows-icon-light", App.Path & "\Resources\images\windows-icon-light-1010.jpg"
-    gdipImageList.AddImage "windows-icon-dark", App.Path & "\Resources\images\windows-icon-dark-1010.jpg"
-    gdipImageList.AddImage "font-icon-dark", App.Path & "\Resources\images\font-icon-dark-1010.jpg"
-    gdipImageList.AddImage "font-icon-light", App.Path & "\Resources\images\font-icon-light-1010.jpg"
-    gdipImageList.AddImage "position-icon-light", App.Path & "\Resources\images\position-icon-light-1010.jpg"
-    gdipImageList.AddImage "position-icon-dark", App.Path & "\Resources\images\position-icon-dark-1010.jpg"
+    thisImageList.AddImage "about-icon-dark", App.Path & "\Resources\images\about-icon-dark-1010.jpg"
+    thisImageList.AddImage "about-icon-light", App.Path & "\Resources\images\about-icon-light-1010.jpg"
+    thisImageList.AddImage "config-icon-dark", App.Path & "\Resources\images\config-icon-dark-1010.jpg"
+    thisImageList.AddImage "config-icon-light", App.Path & "\Resources\images\config-icon-light-1010.jpg"
+    thisImageList.AddImage "development-icon-light", App.Path & "\Resources\images\development-icon-light-1010.jpg"
+    thisImageList.AddImage "development-icon-dark", App.Path & "\Resources\images\development-icon-dark-1010.jpg"
+    thisImageList.AddImage "general-icon-dark", App.Path & "\Resources\images\general-icon-dark-1010.jpg"
+    thisImageList.AddImage "general-icon-light", App.Path & "\Resources\images\general-icon-light-1010.jpg"
+    thisImageList.AddImage "sounds-icon-light", App.Path & "\Resources\images\sounds-icon-light-1010.jpg"
+    thisImageList.AddImage "sounds-icon-dark", App.Path & "\Resources\images\sounds-icon-dark-1010.jpg"
+    thisImageList.AddImage "windows-icon-light", App.Path & "\Resources\images\windows-icon-light-1010.jpg"
+    thisImageList.AddImage "windows-icon-dark", App.Path & "\Resources\images\windows-icon-dark-1010.jpg"
+    thisImageList.AddImage "font-icon-dark", App.Path & "\Resources\images\font-icon-dark-1010.jpg"
+    thisImageList.AddImage "font-icon-light", App.Path & "\Resources\images\font-icon-light-1010.jpg"
+    thisImageList.AddImage "position-icon-light", App.Path & "\Resources\images\position-icon-light-1010.jpg"
+    thisImageList.AddImage "position-icon-dark", App.Path & "\Resources\images\position-icon-dark-1010.jpg"
     
     
     ' clicked images
-    gdipImageList.AddImage "general-icon-dark-clicked", App.Path & "\Resources\images\general-icon-dark-600-clicked.jpg"
-    gdipImageList.AddImage "config-icon-dark-clicked", App.Path & "\Resources\images\config-icon-dark-600-clicked.jpg"
-    gdipImageList.AddImage "font-icon-dark-clicked", App.Path & "\Resources\images\font-icon-dark-600-clicked.jpg"
-    gdipImageList.AddImage "sounds-icon-dark-clicked", App.Path & "\Resources\images\sounds-icon-dark-600-clicked.jpg"
-    gdipImageList.AddImage "position-icon-dark-clicked", App.Path & "\Resources\images\position-icon-dark-600-clicked.jpg"
-    gdipImageList.AddImage "development-icon-dark-clicked", App.Path & "\Resources\images\development-icon-dark-600-clicked.jpg"
-    gdipImageList.AddImage "windows-icon-dark-clicked", App.Path & "\Resources\images\windows-icon-dark-600-clicked.jpg"
-    gdipImageList.AddImage "about-icon-dark-clicked", App.Path & "\Resources\images\about-icon-dark-600-clicked.jpg"
-    gdipImageList.AddImage "general-icon-light-clicked", App.Path & "\Resources\images\general-icon-light-600-clicked.jpg"
-    gdipImageList.AddImage "config-icon-light-clicked", App.Path & "\Resources\images\config-icon-light-600-clicked.jpg"
-    gdipImageList.AddImage "font-icon-light-clicked", App.Path & "\Resources\images\font-icon-light-600-clicked.jpg"
-    gdipImageList.AddImage "sounds-icon-light-clicked", App.Path & "\Resources\images\sounds-icon-light-600-clicked.jpg"
-    gdipImageList.AddImage "position-icon-light-clicked", App.Path & "\Resources\images\position-icon-light-600-clicked.jpg"
-    gdipImageList.AddImage "development-icon-light-clicked", App.Path & "\Resources\images\development-icon-light-600-clicked.jpg"
-    gdipImageList.AddImage "windows-icon-light-clicked", App.Path & "\Resources\images\windows-icon-light-600-clicked.jpg"
-    gdipImageList.AddImage "about-icon-light-clicked", App.Path & "\Resources\images\about-icon-light-600-clicked.jpg"
+    thisImageList.AddImage "general-icon-dark-clicked", App.Path & "\Resources\images\general-icon-dark-600-clicked.jpg"
+    thisImageList.AddImage "config-icon-dark-clicked", App.Path & "\Resources\images\config-icon-dark-600-clicked.jpg"
+    thisImageList.AddImage "font-icon-dark-clicked", App.Path & "\Resources\images\font-icon-dark-600-clicked.jpg"
+    thisImageList.AddImage "sounds-icon-dark-clicked", App.Path & "\Resources\images\sounds-icon-dark-600-clicked.jpg"
+    thisImageList.AddImage "position-icon-dark-clicked", App.Path & "\Resources\images\position-icon-dark-600-clicked.jpg"
+    thisImageList.AddImage "development-icon-dark-clicked", App.Path & "\Resources\images\development-icon-dark-600-clicked.jpg"
+    thisImageList.AddImage "windows-icon-dark-clicked", App.Path & "\Resources\images\windows-icon-dark-600-clicked.jpg"
+    thisImageList.AddImage "about-icon-dark-clicked", App.Path & "\Resources\images\about-icon-dark-600-clicked.jpg"
+    thisImageList.AddImage "general-icon-light-clicked", App.Path & "\Resources\images\general-icon-light-600-clicked.jpg"
+    thisImageList.AddImage "config-icon-light-clicked", App.Path & "\Resources\images\config-icon-light-600-clicked.jpg"
+    thisImageList.AddImage "font-icon-light-clicked", App.Path & "\Resources\images\font-icon-light-600-clicked.jpg"
+    thisImageList.AddImage "sounds-icon-light-clicked", App.Path & "\Resources\images\sounds-icon-light-600-clicked.jpg"
+    thisImageList.AddImage "position-icon-light-clicked", App.Path & "\Resources\images\position-icon-light-600-clicked.jpg"
+    thisImageList.AddImage "development-icon-light-clicked", App.Path & "\Resources\images\development-icon-light-600-clicked.jpg"
+    thisImageList.AddImage "windows-icon-light-clicked", App.Path & "\Resources\images\windows-icon-light-600-clicked.jpg"
+    thisImageList.AddImage "about-icon-light-clicked", App.Path & "\Resources\images\about-icon-light-600-clicked.jpg"
     
     ' load the icon images on the message form to the image list
     Call loadMessageIconImages
@@ -585,10 +585,10 @@ Private Sub loadMessageIconImages()
     
     resourcePath = App.Path & "\resources\images"
     
-    gdipImageList.AddImage "windowsInformation1920", resourcePath & "\windowsInformation1920.jpg"
-    gdipImageList.AddImage "windowsOrangeExclamation1920", resourcePath & "\windowsOrangeExclamation1920.jpg"
-    gdipImageList.AddImage "windowsShieldQMark1920", resourcePath & "\windowsShieldQMark1920.jpg"
-    gdipImageList.AddImage "windowsCritical1920", resourcePath & "\windowsCritical1920.jpg"
+    thisImageList.AddImage "windowsInformation1920", resourcePath & "\windowsInformation1920.jpg"
+    thisImageList.AddImage "windowsOrangeExclamation1920", resourcePath & "\windowsOrangeExclamation1920.jpg"
+    thisImageList.AddImage "windowsShieldQMark1920", resourcePath & "\windowsShieldQMark1920.jpg"
+    thisImageList.AddImage "windowsCritical1920", resourcePath & "\windowsCritical1920.jpg"
     
    On Error GoTo 0
    Exit Sub
@@ -653,7 +653,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     End If
     
     If gsDebug = "1" Then
-        #If TwinBASIC Then
+        #If twinbasic Then
             If gsDefaultTBEditor <> vbNullString Then thisEditor = gsDefaultTBEditor
         #Else
             If gsDefaultVB6Editor <> vbNullString Then thisEditor = gsDefaultVB6Editor
@@ -677,7 +677,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     ' the alpha is already set to zero for all layers found in the PSD, we now turn them back on as we require
         
     If gsDebug = "1" Then
-        #If TwinBASIC Then
+        #If twinbasic Then
             If gsDefaultTBEditor <> vbNullString Then thisEditor = gsDefaultTBEditor
         #Else
             If gsDefaultVB6Editor <> vbNullString Then thisEditor = gsDefaultVB6Editor
