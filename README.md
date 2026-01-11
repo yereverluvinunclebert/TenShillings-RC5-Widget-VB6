@@ -16,9 +16,10 @@ The inital stage is a downgrade to RC5 for testing purposes on older 32bit versi
     * For TwinBasic, RC imageLists for non-Cairo renders replaced by a TB collection, able to import and extract PNGs.	
 
 **Yet to do:**
-    * Cairo replacement using vbCairo.dll COM wrapper.
-    * import of PNG images into collections using Cairo load PNG
-    * Creation of transparent PNG 'widgets' with properties and events using Cairo or GDI+
+
+* Cairo replacement using vbCairo.dll COM wrapper.
+* import of PNG images into collections using Cairo load PNG
+* Creation of transparent PNG 'widgets' with properties and events using Cairo or GDI+
 
 The program does very little in practice but is a test bed for playing with alternative technologies in order to place some eye-candy on the desktop in the manner of the old Yahoo Widget/Konfabulator engine. You can add more logic as you require or replace the main image with your own.  This is merely a template for other single-image VB6 / TwinBasic RC5/6 programs - one that I knocked up late at night whilst drinking gin and tonic.
 
