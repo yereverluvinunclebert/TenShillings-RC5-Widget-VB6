@@ -206,12 +206,12 @@ Private Sub Form_Resize()
 '    If gblMsgBoxADynamicSizingFlg = True Then
         Call setMessageIconImagesLight(1920)
         Call resizeControls(Me, gMsgBoxAControlPositions(), gdMsgBoxACurrentWidth, gdMsgBoxACurrentHeight, currentFont)
-        Me.Width = Me.Height / gdMsgBoxConstraintRatio ' maintain the aspect ratio
+        Me.Width = Me.height / gdMsgBoxConstraintRatio ' maintain the aspect ratio
 '    Else
 '        Call setMessageIconImagesLight(600)
 '    End If
     
-    gsMessageAHeightTwips = CStr(frmMessage.Height)
+    gsMessageAHeightTwips = CStr(frmMessage.height)
     gsMessageAWidthTwips = CStr(frmMessage.Width)
     sPutINISetting "Software\TenShillings", "messageAHeightTwips", gsMessageAHeightTwips, gsSettingsFile
     sPutINISetting "Software\TenShillings", "messageAWidthTwips", gsMessageAWidthTwips, gsSettingsFile
@@ -638,6 +638,36 @@ propButtonVal_Error:
 End Property
 
 
+
+''---------------------------------------------------------------------------------------
+'' Procedure : loadMessageIconImages
+'' Author    : beededea
+'' Date      : 22/06/2023
+'' Purpose   : set the icon images on the message form
+''---------------------------------------------------------------------------------------
+''
+'Private Sub loadMessageIconImages(ByVal thisIconWidth As Long)
+'
+'    Dim resourcePath As String: resourcePath = vbNullString
+'
+'    On Error GoTo loadMessageIconImages_Error
+'
+'    resourcePath = App.Path & "\resources\images"
+'
+'    gdipImageList.AddImage "windowsInformation1920", resourcePath & "\windowsInformation1920.jpg"
+'    gdipImageList.AddImage "windowsOrangeExclamation1920", resourcePath & "\windowsOrangeExclamation1920.jpg"
+'    gdipImageList.AddImage "windowsShieldQMark1920", resourcePath & "\windowsShieldQMark1920.jpg"
+'    gdipImageList.AddImage "windowsCritical1920", resourcePath & "\windowsCritical1920.jpg"
+'
+'   On Error GoTo 0
+'   Exit Sub
+'
+'loadMessageIconImages_Error:
+'
+'    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure loadMessageIconImages of Form frmMessage"
+'
+'End Sub
+
 '---------------------------------------------------------------------------------------
 ' Procedure : setPrefsIconImagesLight
 ' Author    : beededea
@@ -653,10 +683,16 @@ Private Sub setMessageIconImagesLight(ByVal thisIconWidth As Long)
     
     resourcePath = App.Path & "\resources\images"
     
-    If fFExists(resourcePath & "\windowsInformation" & thisIconWidth & ".jpg") Then Set picVBInformation.Picture = LoadPicture(resourcePath & "\windowsInformation" & thisIconWidth & ".jpg")
-    If fFExists(resourcePath & "\windowsOrangeExclamation" & thisIconWidth & ".jpg") Then Set picVBExclamation.Picture = LoadPicture(resourcePath & "\windowsOrangeExclamation" & thisIconWidth & ".jpg")
-    If fFExists(resourcePath & "\windowsShieldQMark" & thisIconWidth & ".jpg") Then Set picVBQuestion.Picture = LoadPicture(resourcePath & "\windowsShieldQMark" & thisIconWidth & ".jpg")
-    If fFExists(resourcePath & "\windowsCritical" & thisIconWidth & ".jpg") Then Set picVBCritical.Picture = LoadPicture(resourcePath & "\windowsCritical" & thisIconWidth & ".jpg")
+'    If fFExists(resourcePath & "\windowsInformation" & thisIconWidth & ".jpg") Then Set picVBInformation.Picture = LoadPicture(resourcePath & "\windowsInformation" & thisIconWidth & ".jpg")
+'    If fFExists(resourcePath & "\windowsOrangeExclamation" & thisIconWidth & ".jpg") Then Set picVBExclamation.Picture = LoadPicture(resourcePath & "\windowsOrangeExclamation" & thisIconWidth & ".jpg")
+'    If fFExists(resourcePath & "\windowsShieldQMark" & thisIconWidth & ".jpg") Then Set picVBQuestion.Picture = LoadPicture(resourcePath & "\windowsShieldQMark" & thisIconWidth & ".jpg")
+'    If fFExists(resourcePath & "\windowsCritical" & thisIconWidth & ".jpg") Then Set picVBCritical.Picture = LoadPicture(resourcePath & "\windowsCritical" & thisIconWidth & ".jpg")
+    
+    ' normal images
+    Set picVBInformation.Picture = gdipImageList.Picture("windowsInformation1920")
+    Set picVBExclamation.Picture = gdipImageList.Picture("windowsOrangeExclamation1920")
+    Set picVBQuestion.Picture = gdipImageList.Picture("windowsShieldQMark1920")
+    Set picVBCritical.Picture = gdipImageList.Picture("windowsCritical1920")
     
     picVBInformation.Refresh
     picVBQuestion.Refresh

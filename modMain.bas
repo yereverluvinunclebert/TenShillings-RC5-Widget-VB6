@@ -557,12 +557,45 @@ Private Sub addImagesToImageList()
     gdipImageList.AddImage "windows-icon-light-clicked", App.Path & "\Resources\images\windows-icon-light-600-clicked.jpg"
     gdipImageList.AddImage "about-icon-light-clicked", App.Path & "\Resources\images\about-icon-light-600-clicked.jpg"
     
+    ' load the icon images on the message form to the image list
+    Call loadMessageIconImages
+    
    On Error GoTo 0
    Exit Sub
 
 addImagesToImageList_Error:
 
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure addImagesToImageList of Module modMain, an image has probably been accidentally deleted from the resources/images folder."
+
+End Sub
+
+
+'---------------------------------------------------------------------------------------
+' Procedure : loadMessageIconImages
+' Author    : beededea
+' Date      : 22/06/2023
+' Purpose   : set the icon images on the message form
+'---------------------------------------------------------------------------------------
+'
+Private Sub loadMessageIconImages()
+    
+    Dim resourcePath As String: resourcePath = vbNullString
+    
+    On Error GoTo loadMessageIconImages_Error
+    
+    resourcePath = App.Path & "\resources\images"
+    
+    gdipImageList.AddImage "windowsInformation1920", resourcePath & "\windowsInformation1920.jpg"
+    gdipImageList.AddImage "windowsOrangeExclamation1920", resourcePath & "\windowsOrangeExclamation1920.jpg"
+    gdipImageList.AddImage "windowsShieldQMark1920", resourcePath & "\windowsShieldQMark1920.jpg"
+    gdipImageList.AddImage "windowsCritical1920", resourcePath & "\windowsCritical1920.jpg"
+    
+   On Error GoTo 0
+   Exit Sub
+
+loadMessageIconImages_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure loadMessageIconImages of Form frmMessage"
 
 End Sub
 
