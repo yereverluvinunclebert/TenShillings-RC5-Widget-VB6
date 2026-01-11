@@ -8,12 +8,12 @@ The inital stage is a downgrade to RC5 for testing purposes on older 32bit versi
 
 **RC5 Removal:** All of these tasks are steps toward RC independence and 64bit capability.
 
-    * DPI aware switch replaced with a API to do the same.
-    * SimplePSD parser replaced with an XML reader and extracting the image layers to PNG files.
-    * RC Timers replaced by an in-code implementation of timers.
-    * For VB6, RC imageLists for non-Cairo renders replaced by scripting.dictionary importing JPGs using GDI+.
-	* scripting.dictionary for the timers and GDIP imageLists replaced by cristianbuse/VBA-FastDictionary.
-    * For TwinBasic, RC imageLists for non-Cairo renders replaced by a TB collection, able to import and extract PNGs.	
+* DPI aware switch replaced with a API to do the same.
+* SimplePSD parser replaced with an XML reader and extracting the image layers to PNG files.
+* RC Timers replaced by an in-code implementation of timers.
+* For VB6, RC imageLists for non-Cairo renders replaced by scripting.dictionary importing JPGs using GDI+.
+* scripting.dictionary for the timers and GDIP imageLists replaced by cristianbuse/VBA-FastDictionary.
+* For TwinBasic, RC imageLists for non-Cairo renders replaced by a TB collection, able to import and extract PNGs.	
 
 **Yet to do:**
 
