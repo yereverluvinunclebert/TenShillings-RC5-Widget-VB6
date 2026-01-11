@@ -11,12 +11,11 @@ The inital stage is a downgrade to RC5 for testing purposes on older 32bit versi
     * DPI aware switch replaced with a API to do the same.
     * SimplePSD parser replaced with an XML reader and extracting the image layers to PNG files.
     * RC Timers replaced by an in-code implementation of timers.
-    * RC imageLists for non-Cairo renders replaced by scripting.dictionary importing JPGs using GDI+.
-	* scripting.dictionary replaced by cristianbuse/VBA-FastDictionary.
+    * For VB6, RC imageLists for non-Cairo renders replaced by scripting.dictionary importing JPGs using GDI+.
+	* scripting.dictionary for the timers and GDIP imageLists replaced by cristianbuse/VBA-FastDictionary.
+    * For TwinBasic, RC imageLists for non-Cairo renders replaced by a TB collection, able to import and extract PNGs.	
 
 **Yet to do:**
-
-    * TB's native collection with PNG handling is possibly the best future solution for this requirement as the image handling will be done by TB.
     * Cairo replacement using vbCairo.dll COM wrapper.
     * import of PNG images into collections using Cairo load PNG
     * Creation of transparent PNG 'widgets' with properties and events using Cairo or GDI+
