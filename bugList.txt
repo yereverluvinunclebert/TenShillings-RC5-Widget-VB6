@@ -6,10 +6,8 @@ TODO
 
 ' add the enumeration property to both the GDIP and TB collection imagelists and also in the github version
 ' amend the credits to incorporate Cristian Buse and chatGPT
-' search for other credits using mz-tools and add  so that they appear on the prefs about tab
+' search for other credits using mz-tools and add so that they appear on the prefs about tab
 ' do the same to the cpu gauge.
-
-' extract the cpu XML reader code to a class? - think about it
 
 ' create a window in code without all the form trimmings
 ' amend the existing Cairo project to place persistent images on the window
@@ -68,7 +66,8 @@ Not going to do (or much, much later)
 
 
 
-DONE
+Tasks DONE
+==========
 
 Rotation
 HTML text and images
@@ -167,3 +166,6 @@ removed manifest for TB
 
 ' Test using tB collections to replace the GDIP class
 ' Create a wrapper around a TB collection to replace the GDIP class, for TwinBasic use only.
+
+
+' DeepWiki and badge to the readme.md

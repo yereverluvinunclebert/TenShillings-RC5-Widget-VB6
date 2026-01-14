@@ -1,7 +1,7 @@
 Attribute VB_Name = "modTimerWnd"
 '---------------------------------------------------------------------------------------
 ' Module    : modTimerWnd
-' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Author    : beededea & chatGPT (with corrections/documentation/TB collection changes by me)
 ' Date      : 17/12/2025
 ' Purpose   : creates a hidden window with zero dimensions intercepting timer events
 '             used to host/create in-code timers that do not require VB6 timer controls to exist on a VBform
@@ -74,7 +74,7 @@ Private m_hWnd As Long
 
 '---------------------------------------------------------------------------------------
 ' Procedure : CreateTimerWindow
-' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Author    : beededea & chatGPT (with corrections/documentation/TB collection changes by me)
 ' Date      : 17/12/2025
 ' Purpose   : Create a hidden timer window that captures the WM_TIMER messages
 '---------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ End Function
 
 '---------------------------------------------------------------------------------------
 ' Procedure : pDefFarWndProc
-' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Author    : beededea & chatGPT (with corrections/documentation/TB collection changes by me)
 ' Date      : 17/12/2025
 ' Purpose   : used above within wc.lpfnWndProc to return a long integer pointer
 '             to the Windows Procedure function that will be called
@@ -136,7 +136,7 @@ End Function
 
 '---------------------------------------------------------------------------------------
 ' Procedure : WindowProc
-' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Author    : beededea & chatGPT (with corrections/documentation/TB collection changes by me)
 ' Date      : 17/12/2025
 ' Purpose   : called on create window, manages messages and causes the timer events to trigger
 '---------------------------------------------------------------------------------------

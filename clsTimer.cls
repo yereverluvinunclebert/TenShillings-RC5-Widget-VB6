@@ -33,7 +33,7 @@ Public Event Tick() ' the tick event appears to be the standard named event for 
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Class_Initialize
-' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Author    : beededea & chatGPT (with corrections/documentation/TB collection changes by me)
 ' Date      : 17/12/2025
 ' Purpose   : just set a few base member variables
 '---------------------------------------------------------------------------------------

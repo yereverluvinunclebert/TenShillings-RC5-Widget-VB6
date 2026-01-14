@@ -71,7 +71,7 @@ Option Explicit
 ' Declarations for the TB Collection replacement START
 '-----------------------------------------------------------
 
-Private mDict As Collection ' std TB collection
+Private mDict As Collection ' standard TwinBasic collection
 
 '-----------------------------------------------------------
 ' Declarations for the TB Collection replacements END

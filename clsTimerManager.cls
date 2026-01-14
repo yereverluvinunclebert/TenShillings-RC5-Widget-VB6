@@ -13,7 +13,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 '---------------------------------------------------------------------------------------
 ' Module    : clsTimerManager
-' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Author    : beededea & chatGPT (with corrections/documentation/TB collection changes by me)
 ' Date      : 17/12/2025
 ' Purpose   : requires a reference to the Microsoft scripting dictionary
 '             This module contains the routines that do the behind-the-scenes stuff with APIs and populating the scripting dictionary
@@ -32,15 +32,15 @@ End Type
 
 #Const x64StackIssues = ((Mac = 0) And Win64 And (twinbasic = 0))
 
-'#If twinbasic Then
-    'Private mTimers As Collection ' std TB collection
-'#Else
+#If twinbasic Then
+    Private mTimers As Collection ' standard TwinBasic collection
+#Else
     Private mTimers As Dictionary ' scripting.dictionary
-'#End If
+#End If
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Class_Initialize
-' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Author    : beededea & chatGPT (with corrections/documentation/TB collection changes by me)
 ' Date      : 17/12/2025
 ' Purpose   :
 '---------------------------------------------------------------------------------------
@@ -48,9 +48,17 @@ End Type
 Private Sub Class_Initialize()
     On Error GoTo Class_Initialize_Error
 
-    ' create a dictionary containing the timers by timerID
-    'Set mTimers = CreateObject("Scripting.Dictionary")
-    Set mTimers = New Dictionary
+    #If twinbasic Then
+        ' create a standard collection containing the timers by timerID (string)
+        Set mTimers = New Collection
+    #Else
+        ' create a dictionary containing the timers by timerID (long)
+        ' if you are using the scripting.dictionary
+        'Set mTimers = CreateObject("Scripting.Dictionary")
+        
+        ' if you are using Cristian Buse's VBA dictionary
+        Set mTimers = New Dictionary
+    #End If
     
     ' Create a hidden timer window returning the window handle
     mHWnd = CreateTimerWindow
@@ -65,7 +73,7 @@ End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : StartTimer
-' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Author    : beededea & chatGPT (with corrections/documentation/TB collection changes by me)
 ' Date      : 17/12/2025
 ' Purpose   :
 '---------------------------------------------------------------------------------------
@@ -77,8 +85,13 @@ Public Sub StartTimer(ByVal t As clsTimer, ByVal IntervalMS As Long)
     mNextID = mNextID + 1
     t.TimerID = mNextID
 
-    ' add timer to the Dictionary collection
-    mTimers.Add t.TimerID, t
+    #If twinbasic Then
+        ' add timer to the standard TwinBasic collection
+        mTimers.Add t, CStr(t.TimerID) ' TIMER object, string key
+    #Else
+       ' add timer to either type of Dictionary collection
+       mTimers.Add t.TimerID, t    ' long key, TIMER object
+    #End If
     
     ' use the setTimer API to start a timer run
     SetTimer mHWnd, t.TimerID, IntervalMS, 0
@@ -93,7 +106,7 @@ End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : StopTimer
-' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Author    : beededea & chatGPT (with corrections/documentation/TB collection changes by me)
 ' Date      : 17/12/2025
 ' Purpose   : stop the specified timer
 '---------------------------------------------------------------------------------------
@@ -101,13 +114,23 @@ End Sub
 Public Sub StopTimer(ByVal t As clsTimer)
     On Error GoTo StopTimer_Error
 
-    ' test the collection for timer existence
-    If mTimers.Exists(t.TimerID) Then
-        ' kill it by ID
-        KillTimer mHWnd, t.TimerID
-        ' remove the timer from the collection
-        mTimers.Remove t.TimerID
-    End If
+    #If twinbasic Then
+        ' test the standard TwinBasic collection for timer existence
+        If mTimers.Exists(CStr(t.TimerID)) Then
+            ' kill it by ID
+            KillTimer mHWnd, t.TimerID
+            ' remove the timer from the collection
+            mTimers.Remove CStr(t.TimerID)
+        End If
+    #Else
+        ' test either type of Dictionary for timer existence
+        If mTimers.Exists(t.TimerID) Then
+            ' kill it by ID
+            KillTimer mHWnd, t.TimerID
+            ' remove the timer from the collection
+            mTimers.Remove t.TimerID
+        End If
+    #End If
 
     On Error GoTo 0
     Exit Sub
@@ -119,19 +142,27 @@ End Sub
 
 '---------------------------------------------------------------------------------------
 ' Procedure : Dispatch
-' Author    : beededea & chatGPT (with corrections/documentation by me)
+' Author    : beededea & chatGPT (with corrections/documentation/TB collection changes by me)
 ' Date      : 17/12/2025
 ' Purpose   : Called by WindowProc in the BAS module modTimerWnd on captured form timer events
 '---------------------------------------------------------------------------------------
 '
 Friend Sub Dispatch(ByVal TimerID As Long)
     On Error GoTo Dispatch_Error
-
-    ' tests the timer in the timer collection to see if it exists, if so, raise a tick event in the calling form frmTimer
-    If mTimers.Exists(TimerID) Then
-        ' call the raiseTick subroutine in the clsTimer class that in turn raises a tick event in the calling form frmTimer
-        mTimers(TimerID).RaiseTick
-    End If
+    
+    #If twinbasic Then
+       ' standard TwinBasic collection
+       If mTimers.Exists(CStr(TimerID)) Then
+           ' call the raiseTick subroutine in the clsTimer class that in turn raises a tick event in the calling form frmTimer
+           mTimers(CStr(TimerID)).RaiseTick
+       End If
+    #Else
+        ' either type of Dictionary collection
+        If mTimers.Exists(TimerID) Then
+            ' call the raiseTick subroutine in the clsTimer class that in turn raises a tick event in the calling form frmTimer
+            mTimers(TimerID).RaiseTick
+        End If
+    #End If
 
     On Error GoTo 0
     Exit Sub
