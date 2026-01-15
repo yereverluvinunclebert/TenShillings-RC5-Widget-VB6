@@ -75,8 +75,8 @@ BUILD: The program runs without any Microsoft plugins.
  early 2000s. Thanks for VB6.
  
  Olaf Schmidt - This tool was built using the RichClient RC5 Cairo wrapper for 
- VB6. Specifically the components using transparency and reading images directly 
- from PSD. Thanks for the massive effort Olaf in creating Cairo counterparts for 
+ VB6. Specifically creating and placing the graphic 'widgets' using transparency. 
+ Thanks for the massive effort Olaf in creating Cairo counterparts for 
  all VB6 native controls and giving us access to advanced features on controls 
  such as transparency.
  
