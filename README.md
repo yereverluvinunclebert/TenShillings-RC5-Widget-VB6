@@ -35,8 +35,8 @@ BUILD: The program runs without any Microsoft plugins.
  Built using: VB6/TwinBasic, MZ-TOOLS 3.0, VBAdvance, CodeHelp Core IDE Extender
  Framework 2.2 & Rubberduck 2.4.1, RichClient 5
 
-  ![vb6-logo-200](https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-VB6/assets/2788342/bf00fa3d-f1d4-417b-bc50-9446f2c3e674)
- 
+ <img width="650" height="56" alt="image" src="https://github.com/user-attachments/assets/1c51ef53-12f4-4d87-9ad9-4c7ddd72b5c8" />
+
  Links:
  
 	https://www.vbrichclient.com/#/en/About/
