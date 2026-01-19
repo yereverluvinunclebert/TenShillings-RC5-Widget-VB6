@@ -35,8 +35,8 @@ BUILD: The program runs without any Microsoft plugins.
  Built using: VB6/TwinBasic, MZ-TOOLS 3.0, VBAdvance, CodeHelp Core IDE Extender
  Framework 2.2 & Rubberduck 2.4.1, RichClient 5
 
-  ![vb6-logo-200](https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-VB6/assets/2788342/bf00fa3d-f1d4-417b-bc50-9446f2c3e674)
- 
+ <img width="650" height="56" alt="image" src="https://github.com/user-attachments/assets/1c51ef53-12f4-4d87-9ad9-4c7ddd72b5c8" />
+
  Links:
  
 	https://www.vbrichclient.com/#/en/About/
@@ -75,8 +75,8 @@ BUILD: The program runs without any Microsoft plugins.
  early 2000s. Thanks for VB6.
  
  Olaf Schmidt - This tool was built using the RichClient RC5 Cairo wrapper for 
- VB6. Specifically the components using transparency and reading images directly 
- from PSD. Thanks for the massive effort Olaf in creating Cairo counterparts for 
+ VB6. Specifically creating and placing the graphic 'widgets' using transparency. 
+ Thanks for the massive effort Olaf in creating Cairo counterparts for 
  all VB6 native controls and giving us access to advanced features on controls 
  such as transparency.
  
