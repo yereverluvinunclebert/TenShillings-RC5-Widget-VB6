@@ -49,6 +49,8 @@ Zach_VB6 https://www.vbforums.com/member.php?95578-Zach_VB6 for loading a file t
 Open File common dialog code without dependent OCX - http://forums.codeguru.com/member.php?92278-rxbagain
 Centre-ing dialogs code from Chris001 https://www.vbforums.com/member.php?65196-Chris001
 VBAdvance
+cristianbuse - scripting.dictionary replaced by VBA-FastDictionary.
+chatGPT for speeding up my understanding of GDI+/SQLite and for code review.
 
 -oOo-
 

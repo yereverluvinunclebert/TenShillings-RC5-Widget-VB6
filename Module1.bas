@@ -1722,33 +1722,22 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Public Sub getKeyPress(ByVal KeyCode As Integer, ByVal Shift As Integer)
-    'Dim answer As VbMsgBoxResult: answer = vbNo
+
     Dim answerMsg As String: answerMsg = vbNullString
    
     On Error GoTo getkeypress_Error
-
-    If gbCTRL_1 Or gbSHIFT_1 Then
-        gbCTRL_1 = False
-        gbSHIFT_1 = False
-    End If
     
     If Shift Then
         gbSHIFT_1 = True
     End If
 
     Select Case KeyCode
-        Case vbKeyControl
-            gbCTRL_1 = True
-        Case vbKeyShift
-            gbSHIFT_1 = True
         Case 82 ' R
             If Shift = 1 Then Call hardRestart
 
         Case 116 ' Performing a hard restart message box shift+F5
             If Shift = 1 Then
-                'answer = vbYes
                 answerMsg = "Performing a hard restart now, press OK."
-                'answer =
                 msgBoxA answerMsg, vbExclamation + vbOK, "Performing a hard restart", True, "getKeypressHardRestart1"
                 Call hardRestart
             Else
@@ -1756,27 +1745,47 @@ Public Sub getKeyPress(ByVal KeyCode As Integer, ByVal Shift As Integer)
             End If
             
         Case vbKeyUp
+           If Shift = vbCtrlMask Then
+                ' rotate the tenShillingsForm to the left
+                TenShillingsWidget.Zoom = TenShillingsWidget.Zoom - 0.01
+            End If
+        
             If Shift = 1 Then
-                ' move the the tenShillingsForm upward
+                ' move the tenShillingsForm upward
                 fMain.TenShillingsForm.Top = fMain.TenShillingsForm.Top - 5
             End If
         Case vbKeyDown
+           If Shift = vbCtrlMask Then
+                ' rotate the tenShillingsForm to the right
+                TenShillingsWidget.Zoom = TenShillingsWidget.Zoom + 0.01
+            End If
+                    
             If Shift = 1 Then
-                ' move the the tenShillingsForm downward
+                ' move the tenShillingsForm downward
                 fMain.TenShillingsForm.Top = fMain.TenShillingsForm.Top + 5
             End If
         Case vbKeyLeft
-             If Shift = 1 Then
-                ' move the the tenShillingsForm to the left
+           If Shift = vbCtrlMask Then
+                ' rotate the tenShillingsForm to the left
+                TenShillingsWidget.SkewDegrees = TenShillingsWidget.SkewDegrees - 2
+            End If
+            
+            If Shift = 1 Then
+                ' move the tenShillingsForm to the left
                 fMain.TenShillingsForm.Left = fMain.TenShillingsForm.Left - 5
             End If
         Case vbKeyRight
+           If Shift = vbCtrlMask Then
+                ' rotate the tenShillingsForm to the right
+                TenShillingsWidget.SkewDegrees = TenShillingsWidget.SkewDegrees + 2
+            End If
+        
             If Shift = 1 Then
-                ' move the the tenShillingsForm to the right
+                ' move the tenShillingsForm to the right
                 fMain.TenShillingsForm.Left = fMain.TenShillingsForm.Left + 5
             End If
         End Select
- 
+    
     On Error GoTo 0
    Exit Sub
 

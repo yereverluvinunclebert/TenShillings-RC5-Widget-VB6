@@ -2,13 +2,6 @@
 TODO
 ====
 
-' document
-
-' add the enumeration property to both the GDIP and TB collection imagelists and also in the github version
-' amend the credits to incorporate Cristian Buse and chatGPT
-' search for other credits using mz-tools and add so that they appear on the prefs about tab
-' do the same to the cpu gauge.
-
 ' create a window in code without all the form trimmings
 ' amend the existing Cairo project to place persistent images on the window
 
@@ -18,6 +11,11 @@ TODO
 
 ' we can also use a canvas to write the image to a larger background.
 ' Have a sample canvas RC project by Olaf alpha* that shows how to use a canvas as Olaf suggests
+
+' CTRL and up/down to resize
+' CTRL and left/right to rotate
+
+' document the above
 
 ' test the icon sizes on 32bit Win7, XP and ReactOS, find out if greater than 48x48 causes a crash, therefore excluding the 256x256 icon
 ' 32x32 (24 bit)
@@ -167,5 +165,8 @@ removed manifest for TB
 ' Test using tB collections to replace the GDIP class
 ' Create a wrapper around a TB collection to replace the GDIP class, for TwinBasic use only.
 
-
 ' DeepWiki and badge to the readme.md
+
+' add the enumeration property to both the GDIP and TB collection imagelists and also in the github version
+' amend the credits to incorporate Cristian Buse and chatGPT
+' search for other credits using mz-tools and add so that they appear on the prefs about tab
