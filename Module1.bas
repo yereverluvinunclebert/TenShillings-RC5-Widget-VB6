@@ -2188,6 +2188,9 @@ Public Sub reloadProgram()
     gbThisWidgetAvailable = False ' tell the ' screenWrite util that the widgetForm is no longer available to write console events to
     gbReload = True
     
+    ' clear the image list before we try to reload
+    thisImageList.Clear
+    
     Call saveMainRCFormPosition
     
     Call unloadAllForms(False) ' unload forms but do not END

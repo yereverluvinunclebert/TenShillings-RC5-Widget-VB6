@@ -170,3 +170,6 @@ removed manifest for TB
 ' add the enumeration property to both the GDIP and TB collection imagelists and also in the github version
 ' amend the credits to incorporate Cristian Buse and chatGPT
 ' search for other credits using mz-tools and add so that they appear on the prefs about tab
+
+' moved the GDI code to load/create GDIP bitmap from the GDIP class to a new module
+' modify the TBImageList class to use GDIP to resize an image (TB has no native image resize)
