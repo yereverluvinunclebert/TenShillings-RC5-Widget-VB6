@@ -30,16 +30,16 @@ It is an example for how to create a simple single-image desktop widget in the s
 If you want a template for a more complex program with multi-function, clickable areas then try this program, 
 [https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-VB6](https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-RC5-VB6)
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/yereverluvinunclebert/TenShillings-RC5-Widget-VB6) Click here for a full documentation describing the program structure.
+**BUILD:** The program runs without any Microsoft plugins.
 
-BUILD: The program runs without any Microsoft plugins.
+ [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/yereverluvinunclebert/TenShillings-RC5-Widget-VB6) Click here for a full documentation describing the program structure.
  
  Built using: VB6/TwinBasic, MZ-TOOLS 3.0, VBAdvance, CodeHelp Core IDE Extender
  Framework 2.2 & Rubberduck 2.4.1, RichClient 5
 
  <img width="650" height="56" alt="image" src="https://github.com/user-attachments/assets/1c51ef53-12f4-4d87-9ad9-4c7ddd72b5c8" />
 
- Links:
+ **Links:**
  
 	https://www.vbrichclient.com/#/en/About/
 	MZ-TOOLS https://www.mztools.com/  
@@ -55,7 +55,7 @@ BUILD: The program runs without any Microsoft plugins.
  
  <img width="800" height="491" alt="tenShillingsHelp" src="https://github.com/user-attachments/assets/2e366c76-90c3-4992-9614-94b65eb559e2" />
 
- Tested on :
+ **Tested on :**
  
 	Windows XP Professional 32bit on Intel 
     ReactOS 32bit on Intel 
@@ -67,7 +67,7 @@ BUILD: The program runs without any Microsoft plugins.
 	Windows 10 Home 64bit on AMD    
 	Windows 11 64bit on Intel  
    
- CREDITS:
+ **CREDITS:**
  
  I have really tried to maintain the credits as the project has progressed. If I 
  have made a mistake and left someone out then do forgive me. I will make amends 
@@ -96,7 +96,7 @@ BUILD: The program runs without any Microsoft plugins.
  Harry Whitfield for his quality testing, brain stimulation and being an 
  unwitting source of inspiration. 
  
- Dependencies:
+ **Dependencies:**
  
  o A windows-alike o/s such as Windows XP, 7-11 or Apple Mac OSX 11. 
  
@@ -130,7 +130,7 @@ dedicated OCX file that are shipped with this package.
 
 During development only, this must be copied to C:\windows\syswow64 and should be registered.
 
-- CCRSlider.ocx
+**- CCRSlider.ocx**
 
 Register this using regsvr32, ie. in a CMD window with administrator privileges.
 	
@@ -146,7 +146,7 @@ The above is only for development, for ordinary users, during runtime there is n
 
  <img width="451" height="406" alt="components" src="https://github.com/user-attachments/assets/0dad6c34-439c-4fbd-8522-23036269a89e" />
  
- * OLEGuids.tlb
+**OLEGuids.tlb**
  
  This is a type library that defines types, object interfaces, and more specific 
  API definitions needed for COM interop / marshalling. It is only used at design 
@@ -175,7 +175,7 @@ The above is only for development, for ordinary users, during runtime there is n
  the job admirably. The HTML files exist alongside the compiled CHM file in the 
  HELP folder.
  
-  Project References:
+  **Project References:**
 
 	VisualBasic for Applications  
 	VisualBasic Runtime Objects and Procedures  
@@ -186,7 +186,7 @@ The above is only for development, for ordinary users, during runtime there is n
 
  <img width="445" height="359" alt="RC5VB6References" src="https://github.com/user-attachments/assets/d4130a3e-c08d-4f1b-91cc-6a04c0756c5e" />
  
- LICENCE AGREEMENTS:
+ **LICENCE AGREEMENTS:**
  
  Copyright © 2023 Dean Beedell
  
