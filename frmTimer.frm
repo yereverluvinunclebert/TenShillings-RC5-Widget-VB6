@@ -328,22 +328,22 @@ Private Sub sleepTimer_Timer()
         gbThisWidgetAvailable = True
         ' Call ' screenWrite("system has just woken up from a sleep at " & Now() & vbCrLf & "updating digital widgets... ")
         
-        'TenShillingsWidget.BaseDate = Now()
+        'tenShillingsOverlay.BaseDate = Now()
         'gsTriggerDigitalWidgetPopulation = True
         
         fMain.TenShillingsForm.Refresh
         
 '        If gsNumericDisplayRotation = "1" Then
-'            TenShillingsWidget.TmrDigitRotatorTicking = True
+'            tenShillingsOverlay.TmrDigitRotatorTicking = True
 '        End If
 '
 '        '  clear any existing weekday indicator after a wake from sleep
-'        If TenShillingsWidget.weekdayToggleEnabled = True Then
+'        If tenShillingsOverlay.weekdayToggleEnabled = True Then
 '            Call hideDayOfWeek
 '            fMain.TenShillingsForm.Widgets(fDayOfWeek).Widget.Alpha = 1
 '        End If
         
-        TenShillingsWidget.Widget.Parent.Refresh
+        tenShillingsOverlay.Widget.Parent.Refresh
         
     End If
     

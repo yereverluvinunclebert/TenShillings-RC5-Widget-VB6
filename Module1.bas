@@ -1619,10 +1619,10 @@ Public Sub setRichClientTooltips()
    On Error GoTo setRichClientTooltips_Error
 
     If gsWidgetTooltips = "1" Then
-        TenShillingsWidget.Widget.ToolTip = "Use Mouse scrollwheel UP/DOWN to rotate, press CTRL at same time to resize. "
+        tenShillingsOverlay.Widget.ToolTip = "Use Mouse scrollwheel UP/DOWN to rotate, press CTRL at same time to resize. "
         aboutWidget.Widget.ToolTip = "Click on me to make me go away."
     Else
-        TenShillingsWidget.Widget.ToolTip = vbNullString
+        tenShillingsOverlay.Widget.ToolTip = vbNullString
         aboutWidget.Widget.ToolTip = vbNullString
    End If
     
@@ -1746,8 +1746,8 @@ Public Sub getKeyPress(ByVal KeyCode As Integer, ByVal Shift As Integer)
             
         Case vbKeyUp
            If Shift = vbCtrlMask Then
-                ' rotate the tenShillingsForm to the left
-                TenShillingsWidget.Zoom = TenShillingsWidget.Zoom - 0.01
+                ' decrease the tenShillingsForm size a tiny bit
+                tenShillingsOverlay.Zoom = tenShillingsOverlay.Zoom - 0.01
             End If
         
             If Shift = 1 Then
@@ -1756,8 +1756,8 @@ Public Sub getKeyPress(ByVal KeyCode As Integer, ByVal Shift As Integer)
             End If
         Case vbKeyDown
            If Shift = vbCtrlMask Then
-                ' rotate the tenShillingsForm to the right
-                TenShillingsWidget.Zoom = TenShillingsWidget.Zoom + 0.01
+                ' increase the tenShillingsForm size a tiny bit
+                tenShillingsOverlay.Zoom = tenShillingsOverlay.Zoom + 0.01
             End If
                     
             If Shift = 1 Then
@@ -1767,7 +1767,7 @@ Public Sub getKeyPress(ByVal KeyCode As Integer, ByVal Shift As Integer)
         Case vbKeyLeft
            If Shift = vbCtrlMask Then
                 ' rotate the tenShillingsForm to the left
-                TenShillingsWidget.SkewDegrees = TenShillingsWidget.SkewDegrees - 2
+                tenShillingsOverlay.SkewDegrees = tenShillingsOverlay.SkewDegrees - 2
             End If
             
             If Shift = 1 Then
@@ -1777,7 +1777,7 @@ Public Sub getKeyPress(ByVal KeyCode As Integer, ByVal Shift As Integer)
         Case vbKeyRight
            If Shift = vbCtrlMask Then
                 ' rotate the tenShillingsForm to the right
-                TenShillingsWidget.SkewDegrees = TenShillingsWidget.SkewDegrees + 2
+                tenShillingsOverlay.SkewDegrees = tenShillingsOverlay.SkewDegrees + 2
             End If
         
             If Shift = 1 Then
@@ -1934,7 +1934,7 @@ Private Sub checkScreenEdgeBottom()
 
     If (fMain.TenShillingsForm.Top + fMain.TenShillingsForm.height) > glVirtualScreenHeightPixels Then  ' if any part of the form is off screen
         ' the widget height is divided by two as it is doubled earlier
-        widgetCurrentHeightPx = (TenShillingsWidget.Widget.height / 2 * TenShillingsWidget.Zoom) ' pixels
+        widgetCurrentHeightPx = (tenShillingsOverlay.Widget.height / 2 * tenShillingsOverlay.Zoom) ' pixels
         formMidPointY = (fMain.TenShillingsForm.height / 2) + fMain.TenShillingsForm.Top
         widgetTopY = formMidPointY '- (widgetCurrentHeightPx)
         screenEdge = 100 ' pixels from the edge
@@ -1975,7 +1975,7 @@ Private Sub checkScreenEdgeRight()
     On Error GoTo checkScreenEdgeRight_Error
 
     If (fMain.TenShillingsForm.Left + fMain.TenShillingsForm.Width) > glVirtualScreenWidthPixels Then ' if any part of the form is off screen
-        widgetCurrentWidthPx = (TenShillingsWidget.Widget.Width / 2 * TenShillingsWidget.Zoom) ' pixels
+        widgetCurrentWidthPx = (tenShillingsOverlay.Widget.Width / 2 * tenShillingsOverlay.Zoom) ' pixels
         formMidPointX = (fMain.TenShillingsForm.Width / 2) + fMain.TenShillingsForm.Left
         widgetLeftX = formMidPointX ' - widgetCurrentWidthPx / 2
         screenEdge = 100 ' pixels from the edge
@@ -2013,7 +2013,7 @@ Private Sub checkScreenEdgeLeft()
     On Error GoTo checkScreenEdgeLeft_Error
 
     If fMain.TenShillingsForm.Left < 0 Then ' if any part of the form is off screen
-        widgetCurrentWidthPx = (TenShillingsWidget.Widget.Width / 2 * TenShillingsWidget.Zoom) ' pixels
+        widgetCurrentWidthPx = (tenShillingsOverlay.Widget.Width / 2 * tenShillingsOverlay.Zoom) ' pixels
         formMidPointX = (fMain.TenShillingsForm.Width / 2) + fMain.TenShillingsForm.Left
         widgetRightX = formMidPointX '+ widgetCurrentWidthPx / 2
         screenEdge = 100 ' pixels from the edge
@@ -2050,7 +2050,7 @@ Private Sub checkScreenEdgeTop()
     On Error GoTo checkScreenEdgeTop_Error
 
     If fMain.TenShillingsForm.Top < 0 Then ' if any part of the form is off screen
-        widgetCurrentHeightPx = (TenShillingsWidget.Widget.height / 2 * TenShillingsWidget.Zoom) ' pixels
+        widgetCurrentHeightPx = (tenShillingsOverlay.Widget.height / 2 * tenShillingsOverlay.Zoom) ' pixels
         formMidPointY = (fMain.TenShillingsForm.height / 2) + fMain.TenShillingsForm.Top
         widgetBottomY = formMidPointY + widgetCurrentHeightPx / 2
         screenEdge = 100 ' pixels from the edge
@@ -2183,7 +2183,7 @@ Public Sub reloadProgram()
     
     On Error GoTo reloadProgram_Error
     
-    'TenShillingsWidget.ShowHelp = False ' needs to be set to false for the reload to reshow it, if enabled
+    'tenShillingsOverlay.ShowHelp = False ' needs to be set to false for the reload to reshow it, if enabled
     
     gbThisWidgetAvailable = False ' tell the ' screenWrite util that the widgetForm is no longer available to write console events to
     gbReload = True
@@ -2238,8 +2238,8 @@ Public Sub saveMainRCFormPosition()
     
     sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gsWidgetPrimaryHeightRatio, gsSettingsFile
     sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gsWidgetSecondaryHeightRatio, gsSettingsFile
-    gsWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
-    gsSkewDegrees = CStr(TenShillingsWidget.SkewDegrees)
+    gsWidgetSize = CStr(tenShillingsOverlay.Zoom * 100)
+    gsSkewDegrees = CStr(tenShillingsOverlay.SkewDegrees)
     
     sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gsSettingsFile
     sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gsSettingsFile
@@ -2266,8 +2266,8 @@ Public Sub saveMainRCFormSize()
 
     sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gsWidgetPrimaryHeightRatio, gsSettingsFile
     sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gsWidgetSecondaryHeightRatio, gsSettingsFile
-    gsWidgetSize = CStr(TenShillingsWidget.Zoom * 100)
-    gsSkewDegrees = CStr(TenShillingsWidget.SkewDegrees)
+    gsWidgetSize = CStr(tenShillingsOverlay.Zoom * 100)
+    gsSkewDegrees = CStr(tenShillingsOverlay.SkewDegrees)
     sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gsSettingsFile
     sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gsSettingsFile
 
@@ -2459,7 +2459,7 @@ End Sub
 '    gsUnhide = fGetINISetting("Software\TenShillings", "unhide", gsSettingsFile)
 '
 '    If gsUnhide = "true" Then
-'        'TenShillingsWidget.Hidden = False
+'        'tenShillingsOverlay.Hidden = False
 '        fMain.TenShillingsForm.Visible = True
 '        sPutINISetting "Software\TenShillings", "unhide", vbNullString, gsSettingsFile
 '    End If
@@ -2501,12 +2501,12 @@ Public Sub toggleWidgetLock()
         menuForm.mnuLockWidget.Checked = False
         If widgetPrefs.IsLoaded = True Then widgetPrefs.chkPreventDragging.Value = 0
         gsPreventDragging = "0"
-        TenShillingsWidget.Locked = False
+        tenShillingsOverlay.Locked = False
     Else
         ' Call ' screenWrite("Widget locked in place")
         menuForm.mnuLockWidget.Checked = True
         If widgetPrefs.IsLoaded = True Then widgetPrefs.chkPreventDragging.Value = 1
-        TenShillingsWidget.Locked = True
+        tenShillingsOverlay.Locked = True
         gsPreventDragging = "1"
     End If
     
@@ -2848,10 +2848,10 @@ Public Sub saveRCFormCurrentSizeRatios()
 
     If LTrim$(gsMultiMonitorResize) = "2" Then
         If gWidgetMonitorStruct.IsPrimary Then
-            gsWidgetPrimaryHeightRatio = CStr(TenShillingsWidget.Zoom)
+            gsWidgetPrimaryHeightRatio = CStr(tenShillingsOverlay.Zoom)
             sPutINISetting "Software\TenShillings", "widgetPrimaryHeightRatio", gsWidgetPrimaryHeightRatio, gsSettingsFile
         Else
-            gsWidgetSecondaryHeightRatio = CStr(TenShillingsWidget.Zoom)
+            gsWidgetSecondaryHeightRatio = CStr(tenShillingsOverlay.Zoom)
             sPutINISetting "Software\TenShillings", "widgetSecondaryHeightRatio", gsWidgetSecondaryHeightRatio, gsSettingsFile
         End If
     End If

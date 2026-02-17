@@ -2846,7 +2846,7 @@ Public Sub positionPrefsMonitor()
         End If
     End If
 
-    '' TenShillingsWidget.RotateBusyTimer = True
+    '' tenShillingsOverlay.RotateBusyTimer = True
     
     On Error GoTo 0
     Exit Sub
@@ -3227,7 +3227,7 @@ Private Sub chkPreventDragging_Click()
     If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
     ' immediately make the widget locked in place
     If chkPreventDragging.Value = 0 Then
-        TenShillingsWidget.Locked = False
+        tenShillingsOverlay.Locked = False
         gsPreventDragging = "0"
         menuForm.mnuLockWidget.Checked = False
         If gsAspectRatio = "landscape" Then
@@ -3238,7 +3238,7 @@ Private Sub chkPreventDragging_Click()
             txtPortraitYoffset.Text = vbNullString
         End If
     Else
-        TenShillingsWidget.Locked = True
+        tenShillingsOverlay.Locked = True
         gsPreventDragging = "1"
         menuForm.mnuLockWidget.Checked = True
         If gsAspectRatio = "landscape" Then
@@ -3277,13 +3277,13 @@ Private Sub chkWidgetHidden_Click()
    On Error GoTo chkWidgetHidden_Click_Error
 
     If chkWidgetHidden.Value = 0 Then
-        'TenShillingsWidget.Hidden = False
+        'tenShillingsOverlay.Hidden = False
         fMain.TenShillingsForm.Visible = True
 
         frmTimer.revealWidgetTimer.Enabled = False
         gsWidgetHidden = "0"
     Else
-        'TenShillingsWidget.Hidden = True
+        'tenShillingsOverlay.Hidden = True
         fMain.TenShillingsForm.Visible = False
 
 
@@ -3316,13 +3316,13 @@ Private Sub cmbAspectHidden_Click()
    On Error GoTo cmbAspectHidden_Click_Error
 
     If cmbAspectHidden.ListIndex = 1 And gsAspectRatio = "portrait" Then
-        'TenShillingsWidget.Hidden = True
+        'tenShillingsOverlay.Hidden = True
         fMain.TenShillingsForm.Visible = False
     ElseIf cmbAspectHidden.ListIndex = 2 And gsAspectRatio = "landscape" Then
-        'TenShillingsWidget.Hidden = True
+        'tenShillingsOverlay.Hidden = True
         fMain.TenShillingsForm.Visible = False
     Else
-        'TenShillingsWidget.Hidden = False
+        'tenShillingsOverlay.Hidden = False
         fMain.TenShillingsForm.Visible = True
     End If
 
@@ -3412,7 +3412,7 @@ Private Sub cmbScrollWheelDirection_Click()
    On Error GoTo cmbScrollWheelDirection_Click_Error
 
     If gbStartupFlg = False Then btnSave.Enabled = True ' enable the save button
-    'TenShillingsWidget.ZoomDirection = cmbScrollWheelDirection.List(cmbScrollWheelDirection.ListIndex)
+    'tenShillingsOverlay.ZoomDirection = cmbScrollWheelDirection.List(cmbScrollWheelDirection.ListIndex)
 
    On Error GoTo 0
    Exit Sub
@@ -3631,7 +3631,7 @@ Private Sub showLastTab()
     If gsLastSelectedTab = "window" Then Call picButtonMouseUpEvent("window", imgWindow, imgWindowClicked, fraWindow, fraWindowButton)
     If gsLastSelectedTab = "about" Then Call picButtonMouseUpEvent("about", imgAbout, imgAboutClicked, fraAbout, fraAboutButton)
 
-    '' TenShillingsWidget.RotateBusyTimer = True
+    '' tenShillingsOverlay.RotateBusyTimer = True
     
   On Error GoTo 0
    Exit Sub
@@ -3733,7 +3733,7 @@ Private Sub positionPrefsFramesButtons()
     btnSave.Left = btnClose.Left - btnSave.Width - 50
     btnHelp.Left = frameLeft
     
-    '' TenShillingsWidget.RotateBusyTimer = True
+    '' tenShillingsOverlay.RotateBusyTimer = True
 
    On Error GoTo 0
    Exit Sub
@@ -5006,12 +5006,12 @@ End Sub
 '    ' It does this in order to avoid reciprocal back and forth between the main widget form and the prefs form,
 '
 '    ' ie. the slider slides but does not itself change the widget rotation, that is happening elsewhere
-'    ' the widget rotation is modified in W_MouseWheel in cwTenShillings
+'    ' the widget rotation is modified in W_MouseWheel in cwTenShillingsOverlay
 '
 '    ' the pAllowSkewChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
 '
 '    If pAllowSkewChangeFlg = True Then
-'        TenShillingsWidget.SkewDegrees = sliSkewDegrees.Value
+'        tenShillingsOverlay.SkewDegrees = sliSkewDegrees.Value
 '    End If
 '
 '    Call saveMainRCFormSize
@@ -5050,12 +5050,12 @@ Private Sub sliSkewDegrees_Scroll()
     ' It does this in order to avoid reciprocal back and forth between the main widget form and the prefs form,
 
     ' ie. the slider slides but does not itself change the widget rotation, that is happening elsewhere
-    ' the widget rotation is modified in W_MouseWheel in cwTenShillings
+    ' the widget rotation is modified in W_MouseWheel in cwTenShillingsOverlay
 
     ' the pAllowSkewChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
 
     If pAllowSkewChangeFlg = True Then
-        TenShillingsWidget.SkewDegrees = sliSkewDegrees.Value
+        tenShillingsOverlay.SkewDegrees = sliSkewDegrees.Value
     End If
 
     Call saveMainRCFormSize
@@ -5085,7 +5085,7 @@ Private Sub sliWidgetSize_Scroll()
     ' It does this in order to avoid reciprocal back and forth between the main widget form and the prefs form
     
     ' ie. the slider slides but does not itself change the widget size, that is happening elsewhere
-    ' the widget size is modified in W_MouseWheel in cwTenShillings
+    ' the widget size is modified in W_MouseWheel in cwTenShillingsOverlay
     
     ' the pAllowSizeChangeFlg is only set when this control receives focus and the flag is unset when the user selects any another control.
     If pAllowSizeChangeFlg = True Then
@@ -6056,7 +6056,7 @@ Public Property Get WidgetSize() As Single
 
 widgetSizeGet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property WidgetSize of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property WidgetSize of Class Module cwTenShillingsOverlay"
 End Property
 
 '---------------------------------------------------------------------------------------
@@ -6071,14 +6071,14 @@ Public Property Let WidgetSize(ByVal newValue As Single)
 
     If mWidgetSize <> newValue Then mWidgetSize = newValue Else Exit Property
         
-    TenShillingsWidget.Zoom = (mWidgetSize)
+    tenShillingsOverlay.Zoom = (mWidgetSize)
 
    On Error GoTo 0
    Exit Property
 
 widgetSizeLet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property WidgetSize of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property WidgetSize of Class Module cwTenShillingsOverlay"
 End Property
 
 

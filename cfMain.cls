@@ -55,11 +55,11 @@ Attribute textBox.VB_VarHelpID = -1
 '---------------------------------------------------------------------------------------
 '
 Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByVal dy As Long, Optional ByVal Caption As String)
-    Dim imageHeight As Long: imageHeight = 0
-    Dim imageWidth As Long: imageWidth = 0
+    Dim ImageHeight As Long: ImageHeight = 0
+    Dim ImageWidth As Long: ImageWidth = 0
     Dim tenShillingsFormWidth As Long: tenShillingsFormWidth = 0
     Dim tenShillingsFormHeight As Long: tenShillingsFormHeight = 0
-    Dim tenShillingsWidgetZoomValue As Double: tenShillingsWidgetZoomValue = 1
+    Dim tenShillingsOverlayZoomValue As Double: tenShillingsOverlayZoomValue = 1
     Dim imageModifier As Long: imageModifier = 0
     
     Const WFFStyleTool As Integer = 7 ' additional styles above the normal five  WFFStyleTool = 7 makes the taskbar button go away
@@ -68,14 +68,14 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
     On Error GoTo initAndCreateTenShillingsForm_Error
     
     gdResizeRestriction = 1
-    imageWidth = dx
-    imageHeight = dy
+    ImageWidth = dx
+    ImageHeight = dy
     
     ' take the LARGEST size and make that the size of the square form
-    If imageWidth > imageHeight Then
-        imageModifier = imageWidth * cSngProportion
+    If ImageWidth > ImageHeight Then
+        imageModifier = ImageWidth * cSngProportion
     Else
-        imageModifier = imageHeight * cSngProportion
+        imageModifier = ImageHeight * cSngProportion
     End If
     
     ' make the form square
@@ -90,7 +90,7 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
         gdResizeRestriction = (glVirtualScreenHeightPixels / tenShillingsFormHeight) * cSngProportion
         
         ' alter the zoom according to the proportion
-        tenShillingsWidgetZoomValue = gdResizeRestriction
+        tenShillingsOverlayZoomValue = gdResizeRestriction
         
         'so we need to adjust the vertical aspect of the note, ie the  Y position
         ' and the maximum size it can attain
@@ -99,7 +99,7 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
         'limit the form size to the screen size (RC limits the form size to the virtual size in any case)
         tenShillingsFormHeight = glVirtualScreenHeightPixels
     Else
-        tenShillingsWidgetZoomValue = 1
+        tenShillingsOverlayZoomValue = 1
     End If
     
     ' this situation never occurs as the monitor width is almost always greater than the height but just in case the width is greater than the height
@@ -110,12 +110,12 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
             gdResizeRestriction = tenShillingsFormWidth / glVirtualScreenWidthPixels * cSngProportion
             
             ' alter the zoom according to the proportion
-            tenShillingsWidgetZoomValue = gdResizeRestriction
+            tenShillingsOverlayZoomValue = gdResizeRestriction
             
             'limit the form size to the screen size (RC limits the form size to the virtual size in any case)
             tenShillingsFormWidth = glVirtualScreenWidthPixels
         Else
-            tenShillingsWidgetZoomValue = 1
+            tenShillingsOverlayZoomValue = 1
             
         End If
     End If
@@ -127,11 +127,11 @@ Public Sub initAndCreateTenShillingsForm(Optional ByVal dx As Long, Optional ByV
     If gsFormVisible = "0" Then TenShillingsForm.WidgetRoot.BackColor = -1
     
     ' create a new tenShillings widget with a name, position and size, first step of that is to run Class_Initialize
-    Set TenShillingsWidget = TenShillingsForm.Widgets.Add(New cwTenShillings, "tenShillings", 1, 1, tenShillingsFormWidth, tenShillingsFormHeight)
+    Set tenShillingsOverlay = TenShillingsForm.Widgets.Add(New cwTenShillingsOverlay, "tenShillings", 1, 1, tenShillingsFormWidth, tenShillingsFormHeight)
     
-    TenShillingsWidget.Zoom = tenShillingsWidgetZoomValue
-    TenShillingsWidget.imageWidth = imageWidth
-    TenShillingsWidget.imageHeight = imageHeight
+    tenShillingsOverlay.Zoom = tenShillingsOverlayZoomValue
+    tenShillingsOverlay.ImageWidth = ImageWidth
+    tenShillingsOverlay.ImageHeight = ImageHeight
     
    On Error GoTo 0
    Exit Sub
@@ -345,7 +345,7 @@ Public Sub initAndCreateLicenceForm(Optional ByVal Caption As String)
     ' When running in the IDE the RC DLLs are required to be registered. If for some reason they become unregistered then
     ' the following 'set' commands will generate an error, to handle this we have a temporary error trap for the IDE only.
     
-    If InIDE Then On Error GoTo RCNotRegistered_Error
+    If InIde Then On Error GoTo RCNotRegistered_Error
 
     ' add two RC predefined button controls to the licence form
     If gsDpiAwareness = "1" Then
@@ -563,7 +563,7 @@ Private Sub TenShillingsForm_MouseMove(Button As Integer, Shift As Integer, x As
     
     If Button = vbLeftButton And Not TenShillingsForm.ActiveWidget Is Nothing Then 'Form-Dragging (under certain conditions)
     
-        If TenShillingsWidget.Locked = True Then Exit Sub
+        If tenShillingsOverlay.Locked = True Then Exit Sub
         If gsIgnoreMouse = "1" Then Exit Sub
         
         If gbMenuOccurred = True Then

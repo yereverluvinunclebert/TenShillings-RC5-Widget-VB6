@@ -6,14 +6,14 @@ BEGIN
   DataSourceBehavior  = 0  'vbNone
   MTSTransactionMode  = 0  'NotAnMTSObject
 END
-Attribute VB_Name = "cwTenShillings"
+Attribute VB_Name = "cwTenShillingsOverlay"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 '@IgnoreModule IntegerDataType, ModuleWithoutFolder
 '---------------------------------------------------------------------------------------
-' Module    : cwTenShillings
+' Module    : cwTenShillingsOverlay
 ' Author    : beededea
 ' Date      : 31/07/2023
 ' Purpose   : create a fully click-through Widget, which allows for all kind of
@@ -62,11 +62,11 @@ Private Sub initialisePrivateVars()
 
 initialisePrivateVars_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure initialisePrivateVars of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure initialisePrivateVars of Class Module cwTenShillingsOverlay"
 End Sub
 
 '---------------------------------------------------------------------------------------
-' Procedure : Class_Initialize for cwTenShillings
+' Procedure : Class_Initialize for cwTenShillingsOverlay
 ' Author    : olaf schmidt
 ' Date      : 31/07/2023
 ' Purpose   : Constructor (Initialise) set the inital values of private vars, set up the timers
@@ -92,7 +92,7 @@ Private Sub Class_Initialize()
 
 Class_Initialize_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Class_Initialize of Class Module cwTenShillingsOverlay"
 End Sub
     
 
@@ -114,7 +114,7 @@ Public Property Get Widget() As cWidgetBase
 
 Widget_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Widget of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Widget of Class Module cwTenShillingsOverlay"
 End Property
 '---------------------------------------------------------------------------------------
 ' Procedure : Widgets
@@ -133,7 +133,7 @@ Public Property Get Widgets() As cWidgets
 
 Widgets_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Widgets of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Widgets of Class Module cwTenShillingsOverlay"
 End Property
 
 '---------------------------------------------------------------------------------------
@@ -153,7 +153,7 @@ Public Property Get Zoom() As Double
 
 ZoomGet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Zoom of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Zoom of Class Module cwTenShillingsOverlay"
 End Property
 '---------------------------------------------------------------------------------------
 ' Procedure : Zoom
@@ -186,7 +186,7 @@ Public Property Let Zoom(ByVal newValue As Double)
 
 ZoomLet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Zoom of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Zoom of Class Module cwTenShillingsOverlay"
 End Property
 '---------------------------------------------------------------------------------------
 ' Procedure : ZoomDirection
@@ -205,7 +205,7 @@ Public Property Get ZoomDirection() As String
 
 ZoomDirectionGet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ZoomDirection of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ZoomDirection of Class Module cwTenShillingsOverlay"
 End Property
 '---------------------------------------------------------------------------------------
 ' Procedure : ZoomDirection
@@ -225,7 +225,7 @@ Public Property Let ZoomDirection(ByVal newValue As String)
 
 ZoomDirectionLet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ZoomDirection of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ZoomDirection of Class Module cwTenShillingsOverlay"
 End Property
 
 '---------------------------------------------------------------------------------------
@@ -245,7 +245,7 @@ Public Property Get SkewDegrees() As Double
 
 SkewDegrees_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure SkewDegrees of Class Module cwTenShillings"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure SkewDegrees of Class Module cwTenShillingsOverlay"
 End Property
 '---------------------------------------------------------------------------------------
 ' Procedure : SkewDegrees
@@ -265,7 +265,7 @@ Public Property Let SkewDegrees(ByVal newValue As Double)
 
 SkewDegrees_Error:
 
-     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure SkewDegrees of Class Module cwTenShillings"
+     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure SkewDegrees of Class Module cwTenShillingsOverlay"
 End Property
 
 '---------------------------------------------------------------------------------------
@@ -275,7 +275,7 @@ End Property
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Public Property Let opacity(ByVal newValue As Double)
+Public Property Let Opacity(ByVal newValue As Double)
    On Error GoTo opacityLet_Error
 
     If mOpacity <> newValue Then mOpacity = newValue Else Exit Property
@@ -285,7 +285,7 @@ Public Property Let opacity(ByVal newValue As Double)
 
 opacityLet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure opacity of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure opacity of Class Module cwTenShillingsOverlay"
 End Property
 '---------------------------------------------------------------------------------------
 ' Procedure : opacity
@@ -294,17 +294,17 @@ End Property
 ' Purpose   :
 '---------------------------------------------------------------------------------------
 '
-Public Property Get opacity() As Double
+Public Property Get Opacity() As Double
    On Error GoTo opacityGet_Error
 
-    opacity = mOpacity
+    Opacity = mOpacity
 
    On Error GoTo 0
    Exit Property
 
 opacityGet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure opacity of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure opacity of Class Module cwTenShillingsOverlay"
 End Property
 
 
@@ -326,7 +326,7 @@ Public Property Get Locked() As Boolean
 
 LockedGet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Locked of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Locked of Class Module cwTenShillingsOverlay"
 End Property
 '---------------------------------------------------------------------------------------
 ' Property  : Locked
@@ -345,7 +345,7 @@ Public Property Let Locked(ByVal newValue As Boolean)
 
 LockedLet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Locked of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Locked of Class Module cwTenShillingsOverlay"
 End Property
 
 
@@ -369,7 +369,7 @@ Public Property Get Hidden() As Boolean
 
 HiddenGet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Hidden of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Hidden of Class Module cwTenShillingsOverlay"
 End Property
 
     
@@ -401,7 +401,7 @@ Public Property Let Hidden(ByVal newValue As Boolean)
 
 HiddenLet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Hidden of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property Hidden of Class Module cwTenShillingsOverlay"
 End Property
 
 
@@ -412,7 +412,7 @@ End Property
 ' Purpose   : property to determine (by value)  the set the imageWidth value of the whole widget
 '---------------------------------------------------------------------------------------
 '
-Public Property Let imageWidth(ByVal newValue As Long)
+Public Property Let ImageWidth(ByVal newValue As Long)
    On Error GoTo imageWidthLet_Error
 
     If mImageWidth <> newValue Then mImageWidth = newValue Else Exit Property
@@ -422,7 +422,7 @@ Public Property Let imageWidth(ByVal newValue As Long)
 
 imageWidthLet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property imageWidth of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property imageWidth of Class Module cwTenShillingsOverlay"
 End Property
 
 '---------------------------------------------------------------------------------------
@@ -432,7 +432,7 @@ End Property
 ' Purpose   : property to determine (by value)  the set the imageHeight value of the whole widget
 '---------------------------------------------------------------------------------------
 '
-Public Property Let imageHeight(ByVal newValue As Long)
+Public Property Let ImageHeight(ByVal newValue As Long)
    On Error GoTo imageHeightLet_Error
 
     If mImageHeight <> newValue Then mImageHeight = newValue Else Exit Property
@@ -442,7 +442,7 @@ Public Property Let imageHeight(ByVal newValue As Long)
 
 imageHeightLet_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property imageHeight of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in Property imageHeight of Class Module cwTenShillingsOverlay"
 End Property
     
 '---------------------------------------------------------------------------------------
@@ -465,7 +465,7 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
         Else
             Me.Zoom = Me.Zoom + 0.02 * LineOffset
         End If
-        gsWidgetSize = CStr(TenShillingsWidget.Zoom * 100) ' store the value dynamically
+        gsWidgetSize = CStr(tenShillingsOverlay.Zoom * 100) ' store the value dynamically
         sPutINISetting "Software\TenShillings", "widgetSize", gsWidgetSize, gsSettingsFile
         
         ' saves the current ratios for the RC form
@@ -482,7 +482,7 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
         If SkewDegrees > 360 Then SkewDegrees = SkewDegrees - 360
         If SkewDegrees < 0 Then SkewDegrees = SkewDegrees + 360
          
-        gsSkewDegrees = CStr(TenShillingsWidget.SkewDegrees) ' store the value dynamically
+        gsSkewDegrees = CStr(tenShillingsOverlay.SkewDegrees) ' store the value dynamically
         sPutINISetting "Software\TenShillings", "skewDegrees", gsSkewDegrees, gsSettingsFile
         
         If widgetPrefs.IsVisible = True Then
@@ -495,7 +495,7 @@ Private Sub W_MouseWheel(ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal 
 
 W_MouseWheel_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure W_MouseWheel of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure W_MouseWheel of Class Module cwTenShillingsOverlay"
     
 End Sub
 
@@ -522,7 +522,7 @@ Private Sub W_MouseDown(Button As Integer, Shift As Integer, ByVal x As Single, 
 
 W_MouseDown_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure W_MouseDown of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure W_MouseDown of Class Module cwTenShillingsOverlay"
 End Sub
 
 
@@ -583,7 +583,7 @@ Private Sub W_Paint(CC As vbRichClient5.cCairoContext, ByVal xAbs As Single, ByV
 
 W_Paint_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure W_Paint of Class Module cwTenShillings"
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure W_Paint of Class Module cwTenShillingsOverlay"
 End Sub
  
 

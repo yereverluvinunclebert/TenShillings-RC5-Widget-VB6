@@ -30,7 +30,7 @@ Public fMain As New cfMain
 Public aboutWidget As cwAbout
 Public helpWidget As cwHelp
 Public licenceWidget As cwLicence
-Public TenShillingsWidget As cwTenShillings
+Public tenShillingsOverlay As cwTenShillingsOverlay
 
 ' any other private vars for public properties
 Private m_sgsWidgetName As String
@@ -629,19 +629,19 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     menuForm.mnuAbout.Caption = "About TenShillings " & gsRichClientEnvironment & " Cairo " & gsCodingEnvironment & " widget"
     
 '    ' Set the opacity of the widget, passing just this one global variable to a public property within the class
-    TenShillingsWidget.Opacity = Val(gsOpacity) / 100
+    tenShillingsOverlay.Opacity = Val(gsOpacity) / 100
     
-    TenShillingsWidget.SkewDegrees = CDbl(gsSkewDegrees)
+    tenShillingsOverlay.SkewDegrees = CDbl(gsSkewDegrees)
     
     ' set the initial size
     If glMonitorCount > 1 And (LTrim$(gsMultiMonitorResize) = "1" Or LTrim$(gsMultiMonitorResize) = "2") Then
         If gWidgetMonitorStruct.IsPrimary = True Then
-            TenShillingsWidget.Zoom = (Val(gsWidgetPrimaryHeightRatio))
+            tenShillingsOverlay.Zoom = (Val(gsWidgetPrimaryHeightRatio))
         Else
-            TenShillingsWidget.Zoom = (Val(gsWidgetSecondaryHeightRatio))
+            tenShillingsOverlay.Zoom = (Val(gsWidgetSecondaryHeightRatio))
         End If
     Else
-        TenShillingsWidget.Zoom = Val(gsWidgetSize) / 100
+        tenShillingsOverlay.Zoom = Val(gsWidgetSize) / 100
     End If
     
     If gsWidgetFunctions = "1" Then
@@ -692,13 +692,13 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
    ' set the lock state of the widget
    If gsPreventDragging = "0" Then
         menuForm.mnuLockWidget.Checked = False
-        TenShillingsWidget.Locked = False
+        tenShillingsOverlay.Locked = False
     Else
         menuForm.mnuLockWidget.Checked = True
-        TenShillingsWidget.Locked = True ' this is just here for continuity's sake, it is also set at the time the control is selected
+        tenShillingsOverlay.Locked = True ' this is just here for continuity's sake, it is also set at the time the control is selected
     End If
     
-    TenShillingsWidget.Opacity = Val(gsOpacity) / 100
+    tenShillingsOverlay.Opacity = Val(gsOpacity) / 100
 
     ' set the z-ordering of the window
     Call setAlphaFormZordering
@@ -712,7 +712,7 @@ Public Sub adjustMainControls(Optional ByVal licenceState As Integer)
     If giMinutesToHide > 0 Then menuForm.mnuHideWidget.Caption = "Hide Widget for " & giMinutesToHide & " min."
     
     ' refresh the form in order to show the above changes immediately
-    TenShillingsWidget.Widget.Refresh
+    tenShillingsOverlay.Widget.Refresh
 
    On Error GoTo 0
    Exit Sub
