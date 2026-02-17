@@ -28,7 +28,7 @@ The program does very little in practice but is a test bed for playing with alte
 It is an example for how to create a simple single-image desktop widget in the style of the old Yahoo widget engine with a full preference utility, right click menu, an about image, a help image and tooltips.
 
 If you want a template for a more complex program with multi-function, clickable areas then try this program, 
-https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-VB6
+[https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-VB6](https://github.com/yereverluvinunclebert/Panzer-CPU-Gauge-RC5-VB6)
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/yereverluvinunclebert/TenShillings-RC5-Widget-VB6) Click here for a full documentation describing the program structure.
 
