@@ -449,16 +449,16 @@ Private pbDebugMode As Boolean ' .30 DAEB 03/03/2021 frmMain.frm replaced the in
 
 Public gdResizeRestriction As Double
             
-#If twinbasic Then
-    ' Wrapper around TwinBasic's collection
-    Public thisImageList As New cTBImageList
-#Else
-    ' new GDI+ image list instance
-    Public thisImageList As New cGdipImageList
-#End If
-
-' counter for each usage of the class
-Public gGdipImageListInstanceCount As Long
+'#If twinbasic Then
+'    ' Wrapper around TwinBasic's collection
+'    Public thisImageList As New cTBImageList
+'#Else
+'    ' new GDI+ image list instance
+'    Public thisImageList As New cGdipImageList
+'#End If
+'
+'' counter for each usage of the class
+'Public gGdipImageListInstanceCount As Long
 
 '---------------------------------------------------------------------------------------
 ' Procedure : fFExists
