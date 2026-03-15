@@ -7157,8 +7157,6 @@ End Sub
 '---------------------------------------------------------------------------------------
 '
 Private Sub setPrefsIconImagesDark()
-
-Dim count As Long
     
     On Error GoTo setPrefsIconImagesDark_Error
     
@@ -7166,6 +7164,11 @@ Dim count As Long
 
 '        thisImageList.ImageHeight = 0
 '        thisImageList.ImageWidth = 0
+
+'        Dim iPic As StdPicture
+'
+'        Set iPic = thisImageList.Picture("general-icon-dark")
+
 
         ' normal images
         Set imgGeneral.Picture = thisImageList.Picture("general-icon-dark")
