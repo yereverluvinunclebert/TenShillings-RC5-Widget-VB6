@@ -44,10 +44,22 @@ Final Tasks
 ' setup2go
 ' Github release
 
-Not going to do (or much, much later)
-====================================
+Going to do later
+==================
 
 ' 32bit to 64bit conversion but only when RC is 64bit.
+
+'       Remove reference to OLEEXP.TLB (32bit)
+'       Add reference to WindevLib  (64bit)
+'       remove all API declarations as they will ALL be covered in Faf's Type lib
+'       Remove CCRSlider.ocx reference (32bit)
+'       Replace the three sliSlider controls in the prefs with the new ccrSliders from CCR18
+'       Add reference to Krool's CCR18  (64bit) experimental
+'       Fix all hWNd and hDC Longs with LongPtr APIs and usages using TwinBasic's diagnostic panel
+'       VBWidgets & RC5.dlls need to be upgraded as they are still 32bit.
+
+' replace RC with my new GDIP image class as a single image widget does not need RichClient at all.
+
 
 ' add functionality to the prefs to allow autoscaling dependent upon different monitor scaling factors using WM_DPICHANGED? Think and decide.
 '    we can already size a form per monitor, all we would need is to do the same when a DPI change is detected.

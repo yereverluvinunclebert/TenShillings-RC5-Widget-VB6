@@ -1,4 +1,11 @@
 Attribute VB_Name = "mGDIPImageList"
+'---------------------------------------------------------------------------------------
+' Module    : mGDIPImageList
+' Author    : beededea
+' Date      : 29/03/2026
+' Purpose   : Module to support cGdipImageList & cTBImageList, subs, functions and API declarations.
+'---------------------------------------------------------------------------------------
+
 Option Explicit
 
 Private Declare Function CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Dest As Any, Src As Any, ByVal cb As Long) As Long
