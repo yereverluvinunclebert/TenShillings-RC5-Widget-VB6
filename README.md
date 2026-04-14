@@ -2,6 +2,8 @@
 
 An example of a moveable/resizable single-image, VB6 / TwinBasic program using the RC5 widget framework, complete with right click menu, help, about and licence forms and help CHM.
 
+This project is no longer maintained on github please find us now on gitlab https://gitlab.com/yereverluvinunclebert/tenshillings-rc5-widget-vb6
+
 The RC5 version here operates on XP/ReactOS, Vista+ to Windows 11+. There is another version on github in my repo. that operates with RC6, the latest version of RichClient. Other than being able to run on XP type systems, there is no other difference.
 
 The inital stage is a downgrade to RC5 for testing purposes on older 32bit versions of Windows. It should run on XP/ReactOS with no problems at all.
